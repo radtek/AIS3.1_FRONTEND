@@ -1,0 +1,199 @@
+<div layout class="baseConfig">
+    <div flex=25 layout="column" class="panel panel-default no-marBtm">
+        <div class="panel-heading">手术流程</div>
+        <div flex class="panel-body">
+            <div class="form-group">
+                <span>手术申请后是否需要批准手术流程：</span>
+                <checkbox ng-model='surgProc.configureValue.isRatify' ng-true-value='1'>是</checkbox>
+                <checkbox ng-model='surgProc.configureValue.isRatify' ng-true-value='2'>否</checkbox>
+            </div>
+            <div>
+                <span style="margin-left: 45px;">局麻是否需要安排麻醉医生：</span>
+                <checkbox ng-model='surgProc.configureValue.isNeedDoct' ng-true-value='1'>是</checkbox>
+                <checkbox ng-model='surgProc.configureValue.isNeedDoct' ng-true-value='2'>否</checkbox>
+            </div>
+        </div>
+    </div>
+    <div flex=25 layout="column" class="panel panel-default no-marBtm" style="margin-left: 15px; margin-right: 15px;">
+        <div class="panel-heading">手术排程</div>
+        <div flex class="panel-body">
+            <div class="form-group">
+                <span>同日手术间是否默认安排相同麻醉医生：</span>
+                <checkbox ng-model='surgSchedule.configureValue.isSameDoct' ng-true-value='1'>是</checkbox>
+                <checkbox ng-model='surgSchedule.configureValue.isSameDoct' ng-true-value='2'>否</checkbox>
+            </div>
+            <div>
+                <span style="margin-left: 30px;">同日手术间是否默认安排相同护士：</span>
+                <checkbox ng-model='surgSchedule.configureValue.isSameNurs' ng-true-value='1'>是</checkbox>
+                <checkbox ng-model='surgSchedule.configureValue.isSameNurs' ng-true-value='2'>否</checkbox>
+            </div>
+        </div>
+    </div>
+    <div flex layout="column" class="panel panel-default no-marBtm">
+        <div class="panel-heading">数据同步</div>
+        <div flex class="panel-body">
+            <div class="form-group">
+                <span style="margin-left: 45px;">开启状态时，所有手术间的服务和采集的服务调用的是当前手术室电脑的数据库：</span>
+                <checkbox ng-model='DS.configureValue.isSync' ng-true-value='1'>开</checkbox>
+            </div>
+            <div>
+                <span>关闭状态时，控制中心和所有手术间的服务以及采集的服务调用的是控制中心的数据库：</span>
+                <checkbox ng-model='DS.configureValue.isSync' ng-true-value='2'>关</checkbox>
+            </div>
+        </div>
+    </div>
+</div>
+<div layout="column" class="panel panel-default baseConfig">
+    <div class="panel-heading">麻醉记录单</div>
+    <div flex class="panel-body">
+        <fieldset>
+            <legend>用药配置</legend>
+            <div>
+                <div class="form-group">
+                    <!-- <checkbox ng-model='med.configureValue.isMerge' ng-true-value='1'>分为麻醉药和治疗药</checkbox> -->
+                    <span>
+                        治疗药占用行数：
+                        <input type="number" class="noborder3 text-center" ng-model='med.configureValue.zlyRows'>，
+                        治疗药栏名称：
+                        <input type="text" style="width:120px" class="noborder3 text-center" ng-model='med.configureValue.zlyName'>，
+                        麻醉药占用行数：
+                        <input type="number" class="noborder3 text-center" ng-model='med.configureValue.mzyRows'>
+                        麻醉药栏名称：
+                        <input type="text" style="width:120px" class="noborder3 text-center" ng-model='med.configureValue.mzyName'>
+                    </span>
+                </div>
+<!--                 <div class="form-group">
+                    <checkbox ng-model='med.configureValue.isMerge' ng-true-value='2'>合并为</checkbox>
+                    <span>
+                        <input type="text" style="width:120px" class="noborder3 text-center w80" ng-model='med.configureValue.alias'>（占用行数：
+                        <input type="number" class="noborder3 text-center" ng-model='med.configureValue.aliasRows'>）
+                    </span>
+                </div> -->
+                <div class="form-group">
+                    <checkbox ng-model='med.configureValue.showDTF' ng-true-value='1'>显示</checkbox>
+                    <span>
+                        剂量（位置：
+                        <select name="" class="noborder3" ng-model='med.configureValue.dosePoist'>
+                            <option ng-repeat='item in markPosition' ng-value='item'>{{item}}</option>
+                        </select>）
+                    </span>&nbsp;&nbsp;
+                    <span>
+                        浓度（位置：
+                        <select name="" class="noborder3" ng-model='med.configureValue.thickPoist'>
+                            <option ng-repeat='item in markPosition' ng-value='item'>{{item}}</option>
+                        </select>）
+                    </span>&nbsp;&nbsp;
+                    <span>
+                        流速（位置：
+                        <select name="" class="noborder3" ng-model='med.configureValue.flowPoist'>
+                            <option ng-repeat='item in markPosition' ng-value='item'>{{item}}</option>
+                        </select>）
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">显示方式：</div>
+            <figure>
+                <div class="form-group">
+                    <checkbox ng-model='med.configureValue.isSingleLine' ng-true-value='1'>单行显示</checkbox>
+                    <span>
+                        （是否显示总剂量：
+                        <checkbox ng-model='med.configureValue.showTotal' ng-true-value='1'>是</checkbox>
+                        &nbsp;位置：
+                        <select name="" class="noborder3" ng-model='med.configureValue.totalPoist'>
+                            <option ng-repeat='item in markPosition | limitTo: 2' ng-value='item'>{{item}}</option>
+                        </select>
+                        &nbsp;&nbsp;
+                        <checkbox ng-model='med.configureValue.showTotal' ng-true-value='2'>否</checkbox>
+                        ）
+                    </span>
+                </div>
+                <div class="form-group">
+                    <checkbox ng-model='med.configureValue.isSingleLine' ng-true-value='2'>多行显示</checkbox>
+                </div>
+            </figure>
+        </fieldset>
+        <div layout>
+            <fieldset flex style="margin-right: 15px;">
+                <legend>入量配置</legend>
+                <div>
+                    <div class="form-group">
+                        <!-- <checkbox ng-model='i.configureValue.isMerge' ng-true-value='1'></checkbox> -->
+                            一栏:输液占用行数：
+                            <input type="number" name='syRows' class="noborder3 text-center" ng-model='i.configureValue.syRows'>
+                            输液栏名称：
+                            <input type="text" style="width:120px" name='syRows' class="noborder3 text-center" ng-model='i.configureValue.syName'>
+                            
+                    </div>
+                    <div class="form-group readonly" >
+                        <!-- <checkbox ng-model='i.configureValue.isMerge' ng-true-value='1'></checkbox> -->
+                            两栏:输血占用行数：
+                            <input type="number" name='sxRows' class="noborder3 text-center" ng-model='i.configureValue.sxRows' ng-disabled="loginInfo.beCode!='sybx'" >
+                            输血栏名称：
+                            <input type="text" style="width:120px" name='sxRows' class="noborder3 text-center" ng-model='i.configureValue.sxName' ng-disabled="loginInfo.beCode!='sybx'" >
+                    </div>
+                <!--     <div class="form-group">
+                        <checkbox ng-model='i.configureValue.isMerge' ng-true-value='2'>合并为
+                            <input type="text" style="width:120px" class="noborder3 text-center w80" ng-model='i.configureValue.alias'>（占用行数：
+                            <input type="number" class="noborder3 text-center" ng-model='i.configureValue.aliasRows'>）</checkbox>
+                    </div> -->
+                </div>
+                <div class="form-group">显示方式：</div>
+                <figure>
+                    <div class="form-group">
+                        是否显示总量：
+                        <checkbox ng-model='i.configureValue.showTotal' ng-true-value='1'>是</checkbox>
+                        <checkbox ng-model='i.configureValue.showTotal' ng-true-value='2'>否</checkbox>
+                    </div>
+                    <div class="form-group">
+                        是否为时间段：
+                        <checkbox ng-model='i.configureValue.isInterval' ng-true-value='1'>是</checkbox>
+                        <checkbox ng-model='i.configureValue.isInterval' ng-true-value='2'>否</checkbox>
+                    </div>
+                </figure>
+            </fieldset>
+            <fieldset flex>
+                <legend>其它配置</legend>
+                <div layout class="form-group err-wrap">
+                    出量占用行数：
+                    <input type="number" min="1" max="8" class="noborder3 text-center" ng-model='other.configureValue.oRows' ng-focus="field = 'oRows'" ng-blur="_oRows = true">&nbsp;<span ng-if="(other.configureValue.oRows == undefined || other.configureValue.oRows > 8) && _oRows" class="help-block text-right">行数应在1~8之间</span>
+                    出量栏名称：
+                    <input type="text" style="width: 120px" class="noborder3 text-center" ng-model='other.configureValue.oName' >
+                </div>
+                <div layout class="form-group err-wrap">
+                    监测项占用行数：
+                    <input type="number" min="1" max="8" class="noborder3 text-center" ng-model='other.configureValue.mongRows' ng-focus="field = 'mongRows'" ng-blur="_mongRows = true">&nbsp;<span ng-if="(other.configureValue.mongRows == undefined || other.configureValue.mongRows > 8) && _mongRows" class="help-block text-right">行数应在1~8之间</span>
+                </div>
+                <div class="form-group">
+                    检验事件：
+                    <checkbox ng-model='other.configureValue.showInspEvent' ng-true-value='1'>显示</checkbox>
+                    （
+                    <checkbox ng-model='other.configureValue.showIEInDrugArea' ng-true-value='1'>显示在用药事件区域</checkbox>
+                    <checkbox ng-model='other.configureValue.showIEInPointArea' ng-true-value='2'>显示在描点区域</checkbox>
+                    <checkbox ng-model='other.configureValue.showIEInRemarkArea' ng-true-value='3'>显示在备注</checkbox>）
+                    <checkbox ng-model='other.configureValue.showInspEvent' ng-true-value='2'>不显示</checkbox>
+                </div>
+                <div class="form-group">
+                    手术名称、入室时间、出室时间，数据依据：
+                    <checkbox ng-model='other.configureValue.docTime' ng-true-value='1'>以麻醉记录单为准</checkbox>
+                    <checkbox ng-model='other.configureValue.docTime' ng-true-value='2'>以手术护理单为准</checkbox>
+                </div>
+                <div class="form-group">
+                    麻醉记录单出室选择为PACU时，手术状态是否直接变为术后：
+                    <checkbox ng-model='other.configureValue.outRoomType' ng-true-value='1'>是</checkbox>
+                    <checkbox ng-model='other.configureValue.outRoomType' ng-true-value='2'>否</checkbox>
+                </div>
+                <div class="form-group">
+                    麻醉科主任和护士长是否可以修改提交后的文书：
+                    <checkbox ng-model='other.configureValue.majorUpdateFinishDoc' ng-true-value='1'>是</checkbox>
+                    <checkbox ng-model='other.configureValue.majorUpdateFinishDoc' ng-true-value='2'>否</checkbox>
+                </div>
+                <div class="form-group">
+                    麻醉医生和护士是否可以修改提交后的文书：
+                    <checkbox ng-model='other.configureValue.assistantUpdateFinishDoc' ng-true-value='1'>是</checkbox>
+                    <checkbox ng-model='other.configureValue.assistantUpdateFinishDoc' ng-true-value='2'>否</checkbox>
+                </div>
+                <textarea style="resize: none;width: 100%;height: 50px" ng-model="other.configureValue.baseBusConfig"></textarea>
+            </fieldset>
+        </div>
+    </div>
+</div>

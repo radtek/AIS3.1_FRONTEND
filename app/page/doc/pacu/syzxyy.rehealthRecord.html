@@ -1,0 +1,404 @@
+<div id="rehealthRecordNhfe" layout flex>
+    <div layout ng-cloak ng-class="{true: 'sheet-readonly'}[finish == 'ok' && !vm.rSheet.anaesPacuRec.bedId && vm.rSheet.anaesPacuRec.processState === 'NO_END']">
+        <aside layout="column" ng-show="pageState !== 1">
+            <!-- <button type="button" class="btn btn-primary readonly" ng-if="finish != 'ok'" ng-click="seeTemp($event)">
+                <span class="glyphicon glyphicon-user"></span>
+                <div>观察记
+                    <br>录模板</div>
+            </button> -->
+            <button type="button" class="btn btn-primary readonly" ng-if="permission.indexOf('INOPER') > -1" ng-click="toOperRoom()">
+                <span class="glyphicon glyphicon-log-in"></span>
+                <div>转入
+                    <br>手术室</br>
+                </div>
+            </button>
+            <button type="button" class="btn btn-primary readonly" ng-if="finish != 'ok'" ng-click="outRoom()">
+                <span class="glyphicon glyphicon-log-out"></span>
+                <div>出室</div>
+            </button>
+            <button type="button" class="btn btn-primary" tk-print-region="print-region" ng-click="print()">
+                <span class="glyphicon glyphicon-print"></span>
+                <div>打印</div>
+            </button>
+        </aside>
+        <main flex class="body rehealth-print" id="print-region" when-scrolled="loadMore()">
+            <article layout="column">
+                <header layout="column" layout-align="center center">
+                    <img src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+                    <h4 style='margin-top: 0;'>麻醉恢复室(PACU)观察记录单</h4>
+                </header>
+                <div layout="column">
+                    <div layout class="form-group">
+                        <!-- <div>病室&nbsp;<span class="span-rehnode-info"> &nbsp;{{vm.rSheet.regOpt.regionName}} </span></div> -->
+                        <div>床号&nbsp;<span class="span-rehnode-info"> &nbsp;{{vm.rSheet.regOpt.bed}} </span></div>
+                        <div>姓名&nbsp;<span class="span-rehnode-info"> &nbsp;{{vm.rSheet.regOpt.name}} </span></div>
+                        <div>性别&nbsp;<span class="span-rehnode-info"> &nbsp;{{vm.rSheet.regOpt.sex}} </span></div>
+                        <div>年龄&nbsp;<span class="span-rehnode-info"> &nbsp;{{vm.rSheet.regOpt.age}} </span></div>
+                        <div>住院号&nbsp;<span class="span-rehnode-info"> &nbsp;{{vm.rSheet.regOpt.hid}} </span></div>
+                        <div>PACU编号&nbsp;<span class="span-rehnode-info"> &nbsp;{{vm.rSheet.anaesPacuRec.pacuNumber}} </span></div>
+                    </div>
+                    <div layout class="form-group">
+                        <span flex layout>诊断名称：<a flex style="text-align: left">{{vm.rSheet.regOpt.optLatterDiag}}</a></span>&nbsp;
+                        <span flex layout>麻醉方法：<a flex style="text-align: left">{{vm.rSheet.regOpt.anaesMethod}}</a></span>
+                    </div>
+                    <!-- 术前 -->
+                    <div layout class="form-group">
+                        <span flex='30' layout ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.enterTime && verify]'>入PACU时间：<datetime-picker timepicker="true" format="Y-m-d H:i" class="noborder3" ng-model="vm.rSheet.anaesPacuRec.enterTime" ng-change="vm.setreNodeinfo()"></datetime-picker></span>
+                        <span flex ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.enterTemp && verify]'>入室体温：<input type="number" class="noborder3" ng-value="vm.rSheet.anaesPacuRec.enterTemp" ng-model="vm.rSheet.anaesPacuRec.enterTemp" ng-blur="vm.setreNodeinfo()" style="width: 100px;"></input>℃</span>
+                    </div>
+                    <div layout class="form-group line4" ng-if='false'>
+                        <span>随身物品&nbsp;&nbsp;</span>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portableRes_[0]" ng-change="changeResAndPipe();" ng-true-value="'1'" ng-false-value="'0'"> 影像资料</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portableRes_[1]" ng-change="changeResAndPipe();" ng-true-value="'2'" ng-false-value="'0'"> 衣服</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portableRes_[2]" ng-change="changeResAndPipe();" ng-true-value="'3'" ng-false-value="'0'"> 裤子</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portableRes_[3]" ng-change="changeResAndPipe();" ng-true-value="'4'" ng-false-value="'0'"> 鞋</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portableRes_[4]" ng-change="changeResAndPipe();" ng-true-value="'5'" ng-false-value="'0'"> 药物</checkbox>
+                        </label>
+                        <label class="checkbox-inline" flex layout>&nbsp;&nbsp;&nbsp;&nbsp;其他&nbsp;
+                            <input flex style="text-align: left;" ng-value="vm.rSheet.anaesPacuRec.portableResOther" type="text" maxlength="40" ng-model="vm.rSheet.anaesPacuRec.portableResOther" ng-blur="vm.setreNodeinfo()" />
+                        </label>
+                    </div>
+                    <div layout class="form-group line4" ng-if='false'>
+                        <span>随身管道&nbsp;&nbsp;</span>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[0]" ng-change="changeResAndPipe();" ng-true-value="'1'" ng-false-value="'0'"> 输液管</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[1]" ng-change="changeResAndPipe();" ng-true-value="'2'" ng-false-value="'0'"> 尿管</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[2]" ng-change="changeResAndPipe();" ng-true-value="'3'" ng-false-value="'0'"> 伤口引流管</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[3]" ng-change="changeResAndPipe();" ng-true-value="'4'" ng-false-value="'0'"> T管</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[4]" ng-change="changeResAndPipe();" ng-true-value="'5'" ng-false-value="'0'"> 胸腔闭式引流管</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[5]" ng-change="changeResAndPipe();" ng-true-value="'6'" ng-false-value="'0'"> 胃管</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[6]" ng-change="changeResAndPipe();" ng-true-value="'7'" ng-false-value="'0'"> 鼻肝管</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[7]" ng-change="changeResAndPipe();" ng-true-value="'8'" ng-false-value="'0'"> 鼻肠管</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[8]" ng-change="changeResAndPipe();" ng-true-value="'9'" ng-false-value="'0'"> 中心静脉</checkbox>
+                        </label>
+                        <label class="checkbox-inline">
+                            <checkbox ng-model="portablePipe_[9]" ng-change="changeResAndPipe();" ng-true-value="'10'" ng-false-value="'0'"> 镇痛泵</checkbox>
+                        </label>
+                    </div>
+                </div>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <td>清醒程度</td>
+                            <td colspan="4">呼吸道通畅程度</td>
+                            <td colspan="3">肢体活动度</td>
+                            <td colspan="2">导尿管</td>
+                            <td>恶心/呕吐</td>
+                            <td>给氧方式</td>
+                            <td>拔管</td>
+                            <td>伤口敷料</td>
+                            <!-- <td colspan="3">引流液性状</td> -->
+                            <td rowspan='4' style="min-width: 150px;">
+                                <span>使用液体/药物</span>
+                            </td>
+                            <td rowspan='4' style="min-width: 150px;">
+                                <span>备注</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>0=对刺激无反应</div>
+                                <div>1=对刺激有反应</div>
+                                <div>2=完全清醒</div>
+                            </td>
+                            <td colspan="4">
+                                <div>0=呼吸道需予以支持</div>
+                                <div>1=不支持可以维持呼吸道通畅</div>
+                                <div>2=可自由咳嗽</div>
+                            </td>
+                            <td colspan="3">
+                                <div>0=无法活动</div>
+                                <div>1=肢体无意识活动</div>
+                                <div>2=肢体能作有意识的活动</div>
+                            </td>
+                            <td colspan="2">
+                                <div>0=无; 1=有小便性状</div>
+                                <div>a=淡黄; b=浑浊</div>
+                                <div>c=淡红; d=血性; e=清亮;</div>
+                            </td>
+                            <td>
+                                <div>0=无</div>
+                                <div>1=有</div>
+                            </td>
+                            <td>
+                                <span>1=机械通气</span>
+                                <span>2=气管插管内给氧</span>
+                                <span>3=面罩给氧</span>
+                                <span>4=鼻导管给氧</span>
+                            </td>
+                            <td>
+                                <div>1=拔除气管插管</div>
+                                <div>2=拔除喉罩</div>
+                            </td>
+                            <td>
+                                <div>0=无敷料</div>
+                                <div>1=有渗透</div>
+                                <div>2=无渗透</div>
+                            </td>
+                            <!-- <td colspan="3">
+                                <div>a=浅黄色</div>
+                                <div>b=淡血性</div>
+                                <div>c=血性</div>
+                            </td> -->
+                        </tr>
+                        <tr>
+                            <td rowspan='2' style="width: 140px;">
+                                <span>时间</span>
+                            </td>
+                            <td colspan='4'>
+                                <span>生命体征</span>
+                            </td>
+                            <td colspan="3" style="width: 100px;">
+                                <span>Steward评分</span>
+                            </td>
+                            <td rowspan='2' style="width: 110px;">
+                                <span>导尿管/量ml</span>
+                            </td>
+                            <td rowspan='2' style="width: 100px;">
+                                <span>小便性状</span>
+                            </td>
+                            <td rowspan='2' style="width: 100px;">
+                                <span>恶心呕吐</span>
+                            </td>
+                            <td rowspan='2' style="width: 115px;">
+                                <span>给氧方式</span>
+                            </td>
+                            <td rowspan='2' style="width: 100px;">
+                                <span>拔管选项</span>
+                            </td>
+                            <td rowspan='2' style="width: 100px;">
+                                <span>伤口情况</span>
+                            </td>
+                            <!-- <td rowspan='2' style="width: 115px;">
+                                <span>引流液性状/量ml</span>
+                            </td> -->
+                            <!-- <td rowspan='4' style="min-width: 150px;">
+                                <span>使用液体/药物</span>
+                            </td>
+                            <td rowspan='4' style="min-width: 150px;">
+                                <span>备注</span>
+                            </td> -->
+                        </tr>
+                        <tr>
+                            <td style='width: 65px;'>
+                                <span>HR次/分</span>
+                            </td>
+                            <td style='width: 60px;'>
+                                <span>R次/分</span>
+                            </td>
+                            <td style='width: 105px;'>
+                                <span>BPmmHg/分</span>
+                            </td>
+                            <td style='width: 60px;'>
+                                <span>SPO<sub>2</sub></span>
+                            </td>
+                            <td style='width: 70px;'>
+                                <span>清醒程度</span>
+                            </td>
+                            <td style='width: 110px;'>
+                                <span>呼吸道通畅程度</span>
+                            </td>
+                            <td style='width: 80px;'>
+                                <span>肢体活动度</span>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div when-scrolled="loadMore()">
+                            <tr style="height: 36px;" ng-repeat="item in vm.pacuRecList track by $index" ng-class="{true: 'not-print'}[item.recordTime == '']">
+                                <td>
+                                    <span style="cursor:pointer;" class="glyphicon glyphicon-trash not-print" ng-if="item.id" ng-click="delete(item.id, $index)"></span>
+                                    <datetime-picker style="border:none; float: right; width: 120px;" timepicker="true" format="Y-m-d H:i" ng-model="item.recordTime" ng-change="vm.setaddNode($index, item, true)"></datetime-picker>
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <input type="number" min="0" max="999" ng-model="item.hr" ng-value="item.hr" ng-blur="vm.setreNode(item)">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <input type="number" min="0" max="999" ng-model="item.r" ng-value="item.r" ng-blur="vm.setreNode(item)">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <input style="width: 40%;" type="number" min="0" max="999" ng-model="item.hypertension" ng-value="item.hypertension" ng-blur="vm.setreNode(item)"> /
+                                    <input style="width: 40%;" type="number" min="0" max="999" ng-model="item.hypopiesia" ng-value="item.hypopiesia" ng-blur="vm.setreNode(item)">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <input type="number" min="0" max="999" ng-model="item.spo2" ng-value="item.spo2" ng-blur="vm.setreNode(item)">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <select style="width: 50px; padding-left: 10px;" ng-model="item.consLev" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueList3 track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 50px;" ng-model="item.consLev" ng-value="item.consLev">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <select style="width: 50px; padding-left: 10px;" ng-model="item.airwayPatency" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueList3 track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 50px;" ng-model="item.airwayPatency" ng-value="item.airwayPatency">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <select style="width: 50px; padding-left: 10px;" ng-model="item.physicalActivity" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueList3 track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 50px;" ng-model="item.physicalActivity" ng-value="item.physicalActivity">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]" style="min-width: 60px;">
+                                    <select style="width: 40%; padding-left: 10%; float: left;" ng-model="item.catheter" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueList1 track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 40%; padding-left: 10%; float: left;" ng-model="item.catheter" ng-value="item.catheter"> /
+                                    <input style="width: 40%;" type="number" min="1" max="9999" ng-model="item.upd" ng-value="item.upd" ng-blur="vm.setreNode(item)">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <select style="width: 50px; padding-left: 10px;" ng-model="item.urineCharac" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueLista track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="a">a</option>
+                                        <option value="b">b</option>
+                                        <option value="c">c</option>
+                                        <option value="d">d</option>
+                                        <option value="e">e</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 50px;" ng-model="item.urineCharac" ng-value="item.urineCharac">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <select style="width: 50px; padding-left: 10px;" ng-model="item.nauseaVomit" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueList1 track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 50px;" ng-model="item.nauseaVomit" ng-value="item.nauseaVomit">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <select style="width: 50px; padding-left: 10px;" ng-model="item.oxInhalMeth" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueList4 track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 50px;" ng-model="item.oxInhalMeth" ng-value="item.oxInhalMeth">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <select style="width: 50px; padding-left: 10px;" ng-model="item.extubation" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueList2 track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 50px;" ng-model="item.extubation" ng-value="item.extubation">
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <select style="width: 50px; padding-left: 10px;" ng-model="item.woundCondition" class="not-print" ng-change="vm.setreNode(item)">
+                                        <!-- <option ng-repeat="item in vm.valueList3 track by $index" value="{{item.code}}">{{item.label}}</option> -->
+                                        <option value=""></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                    <input type="text" class="not-display" style="width: 50px;" ng-model="item.woundCondition" ng-value="item.woundCondition">
+                                </td>
+                                <!-- <td ng-class="{true: 'form-readonly'}[!!!item.id]" style="min-width: 60px;">
+                                    <select style="width: 40%; padding-left: 10%;" ng-model="item.drainageCharac" ng-change="vm.setreNode(item)">
+                                        <option value="a">a</option>
+                                        <option value="b">b</option>
+                                        <option value="c">c</option>
+                                    </select> /
+                                    <input style="width: 40%;" type="number" min="1" max="9999" ng-model="item.drainageFlow" ng-value="item.drainageFlow" ng-blur="vm.setreNode(item)">
+                                </td> -->
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]">
+                                    <div class="readonly med-name-flow" contenteditable="false" style="width:inherit; min-height: 23px; outline: none; line-height: 13px;" ng-click="vm.showmedNameFlow(item,$event)">{{item.medNameFlow}}</div>
+                                </td>
+                                <td ng-class="{true: 'form-readonly'}[!!!item.id]" style="min-width: 150px;">
+                                    <textarea class="obser-rec" ng-model="item.obserRec" ng-blur="vm.setreNode(item)" maxlength="30" style="width: -webkit-fill-available;border: none;resize: none;">{{item.obserRec}}</textarea>
+                                    <!-- <input style="width: 100%;" ng-model="item.obserRec" ng-value="item.obserRec" ng-blur="vm.setreNode(item)"> -->
+                                </td>
+                            </tr>
+                        </div>
+                    </tbody>
+                </table>
+            </article>
+            <article layout="column">
+                <div class="readonly">
+                    <div layout class="layout-padding preoperative" style="margin-top: 10px;margin-bottom: 10px;">
+                        <div layout layout-align="start center" style="margin-right: 20px;">
+                            <span layout ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.exitTime && verify]'>出PACU时间：<datetime-picker timepicker="true" format="Y-m-d H:i" class="noborder3" ng-model="vm.rSheet.anaesPacuRec.exitTime" ng-change="vm.setreNodeinfo()"></datetime-picker></span>
+                        </div>
+                        <div layout layout-align="start center" ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.leaveTo && verify]'>
+                            出室后去向 ：
+                            <label class="checkbox-inline" layout layout-align="center center">
+                                <checkbox ng-true-value="1" ng-model="vm.rSheet.anaesPacuRec.leaveTo"><span>回病房</span></checkbox>
+                            </label>
+                            <label class="checkbox-inline">
+                                <checkbox ng-true-value="2" ng-model="vm.rSheet.anaesPacuRec.leaveTo">ICU</checkbox>
+                            </label>
+                            <label class="checkbox-inline">
+                                <checkbox ng-true-value="3" ng-model="vm.rSheet.anaesPacuRec.leaveTo">离院</checkbox>
+                            </label>
+                            <label class="checkbox-inline">
+                                <checkbox ng-true-value="4" ng-model="vm.rSheet.anaesPacuRec.leaveTo">死亡</checkbox>
+                            </label>
+                        </div>
+                    </div>
+                    <div layout>
+                        <div layout flex='55' ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.docSign && verify]'>
+                            <span class="anesSign">麻醉医师签名：</span>
+                            <oi-select flex="25" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig1]" ng-blur="vm.setreNodeinfo()" ng-model="vm.rSheet.anaesPacuRec.docSign" oi-options="i.userName as i.name for i in anaesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }"></oi-select>
+                            <div class="eSignature">
+                                <img ng-repeat="item in eSignatureAnesthetist track by $index" src="{{item.path}}" ng-if="item.hasPath" />
+                            </div>
+                        </div>
+                        <div layout flex ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.nurseSign && verify]'>
+                            <span class="anesSign">PACU区域负责护士签名：</span>
+                            <oi-select flex="30" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig2]" ng-blur="vm.setreNodeinfo()" ng-model="vm.rSheet.anaesPacuRec.nurseSign" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }"></oi-select>
+                            <div class="eSignature">
+                                <img ng-repeat="item in eSignatureNurseList track by $index" src="{{item.path}}" ng-if="item.hasPath" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+</div>

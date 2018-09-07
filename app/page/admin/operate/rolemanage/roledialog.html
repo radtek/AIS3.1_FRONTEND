@@ -1,0 +1,84 @@
+<div class="modal-header">
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form class="form-horizontal shiftIn-baseInfo" name="BaseInfoForm" novalidate>
+    <div class="modal-body" layout>
+        <div flex=40>
+            <div class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>局点:</label>
+                    <select class="form-control" ng-model="vm.role.beid" ng-change="getRoleTree()" required ng-disabled="!!item">
+                        <option value="">--请选择--</option>
+                        <option ng-repeat="item in vm.bus" value="{{item.beid}}">{{item.name}}</option>
+                    </select>
+                </div>
+                <p ng-if="BaseInfoForm.beid.$dirty && !BaseInfoForm.beid.$valid" class="help-block text-right">局点不能为空</p>
+            </div>
+            <div class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>用户组名称:</label>
+                    <input type="text" class="form-control" name="name" ng-model="vm.role.name" required>
+                </div>
+                <p ng-if="BaseInfoForm.name.$dirty && !BaseInfoForm.name.$valid" class="help-block text-right">用户组名称不能为空</p>
+            </div>
+            <div class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>用户组状态:</label>
+                    <select class="form-control" ng-model="vm.role.enable" required>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>用户组类型:</label>
+                    <select class="form-control" ng-model="vm.role.roleType" required>
+                        <option value="">--请选择--</option>
+                        <option ng-repeat="item in vm.roleTypeList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>用户组描述:</label>
+                    <textarea class="form-control" name="description" rows="3" ng-model="vm.role.description" required></textarea>
+                </div>
+                <p ng-if="BaseInfoForm.description.$dirty && !BaseInfoForm.description.$valid" class="help-block text-right">描述不能为空</p>
+            </div>
+        </div>
+        <div flex=55 layout flex-offset=5>
+            <div class="shutab" layout='column'>
+                <div ng-click="vm.setCurrModel('CTRLCENT')" ng-class="{'active': vm.currModel=='CTRLCENT'}">控制中心权限</div>
+                <div ng-click="vm.setCurrModel('OPRM')" ng-class="{'active': vm.currModel=='OPRM'}">术中权限</div>
+                <div ng-click="vm.setCurrModel('PACU')" ng-class="{'active': vm.currModel=='PACU'}">复苏室权限</div>
+                <div ng-click="vm.setCurrModel('LRGSCRN')" ng-class="{'active': vm.currModel=='LRGSCRN'}">大屏权限</div>
+            </div>
+            <div flex-offset=5>
+                <z-tree id="tree" style="max-height: 400px;overflow: auto;min-width: 200px;display: block;" class="ztree" z-config="zConfig" z-option="zOption"></z-tree>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="BaseInfoForm.$invalid || !vm.saved" type="button" ng-click="vm.update()">保存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取消</button>
+    </div>
+</form>
+<style>
+.shutab>div {
+    height: 40px;
+    float: right;
+    line-height: 40px;
+    width: 100px;
+    text-align: center;
+    background-color: #fafafa;
+    color: #333;
+    cursor: pointer;
+    border: 1px solid #bad1e8;
+}
+
+.shutab>div.active {
+    color: #fff;
+    background-color: #106cc8;
+}
+</style>

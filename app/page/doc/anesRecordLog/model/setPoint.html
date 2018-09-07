@@ -1,0 +1,34 @@
+<div class="modal-header">    
+    <h4><span>修改描点值</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="setPoint">
+	<div class="modal-body">
+        <div class="input-wrap">
+            <div layout layout-align="center center" class="input-group">
+                <label class="tit"><em>*</em>时&nbsp;&nbsp;间</label>
+                <input flex ng-model="series.time_" readonly>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="center center" class="input-group">
+                <label class="tit"><em>*</em>名&nbsp;&nbsp;称</label>
+                <input flex ng-model="series.observeName" readonly>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="center center" class="input-group">
+                <label class="tit"><em>*</em>数&nbsp;&nbsp;值</label>
+                <input flex required type="number" name="value" ng-model="series.value" ng-blur="_value = true">
+            </div>
+            <p ng-if="form.value.$error.required && _value" class="help-block text-right">不能为空</p>
+        </div>
+        <!-- <div layout layout-align="center center" class="input-group">
+            <label class="tit"><em>*</em>备&nbsp;&nbsp;注</label>
+            <textarea flex ng-model="series.memo" rows="3"></textarea>
+        </div> -->
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h4><span>{{item.title}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" novalidate class="form-horizontal">
+    <div class="modal-body">
+        <div class="patient-in-modal-form-div">
+            <div class="form-group">
+                <label for="beid" class="col-sm-4 control-label"><span class="red">*</span>局点名称：</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="beid" ng-options="item.beid as item.name for item in hospital" ng-model="obj.beid" required ng-disabled="item.opt"></select>
+                    <div class="form-error-info" ng-show="form.beid.$dirty && !form.beid.$valid"> <span>局点不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="groupName" class="col-sm-4 control-label"><span class="red">*</span>班次名称：</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="content" ng-options="item.codeValue as item.codeName for item in subType" ng-model="obj.type" required ng-disabled="item.opt"></select>
+                    <div class="form-error-info" ng-show="form.groupName.$dirty && !form.groupName.$valid"> <span>班次名称不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="startTime" class="col-sm-4 control-label"><span class="red">*</span>开始时间：</label>
+                <div class="col-sm-5">
+                    <datetimepicker dateID="date-start-time" name="startTime" ng-model="obj.startTime" timepicker="false" format="Y-m-d" class="form-control" style='padding: 0 2px; height: 26px;'></datetimepicker>
+                    <div class="form-error-info" ng-show="form.startTime.$dirty && !form.startTime.$valid"> <span>开始时间不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="endTime" class="col-sm-4 control-label"><span class="red">*</span>结束时间：</label>
+                <div class="col-sm-5">
+                    <datetimepicker dateID="date-end-time" name="endTime" ng-model="obj.endTime" timepicker="false" format="Y-m-d" class="form-control" style='padding: 0 2px; overflow: hidden; height: 26px;'></datetimepicker>
+                    <div class="form-error-info" ng-show="form.endTime.$dirty && !form.endTime.$valid"> <span>结束时间不能为空</span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="form.$invalid">确&nbsp;&nbsp;定</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+</div>

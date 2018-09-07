@@ -1,0 +1,9 @@
+<div flex layout="column" id="operList">
+    <div class="navbar-btn btn-xs text-right c-el-10">
+        <button type="submit" class="btn btn-primary" ng-click="refresh()">刷&nbsp;&nbsp;新</button>
+    </div>
+    <div flex>
+        <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+        <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+    </div>
+</div>

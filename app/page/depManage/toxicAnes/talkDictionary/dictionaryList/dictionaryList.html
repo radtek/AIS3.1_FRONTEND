@@ -1,0 +1,12 @@
+<div flex>
+    <form role="form" layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+        <label>领用人：</label>
+        <oi-select flex=10 name="receiveName" oi-options="item.userName as item.name for item in getAllUser | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']'}" ng-model="receiveName">
+        </oi-select>
+        <label>领用时间：</label>
+        <datetime-picker flex=10 ng-model="outTime" name="outTime" class="form-control" max="2200-01-01"></datetime-picker>
+        <button class="btn btn-primary" type="button" ng-click="piliang();">批量取药</button>
+    </form>
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ui-grid-pagination ng-if="gridOptions.data" style="height: 771px;"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+</div>

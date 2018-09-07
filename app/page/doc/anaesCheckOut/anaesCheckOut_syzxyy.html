@@ -1,0 +1,176 @@
+<div id="print-region">
+    <div id="anaesCheckOutNhfe" class="page-print" ng-class="{true: 'end-state'}[setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if='docInfo.beName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.beName}}</h3>
+            <h4 ng-if='docInfo.subName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.subName}}</h4>
+            <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h4>手术核算单</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：{{vm.regOptItem.name}}</span>&nbsp;
+            <span layout>病区：{{vm.regOptItem.regionName}}</span>&nbsp;
+            <span layout>床号：{{vm.regOptItem.bed}}</span>&nbsp;
+            <span layout>性别：{{vm.regOptItem.sex}}</span>&nbsp;
+            <span layout>年龄：{{vm.regOptItem.age}}</span>&nbsp;
+            <span layout>住院号：{{vm.regOptItem.hid}}</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>科室：{{vm.regOptItem.deptName}}</span>&nbsp;
+            <span layout flex>费用类型：{{vm.regOptItem.medicalType}}</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>主刀医生：{{vm.data.operatDoc}}</span>&nbsp;
+            <span layout flex>麻醉医生：{{vm.data.anaesDoc}}</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>手术间：{{vm.data.operRoomName}}</span>&nbsp;
+            <span layout flex>手术日期：{{vm.data.anaesRecord.operStartTime.split(' ')[0]}}</span>&nbsp;
+            <span layout flex>特殊感染：{{vm.data.anaesRecord.specialInfection}}</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>手术名称：{{vm.data.realOper}}</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>合计应收：{{vm.data.shouldCostTotal}}元</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <div class="headerDiv" flex layout layout-align="space-between center">
+                <span>手术费用统计 &nbsp; 应收：{{vm.data.anaesChargeShouldSum}}元</span>
+                <div ng-if="!readonly" class="optDiv">
+                    <button class="btn btn-primary" ng-click="add($event, 'ss')">手术费用</button>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="th ckAll">
+                            <label style="position:relative;">
+                                <input ng-model="vm.selectAllCharge" style="position:absolute;" type="checkbox"><span style="margin-left:15px;font-weight:500">全选</span>
+                            </label>
+                        </th>
+                        <th class="th">项目名称</th>
+                        <th class="th">单价</th>
+                        <th class="th">数量</th>
+                        <th class="th">应收</th>
+                        <th class="th">状态</th>
+                        <th class="th">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="charge in vm.data.anaesChargeList track by $index" ng-style="{color: charge.enable != 1 ? '#bbb' : ''}">
+                        <td class="th">
+                            <input ng-model="charge.isSelected" ng-change="countItemsToDel()" ng-disabled="charge.state === 'FINISH'" type="checkbox">
+                        </td>
+                        <td class="th"  ng-class="{'color-red': charge.state == 'FINISH'}"  >{{charge.name}}/{{charge.unit}}</td>
+                        <td class="th">{{charge.priceMinPackage}}</td>
+                        <td class="th"  >
+                            <input type="number" class="noborder3"  ng-class="{'color-red': charge.state == 'FINISH'}"   min="0" transform="number" ng-model="charge.chargeAmount" ng-blur="update(charge, 'anaesChargeList')" ng-disabled="charge.state == 'FINISH'" style="width: 60px;" ng-style="{color: charge.enable != 1 ? '#bbb' : ''}">
+                        </td>
+                        <td class="th">{{charge.shouldSum}}</td>
+                        <td class="th">{{charge.state == 'FINISH' ? '已结算' : '未结算'}}</td>
+                        <td class="th">
+                            <button class="btn btn-warning btn-xs" ng-click="del(charge, 'charge')" ng-disabled="charge.state == 'FINISH'" style="min-width: 40px;">删除</button>
+                            <span class="icon" title="下移"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'anaesChargeList', 'down', charge)"></i></span>
+                            <span class="icon" title="上移"><i class="glyphicon glyphicon-upload" ng-click="vm.sortdown($index, 'anaesChargeList', 'up', charge)"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <div class="headerDiv" flex layout layout-align="space-between center">
+                <span>材料费用统计 &nbsp; 应收：{{vm.data.materialList.total}}元</span>
+                <div ng-if="!readonly" class="optDiv">
+                    <button class="btn btn-primary" ng-click="add($event, 'cl')">材料费用</button>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="th ckAll">
+                            <label style="position:relative;">
+                                <input ng-model="vm.selectAllMaterial" style="position:absolute;" type="checkbox"><span style="margin-left:15px;font-weight:500">全选</span>
+                            </label>
+                        </th>
+                        <th class="th">项目名称</th>
+                        <th class="th">规格</th>
+                        <th class="th">单价</th>
+                        <th class="th">数量</th>
+                        <th class="th">应收</th>
+                        <th class="th">状态</th>
+                        <th class="th">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="material in vm.data.materialList track by $index" ng-style="{color: material.enable != 1 ? '#bbb' : ''}">
+                        <td class="th">
+                            <input ng-model="material.isSelected" ng-change="countItemsToDel();" ng-disabled="material.state === 'FINISH'" type="checkbox">
+                        </td>
+                        <td class="th "  ng-class="{'color-red': material.state == 'FINISH'}"   >{{material.name}}/{{material.unit}}</td>
+                        <td class="th">{{material.spec}}</td>
+                        <td class="th">{{material.priceMinPackage}}</td>
+                        <td class="th "   >
+                            <input type="number" class="noborder3 "  ng-class="{'color-red': material.state == 'FINISH'}" min="0" transform="number" ng-model="material.chargeAmount" ng-blur="update(material, 'materialList')" ng-disabled="material.state == 'FINISH'" style="width: 60px;" ng-style="{color: material.enable != 1 ? '#bbb' : ''}">
+                        </td>
+                        <td class="th">{{material.shouldSum}}</td>
+                        <td class="th">{{material.state == 'FINISH' ? '已结算' : '未结算'}}</td>
+                        <td class="th">
+                            <button class="btn btn-warning btn-xs" ng-click="del(material, 'materialList')" ng-disabled="material.state == 'FINISH'" style="min-width: 40px;">删除</button>
+                            <span class="icon" title="下移"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'materialList', 'down', material)"></i></span>
+                            <span class="icon" title="上移"><i class="glyphicon glyphicon-upload" ng-click="vm.sortdown($index, 'materialList', 'up', material)"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <div class="headerDiv" flex layout layout-align="space-between center">
+                <span>药品费用统计 &nbsp;应收：{{vm.data.medList.total}}元</span>
+                <div ng-if="!readonly" class="optDiv">
+                    <button class="btn btn-primary" ng-if="isQnz" ng-click="tb()">同步术中药品</button>
+                    <button class="btn btn-primary" ng-click="add($event, 'yp')">药品费用</button>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="th ckAll">
+                            <label style="position:relative;">
+                                <input ng-model="vm.selectAllMed" style="position:absolute;" type="checkbox"><span style="margin-left:15px;font-weight:500">全选</span>
+                            </label>
+                        </th>
+                        <th class="th">药品名称</th>
+                        <th class="th">规格</th>
+                        <th class="th">实际用药</th>
+                        <th class="th">单价</th>
+                        <th class="th text-left" style="width: 80px;">计价用量</th>
+                        <th class="th">应收</th>
+                        <th class="th">状态</th>
+                        <th class="th">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="med in vm.data.medList track by $index">
+                        <td class="th">
+                            <input ng-model="med.isSelected" ng-change="countItemsToDel();" ng-disabled="med.state === 'FINISH'" type="checkbox">
+                        </td>
+                        <td class="th"  ng-class="{'color-red': med.state == 'FINISH'}"  >{{med.name}}</td>
+                        <td class="th">{{med.spec}}</td>
+                        <td class="th">{{med.dosageTotalAmount}}{{med.dosageUnit}}</td>
+                        <td class="th">{{med.priceMinPackage}}</td>
+                        <td class="th">
+                            <input type="number" min="0"  ng-class="{'color-red': med.state == 'FINISH'}"   class="noborder3" transform="number" ng-model="med.packageTotalAmount" ng-blur="update(med, 'medList')" ng-disabled="med.state == 'FINISH'" style="width: 40px;"> {{med.minPackageUnit}}
+                        </td>
+                        <td class="th">{{med.shouldCost}}</td>
+                        <td class="th">{{med.state == 'FINISH' ? '已结算' : '未结算'}}</td>
+                        <td class="th">
+                            <button class="btn btn-warning btn-xs" ng-click="del(med, 'medList')" ng-disabled="med.state == 'FINISH'" style="min-width: 40px;">删除</button>
+                            <span class="icon" title="下移"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'medList', 'down', med)"></i></span>
+                            <span class="icon" title="上移"><i class="glyphicon glyphicon-upload" ng-click="vm.sortdown($index, 'medList', 'up', med)"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

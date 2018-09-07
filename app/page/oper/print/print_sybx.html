@@ -1,0 +1,21 @@
+<!-- 加载中 -->
+<div class="print-progress">
+    <progressbar></progressbar>
+</div>
+<div id="doc-all">
+    <!-- 文书 -->
+    <access-log-sybx ng-if="doc_pre_post_visit"></access-log-sybx>
+    <shut-tran-log-sybx ng-if="doc_transfer_connect_record"></shut-tran-log-sybx>
+    <risk-asse-log-sybx ng-if="doc_opt_risk_evaluation"></risk-asse-log-sybx>
+    <pre-visit-log-sybx ng-if="doc_pre_visit"></pre-visit-log-sybx>
+    <anes-program-sybx ng-if="doc_anaes_plan"></anes-program-sybx>
+    <info-cons-sybx ng-if="doc_accede"></info-cons-sybx>
+    <over-medi-log-sybx ng-if="doc_insured_pat_agree"></over-medi-log-sybx>
+    <nurs-record-log-sybx ng-if="doc_opt_care_record"></nurs-record-log-sybx>
+    <check-record-log-sybx ng-if="doc_opt_nurse"></check-record-log-sybx>
+    <safety-verif-log-sybx ng-if="doc_safe_check"></safety-verif-log-sybx>
+    <post-visit-log-sybx ng-if="doc_post_follow_record"></post-visit-log-sybx>
+    <anesthesia-summary-sybx ng-if="doc_anaes_summary"></anesthesia-summary-sybx>
+    <anes-record-log-print-sybx ng-if="doc_anaes_record"></anes-record-log-print-sybx>
+    <placenta-agree-log ng-if="doc_placenta_handle_agree"></placenta-agree-log>
+</div>

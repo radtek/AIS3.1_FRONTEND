@@ -1,0 +1,33 @@
+<div class="modal-header">    
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper">
+    <form name="backDataDict" class="panel panel-default" role="form" novalidate>
+    	<div class="wrap" layout layout-wrap="wrap">
+	    	<div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>备份说明</label>
+                    <textarea ng-model="bfsm" style="height: 75px; width: 500px;" ng-blur="_bfsm = true" required></textarea>
+                </div>
+                <p ng-if="!bfsm && (_bfsm || verify == false)" class="help-block text-right">备份说明不能为空</p>
+            </div>
+            <div flex="90" class="input-wrap" style="padding-top: 30px;">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">备份人员</label>
+                    管理员
+                </div>
+            </div>
+            <div flex="90" class="input-wrap" style="padding-top: 10px;">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>密码</label>
+                    <input flex type="text" name="password" class="form-control" ng-model="backData.password" ng-maxlength="10" ng-blur="_password = true" required>
+                </div>
+                <p ng-if="!backData.password && (_password || verify == false)" class="help-block text-right">密码不能为空</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+        	<button class="btn btn-primary" ng-click="btnActive && count()">保&nbsp;&nbsp;存</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+        </div>
+    </form>
+</div>

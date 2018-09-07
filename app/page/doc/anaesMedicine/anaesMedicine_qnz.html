@@ -1,0 +1,94 @@
+<div id="print-region">
+    <div id="anaesMedicineQnz" class="page-print" ng-class="{true: 'end-state'}[processState==='END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>手术麻醉使用药品知情同意书</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>患者姓名：<a flex>{{vm.regOpt.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{vm.regOpt.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{vm.regOpt.age}}</a></span>&nbsp;
+            <span layout>科别：<a flex>{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{vm.regOpt.bed}}</a></span>&nbsp;
+            <span layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>患者因患<a flex>{{::vm.regOpt.diagnosisName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>定于<a>{{vm.regOpt.operaDate | date: 'yyyy 年 MM 月 dd 日'}}</a>拟施行<a flex>{{vm.regOpt.designedOptName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <p>
+                手术治疗，根据手术需要及患者情况，拟施<a>{{vm.regOpt.designedAnaesMethodName}}</a>麻醉（若区域阻滞麻醉不完善，必要时改用全身麻醉）。现将麻醉中用药向您或委托代理人详细告知如下：
+            </p>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            1、麻醉医师将根据病情合理选择相应的药品，但在不违反原则的基础上也尊重病员根据自己实际情况选择不同的药品。
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            2、由于同一类药品中不同药品的性能不同，价格也有差异。
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            3、麻醉及手术过程中病情可能发生各种变化，在紧急情况下可能会使用事先未能提及的药品。
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            4、对应医保的患者，有一些药品虽然属于医保自费药，但在麻醉过程中必须使用。
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            5、对一些价格较高的药品是麻醉过程中必须使用的，在紧急情况下可能先使用后告知。
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <p class="indent">
+                麻醉科医师将麻醉中会用到的药品作介绍，请病员或委托代理人仔细考虑，如有疑问请向麻醉科医师提出咨询。
+            </p>
+            <p class="indent">
+                麻醉中常用药品有：（仅按医保药品分类，并非按价格分类）
+            </p>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            一、甲类药：（医保全报销）
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end" style="line-height: 1.6">
+            恩氟烷&nbsp;异氟烷&nbsp;氯胺酮&nbsp;芬太尼&nbsp;吗啡&nbsp;哌替啶&nbsp;司可林&nbsp;纳络酮&nbsp;葡萄糖酸钙&nbsp;麻黄碱&nbsp;布比卡因&nbsp;利多卡因&nbsp;氟马西尼&nbsp;新斯的明&nbsp;异丙嗪&nbsp;地塞米松&nbsp;阿托品&nbsp;多巴酚丁胺&nbsp;肾上腺素&nbsp;维库溴胺&nbsp;异丙肾上腺素&nbsp;硝酸甘油&nbsp;胺碘酮&nbsp;甘露醇&nbsp;碳酸氢钠&nbsp;甲氧氯普胺&nbsp;氟哌利多&nbsp;西地兰&nbsp;美托洛尔&nbsp;丙泊酚&nbsp;多巴胺&nbsp;地西泮&nbsp;丁卡因&nbsp;阿曲库胺&nbsp;氨茶碱&nbsp;速尿&nbsp;林格氏液
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            二、乙类药（医保部分自付）：
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end" style="line-height: 1.6">
+            七氟烷&nbsp;咪达唑仑&nbsp;罗哌卡因&nbsp;多沙普仑&nbsp;瑞芬太尼&nbsp;舒芬太尼&nbsp;曲马多&nbsp;昂丹司琼&nbsp;艾司洛尔&nbsp;顺苯阿曲库胺&nbsp;聚明胶肽&nbsp;羟乙基淀粉130/0.4氯化钠&nbsp;罗库溴胺&nbsp;氯诺昔康&nbsp;泮库溴胺&nbsp;乌拉地尔&nbsp;左旋布比卡因&nbsp;哌库溴胺 利多卡因乳膏&nbsp;布洛芬&nbsp;依托咪酯乳剂&nbsp;拉贝洛尔&nbsp;阿扎司琼&nbsp;白眉蛇血凝酶&nbsp;托烷司琼
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            三、医保自费药：盐酸奈福泮&nbsp;地佐辛&nbsp;巴曲亭&nbsp;喷他佐辛&nbsp;右美托咪定
+            <input flex type="text" class="noborder3" ng-model="vm.anaesMedicineAccede.insuredMedicine" ng-value="vm.anaesMedicineAccede.insuredMedicine" />
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <p class="indent">
+                本人或委托代理人已认真阅读，经麻醉科医师通俗的解释，理解了本同意书的全部含义。经慎重考虑，同意接受医院所使用的手术麻醉药品，并承担该麻醉药品的风险。
+            </p>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <p class="indent" style="width: 100%;">
+                <span>病员签署意见并签名：<input type="text" class="noborder3" style="width: 160px;" readonly /></span>
+            </p>
+            <p class="indent">
+                <span>监护人签署意见并签名：<input type="text" class="noborder3" style="width: 160px;" readonly /></span>
+            </p>
+            <p class="indent">
+                <span>病员授权委托人签署意见并签名：<input type="text" class="noborder3" style="width: 160px;" readonly /></span>（在此项签名即视同为得到授权）
+            </p>
+        </div>
+        <div class="form-group" style="margin-top: 20px; margin-bottom: 20px!important;" layout layout-align="end center" ng-class="{true: 'md-red'}[!vm.anaesMedicineAccede.anaestheitistId && verify]">
+            <span>麻醉科医师签名：</span>
+            <oi-select class="noborder3 sign signature" ng-model="vm.anaesMedicineAccede.anaestheitistId" oi-options="i.userName as i.name for i in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+            <div class="eSignature" style="margin-top: -10px;">
+                <!-- <img ng-repeat="sig in eSignatureAnaestheitist" src="{{sig}}" ng-if="sig.indexOf('http')>=0" /> -->
+                <input type="text" class="noborder3" style="width: 150px;" />
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end center">
+            <span>日期：</span>
+            <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.anaesMedicineAccede.date" ng-value="vm.anaesMedicineAccede.date" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime"></datetime-picker>
+        </div>
+    </div>
+</div>

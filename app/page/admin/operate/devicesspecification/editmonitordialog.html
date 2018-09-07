@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form class="form-horizontal shiftIn-baseInfo" name="BaseInfoForm" novalidate style="min-height: 350px">
+    <div class="modal-body">
+        显示位置：描点
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-4" ng-repeat="item in gridOptions.data" ng-show="item.position==0">
+                <input type="checkbox" name="{{item}}" ng-model="item.discount"  ng-true-value=1 ng-false-value=0 ng-click="changeChecked(item)" required> {{item.eventName}}
+            </div>
+        </div>
+        显示位置：数字
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-4" ng-repeat="item in gridOptions.data" ng-show="item.position==1">
+                <input type="checkbox" name="{{item}}" ng-model="item.discount" ng-true-value=1 ng-false-value=0 ng-click="changeChecked(item)" required> {{item.eventName}}
+            </div>
+        </div>
+        显示位置：实时
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-4" ng-repeat="item in gridOptions.data" ng-show="item.position=='-1'">
+                <input type="checkbox" name="{{item}}" ng-model="item.discount" ng-true-value=1 ng-false-value=0 ng-click="changeChecked(item)" required> {{item.eventName}}
+            </div>
+        </div>
+        <!-- {{gridOptions.data}} -->
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn btn-primary" type="button" ng-click="vm.save()">保存</button> -->
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取消</button>
+    </div>
+</form>

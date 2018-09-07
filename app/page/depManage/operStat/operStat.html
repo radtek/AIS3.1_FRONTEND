@@ -1,0 +1,71 @@
+<div id="statQuery" layout="column" flex>
+	<form role="form" class="navbar-btn btn-xs text-right c-el-10">
+		<div layout class="col-md-2">
+	    <label class="radio-inline">
+	        <input ng-model="queryObj.timeType" type="radio" name="sex" value="1">月报</input>
+	    </label>
+	    <select flex class="form-control" ng-model="queryObj.timeRange1">
+	        <option value="0">当前月</option>
+	        <option value="1">最近1月</option>
+	        <option value="2">最近2月</option>
+	    </select>
+	    </div>
+	    <div layout class="col-md-2">
+	    <label class="radio-inline">
+	        <input ng-model="queryObj.timeType" type="radio" name="sex" value="2">季报</input>
+	    </label>
+	    <select flex class="form-control"  ng-model="queryObj.timeRange2">
+	        <option value="0">当前季度</option>
+	        <option value="1">最近1季度</option>
+	        <option value="2">最近2季度</option>
+	        <option value="3">最近3季度</option>
+	    </select>
+	    </div>
+	    <div layout class="col-md-2">
+	    <label class="radio-inline">
+	        <input ng-model="queryObj.timeType" type="radio" name="sex" value="3">年报</input>
+	    </label>
+	    <select flex class="form-control"  ng-model="queryObj.timeRange3">
+	        <option value="0">当前年</option>
+	        <option value="1">最近1年</option>
+	        <option value="2">最近2年</option>
+	    </select>
+	    </div>
+        <div layout class="col-md-4">
+        <label class="radio-inline">
+            <input ng-model="queryObj.timeType" type="radio" name="sex" value="4">日期范围</input>
+        </label>
+        <div>
+        	<datetime-picker flex dateID="date-start-time" ng-model="queryObj.startTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>
+    	</div>
+        <div style="margin: 5px 10px 0 10px;"><span>到</span></div>
+        <div>
+        	<datetime-picker flex dateID="date-end-time" ng-model="queryObj.endTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>
+        </div>
+        </div>
+        <div class="text-right c-el-10">
+	        <button class="btn btn-primary" type="button" ng-click="query();">查&nbsp;&nbsp;询</button>
+	        <button class="btn btn-primary" type="button" ng-click="export();">导&nbsp;&nbsp;出</button>
+        </div>
+	</form>
+	<form role="form" class="from-horizontal bottom-form" ng-if="$state.current.name==='statOperatorPatient' || $state.current.name==='statByDept'">
+		<div ng-if="$state.current.name==='statByDept'" layout class="col-md-2">
+		<label class="radio-inline">
+		    科室
+		</label>
+		<select flex class="form-control"  ng-model="queryObj.deptId">
+			<option value="">全部</option>
+			<option ng-repeat="item in deptList" value="{{item.deptId}}">{{item.name}}</option>
+		</select>
+		</div>
+		<div ng-if="$state.current.name==='statOperatorPatient'" layout class="col-md-2">
+		<label class="radio-inline">
+		    医生
+		</label>
+		<oi-select class="oi-operator" oi-options="i.operatorId as i.name for i in operatorList | limitTo: 100" ng-model="queryObj.operatorId" oi-select-options="{
+		     listFilter: 'oiSelectAscSort:[\'pinyin\', \'name\']',cleanModel: true
+		 }"  ></oi-select>
+		</div>
+	</form>
+	<section flex ui-view class="view-container"></section>
+</div>

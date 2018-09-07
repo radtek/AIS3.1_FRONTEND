@@ -1,0 +1,57 @@
+<div id="print-region">
+    <div id="tempDocAdvice" class="page-print show-page" style="width: 1000px;" ng-class="{true:'end-state'}[setting.readonly]">
+        <div layout layout-align="space-between end" class="form-group" style="white-space:nowrap;">
+            <span flex layout>姓名：<a flex>{{vm.regOpt.name}}</a></span>
+            <span flex layout>性别：<a flex>{{vm.regOpt.sex}}</a></span>
+            <span flex layout>年龄：<a flex>{{vm.regOpt.age}}</a></span>
+            <span flex layout>科室：<a flex>{{vm.regOpt.deptName}}</a></span>
+            <span flex layout>床号：<a flex>{{vm.regOpt.bed}}</a></span>
+            <span flex layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+        </div>
+        <div layout layout-align="space-between end" class="form-group" style="white-space:nowrap;">
+            <span flex layout>拟施诊断：<a flex>{{vm.regOpt.diagnosisName}}</a></span>
+        </div>
+        <div layout layout-align="space-between end" class="form-group" style="white-space:nowrap;">
+            <span flex layout>拟施手术：<a flex>{{vm.regOpt.designedOptName}}</a></span>
+        </div>
+        <div ui-grid="gridOptions" class="form-group" style="height:600px;"></div>
+    </div>
+    <div style="width: 800px;" class="page-print print-page">
+        <div layout layout-align="space-between end" class="form-group" style="white-space:nowrap;">
+            <span flex layout>姓名：<a flex>{{vm.regOpt.name}}</a></span>
+            <span flex layout>性别：<a flex>{{vm.regOpt.sex}}</a></span>
+            <span flex layout>年龄：<a flex>{{vm.regOpt.age}}</a></span>
+            <span flex layout>科室：<a flex>{{vm.regOpt.deptName}}</a></span>
+            <span flex layout>床号：<a flex>{{vm.regOpt.bed}}</a></span>
+            <span flex layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+        </div>
+        <div layout layout-align="space-between end" class="form-group" style="white-space:nowrap;">
+            <span flex layout>拟施诊断：<a flex>{{vm.regOpt.diagnosisName}}</a></span>
+        </div>
+        <div layout layout-align="space-between end" class="form-group" style="white-space:nowrap;">
+            <span flex layout>拟施手术：<a flex>{{vm.regOpt.designedOptName}}</a></span>
+        </div>
+        <table flex class="table table-bordered" style="width:800px;">
+            <thead>
+                <tr>
+                    <th>开始时间</th>
+                    <th>医嘱项目</th>
+                    <th>医师签名</th>
+                    <th>护士签名</th>
+                    <th>执行人</th>
+                    <th>执行时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in gridOptions.data">
+                    <td>{{item.doctorTime | date:"MM-dd HH:mm"}}</td>
+                    <td>{{item | sos}}</td>
+                    <td>{{item.doctor}}</td>
+                    <td>{{item.checkor}}</td>
+                    <td>{{item.$$treeLevel === 0?item.excutor:''}}</td>
+                    <td>{{item.$$treeLevel === 0?(item.excuteTime | date: 'MM-dd HH:mm'):''}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

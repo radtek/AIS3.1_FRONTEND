@@ -1,0 +1,77 @@
+<div id="print-region">
+    <div id="preVisitLog_qnzOutPatient" class="page-print" ng-class="{true:'end-state'}[accedeItem.processState == 'END' && !saveActive || setting.readonly]">
+        <div class="table-bordered">
+            <header layout="column" layout-align="center center">
+                <h3>{{docInfo.beName}}麻醉前访视和谈话记录</h3>
+            </header>
+            <div class="form-group-info" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout>姓名：<a flex>{{regOptItem.name}}</a></span>&nbsp;
+                <span layout>性别：<a flex>{{regOptItem.sex}}</a></span>&nbsp;
+                <span layout>年龄：<a flex>{{regOptItem.age}}</a></span>&nbsp;
+                <span layout>住院号：<a flex>{{regOptItem.hid}}</a></span>&nbsp;
+                <!-- <span layout>科别：<a flex>{{regOptItem.deptName}}</a></span>&nbsp; -->
+                <span layout>床号：<a flex>{{regOptItem.bed}}</a></span>&nbsp;
+            </div>
+            <div class="form-group-info" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>诊&nbsp;&nbsp;断：<a flex>{{regOptItem.diagnosisName}}</a></span>
+            </div>
+            <div class="form-group-info" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex><span layout layout-align="center center">拟施手术：</span><a flex>{{regOptItem.designedOptName}}</a></span>
+                <span layout flex><span layout layout-align="center center">麻醉方法：</span><a flex>{{regOptItem.designedAnaesMethodName}}</a></span>
+            </div>
+            <div class="form-group-info" style="padding-top: 5px">
+                <span class="labPrint">特殊病史</span>
+                <textarea class="no-triangle" style="width: 100%;height: 150px" ng-model="preAnaesTalkRecord.specialMedicalHis" maxlength="220">{{preAnaesTalkRecord.specialMedicalHis}}</textarea>
+            </div>
+            <div class="form-group">
+                <span style="line-height: 30px">手术需在麻醉下进行，麻醉可能发生以下并发症和意外</span>
+                <p class="indent">
+                    1.麻醉、手术中可能发生呕吐、误吸、喉痉挛等。
+                </p>
+                <p class="indent">
+                    2.对麻醉药和输液可能发生过敏等严重不良反应。
+                </p>
+                <p class="indent">
+                    3.神经阻滞、椎管内麻醉可能发生神经损伤、肢体感觉和运动障碍，可能引起血肿、气胸等并发症。
+                </p>
+                <p class="indent">
+                    4.麻醉可能诱发和加重原有疾病。麻醉可能引起心、脑、呼吸功能紊乱，严重者可能导致死亡。
+                </p>
+                <p class="indent">
+                    5.术中麻醉医生根据手术需要和病情变化，可能改变麻醉方式，将不再通知病人和家属。
+                </p>
+                <p class="indent">
+                    6.注意事项：
+                </p>
+                <p class="indent">
+                    （1）麻醉前6小时禁食，麻醉前：3小时禁饮。麻醉前请摘下活动假牙。
+                </p>
+                <p class="indent">
+                    （2）手术结束离院，需要有成年家属陪同；全身麻醉结束后12小时内不能登高，驾驶汽车，避免做重要决策等事项。
+                </p>
+                以上各项已告知病人和/或家属。病人和/或家属对以上情况表示理解，同意麻醉
+                <br>
+            </div>
+            <div layout layout-wrap="wrap" layout-align="space-between end" style="line-height: 30px">
+                <span layout>病人/家属：<a flex></a></span>&nbsp;
+                <span layout>（签名）与病人关系：<a flex></a></span>&nbsp;
+            </div>
+            <div layout layout-wrap="wrap" layout-align="space-between end" style="line-height: 30px">
+                <span></span>
+                <span layout flex=30>医生：
+                <!--      <oi-select class="noborder3 sign signature" name="anesthetistId" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="regOptItem.anesthetistId"></oi-select> -->
+                <!-- <div class="eSignature"> -->
+                    <input type="text" class="noborder3" style="width: 150px;" />
+                <!-- </div> -->
+
+                </span>
+            </div>
+            <div layout layout-wrap="wrap" layout-align="space-between end" style="line-height: 30px">
+                <span></span>
+                <span layout flex=30>手术日期： 
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp年&nbsp&nbsp&nbsp&nbsp&nbsp月&nbsp&nbsp&nbsp&nbsp&nbsp日
+         <!--            <datetime-picker class='calendar sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="regOptItem.operaDate" timepicker="false" format="Y-m-d"></datetime-picker>  </span> -->
+            </div>
+        </div>
+    </div>
+</div>

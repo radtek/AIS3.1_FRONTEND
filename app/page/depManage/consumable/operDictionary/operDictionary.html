@@ -1,0 +1,56 @@
+<div flex layout="column" id="operDictionary" >
+	<div class="wrap" layout layout-wrap="wrap">
+        <div flex="50" class="div1-head" >
+            <div layout layout-wrap="wrap" class="form-group">
+        		<div flex="15" class="text-center" style="margin: 5px 10px 0 10px;">预约手术日期　从</div>	
+                <datetime-picker  flex="15"  dateID="date-start-time" ng-model="startTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>    	
+                <div  flex="5"  class="text-center" style="margin: 5px 10px 0 10px;">到</div>
+                <datetime-picker  flex="15"  dateID="date-end-time" ng-model="endTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>       
+            　  <button class="btn btn-primary pull-right" type="button" ng-click="query();">查&nbsp;&nbsp;询</button>
+            </div>
+            <div class="div1-tab" >
+                <span class="span-tab" ng-class="{'active': talkInfo==0}" ng-click="setTalkInfo(0)">未取耗材手术信息</span><span class="span-tab" ng-class="{'active': talkInfo==1}"  ng-click="setTalkInfo(1)">已取耗材手术信息</span>
+            </div>
+            <div ng-if="talkInfo==0">
+                <div ui-grid="gridOptions" style="height:730px;" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+                <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+            </div>
+            <div ng-if="talkInfo==1">
+                <div ui-grid="gridOptions2" style="height:730px;" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions2"></div>
+                <div class="noData" ng-if="!gridOptions2">暂无数据</div>
+            </div>
+        </div>
+		<div flex="50"  >
+			<div style="border: solid 2px #ccc; padding: 10px;margin-left: 10px;">
+			<h5><b>手术详情</b></h5>
+			    <ul class="pinfoul">
+                    <li>姓名：<span>{{resultRegOpt.name}}</span></li>
+                    <li>性别：<span>{{resultRegOpt.sex}}</span></li>
+                    <li>年龄：<span>{{resultRegOpt.age}}</span></li>
+                    <li>住院号：<span>{{resultRegOpt.hid}}</span></li>
+                    <li>病区：<span>{{resultRegOpt.regionName}}</span></li>
+                    <li>科室：<span>{{resultRegOpt.deptName}}</span></li>
+                    <li>床号：<span>{{resultRegOpt.bed}}</span></li>
+                    <li>手术日期：<span>{{resultRegOpt.operaDate}}</span></li>
+                    <li>手术级别：<span>{{resultRegOpt.optLevel}}</span></li>
+                    <li>手术室：<span>{{resultDispatch.operRoomName}}</span></li>
+                    <li>手术台次：<span>{{resultDispatch.pcs}}</span></li>
+                    <li>切口等级：<span>{{resultRegOpt.cutLevel}}</span></li>
+                    <li>麻醉方式：<span>{{resultRegOpt.localAnaes}}</span></li>
+                    <li>手术名称：<span>{{resultRegOpt.designedOptName}}</span></li>
+                    <li>麻醉医生：<span>{{resultDispatch.anesthetistName}}</span></li>
+                    <li>主刀医生：<span>{{resultRegOpt.operatorName}}</span></li>
+                    <li>巡回护士：<span>{{resultDispatch.circunurseName1}}</span></li>
+                    <li>洗手护士：<span>{{resultDispatch.instrnurseName1 }}{{resultDispatch.instrnurseName2}}</span></span></li>
+                    <li>助手医生：<span>{{resultDispatch.assistantName}}</span></li>                    
+                </ul>
+        	</div>
+        	<div style="border: solid 2px #ccc; padding: 8px;margin-left: 10px; margin-top: 10px;">
+        	<h5><b>取耗材记录</b></h5>
+            <div style="height:30px;margin-bottom: 5px;"><button class="btn btn-primary pull-right" type="button" ng-click="addmed()">新增耗材</button></div>
+        	<div ui-grid="gridOptions3" style="height: 425px;"  ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+        	<div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+        	</div>
+        </div>
+	</div>
+</div>

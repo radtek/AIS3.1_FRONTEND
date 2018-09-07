@@ -1,0 +1,14 @@
+<!-- <div class="dtdiv div-bg-100"
+     ng-mouseover="row.entity.circuAnesthetistId1div=true" 
+     ng-if="!row.entity.circuAnesthetistId1div">
+     {{row.entity.circuAnesthetistId}}
+</div> -->
+<oi-select 
+		   ng-class="{true: 'oi-select'}[!(row.entity.state == '04' || row.entity.state == '05' || row.entity.state == '06' || row.entity.state == '07') ]"
+		   ng-disabled=" row.entity.state == '04' || row.entity.state == '05' || row.entity.state == '06' || row.entity.state == '07' "
+		   ng-change="grid.appScope.blurFn(row.entity,col,'isSameDoct');"
+           ng-click="grid.appScope.focus(row.entity, col);" 
+           oi-options="item.userName as item.name for item in col.colDef.editDropdownOptionsArray track by item.userName | limitTo: 100" 
+           ng-model="row.entity.perfusionDoctorId"  oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" multiple>
+</oi-select>
+

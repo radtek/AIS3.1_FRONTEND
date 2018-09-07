@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <h4><span>{{vm.title}}{{(vm.overMedicare.type=='1') ? "药品" : ((vm.overMedicare.type=='2') ? "材料" : "项目")}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="overMedicare">
+    <div layout="column">
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;">
+                类型
+            </div>
+            <div layout layout-align="end center" flex="60">
+                <select flex name="type" ng-model="vm.overMedicare.type" class="form-control">
+                    <option value="1" ng-selected="vm.overMedicare.type == 1">药品</option>
+                    <option value="2" ng-selected="vm.overMedicare.type == 2">材料</option>
+                    <option value="3" ng-selected="vm.overMedicare.type == 3">项目</option>
+                </select>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;">
+                <span class="md-red">*</span>时间
+            </div>
+            <div layout layout-align="end center" flex="60">
+                <datetime-picker name="dateTime" dateID="datetime1" ng-model="vm.overMedicare.time" timepicker="true" format="Y-m-d H:i" class="form-control" required></datetime-picker>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;">
+                <span class="md-red">*</span>名称
+            </div>
+            <div layout layout-align="end center" flex="60">
+                <oi-select flex oi-options="item.name for item in getItems($query) | limitTo: 100" ng-model="vm.overMedicare.itemName" name="chargeItem" placeholder="请输入拼音搜索" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']'}" required ng-disabled="vm.overMedicare.id ? true : false">
+                </oi-select>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;">
+                事由
+            </div>
+            <div layout layout-align="end center" flex="60">
+                <input flex type="text" class="form-control" maxlength="30" ng-model="vm.overMedicare.reason"></input>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;">
+                {{data.from == 'beforeAfter'?'护理人员':'医师'}}
+            </div>
+            <div layout layout-align="end center" flex="60">
+                <oi-select style="min-width:115px;" ng-if="data.from=='beforeAfter'" oi-options="item.name for item in  getUser(overMedicare.nurseName, 'NURSE') | limitTo: 100" ng-model="vm.overMedicare.nurseName" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'nurseName\']', cleanModel: true}"></oi-select>
+                <oi-select style="min-width:115px;" ng-if="data.from=='overMedicare'" oi-options="item.name for item in  getUser(overMedicare.doctorName, 'ANAES_DOCTOR') | limitTo: 100" ng-model="vm.overMedicare.doctorName" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}"></oi-select>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-disabled="overMedicare.$invalid" type="button" ng-click="save('I')">保存</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">关闭</button>
+</div>

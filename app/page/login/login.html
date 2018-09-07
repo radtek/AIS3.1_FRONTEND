@@ -1,0 +1,34 @@
+<div flex layout="column" id="login">
+    <header layout layout-align="start center">
+        <span class="login-logo"></span>
+    </header>
+    <section flex layout layout-align="end center" class="login-banner">
+        <form name="form" role="form" ng-submit="auth(userInfo)" class="auth-user panel panel-default panel-body" novalidate>
+            <h4 layout layout-align='space-between end'>
+                <span>AIS手术麻醉系统</span>
+                <!-- NODE_ENV == "development" -->
+                <select ng-if='selectBeid' class="noborder form-control select" style='height: 21px; padding: 0' ng-options="i.id as i.id for i in beList" ng-model="userInfo.logionBeid" ng-change="changeBeListFn()"></select>
+                <select class="noborder form-control select" style='height: 21px; padding: 0; font-size: 16px!important;' ng-options="i.name as i.fieldname for i in fieldList" ng-model="userInfo.module" ng-change="changeModuleFn()"></select>
+            </h4>
+            <div class="input-wrap">
+                <div class="input-group">
+                    <div class="input-group-addon glyphicon glyphicon-user"></div>
+                    <input type="text" name="userName" class="form-control" ng-model="userInfo.username" maxlength="18" placeholder="请输入用户帐号" required>
+                </div>
+                <p ng-show="errName" class="help-block text-right">{{errName}}</p>
+            </div>
+            <div class="input-wrap">
+                <div class="input-group">
+                    <div class="input-group-addon glyphicon glyphicon-lock"></div>
+                    <input type="password" name="userPwd" class="form-control" ng-model="userInfo.password" maxlength="18" placeholder="请输入密码" required>
+                </div>
+                <p ng-show="errPwd" class="help-block text-right">{{errPwd}}</p>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-login">登&nbsp;&nbsp;录</button>
+        </form>
+    </section>
+    <footer layout="column" layout-align="center center">
+        <strong>深圳迪聚海思科技有限公司</strong>
+        <span>Shenzhen DigiHealth Technology Co.Ltd</span>
+    </footer>
+</div>

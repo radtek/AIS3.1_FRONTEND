@@ -1,0 +1,50 @@
+<div id="print-region">
+    <div id="anaesMethodChange_syzxyy" class="page-print" ng-class="{true:'end-state'}[accedeItem.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if='docInfo.beName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.beName}}</h3>
+            <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h3>麻醉方法变更记录</h3>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：{{vm.regOptItem.name}}</span>&nbsp;
+            <span layout>住院号：{{vm.regOptItem.hid}}</span>&nbsp;
+            <span layout>麻醉日期：{{vm.regOptItem.operaDate}}</span>
+        </div>
+        <div class="form-group">
+            <a flex layout style="border-bottom: 1px solid #000000;"></a>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>拟定麻醉方法：{{vm.regOptItem.designedAnaesMethodName}}</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>更改麻醉方法：
+                <oi-select flex multiple class="noborder3 sign" ng-model="vm.methodChangeRecord.anaesMethodCodes" oi-options="item.anaMedId as item.name for item in vm.anaesMethodList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+            </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>更改原因：
+                <textarea class="no-triangle" cols="100" rows="5" ng-model="vm.methodChangeRecord.reason" maxlength="445">{{vm.methodChangeRecord.reason}}</textarea>
+            </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>更改后麻醉效果评定：
+                <checkbox ng-model="vm.methodChangeRecord.anaesEffect" ng-true-value="1">满意</checkbox>
+                <checkbox ng-model="vm.methodChangeRecord.anaesEffect" ng-true-value="2">欠佳</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end end" ng-class="{true: 'md-red'}[!vm.methodChangeRecord.anesthetistId && verify]">
+            <span><em class="not-print">*</em>麻醉医师：</span>
+            <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig1]" name="anesthetistId" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="vm.methodChangeRecord.anesthetistId"></oi-select>
+            <div class="eSignature">
+                <img ng-repeat="item in eSignatureAnaestheitist1" src="{{item.path}}" ng-if="item.hasPath" />
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+            <span>上级医师：</span>
+            <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig2]" name="superiorPhysician" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="vm.methodChangeRecord.superiorPhysician"></oi-select>
+            <div class="eSignature">
+                <img ng-repeat="item in eSignatureAnaestheitist2" src="{{item.path}}" ng-if="item.hasPath" />
+            </div>
+        </div>
+    </div>
+</div>

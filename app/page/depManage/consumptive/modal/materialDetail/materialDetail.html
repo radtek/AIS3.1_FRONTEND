@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4>
+        <span>{{vm.title}}</span>
+        <span class="pull-right modal-container_close" ng-click="vm.close()">✖</span>
+    </h4>
+</div>
+<form class="form-horizontal shiftIn-baseInfo" name="BaseInfoForm" novalidate>
+    <div class="modal-body">
+        <div class="patient-in-modal-form-div">
+            <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+        </div>
+    </div>
+    <div ng-if="vm.errorinfo" class="text-center" style="color:red;">{{vm.errorinfo}}</div>
+</form>

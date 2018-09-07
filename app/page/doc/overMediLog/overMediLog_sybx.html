@@ -1,0 +1,61 @@
+<div id="print-region">
+    <div class="page-print" id="overMediLog_sybx">
+        <header layout="column" layout-align="center center" class="noTop">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>参保患者特殊用药、卫材知情单</h4>
+        </header>
+        <div class="form-group" layout layout-align="space-between end">
+            <span layout flex>病志号：<a flex>{{regOpt.hid}}</a></span>
+            <span layout flex>姓名：<a flex>{{regOpt.name}}</a></span>
+            <span layout flex>性别：<a flex>{{regOpt.sex}}</a></span>
+            <span layout flex>年龄：<a flex>{{regOpt.age}}</a></span>
+        </div>
+        <div class="form-group" layout>
+            <span layout flex>诊断：<a flex>{{regOpt.diagnosisName}}</a></span>
+        </div>
+        <p><b>特殊用药知情单</b></p>
+        <table class="form-group text-center">
+            <tr>
+                <th class="text-center" style="width: 35px;"></th>
+                <th class="text-center" style="width: 140px;">时间</th>
+                <th class="text-center">药品名称</th>
+                <th class="text-center" style="width: 100px;">规格</th>
+                <th class="text-center" style="width: 50px;">单价</th>
+                <th class="text-center" style="width: 100px;">用药依据</th>
+                <th class="text-center" style="width: 70px;" ng-if="processState != 'END' && !setting.readonly">操作</th>
+            </tr>
+            <tr ng-repeat="item in insuredItems">
+                <td class="text-center" ng-if="item.num == 0" rowspan="{{item.len}}">
+                    <span style="display: inline-block; width: 16px;">{{item.tit}}</span>
+                </td>
+                <td>{{item.time}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.spec}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.reason}}</td>
+                <td ng-if="processState != 'END' && !setting.readonly">
+                    <i class="glyphicon glyphicon-edit" style="cursor: pointer; margin-left: 10px; margin-right: 10px;" ng-click="add(item)" ng-if="!!item.id"></i>
+                    <i class="glyphicon glyphicon-remove" style="cursor: pointer;" ng-click="del(item)" ng-if="!!item.id"></i>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group" layout layout-align="space-between end" ng-class="{true: 'end-state'}[processState == 'END' || setting.readonly]">
+            <div layout>患者/家属签字：
+                <a flex class="sign"></a>
+            </div>&nbsp;
+            <div layout>医生签字：
+                <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="insuredPatAgree.docSign"></oi-select>
+                <div class="eSignature">
+    <img ng-repeat="item in eSignatureAnesthetist" src="{{item.path}}" ng-if="item.hasPath" />
+</div>
+            </div>&nbsp;
+            <div layout>科主任签字：
+                <a flex class="sign"></a>
+            </div>
+        </div>
+        <div layout layout-align="end center" ng-class="{true: 'end-state'}[processState == 'END' || setting.readonly]">
+            日期：
+            <datetime-picker class='calendar noborder3 sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="insuredPatAgree.signTime" timepicker="false" format="Y-m-d"></datetime-picker>
+        </div>
+    </div>
+</div>

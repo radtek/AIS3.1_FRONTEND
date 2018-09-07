@@ -1,0 +1,31 @@
+<div flex layout="column" id="oper">
+    <form id="modifyPwd" name="passInfo" role="form" novalidate class="panel panel-default">
+        <!-- <div class="wrap" layout layout-wrap="wrap"> -->
+            <div class="navbar-btn btn-xs text-right c-el-10">
+                <button type="button" ng-click="vm.changeInputType();" class="btn btn-default"><span ng-if="vm.inputType==='password'" class="glyphicon glyphicon-eye-open"></span><span ng-if="vm.inputType==='text'" class="glyphicon glyphicon-eye-close"></span></button>
+                <button class="btn btn-primary" ng-click="btnActive && save()">保存</button>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><span class="glyphicon glyphicon-lock"></span>原密码：</label>
+                    <input flex type="{{vm.inputType}}" name="oldPass" class="form-control" ng-model="vm.oldPass" ng-blur="_oldPass = true" required>
+                </div>
+                <p ng-if="!vm.oldPass && (_oldPass || verify == false)" class="help-block text-right">原密码不能为空</p>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><span class="glyphicon glyphicon-lock"></span>新密码：</label>
+                    <input flex type="{{vm.inputType}}" name="newPass" class="form-control" ng-model="vm.newPass" ng-blur="_newPass = true" required>
+                </div>
+                <p ng-if="!vm.newPass && (_newPass || verify == false)" class="help-block text-right">新密码不能为空</p>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><span class="glyphicon glyphicon-lock"></span>确认新密码：</label>
+                    <input flex type="{{vm.inputType}}" name="rePass" class="form-control" ng-model="vm.rePass" ng-blur="_rePass = true" required>
+                </div>
+                <p ng-if="!vm.rePass && (_rePass || verify == false)" class="help-block text-right">确认新密码不能为空</p>
+            </div>
+        <!-- </div> -->
+    </form>
+</div>

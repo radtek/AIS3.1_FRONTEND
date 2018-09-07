@@ -1,0 +1,12 @@
+<div class="modal-header">    
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div ui-grid="gridChargeItems" ui-grid-pagination ui-grid-auto-resize></div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-disabled="chargePackagesDict.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+</div>

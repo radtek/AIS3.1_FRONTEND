@@ -1,0 +1,241 @@
+<div id="print-region">
+    <div class="page-print" id="accessLog">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>手术患者术前术后访视表</h2>
+        </header>
+        <div layout="column" class="border_around" ng-class="{true: 'end-state'}[prePostVisit.processState == 'END' && !saveActive || setting.readonly]">
+            <div flex layout>
+                <div flex="5" layout layout-align="center center" class="padding_left border_right border_bottom font_bolder">患者信息</div>
+                <div flex class="border_bottom padding_around row_margin">
+                    <div flex layout>
+                        <span flex>科室：{{searchRegOptByIdFormBean.deptName}}</span>
+                        <span flex>姓名：{{searchRegOptByIdFormBean.name}}</span>
+                        <span flex>性别：{{searchRegOptByIdFormBean.sex}}</span>
+                        <span flex>年龄：{{searchRegOptByIdFormBean.age}}</span>
+                        <span flex>病室：{{searchRegOptByIdFormBean.regionName}}</span>
+                        <span flex>病志号：</span>
+                    </div>
+                    <div flex layout>
+                        <div flex layout>
+                            <span flex layout>诊断：<a flex>{{searchRegOptByIdFormBean.diagnosisName}}</a></span>
+                        </div>&nbsp;
+                        <div flex layout>
+                            <span flex layout>手术名称：<a flex>{{searchRegOptByIdFormBean.designedOptName}}</a></span>
+                        </div>
+                    </div>
+                    <div flex layout>
+                        <div flex layout>
+                            <span flex layout>手术日期：<a flex>{{searchRegOptByIdFormBean.operaDate}}</a></span>
+                        </div>&nbsp;
+                        <div flex layout>
+                            <span flex layout>麻醉方式：<a flex>{{searchRegOptByIdFormBean.designedAnaesMethodName}}</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div flex layout>
+                <div flex="5" layout layout-align="center center" class="padding_left border_right border_bottom font_bolder">术前访视内容</div>
+                <div flex layout="column" class="padding_around border_bottom row_margin">
+                    <div layout>
+                        <div>查阅病志化验单：</div>
+                        <div flex layout="column" class="row_margin">
+                            <div layout>
+                                HBsAg：(<checkbox ng-model="prePostVisit.hbsag" ng-true-value="1">+</checkbox>)(<checkbox ng-model="prePostVisit.hbsag" ng-true-value="2">-</checkbox>);
+                                HCV：(
+                                    <checkbox ng-model="prePostVisit.hcv" ng-true-value="1">+</checkbox>)(
+                                    <checkbox ng-model="prePostVisit.hcv" ng-true-value="2">-</checkbox>);
+                                HIV：(
+                                    <checkbox ng-model="prePostVisit.hiv" ng-true-value="1">+</checkbox>)(
+                                    <checkbox ng-model="prePostVisit.hiv" ng-true-value="2">-</checkbox>);
+                            </div>
+                            <div layout>
+                                TPHA：(
+                                    <checkbox ng-model="prePostVisit.tpha" ng-true-value="1">+</checkbox>)(
+                                    <checkbox ng-model="prePostVisit.tpha" ng-true-value="2">-</checkbox>)
+                            </div>
+                            <div layout>
+                                血型：<select class="a-input-hour" ng-model="prePostVisit.blood" ng-options="item.codeValue as item.codeName for item in bloodTypeList"></select>
+                                血糖：<input type="number" max="99.9" class="noborder3" ng-model="prePostVisit.bloodSugar" ng-value="prePostVisit.bloodSugar" />mmol/L。
+                            </div>
+                        </div>
+                    </div>
+                    <div layout>
+                        既往病史：<input flex class="noborder3" ng-model="prePostVisit.briefHis" ng-value="prePostVisit.briefHis" maxlength="8">
+                        <div layout>过敏史：
+                            <checkbox ng-model="prePostVisit.isAllergy" ng-click="prePostVisit.allergy=''" ng-true-value="2">无</checkbox>
+                            <checkbox ng-model="prePostVisit.isAllergy" ng-true-value="1">有</checkbox>
+                            <input class="noborder3" ng-model="prePostVisit.allergy" ng-value="prePostVisit.allergy" ng-disabled="prePostVisit.isAllergy != 1" maxlength="11">
+                        </div>
+                        <div>手术史：
+                            <checkbox ng-model="prePostVisit.operHis" ng-true-value="2">无</checkbox>
+                            <checkbox ng-model="prePostVisit.operHis" ng-true-value="1">有</checkbox>
+                        </div>
+                    </div>
+                    <div layout>
+                        <div>患者评估：</div>
+                        <div flex layout="column" class="row_margin">
+                            <div layout>
+                                <span flex='15'>身体状况：</span>
+                                <checkbox flex='20' ng-model="prePostVisit.bodyStatus" ng-true-value="1">健康</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.bodyStatus" ng-true-value="2">一般</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.bodyStatus" ng-true-value="3">虚弱</checkbox>
+                            </div>
+                            <div layout>
+                                <span flex='15'>体&nbsp;&nbsp;型：</span>
+                                <checkbox flex='20' ng-model="prePostVisit.bodyType" ng-true-value="1">胖</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.bodyType" ng-true-value="2">正常</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.bodyType" ng-true-value="3">瘦</checkbox>
+                            </div>
+                            <div layout>
+                                <span flex='15'>心理状态：</span>
+                                <checkbox flex='20' ng-model="prePostVisit.mentalStatus" ng-true-value="1">乐观</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.mentalStatus" ng-true-value="2">平静</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.mentalStatus" ng-true-value="3">紧张</checkbox>
+                            </div>
+                            <div layout>
+                                <span flex='15'>运动障碍：</span>
+                                <checkbox flex='20' ng-model="prePostVisit.moveObstacle" ng-true-value="2">无</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.moveObstacle" ng-true-value="1">有</checkbox>
+                            </div>
+                            <div layout>
+                                <span flex='15'>血&nbsp;&nbsp;管：</span>
+                                <checkbox flex='20' ng-model="prePostVisit.bloodVessels" ng-true-value="1">充盈</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.bloodVessels" ng-true-value="2">较硬</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.bloodVessels" ng-true-value="3">摸不到</checkbox>
+                            </div>
+                            <div layout>
+                                <span flex='15'>告知内容：</span>
+                                <checkbox flex='20' ng-model="prePostVisit.informContent" ng-true-value="1">全部掌握</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.informContent" ng-true-value="2">部分掌握</checkbox>
+                                <checkbox flex='20' ng-model="prePostVisit.informContent" ng-true-value="3">未掌握</checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <div layout>
+                        <div>术前宣教：</div>
+                        <div flex>
+                            <p>(1)再次将告知书内容进行宣教</p>
+                            <p>(2)告知手术体位的配合方法及重要性</p>
+                            <p layout>(3)特殊问题及注意事项<input class="noborder3" flex ng-model="prePostVisit.precautions" ng-value="prePostVisit.precautions" maxlength="38"></p>
+                        </div>
+                    </div>
+                    <div layout>
+                        <div>经治医生签名：</div>
+                        <oi-select class="noborder3 sign" name="preDoctorSign" oi-options="item.operatorId as item.name for item in operaList" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="prePostVisit.preDoctorSign"></oi-select>
+                    </div>
+                    <div layout>
+                        <div>麻醉医生签名：</div>
+                        <oi-select class="noborder3 sign"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig_1]" name="preAnaesSign" oi-options="item.userName as item.name for item in anesthetistList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="prePostVisit.preAnaesSign"></oi-select>
+                        <div class="eSignature">
+                            <img ng-repeat="item in eSignatureAnesthetist_1" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </div>
+                    <div layout>
+                        <div>护 士&nbsp;签  名：</div>
+                        <oi-select class="noborder3 sign"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig_2]" name="preNurseSign" oi-options="item.userName as item.name for item in preVisitorItem" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="prePostVisit.preNurseSign"></oi-select>
+                        <div class="eSignature">
+    <img ng-repeat="item in eSignatureAnesthetist_2" src="{{item.path}}" ng-if="item.hasPath" />
+</div>
+</div>
+                    <div layout>
+                        <div>患者或家属签名：</div>
+                        <input class="noborder3" maxlength="20" style="width: 135px;">
+                    </div>
+                    <div class="form-group" layout layout-align="end center" ng-class="{true: 'md-red'}[!prePostVisit.preVisitTime && verify]">
+                        <span class="md-red no-print">*</span>访视时间：
+                        <datetime-picker class='calendar sign' name="preVisitTime" id="datatime" dateID="signTimes-times" ng-model="prePostVisit.preVisitTime" timepicker="true" format="Y-m-d H:i"></datetime-picker>
+                    </div>
+                </div>
+            </div>
+            <div flex layout>
+                <div flex="5" layout layout-align="center center" class="padding_left border_right font_bolder">术后访视内容</div>
+                <div flex layout="column" class="padding_around row_margin">
+                    <div layout>
+                        <div flex>
+                            <span>精神状况：</span>
+                            <checkbox ng-model="prePostVisit.spiritStatus" ng-true-value="1">好</checkbox>
+                            <checkbox ng-model="prePostVisit.spiritStatus" ng-true-value="2">欠佳</checkbox>
+                            <checkbox ng-model="prePostVisit.spiritStatus" ng-true-value="3">萎靡</checkbox>
+                        </div>
+                        <div flex="45">
+                            <span>体&nbsp;温：</span>
+                            <checkbox ng-model="prePostVisit.temp" ng-true-value="1">正常</checkbox>
+                            <checkbox ng-model="prePostVisit.temp" ng-true-value="2">低热</checkbox>
+                            <checkbox ng-model="prePostVisit.temp" ng-true-value="3">高热</checkbox>
+                        </div>
+                    </div>
+                    <div layout>
+                        <div flex>
+                            <span>疼&nbsp;&nbsp;痛：</span>
+                            <checkbox ng-model="prePostVisit.pain" ng-true-value="2" ng-click="prePostVisit.painDegree=''">无</checkbox>
+                            <checkbox ng-model="prePostVisit.pain" ng-true-value="1">有</checkbox>(
+                            <checkbox ng-model="prePostVisit.painDegree" ng-true-value="1" ng-false-value="0" ng-disabled="prePostVisit.pain!=1">轻</checkbox>、
+                            <checkbox ng-model="prePostVisit.painDegree" ng-true-value="2" ng-false-value="0" ng-disabled="prePostVisit.pain!=1">中</checkbox>、
+                            <checkbox ng-model="prePostVisit.painDegree" ng-true-value="3" ng-false-value="0" ng-disabled="prePostVisit.pain!=1">重</checkbox>)
+                        </div>
+                        <div flex="45" layout>
+                            <span>皮肤破损灼伤：</span>
+                            <checkbox ng-model="prePostVisit.skinDamaged" ng-true-value="2" ng-click="prePostVisit.skinDamagedDetails = ''">无</checkbox>
+                            <checkbox ng-model="prePostVisit.skinDamaged" ng-true-value="1">有</checkbox>
+                            <input class="noborder3" style="width: 143px;" ng-disabled="prePostVisit.skinDamaged != 1" ng-model="prePostVisit.skinDamagedDetails" ng-value="prePostVisit.skinDamagedDetails" maxlength="13">
+                        </div>
+                    </div>
+                    <div layout>
+                        <div flex>
+                            <span>切口敷料：</span>
+                            <checkbox ng-model="prePostVisit.incisionDress" ng-true-value="1">清洁</checkbox>
+                            <checkbox ng-model="prePostVisit.incisionDress" ng-true-value="2">有渗出</checkbox>
+                        </div>
+                        <div flex="45" layout>
+                            <span>并发症：</span>
+                            <checkbox ng-model="prePostVisit.complication" ng-true-value="2" ng-click="prePostVisit.complicationDetails=''">无</checkbox>
+                            <checkbox ng-model="prePostVisit.complication" ng-true-value="1">有</checkbox>
+                            <input class="noborder3" flex ng-disabled="prePostVisit.complication!=1" ng-model="prePostVisit.complicationDetails" ng-value="prePostVisit.complicationDetails" maxlength="13">
+                        </div>
+                    </div>
+                    <div layout>
+                        <span>患者家属对手术室工作评价：</span>
+                        <checkbox flex="10" ng-model="prePostVisit.jobAssess" ng-true-value="1">很好</checkbox>
+                        <checkbox flex="10" ng-model="prePostVisit.jobAssess" ng-true-value="2">一般</checkbox>
+                        <checkbox flex="10" ng-model="prePostVisit.jobAssess" ng-true-value="3">较差</checkbox>
+                    </div>
+                    <div layout>
+                        <span>患者家属对访视工作的态度：</span>
+                        <checkbox flex="10" ng-model="prePostVisit.visitAttitude" ng-true-value="1">欢迎</checkbox>
+                        <checkbox flex="15" ng-model="prePostVisit.visitAttitude" ng-true-value="2">不欢迎</checkbox>
+                    </div>
+                    <div layout>特殊意见：
+                        <input flex class="noborder3" ng-model="prePostVisit.specialOpinions" ng-value="prePostVisit.specialOpinions" maxlength="48"></div>
+                    <div layout>
+                        <div>经治医生签名：</div>
+                        <oi-select class="noborder3 sign" name="postDoctorSign" oi-options="item.operatorId as item.name for item in operaList" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="prePostVisit.postDoctorSign"></oi-select>
+                    </div>
+                    <div layout class="mzys">
+                        <div>麻醉医生签名：</div>
+                        <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig_3]" name="postAnaesSign" oi-options="item.userName as item.name for item in anesthetistList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="prePostVisit.postAnaesSign"></oi-select>
+                        <div class="eSignature">
+                            <img ng-repeat="item in eSignatureAnesthetist_3" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </div>
+                    <div layout>
+                        <div>护 士&nbsp;签  名：</div>
+                        <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig_4]" name="postNurseSign" oi-options="item.userName as item.name for item in preVisitorItem" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="prePostVisit.postNurseSign"></oi-select>
+                        <div class="eSignature">
+                            <img ng-repeat="item in eSignatureAnesthetist_4" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </div>
+                    <div layout>
+                        <div>患者或家属签名：</div>
+                        <input class="noborder3" maxlength="20" style="width: 135px;">
+                    </div>
+                    <div class="form-group" layout layout-align="end center" ng-class="{true: 'md-red'}[!prePostVisit.postVisitTime && verify]">
+                        <span class="md-red no-print">*</span>访视时间：
+                        <datetime-picker class='calendar sign' name="postVisitTime" id="datatime" dateID="signTimes-times" ng-model="prePostVisit.postVisitTime" timepicker="true" format="Y-m-d H:i"></datetime-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-left">备注：要求经治医生、麻醉师、护士在同一时间对手术患者进行术前、术后访视。</div>
+    </div>
+</div>

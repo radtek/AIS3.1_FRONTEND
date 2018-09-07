@@ -1,0 +1,91 @@
+@charset "utf-8";
+#login {
+    header,
+    footer {
+        height: 80px;
+    }
+    footer strong {
+        color: #666;
+        letter-spacing: 3px;
+    }
+    footer span {
+        color: #999;
+        font-size: 12px;
+    }
+    select {
+        appearance: menulist;
+        -moz-appearance: menulist;
+        -webkit-appearance: menulist;
+    }
+    .login-logo {
+        margin-left: 50px;
+        display: inline-block;
+        background: url(../../img/login-logo.png) no-repeat;
+        width: 299px;
+        height: 28px;
+    }
+    .login-banner {
+        background: url(../../img/login-banner.png) no-repeat;
+        background-size: cover;
+        background-color: #116CC9;
+    }
+    .input-wrap {
+        margin-bottom: 35px;
+    }
+
+    @media screen and (min-height: 1080px) {
+        .login-banner {
+            background-size: initial;
+            background-position-y: 50%;
+        }
+        .auth-user {
+            margin-right: 80px;
+        }
+    }
+}
+
+form.auth-user {
+    width: 400px;
+    margin-bottom: 0;
+    margin-right: 180px;
+    padding: 30px;
+    opacity: 0.95;
+    h4 {
+        padding-left: 10px;
+        font-weight: bold;
+        color: #0b8be1;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0b8be1;
+        padding-bottom: 5px;
+    }
+    .form-group {
+        margin-bottom: 30px;
+    }
+    .input-group .form-control {
+        border: 0;
+        border-bottom: 1px solid #ccc;
+        box-shadow: none;
+    }
+    /*select 兼容IE*/
+    .select.form-control{
+        width: inherit;
+        font-size: inherit;
+        color: inherit;
+    }
+    .select.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: none;
+}
+    .input-group-addon {
+        font-size: 17px;
+        color: #0b8be1;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 1px solid #ccc;
+    }
+    .btn {
+        margin-top: 10px;
+    }
+}
+

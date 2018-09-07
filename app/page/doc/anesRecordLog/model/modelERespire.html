@@ -1,0 +1,16 @@
+<div class="modal-header">    
+    <h4><span>呼吸事件</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="modelERespire">
+    <div class="modal-body">
+        <div layout="column">
+            <label layout layout-align="center center"><input type="radio" name="type" ng-model="type" value="1">&nbsp;&nbsp;自主呼吸</label>
+            <label layout layout-align="center center"><input type="radio" name="type" ng-model="type" value="2">&nbsp;&nbsp;辅助呼吸</label>
+            <label layout layout-align="center center"><input type="radio" name="type" ng-model="type" value="3">&nbsp;&nbsp;控制呼吸</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

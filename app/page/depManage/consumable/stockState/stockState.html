@@ -1,0 +1,8 @@
+<div flex class="talkDictionary special" style="margin-top: 18px;">
+    <div class="tabs-left">
+        <ul class="nav nav-tabs" style="border-top: 0" ng-style="TabsStyle">
+            <li ng-class="{true: 'active', false: ''}[item.url==state.current.name]" ng-click="curTab(item.url)" ng-repeat="item in currentMenu" ><a ui-sref="{{ item.url }}" style="padding: 15px 12px 0 15px;">{{ item.name }}</a></li>        
+        </ul>
+        <section flex layout ui-view class="view-container"></section>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h4><span class="pull-right modal-container_close" ng-click="vm.cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate>
+    <div class="modal-body">
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit"></label>
+                <checkbox ng-model="vm.tplState" ng-true-value="1">个人</checkbox>
+                <checkbox ng-model="vm.tplState" ng-true-value="2" class="ml-15">公用</checkbox>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">模板名称：</label>
+                <input type="text" name="tplName" ng-model="vm.tplName" required>
+            </div>
+        </div>
+        <div class="input-wrap" ng-if='false'>
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">麻醉方法：</label>
+                <input type="text" name="tplMethod" ng-model="vm.tplMethod" required>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">备注：</label>
+                <textarea name="tplRemark" ng-model="vm.tplRemark" style="width: 70%;"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid || !vm.tplState" type="button" ng-click="vm.save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

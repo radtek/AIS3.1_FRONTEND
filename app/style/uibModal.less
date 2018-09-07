@@ -1,0 +1,246 @@
+/* uibModal */
+
+.modal-content {
+    border-radius: 0;
+    .table.table-condensed td,
+    .table.table-condensed th {
+        padding: 8px 4px;
+    }
+    .modal-header {
+        background-color: #0b8be1;
+    }
+    .modal-header h4 {
+        color: #fff;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .modal-header .cancel {
+        font-size: 14px;
+        line-height: 19px;
+        cursor: pointer;
+    }
+    .modal-dialog .modal-footer {
+        text-align: center;
+        border-top-width: 0;
+        padding-top: 0;
+        padding-bottom: 30px;
+    }
+    .modal-dialog .modal-footer.pd {
+        padding-top: 15px;
+    }
+    .modal-dialog .modal-header {
+        padding: 5px 15px;
+    }
+    .modal-dialog .modal-header .modal-container_close {
+        font-size: 32px;
+        margin-top: -10px;
+    }
+    .modal-dialog .form-group {
+        min-height: 44px;
+        margin-bottom: 0px;
+    }
+    .modal-container_close {
+        cursor: pointer;
+    }
+    .modal-dialog .modal-header {
+        background-color: #0b8be1;
+        color: #FFFFFF;
+    }
+    /* 首页 》待办事项 》待补文书 */
+    .vacaDocModal {
+        .patInfo {
+            margin-bottom: 15px;
+        }
+        button {
+            color: #0B8BE1;
+        }
+    }
+    /* 术前/术后 》未完成的文书 */
+    .IncompleteDocList {
+        a {
+            margin-top: 20px;
+        }
+        a:nth-child(-n + 2) {
+            margin-top: 0;
+        }
+        .glyphicon {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+    }
+
+    .modal-body {
+        .red {
+            color: red;
+        }
+    }
+
+    .pharmacy {
+        input {
+            border: 0;
+            border-bottom: 1px solid rgb(169, 169, 169);
+            outline: none;
+            width: 45px;
+            text-align: center;
+        }
+        select {
+            border-left: 0;
+            border-top: 0;
+            border-right: 0;
+            outline: none;
+        }
+        oi-select input {
+            width: 100%;
+            text-align: left;
+            border: 0;
+        }
+        .groupTplItem {
+            height: 30px;
+            line-height: 30px;
+            padding-left: 26px;
+            margin-bottom: 5px;
+            background-color: #eee;
+            cursor: pointer;
+        }
+        .groupTplItem:hover {
+            background-color: #f5f5f5;
+        }
+    }
+}
+
+/* 手术间 》取消手术验证 */
+.modal-ua {
+    width: 400px;
+}
+
+.modal-1200 {
+    width: 1200px;
+}
+
+
+#modelAnaesthetic,
+#inputInfo,
+#outIoevent,
+#remarkInfo,
+#modelHzTime,
+#saveAsTemp,
+#fastAddEvent {
+    tr {
+        cursor: pointer;
+    }
+    input[type=checkbox] {
+        margin: 0;
+        height: 30px;
+    }
+    select {
+        height: 26px;
+    }
+    datetime-picker {
+        height: 26px;
+        border: 1px solid #aaa;
+    }
+    .required {
+        margin-top: 17px;
+        min-width: 45px!important;
+        padding-right: 2px!important;
+    }
+    .shadow {
+        pointer-events: none;
+        >input {
+            background-color: lightgray;
+        }
+    }
+    .interal {
+        margin-left: 40px;
+        padding-left: 0px!important;
+    }
+    .uninteral {
+        padding-left: 0px!important;
+    }
+    oi-select .select-search-list-item_input:not(:first-child) input {
+        width: 100%;
+    }
+}
+
+#monitorConfig {
+    table {
+        margin: 0px;
+    }
+}
+
+#modelIntrMong {
+    input[type=checkbox] {
+        margin: 0;
+    }
+    input {
+        max-width: 100px;
+    }
+    .icon-w {
+        max-width: 60px;
+    }
+    .color-d {
+        min-width: 30px;
+        min-height: 30px;
+        border: 1px solid #d9d9d9;
+    }
+    .un-click {
+        pointer-events: none;
+    }
+    select {
+        height: 26px;
+        width: 80%;
+    }
+    label {
+        height: 26px;
+        line-height: 26px;
+        margin: 0;
+    }
+    tr td:last-child div {
+        height: 26px;
+        line-height: 26px;
+    }
+}
+
+#modelERespire,
+#rescueEvent {
+    input[type=radio] {
+        margin: 0px;
+    }
+    label {
+        margin: 10px auto;
+    }
+    datetime-picker {
+        height: 26px;
+        border: 1px solid #aaa;
+    }
+}
+
+#inspectionEvent {
+    tr {
+        cursor: pointer;
+    }
+    .allCheckItem {
+        height: 530px!important;
+        overflow: auto;
+    }
+    datetime-picker {
+        height: 26px;
+        border: 1px solid #aaa;
+    }
+}
+
+#modelHzTime {
+    label {
+        width: 220px;
+    }
+}
+
+#loadTemp {
+    [ng-model=lv] {
+        height: 26px;
+        width: 174px;
+    }
+    [ui-grid] {
+        margin-top: 20px;
+    }
+}

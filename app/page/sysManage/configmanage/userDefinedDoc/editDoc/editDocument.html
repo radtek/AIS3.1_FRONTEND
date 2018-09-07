@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app" ng-cloak layout-fill>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="renderer" content="webkit">
+    <title>AIS3.1手术麻醉系统</title>	
+	<link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body>   
+   <div class="container"  style="margin:0; padding:0;width: 897px;">
+<form method="post" id="saveform" name="saveform" >
+<input type="hidden" name="fields" id="fields" value="0">
+<div style="padding:0 30px;"><div class="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>提醒：</strong>单选框和复选框，如：<code>{|-</code>选项<code>-|}</code>两边边界是防止误删除控件，程序会把它们替换为空，请不要手动删除！
+</div></div>
+<div class="row" style="margin:0; padding:0;">
+<div style="width: 837px; padding-left:30px ">
+<script id="myFormDesign" type="text/plain" style="width:100%;max-height: 700px;"> 
+<p style="text-align: center;">
+        <br/>
+    </p>
+    <p style="text-align: center;">
+        <span style="font-size: 24px;">示例文书</span>
+    </p>    
+</script>
+</div>
+</div><!--end row-->
+<br/><br/>
+<div style="width:100%;text-align:center;">
+<input type="button" style="background-color: #106cc8; color: #fff;border: none;min-width: 80px;padding: 6px 12px;" name="btn" value="保存" id="btnsave">　
+<input type="button" id="btnsubmit"  name="btn" value="提交审核" style="background-color: #106cc8; color: #fff;border: none;min-width: 80px;padding: 6px 12px;" ></div>
+</form>
+</div><!--end container-->   
+</body>
+<script type="text/javascript" charset="utf-8" src="jquery-1.7.2.min.js?2023"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js?2023"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.js?2023"> </script>
+<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js?2023"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor/formdesign/digiformdesign.js?2023"></script>
+<script type="text/javascript" charset="utf-8" src="editDocument.js?2023"></script>
+</html>

@@ -1,0 +1,173 @@
+#schedule {
+    oi-select[disabled=disabled] .select-search {
+        opacity: 1;
+        background-color: transparent;
+    }
+    input[disabled] {
+        background-color: transparent !important;
+    }
+    .pointer-events {
+        pointer-events: none
+    }
+    .close {
+        opacity: 0;
+    }
+    .oi-select::after {
+        width: 0;
+        height: 0;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        border-top: 6px solid black;
+        position: absolute;
+        right: 3px;
+        top: calc( 50% - 3px);
+        content: '';
+    }
+    .oi-select:hover::after {
+        border: 0
+    }
+    .deleteafter::after {
+        border: 0
+    }
+    oi-select:not(.multiple) .select-search-list-item_selection {
+        text-align: center;
+    }
+    .nurse-startTime,
+    .nurse-operRoomName,
+    .nurse-pcs,
+    .nurse-circunurseId1,
+    .nurse-circunurseId2,
+    .nurse-instrnurseId1,
+    .nurse-instrnurseId2,
+    .nurse-optBody,
+    .anaesthetist-anesthetistId,
+    .anaesthetist-circuanesthetistId,
+    .anaesthetist-perfusiondoctorId {
+        overflow: visible;
+    }
+    div.ui-grid-cell input.ng-valid,
+    oi-select .select-search {
+        border: none;
+    }
+    .search-div oi-select .select-search {
+        border:1px solid #d9d9d9;
+    }
+    .search-div{margin: 8px 0 12px 0;}
+    .dtdiv {
+        line-height: 30px;
+        height: 30px;
+        height: 28px;
+        width: 100%;
+        min-width: 50px;
+        text-align: center;
+    }
+    .div-bg-110 {
+        background-image: url('../../img/select110.png');
+        width: 110px;
+    }
+    .div-bg-100 {
+        background-image: url('../../img/select100.png');
+        width: 100px;
+    }
+    .div-bg-80 {
+        background-image: url('../../img/select80.png');
+        width: 80px;
+    }
+    .div-bg-date {
+        width: 100px;
+        text-align: left;
+    }
+    .input-group > label {
+        font-size: 14px;
+    }
+    .form-control {
+        margin-left: 20px;
+    }
+    select.form-control {
+        margin-left: 0px;
+    }
+    .down {
+        margin-left: 20px;
+    }
+    .up {
+        margin-left: 10px;
+    }
+    .btn-margin > button {
+        margin-left: 15px;
+    }
+}
+.schedule-print-yxrm{
+    @media print {
+    .table {    
+        min-width: 1250px!important;
+        thead td {
+            border: 1px solid #000!important;
+            font-size: 16px;
+        }
+        tbody td {
+            border: 1px solid #000!important;
+            font-size: 16px;
+        }
+    }
+    }
+}
+#list-scan,
+#card-scan {
+    min-width: 1250px;
+    table {
+        font-size: 14px;
+        thead td {
+            height: 28px;
+            line-height: 28px;
+        }
+        td {
+            text-align: center;
+            padding: 2px;
+        }
+        td div {
+            min-height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .table-qnz {
+        thead td {
+            border: 1px solid #000!important;
+        }
+        tbody td {
+            border: 1px solid #000!important;
+        }
+    }
+    .doctitle-icon {
+        width: 28%;
+        margin-top: -5px;
+    }
+}
+
+#list-scan {
+    min-width: 1250px;
+    .desig-name {
+        height: 100%;
+    }
+    .mg-top {
+        margin-top: 8px;
+    }
+}
+
+#card-scan {
+    min-width: 833px;
+    table td {
+        text-align: left;
+        padding: 4px;
+    }
+    .doctitle-icon {
+        width: 50%;
+        margin-top: -5px!important;
+    }
+}
+
+.select-form {
+    width: 155px;
+    height: 30px;
+}

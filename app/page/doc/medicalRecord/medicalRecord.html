@@ -1,0 +1,241 @@
+<div id="print-region">
+    <div class="page-print medicalRecord">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>病理检验申请单</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex=30>送检医院：<a flex></a></span>&nbsp;
+            <span layout flex=30>病理检验号：<a flex></a></span>&nbsp;
+            <span layout flex=20>切片数：<a flex></a></span>
+        </div>
+        <div class="ui-table form-group">
+            <ul>
+                <li layout layout-align="space-between center">
+                    <span layout flex>姓名：{{::regOptItem.name}}</span>
+                    <span layout flex>年龄：{{::regOptItem.age}}</span>
+                    <span layout flex>性别：{{::regOptItem.sex}}</span>
+                    <span layout flex>婚否:</span>
+                    <span layout flex>籍贯:</span>
+                    <span layout flex>职业:</span>
+                </li>
+            </ul>
+            <ul>
+                <li layout layout-align="space-between center">
+                    <span layout flex>门诊病号：</span>
+                    <span layout flex>门诊号：</span>
+                    <span layout flex>住院号：{{::regOptItem.hid}}</span>
+                    <span layout flex>科：{{::regOptItem.deptName}}</span>
+                    <span layout flex>病室:</span>
+                    <span layout flex>床：{{::regOptItem.bed}}</span>
+                </li>
+            </ul>
+            <ul>
+                <li layout class="lih2n" style="align-items: baseline;">
+                    <span flex=60>临床病史与检查：</span>
+                    <span flex=40>简图：</span>
+                </li>
+            </ul>
+            <ul>
+                <li class="lih">
+                    <span>手术范围及手术所见：</span>
+                </li>
+            </ul>
+            <ul layout>
+                <li flex=40>
+                    <div>若系肿瘤，请填写下列各项：</div>
+                    <div>部位：</div>
+                    <div>发现日期：　　年　　月　　日</div>
+                    <div>大小形状：</div>
+                    <div>生长速度：</div>
+                    <div>活动度：</div>
+                    <div>坚　　度 ：</div>
+                    <div>有无转移：</div>
+                </li>
+                <li flex=60>
+                    <div>若系妇科标本，请填写下列各项：</div>
+                    <div layout flex>初期，周期及持续时间
+                        <a flex></a>
+                    </div>
+                    <div layout flex>上次月经日期
+                        <a flex></a>月
+                        <a flex></a>日经量
+                        <a flex></a>持续时间
+                        <a flex></a>
+                    </div>
+                    <div layout flex>末次月经日期
+                        <a flex></a>月
+                        <a flex></a>日经量
+                        <a flex></a>持续时间
+                        <a flex></a>
+                    </div>
+                    <div layout flex>括宫日期
+                        <a flex></a>年
+                        <a flex></a>月
+                        <a flex></a>日</div>
+                    <div layout flex>激素治疗日期及剂量
+                        <a flex></a>
+                    </div>
+                    <div>生育情况</div>
+                </li>
+            </ul>
+            <ul>
+                <li layout>
+                    <span flex>临床诊断：</span>
+                    <span flex>送检日期：　　 年　　 月　　日</span>
+                    <span flex layout style="line-height: normal;">送检医师<a flex></a></span>
+                </li>
+            </ul>
+            <ul layout>
+                <li flex=25 style="text-align: center">标本采取部位</li>
+                <li flex=15 style="text-align: center">送检标本名称</li>
+                <li flex=60 style="text-align: center">曾　在　何　处　做　过　病　理　检　查</li>
+            </ul>
+            <ul layout>
+                <li flex=5 style="text-align: center">1</li>
+                <li flex=20></li>
+                <li flex=15></li>
+                <li flex=15 style="text-align: center">检验单位</li>
+                <li flex=15 style="text-align: center">日期</li>
+                <li flex=15 style="text-align: center">切片号</li>
+                <li flex=15 style="text-align: center">诊断</li>
+            </ul>
+            <ul layout>
+                <li flex=5 style="text-align: center">2</li>
+                <li flex=20></li>
+                <li flex=15></li>
+                <li flex=15></li>
+                <li flex=15 style="text-align: right">年　 月　 日</li>
+                <li flex=15></li>
+                <li flex=15></li>
+            </ul>
+            <ul layout>
+                <li flex=5 style="text-align: center">3</li>
+                <li flex=20></li>
+                <li flex=15></li>
+                <li flex=15></li>
+                <li flex=15></li>
+                <li flex=15></li>
+                <li flex=15></li>
+            </ul>
+            <ul layout>
+                <li flex=5 style="text-align: center">4</li>
+                <li flex=20></li>
+                <li flex=15></li>
+                <li flex=15></li>
+                <li flex=15></li>
+                <li flex=15></li>
+                <li flex=15></li>
+            </ul>
+            <ul layout>
+                <li flex=5 layout="column">
+                    <div style="text-align: center; border-bottom: 1px solid #333; width: 100%;">5</div>
+                    <div style="text-align: center">6</div>
+                </li>
+                <li flex=20 layout="column">
+                    <div flex style="border-bottom: 1px solid #333; width: 100%;"></div>
+                    <div flex></div>
+                </li>
+                <li flex=15 layout="column">
+                    <div flex style="border-bottom: 1px solid #333; width: 100%;"></div>
+                    <div flex></div>
+                </li>
+                <li flex=15 layout="column">
+                    <div flex style="border-bottom: 1px solid #333; width: 100%;"></div>
+                    <div flex></div>
+                </li>
+                <li flex=45>备注：</li>
+            </ul>
+        </div>
+        <div class="form-group" layout>
+            <span flex>划价</span>
+            <span flex>划价人</span>
+            <span flex>收费盖章</span>
+        </div>
+        <div class="form-group" layout flex-offset=60>患方联系电话：</div>
+        <div class="form-group" layout><b>注意事项</b></div>
+        <div class="form-group" layout style="text-indent: 20px;">
+            1、申请单位请以正楷详细填写，以利诊断。 2、患者姓名、住院号、必须在标本容器上注明。
+        </div>
+        <div class="form-group" layout style="text-indent: 20px;">
+            3、手术取下标本后，须从速固定于10%福尔马林液内，标本瓶口宜大、以便取出。
+        </div>
+        <div class="form-group" layout style="text-indent: 20px;">
+            4、传染性标本必须注意处置，并请标明。 5、手术取下之标本，务请全部送检。
+        </div>
+        <div class="form-group" layout style="text-indent: 20px;">
+            6、若发现我科诊断与临床不符时，请立即与我科联系。
+        </div>
+    </div>
+    <div class="page-print medicalRecord">
+        <div class="ui-table">
+            <ul layout>
+                <li flex>A</li>
+                <li flex>E</li>
+                <li flex>I</li>
+                <li flex>M</li>
+                <li flex>Q</li>
+                <li flex>U</li>
+            </ul>
+            <ul layout>
+                <li flex>B</li>
+                <li flex>F</li>
+                <li flex>J</li>
+                <li flex>N</li>
+                <li flex>R</li>
+                <li flex>V</li>
+            </ul>
+            <ul layout>
+                <li flex>C</li>
+                <li flex>G</li>
+                <li flex>K</li>
+                <li flex>O</li>
+                <li flex>S</li>
+                <li flex>W</li>
+            </ul>
+            <ul layout>
+                <li flex>D</li>
+                <li flex>H</li>
+                <li flex>L</li>
+                <li flex>P</li>
+                <li flex>T</li>
+                <li flex>X</li>
+            </ul>
+            <ul>
+                <li>特染、免疫学、组织化学检查：</li>
+            </ul>
+            <ul layout class="lih4n">
+                <li flex=40>
+                    巨标本图：
+                </li>
+                <li flex=60 layout="column" style="align-items: inherit;">
+                    <span flex>巨体检查：</span>
+                    <div layout style="line-height: normal;">
+                        <span flex=50>巨检诊断：</span>
+                        <span flex=50 layout>巨检医师：<a flex></a></span>
+                    </div>
+                </li>
+            </ul>
+            <ul layout>
+                <li flex=40>巨体标本：保留　　丢弃</li>
+                <li flex=60 layout><span flex>重要切片：编号</span>共　　　　张</li>
+            </ul>
+            <ul>
+                <li layout="column" layout-align="space-between" class="lih6n" style="align-items: inherit;">
+                    <span flex>显微镜检查：</span>
+                    <span flex>病理诊断：</span>
+                </li>
+            </ul>
+            <ul>
+                <li layout>
+                    <span flex=40>报告日期：          年　　月　　日</span>
+                    <span flex=60>诊断医师：</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

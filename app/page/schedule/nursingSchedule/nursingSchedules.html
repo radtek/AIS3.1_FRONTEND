@@ -1,0 +1,136 @@
+<div  id="schedule">
+    <div flex layout layout-align='space-between center' class="search-div">   
+        <div layout>
+            <button class="btn btn-primary up" ng-click="updateDay('sub');">上一天</button>
+            <datetime-picker dateID="date-start-time" maxdate="2100-01-01" ng-model="operDate" ng-change="updateDay('sel');" timepicker="false" format="Y-m-d" class="form-control" style="width: 95px;"></datetime-picker>
+            <button class="btn btn-primary down" ng-click="updateDay('add');">下一天</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" ng-if="!isArch" ng-click="refresh()">查询全部</button>&nbsp;&nbsp;
+            <button class="btn btn-primary"  tk-print-region="list-scan" ng-click="print();" ng-if="permission.indexOf('PREVIEW') >= 0">预览</button>
+        </div>
+        <div layout layout-align='start center'>
+            <span>手术室：</span>
+            <span style="width:95px;"><select name="operRoomId" class="form-control"  ng-options="item.operRoomId as item.name for item in operRoomList" ng-model="dispatch.operRoomId" ng-change="changeOperRoomId()"></select></span>&nbsp;&nbsp;
+            <span>巡回护士1：</span>
+            <span style="width:90px;"><oi-select name="circunurseId1" oi-options="item.userName as item.name for item in nurseList | limitTo: 100" ng-model="dispatch.circunurseId1"  ng-change="changenurse()"></oi-select></span>&nbsp;&nbsp;
+            <span>巡回护士2：</span>
+            <span style="width:90px;"><oi-select name="circunurseId2" oi-options="item.userName as item.name for item in nurseList | limitTo: 100" ng-model="dispatch.circunurseId2"  ng-change="changenurse()"></oi-select></span>&nbsp;&nbsp;
+            <span>洗手护士1：</span>
+            <span style="width:90px;"><oi-select name="instrnurseId1" oi-options="item.userName as item.name for item in nurseList | limitTo: 100" ng-model="dispatch.instrnurseId1"  ng-change="changenurse()"></oi-select></span>&nbsp;&nbsp;
+            <span>洗手护士2：</span>
+            <span style="width:90px;"><oi-select name="instrnurseId2" oi-options="item.userName as item.name for item in nurseList | limitTo: 100" ng-model="dispatch.instrnurseId2"  ng-change="changenurse()"></oi-select></span>&nbsp;&nbsp;
+            <button class="btn btn-primary" ng-if="permission.indexOf('UPD') >= 0" ng-click="save();">保存</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" ng-click="clean();">清除</button>&nbsp;&nbsp;
+            <!-- <button class="btn btn-primary" ng-click="pushInfo();" ng-if="permission.indexOf('APPR') >= 0">推送</button>　 -->
+            <button class="btn btn-primary" ng-if="permission.indexOf('CANC') >= 0" ng-click="cancels()">取消</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" ng-if="permission.indexOf('RECALL') >= 0" ng-click="revokeOpers()">撤回</button>
+        </div>
+    </div>
+    <div  id="schedule">
+        <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ui-grid-resize-columns ng-if="gridOptions" ></div>
+        <div class="noData" ng-if="!gridOptions">暂无数据</div>
+    </div>
+    <div flex style="display: none;">
+        <div id="list-scan">
+            <div layout="column" layout-align="center center">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if='docInfo.subName'>{{docInfo.subName}}</h4>
+                <h4>手术安排表</h4>
+                <h5>{{operDate}}</h5>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <td style="width: 47px;">手术室</td>
+                    <td style="width: 40px;">台次</td>
+                    <td>科室</td>
+                    <td>床号</td>
+                    <td>姓名</td>
+                    <td style="width: 40px;">性别</td>
+                    <td style="width: 45px;">年龄</td>
+                    <td style="min-width: 62px;">手术名称</td>
+                    <td style="min-width: 62px;">麻醉方法</td>
+                    <td style="min-width: 62px;">手术医生</td>
+                    <td style="min-width: 62px;">洗手护士</td>
+                    <td style="min-width: 62px;">巡回护士</td>
+                    <td style="min-width: 62px;">麻醉医生</td>
+                    <td style="width: 62px;">手术等级</td>
+                    <td style="width: 62px;">切口等级</td>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in gridOptions.data">
+                        <td>
+                            <div>{{item.operRoomId}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.pcs}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.deptName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.bed}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.name}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.sex}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.age}}</div>
+                        </td>
+                        <td>
+                            <div class="text-left">{{item.designedOptName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.designedAnaesMethodName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.operatorName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.instrnurseName1}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.circunurseName1}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.anesthetistName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.optLevel}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.cutLevelName}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="card-scan">
+            <div layout="column" layout-align="center center">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if='docInfo.subName'>{{docInfo.subName}}</h4>
+                <h4>手术安排表</h4>
+                <h5>{{operDate}}</h5>
+            </div>
+            <table class="table table-bordered" ng-repeat="item in gridOptions.data">
+                <tr>
+                    <td>手术间：{{item.operRoomName}}</td>
+                    <td>科室：{{item.deptName}}</td>
+                    <td>床号：{{item.bed}}</td>
+                    <td>姓名：{{item.name}}</td>
+                    <td>性别：{{item.sex}}</td>
+                    <td>年龄：{{item.age}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">手术日期：{{item.operaDate}}</td>
+                    <td colspan="2">住院号：{{item.hid}}</td>
+                    <td colspan="2">手术医生：{{item.operatorName}}</td>
+                </tr>
+                <tr>
+                    <td colspan="6">手术名称：{{item.designedOptName}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

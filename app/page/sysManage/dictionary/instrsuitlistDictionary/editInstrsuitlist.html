@@ -1,0 +1,10 @@
+<div class="modal-header">    
+    <h4><span>新增器械</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div class="modal-body">
+    <div ui-grid="InstrumentList" ui-grid-pagination ui-grid-selection ui-grid-auto-resize></div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-disabled="instrument.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+</div>

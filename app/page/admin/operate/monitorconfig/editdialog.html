@@ -1,0 +1,118 @@
+<div class="modal-header">
+    <h4><span>{{title}}</span><span class="pull-right modal-container_close" ng-click="cancel()">×</span></h4>
+</div>
+<form name="form" novalidate class="form-horizontal">
+    <div class="modal-body">
+        <div class="patient-in-modal-form-div">
+        </div>
+        <div class="form-group" ng-if="!item">
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>设备类型：</label>
+            <div class="col-sm-5">
+                <select class="form-control" ng-model="obj.deviceType" ng-options="item.value as item.label for item in deviceTypeList" required></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="item">
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>监测ID：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="eventId" ng-model="obj.eventId" ng-disabled="true" required maxlength="30">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>显示位置：</label>
+            <div class="col-sm-5">
+                <select class="form-control" ng-model="obj.position" ng-options="item.value as item.label for item in positionList"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>监测项名称：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="eventName" ng-model="obj.eventName" required maxlength="30">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>频率：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="frequency" ng-model="obj.frequency" required maxlength="30">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>精度：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="precision" ng-model="obj.precision" required maxlength="30">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>最大值：</label>
+            <div class="col-sm-5">
+                <input type="number" class="form-control" name="max" ng-model="obj.max" required max=1000 min=0>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>最小值：</label>
+            <div class="col-sm-5">
+                <input type="number" class="form-control" name="min" ng-model="obj.min" required max=1000 min=0>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label"><span ng-if="obj.position==0" class="red">*</span>图标：</label>
+            <div class="col-sm-5">
+                <!-- <input type="text" class="form-control" name="iconId" ng-model="obj.iconId" required maxlength="30"  ng-required="obj.position==0"  > -->
+                <div class="dropdown" ng-class="{'open': pop}">
+                    <button class="btn btn-default dropdown-toggle" type="button" ng-click="pop = !pop;" style="width: 40px">
+                        <div class="container-img" style="display: inline-block; width: 20px;height: 20px;overflow: hidden;position: relative;">
+                            <img style="height: 22px;width: 22px;border: none;position: relative;left: -1px;top: -1px" ng-src="{{obj.iconId}}" />
+                        </div>
+                        <span class="caret"></span>
+                    </button>
+                    <input type="text" ng-model="obj.iconId" style="display: none;" value="{{obj.iconId}}" />
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="item in goods" ng-click="select(item)" ng-class="{'active':item==obj.iconId}">
+                            <a href="javascript:void(0)"> <img style="height: 20px" src="{{item}}" /> </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--   <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label">修订：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="codeName" ng-model="obj.codeName" maxlength="30">
+            </div>
+        </div> -->
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label">描述：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="eventDesc" ng-model="obj.eventDesc" maxlength="30">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label">是否展示：</label>
+            <div class="col-sm-5">
+                <!-- <input type="text" class="form-control" name="mustShow" ng-model="obj.mustShow"  maxlength="30"> -->
+                <select class="form-control" ng-model="obj.mustShow" ng-options="item.value as item.label for item in mustShowList"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label">单位：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="units" ng-model="obj.units" maxlength="30">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="codeValue" class="col-sm-4 control-label">图标宽高：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" onkeyup="this.value=this.value.replace(/[\D]/g,'')" max=100000 name="widthAndHeight" ng-model="obj.widthAndHeight" >
+            </div>
+        </div>
+        <!--    <div class="form-group" >
+            <label for="codeValue" class="col-sm-4 control-label"><span class="red">*</span>基线应用：</label>
+            <div class="col-sm-5">
+            <input type="text" class="form-control" name="enable" ng-model="obj.enable"  maxlength="30">
+            </div>
+        </div> -->
+    </div>
+</form>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-disabled="form.$invalid" ng-click="ok()">确&nbsp;&nbsp;定</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+</div>

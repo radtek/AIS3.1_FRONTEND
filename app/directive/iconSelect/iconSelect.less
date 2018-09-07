@@ -1,0 +1,33 @@
+.iconSelectImgs {
+    position: relative;
+    height: 26px;
+    width: 26px;
+    .icon {
+        height: 100%;
+        width: 100%;
+        border: 1px solid #aaa;
+    }
+    img {
+        height: inherit;
+        width: inherit;
+    }
+    .icons {
+        display: flex;
+        position: absolute;
+        background-color: #eee;
+        left: -5px;
+        border-radius: 3px;
+        width: 124px;
+        flex-wrap: wrap;
+        z-index: 1;
+        padding: 2px;
+    }
+    .icons div {
+        width: 26px;
+        height: 26px;
+        margin: 2px;
+    }
+    .icons div:hover {
+        background-color: #777;
+    }
+}

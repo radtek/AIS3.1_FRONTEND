@@ -1,0 +1,136 @@
+<div id="print-region">
+    <div id="infoCons_llzyyy" class="page-print" ng-class="{true:'end-state'}[vm.accedeItem.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>麻醉知情同意书</h4>
+        </header>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>病人姓名：<a flex>{{regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{regOptItem.age}}</a></span>&nbsp;
+            <!-- <span layout>病室：<a flex>{{regOptItem.regionName}}</a></span>&nbsp; -->
+            <span layout><a flex>{{regOptItem.deptName}}</a>科</span>&nbsp;
+            <span layout><a flex>{{regOptItem.bed}}</a>床</span>&nbsp;
+            <span layout>住院号：<a flex>{{regOptItem.hid}}</a></span>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>临床诊断：<a flex>{{regOptItem.diagnosisName}}</a></span>
+            <span flex layout>拟施手术：<a flex>{{regOptItem.designedOptName}}</a></span>
+        </div>
+        <!--  <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            
+        </div> -->
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>拟施麻醉：<a flex>{{regOptItem.designedAnaesMethodName}}</a></span>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>麻醉辅助措施：
+                <oi-select class="hidden-print" flex multiple ng-model="vm.accedeItem.anaesAssistMeasureList" oi-options="i.codeValue as i.codeName for i in anaes_assist_measure"  placeholder="请输入拼音搜索" list-placeholder="未找到" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }">
+                    </oi-select>
+                    <span flex  class="visible-print-inline noborder3 ">
+                       {{vm.accedeItem.anaesAssistMeasureName}}
+                    </span>
+            </span>
+        </div>
+        <div class="form-group1" style="line-height: 2;" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp; 经麻醉医师说明上述麻醉选择，麻醉辅助措施以及手术过程中的各种问题，明确解释了各项治疗方法，操作技术的必要性和危险性，以及可能出现的下列意外或并发症：
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[0]" >&nbsp;1、输血、输液及药物过敏或相对逾量，引起休克、抽搐、呼吸心跳骤停危机生命。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[1]" >&nbsp;2、硬膜外麻醉或腰麻，麻醉范围过广导致全脊椎麻痹，危机生命。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[2]" >&nbsp;3、硬膜外麻醉或腰麻最后，头晕、头痛、腰背痛。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[3]" >&nbsp;4、硬膜外血肿或神经损伤致相应神经分布区感觉或运动障碍，甚至截瘫。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[4]" >&nbsp;5、颈丛或臂丛麻醉可能引起气胸、血肿、呼吸困难或声音嘶哑。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[5]" >&nbsp;6、全麻气管内插管可致牙齿脱落、咽喉部组织损伤、喉头水肿甚至心跳骤停。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[6]" >&nbsp;7、全麻气管内插管可引起杓状软骨脱位、声音嘶哑、呼吸困难。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[7]" >&nbsp;8、全麻苏醒延迟、呼吸道梗阻、通气障碍，并可继发肺部感染。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[8]" >&nbsp;9、麻醉手术期间以及手术后麻醉恢复期可发生恶心、呕吐，甚至误咳窒息。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[9]" >&nbsp;10、各种有创监测技术，如动脉穿刺测压，中心静脉穿刺、输血、输液等，可能引起出血、血肿。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[10]" >&nbsp;11、麻醉手术过程，可因手术大出血致严重休克、甚至死亡。也可因严重创伤或已存在心、肺、脑、肝、肾功能障碍代谢紊乱，导致昏迷不醒、呼吸循环衰竭死亡。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[11]" >&nbsp;12、麻醉手术过程可诱发其他疾病，或使原有的并存疾病恶化，例如严重高血压或低血压、心律失常、急性心肌缺血、心肌梗塞、高血糖及重要脏器功能不全甚至衰竭。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[12]" >&nbsp;13、按计划施行的麻醉方法因病情变化或术式改革麻醉医师有权按需改用其他麻醉方法。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <checkbox ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[13]" >&nbsp;14、如需术后麻醉镇痛或其他特殊医疗服务请向麻醉医师提出，以便术中及时准备。
+            </checkbox>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap">
+            <checkbox  ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.accedeItem.selectedList[14]" >&nbsp;15、其他：
+            </checkbox>
+            <input   flex type="text" class="noborder3"  ng-model="vm.accedeItem.other" ng-value="vm.accedeItem.other" maxlength="45" />
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;我们了解以上各点，同意接受治疗和拟施麻醉方法及有关的处理措施
+        </div>
+        <!--        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;作为病人（或病人委托人）我们对以上各项均已了解清楚，同意接受麻醉手术，并愿意承担因此带来的各种风险。
+        </div> -->
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>同意人签字</span>
+            <a flex></a>
+            <span>负责谈话医师签字</span>
+            <a flex></a>
+        </div>
+        <div class="form-group1" flex layout>
+            <span>  </span>
+        </div>
+        <div class="form-group1" flex layout>
+            <span>与病人关系</span>
+            <a flex></a>
+            <span>签字日期</span>
+            <a flex></a>
+        </div>
+        <!--  <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>签同意书地点</span>
+            <a flex="40"></a>
+            <span>时间</span>
+            <a flex></a>
+            <span>年</span>
+            <a flex></a>
+            <span>月</span>
+            <a flex></a>
+            <span>日</span>
+            <a flex></a>
+            <span>时</span>
+            <a flex></a>
+            <span>分</span>
+        </div> -->
+    </div>
+</div>

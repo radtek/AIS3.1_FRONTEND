@@ -1,0 +1,224 @@
+.print-progress {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: white;
+    z-index: 1;
+    progressbar {
+        position: absolute;
+        width: 300px;
+        height: 20px;
+        left: 50%;
+        top: 50%;
+        margin-top: -10px;
+        margin-left: -150px;
+    }
+    @media print {
+        display: none;
+    }
+}
+
+.page-print {
+    @trH: 28px;
+    @default: #d4d4d4;
+    @font-color-base: #333;
+    @span: 10px;
+    width: 833px;
+    padding: 15px;
+    box-shadow: 0 0 10px @default;
+    margin: 5px auto 0;
+    page-break-after: always;
+    page-break-inside: avoid;
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    a {
+        border-bottom: 1px solid @font-color-base;
+        color: @font-color-base;
+        padding-left: 4px;
+        min-width: 30px;
+    }
+    header h3,
+    header h4,
+    header h5 {
+        margin-bottom: 12px;
+        font-family: 'SimHei'!important;
+        letter-spacing: 5px;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    select {
+        border: 0;
+        border-bottom: 1px solid @font-color-base;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+    hr {
+        border-color: @font-color-base;
+    }
+    /* 部分用到Table */
+    table {
+        width: 100%;
+        th,
+        td {
+            border: 1px solid #555;
+            padding: 2px 3px;
+        }
+    }
+    input[type='text'] {
+        height: 20px;
+        min-width: 80px;
+    }    
+    input[type="number"] {
+        text-align: center;
+    }
+    /* 尽量使用flex布局 */
+    .form-group {
+        margin-bottom: @span!important;
+        /* 文本内容行居中 */
+        >p {
+            line-height: 30px;
+            margin-bottom: 0;
+        }
+        /* 日历控制样式 */
+        .calendar {
+            border-bottom: 1px solid @font-color-base;
+            padding-left: 2px;
+            width: 100px;
+        }
+        .m-l-30 {
+            margin-left: 30px;
+        }
+    }
+    /* 文本内容缩进 */
+    .indent {
+        /*text-indent: 30px; */
+        padding-left:30px;
+    }
+    /* 医生护士签名 */
+    .sign {
+        width: 150px!important;
+    }
+    /* 自定义table表格，适合做一些简单的表格，复杂的还是用table .ui-table > ul > li == table > tr > td
+     * 里面不能随便使用ul,li 标签
+     * px值用%值替代, 用px打印时会出问题
+     */
+    .ui-table {
+        text-align: center;
+        border-bottom: 1px solid #333;
+        border-right: 1px solid #333;
+        >ul>li {
+            word-break: break-all;
+            border: 1px solid #333;
+            border-bottom: 0;
+            border-right: 0;
+            /* 控制文本内容居中 */
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            max-width: 100%;
+        }
+        input,
+        select,
+        .select-search-list>li {
+            text-align: center;
+        }
+    }
+    .no-triangle {
+        resize: none;
+        border: 1px solid #000000;
+    }
+    /* 设置文书标题图片宽度 */
+    .doctitle-icon {
+        width: 50%;
+    }
+    @media print {
+        width: 210mm;
+        max-height: 297mm;
+        margin: 0;
+        size: auto;
+        padding: 0;
+        border: 0;
+        header.noTop h3,
+        header.noTop h4,
+        header.noTop h5 {
+            margin-top: 0;
+        }
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+        /*.doctitle-icon {
+            margin-top: -25px;
+        }*/
+        #toast-container,
+        button {
+            display: none;
+        }
+        oi-select.noborder,
+        oi-select.noborder3 {
+            .select-search:after {
+                border: 0!important;
+            }
+            .close {
+                display: none;
+            }
+        }
+
+        checkbox label {
+            font-size: inherit;
+        }
+
+        .eSignature {
+            background-color: transparent;
+            position: relative;
+            z-index: 999;
+            display: black !important;
+        }
+
+        .eSignature img {
+            height: 30px;
+        }
+
+        .signature {
+            display: none !important;
+        }
+
+        .unsignature {
+            display: block !important;
+        }
+        .form-group {
+            font-size: 14px!important;
+        }
+        .no-triangle {
+            resize: none;
+            border: 1px solid #000000;
+        }
+    }
+}
+
+.page-view-big{
+/* 加宽文书 1033px  */
+    width: calc(~"100% - 200px");
+    font-size: 18px;
+    color:"black";
+}
+@media print {
+    /* 打印时需要设置 overflow 默认样式 */
+    #frame,
+    .view-container {
+        overflow: visible!important;
+    }
+    #toast-container,
+    button,
+    .not-print,
+    .modal-dialog {
+        display: none!important;
+    }
+}

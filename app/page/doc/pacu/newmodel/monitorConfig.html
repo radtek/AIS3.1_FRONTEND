@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h4><span>术中记录配置项</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="monitorConfig">
+    <div class="modal-body">
+        <table class="table table-hover">
+            <tr>
+                <td style="width: 15%;">名称</td>
+                <td style="width: 15%;">描述</td>
+                <td style="width: 20%;">最大值</td>
+                <td style="width: 20%;">最小值</td>
+                <td style="width: 10%;">操作</td>
+            </tr>
+            <tr ng-repeat="item in monConfigList">
+                <td>{{item.eventName}}</td>
+                <td>{{item.eventDesc}}</td>
+                <td>
+                    <input type="number" class="noborder3" ng-model="item.max" name="max" ng-disabled="!item.isCheck" style="width: 80px;">
+                </td>
+                <td>
+                    <input type="number" class="noborder3" ng-model="item.min" name="min" ng-disabled="!item.isCheck" style="width: 80px;">
+                </td>
+                <td ng-init="item.isCheck = item.mustShow == 1 ? true : false"><input type="checkbox" ng-model="item.isCheck" ng-click="count(item)"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

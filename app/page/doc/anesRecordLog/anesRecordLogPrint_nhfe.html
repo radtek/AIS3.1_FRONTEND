@@ -1,0 +1,296 @@
+<div class="print-progress">
+    <progressbar></progressbar>
+</div>
+<div>
+    <div layout="column" class="page-print" id="anesRecord_nhfe" ng-repeat="page in PAGES" repeat-finish="vm.pageFinish()">
+        <main class="body">
+            <header layout="column">
+                <h3 class="red" ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 class="red">麻醉记录单</h4>
+                <div layout layout-align="space-between center">
+                    <div layout>
+                        <a class="a-backshow-60">{{startOper.regOpt.operaDate.split('-')[0]}}</a><span class="red">年</span>
+                        <a class="a-backshow-40">{{startOper.regOpt.operaDate.split('-')[1]}}</a><span class="red">月</span>
+                        <a class="a-backshow-40">{{startOper.regOpt.operaDate.split('-')[2]}}</a><span class="red">日</span>
+                    </div>
+                    <div layout ng-if="docInfo.beCode == 'qnzrmyy'">
+                        <a class="a-backshow-60">{{startOper.anaesRecord.operRoomName}}</a>
+                    </div>
+                    <div layout ng-if="docInfo.beCode != 'qnzrmyy'">
+                        <a class="a-backshow-100">{{startOper.regOpt.regionName}}</a><span class="red">病室</span>
+                    </div>
+                    <div layout ng-if="docInfo.beCode == 'qnzrmyy'">
+                        <a class="a-backshow-100">{{startOper.regOpt.deptName}}</a><span class="red">科室</span>
+                    </div>
+                    <div layout>
+                        <a class="a-backshow-60">{{startOper.regOpt.bed}}</a><span class="red">床号</span>
+                    </div>
+                    <div layout>
+                        <span class="red">住院号</span><a style="width: 155px;">{{startOper.regOpt.hid}}</a>
+                    </div>
+                </div>
+            </header>
+            <article>
+                <div class="head">
+                    <div layout class="lineH">
+                        <div layout flex><span class="red">姓名</span><a flex class="a-backshow-100"> {{startOper.regOpt.name}}</a></div>
+                        <div flex="5"></div>
+                        <div layout flex><span class="red">性别</span><a flex class="a-backshow-60">{{startOper.regOpt.sex}}</a></div>
+                        <div flex="5"></div>
+                        <div layout flex><span class="red">年龄</span>
+                            <a flex class="a-backshow-60">{{startOper.regOpt.age ? startOper.regOpt.age + '岁' : ''}}{{startOper.regOpt.ageMon ? startOper.regOpt.ageMon + '月' : ''}}{{startOper.regOpt.ageDay ? startOper.regOpt.ageDay + '天' : ''}}</a>
+                        </div>
+                        <div flex="5"></div>
+                        <div layout flex>
+                            <span class="red">体重</span>
+                            <input flex type="number" transform='number' max="300" min="0" ng-model="startOper.regOpt.weight" ng-value="startOper.regOpt.weight">
+                            <span class="red">kg</span>
+                        </div>
+                        <div flex="5"></div>
+                        <div layout flex>
+                            <span class="red">　身高</span>
+                            <input flex type="number" transform='number' max="300" min="0" ng-model="startOper.regOpt.height" ng-value="startOper.regOpt.height">
+                            <span class="red">cm</span>
+                        </div>
+                    </div>
+                    <div layout>
+                        <div flex>
+                            <div layout ng-class="{true: 'lineH'}[startOper.regOpt.diagnosisName.length < 27]">
+                                <span layout flex><span class="red" style="width: 64px;">术前诊断</span><div ng-if="startOper.regOpt.diagnosisName.length > 26"><span style="letter-spacing: -1px;border-bottom: 1px solid red;">{{startOper.regOpt.diagnosisName}}</span></div>
+                                <a style="border-bottom:1px solid red !important;width:100%;" ng-if="startOper.regOpt.diagnosisName.length < 27">{{startOper.regOpt.diagnosisName}}</a>
+                                </span>
+                                <div layout>
+                                    <span class="red">ASA分级</span>
+                                    <a flex>{{asaLevelName}}</a>
+                                </div>
+                                <div layout >
+                                    <checkbox class='red' ng-model="startOper.anaesRecord.asaLevelE" ng-true-value='true' ng-false-value='false'><span class="red">E</span></checkbox>
+                                </div>
+                            </div>
+                            <div layout class="lineH">
+                                <span layout flex><span class="red">拟施手术</span><a flex class="nowrap a-backshow">{{startOper.regOpt.designedOptName}}</a></span>
+                                <div flex layout>
+                                    <span class="red">手术等级</span>
+                                    <a flex>{{startOper.anaesRecord.optLevel}}</a>
+                                </div>
+                            </div>
+                            <div layout class="lineH">
+                                <div flex="50" layout>
+                                    <span class="red">麻醉方法</span>
+                                    <a flex>{{startOper.realAnaesList | nameString}}</a>
+                                </div>
+                                <div flex="50" layout>
+                                    <span class="red">手术体位</span>
+                                    <a flex><span ng-repeat="o in startOper.anaesRecord.optBodys"><span ng-repeat="i in optBody | filter: { codeValue: o }:eq"> {{i.codeName}} </span></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div flex=25 layout="column" class="bSpecial" ng-if="docInfo.beCode == 'qnzrmyy'">
+                            <div><span class="red">术前特殊情况：</span>{{startOper.regOpt.frontOperSpecialCase}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div layout class="body">
+                    <div class="left" layout>
+                        <table flex>
+                            <tr>
+                                <td colspan="7" class="text-center red">时间</td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" class="text-center red">氧流量&nbsp;L/min</td>
+                            </tr>
+                            <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+                                <td rowspan="11" class="text-center red" ng-if="i == 0">麻醉中用药</td>
+                                <td colspan="6" class="pullLR">
+                                    <div>
+                                        {{startOper.treatMedEvtList[i].name}} &nbsp; {{startOper.treatMedEvtList[i].dosage + startOper.treatMedEvtList[i].medicalEventList[0].dosageUnit}}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="i in [0, 1, 2, 3, 4, 5]">
+                                <td rowspan="6" class="text-center red" ng-if="i == 0">输液</td>
+                                <td colspan="6" class="pullLR">
+                                    <div class="pull-left">{{startOper.inIoeventList[i] && startOper.inIoeventList[i].ioeventList[0].blood != '' ? startOper.inIoeventList[i].name + '(血型:' + startOper.inIoeventList[i].ioeventList[0].blood + ')' : startOper.inIoeventList[i].name}} &nbsp; {{startOper.inIoeventList[i].ioeventList[0].dosageUnit}}</div>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="i in [0, 1, 2]">
+                                <td rowspan="3" class="text-center red" ng-if="i == 0">出量</td>
+                                <td colspan="6" class="pullLR">
+                                    <div class="pull-left">{{startOper.outIoeventList[i].name}} &nbsp; {{startOper.outIoeventList[i].egressList[0].dosageUnit}}</div>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="i in [0, 1, 2, 3, 4]">
+                                <td rowspan="5" class="text-center red" ng-if="i == 0">术中监测</td>
+                                <td colspan="6">
+                                    <div>{{startOper.leftShowList[i].eventName}}</div>
+                                </td>
+                            </tr>
+                            <tr class="mon">
+                                <td colspan="2" class="text-center">
+                                    <div layout layout-align="space-between center"><span class="red">麻醉开始</span><img src="app/img/ico-mzsz-2.png"></div>
+                                    <div layout layout-align="space-between center"><span class="red">置管</span><img src="app/img/ico-qgcg-2.png"></div>
+                                    <div layout layout-align="space-between center"><span class="red">手术开始</span><img src="app/img/ico-ssks-2.png"></div>
+                                    <div layout layout-align="space-between center"><span class="red">手术结束</span><img src="app/img/ico-ssjs-2.png"></div>
+                                    <div layout layout-align="space-between center"><span class="red">拔管</span><img src="app/img/ico-qgbg-2.png"></div>
+                                    <div class="otherImg">
+                                        <div ng-repeat="i in startOper.showList" layout layout-align="space-between center">
+                                            <span class="red">{{i.eventName}}</span><img ng-src="{{i.iconId.split('.')[0] + '-2.' + i.iconId.split('.')[1]}}">
+                                        </div>
+                                    </div>
+                                    <div layout layout-align="space-between center" class="clickSpan"><span class="red">入室</span><a style="background-color: #FFFFFF"><span ng-repeat="i in startOper.anaeseventList | filter: { code: 1 }:eq" ng-init="vm.event.rs = i">{{i.occurTime | date: 'HH:mm'}}</span></a></div>
+                                    <div layout layout-align="start center" class="clickSpan"><span class="red">麻醉开始</span></div>
+                                    <div layout layout-align="end center" class="clickSpan"><a style="background-color: #FFFFFF"><span ng-repeat="i in startOper.anaeseventList | filter: { code: 2 }:eq" ng-init="vm.event.mzks = i">{{i.occurTime | date: 'HH:mm'}}</span></a></div>
+                                    <div layout layout-align="space-between center" class="clickSpan">
+                                        <span class="red">置管</span>
+                                        <a style="background-color: #FFFFFF" ng-if="zg">
+                                            <span ng-repeat="i in startOper.anaeseventList | filter: { code: 3 }:eq" ng-init="vm.event.zg = i">{{i.occurTime | date: 'HH:mm'}}</span>
+                                        </a>
+                                        <a style="background-color: #FFFFFF" ng-if="!zg">/</a>
+                                    </div>
+                                    <div layout layout-align="start center" class="clickSpan"><span class="red">手术开始</span></div>
+                                    <div layout layout-align="end center" class="clickSpan"><a style="background-color: #FFFFFF"><span ng-repeat="i in startOper.anaeseventList | filter: { code: 4 }:eq" ng-init="vm.event.ssks = i">{{i.occurTime | date: 'HH:mm'}}</span></a></div>
+                                    <div layout layout-align="start center" class="clickSpan"><span class="red">手术结束</span></div>
+                                    <div layout layout-align="end center" class="clickSpan"><a style="background-color: #FFFFFF"><span ng-repeat="i in startOper.anaeseventList | filter: { code: 5 }:eq" ng-init="vm.event.ssjs = i">{{i.occurTime | date: 'HH:mm'}}</span></a></div>
+                                    <div layout layout-align="space-between center" class="clickSpan">
+                                        <span class="red">拔管</span>
+                                        <a style="background-color: #FFFFFF" ng-if="bg">
+                                            <span ng-repeat="i in startOper.anaeseventList | filter: { code: 6 }:eq" ng-init="vm.event.bg = i" ng-if="i.occurTime">{{i.occurTime | date: 'HH:mm'}}</span>
+                                        </a>
+                                        <a style="background-color: #FFFFFF" ng-if="!bg">/</a>
+                                    </div>
+                                    <div layout layout-wrap="wrap" layout-align="start center" class="clickSpan">
+                                        <span class="red">去向</span>&nbsp;
+                                        <span class="red" ng-repeat="(key, cs) in leaveTo" ng-if="cs.codeValue == startOper.anaesRecord.leaveTo">{{cs.codeName}}</span>
+                                    </div>
+                                    <div layout layout-align="space-between center " class="clickSpan"><span class="red">出室</span><a><span ng-repeat="i in startOper.anaeseventList | filter: { code: 9 }:eq " ng-init="vm.event.cs=i">{{i.occurTime | date: 'HH:mm'}}</span></a></div>
+                                </td>
+                                <td class="text-center">
+                                    <div layout="column " layout-align="end center " ng-repeat="i in [ '', 'kPa',28, '', '',24, '', '',20, '', '',16, '', '',12, '', '',8, '', '',4, '', '', ''] track by $index"><span class="red">{{i}}</span></div>
+                                </td>
+                                <td class="text-center">
+                                    <div layout="column " layout-align="end center " ng-repeat="i in [ '', '℃', '',38, '',36, '',34, '',32, '',30, '',28, '',26, '',24, '',22, '',20, '', ''] track by $index"><span class="red">{{i}}</span></div>
+                                </td>
+                                <td class="text-center" style="width: 30px;">
+                                    <div layout='column' layout-align="end center " ng-repeat="i in [ 'mmHg',220, '',200, '',180, '',160, '',140, '',120, '',100, '',80, '',60, '',40, '',20, '',0] track by $index"><span class="red">{{i}}</span></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="text-center red">标记</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div layout flex class="middle">
+                        <table flex border="1 " bordercolor="red">
+                            <tr>
+                                <td colspan="16">
+                                    <div layout>
+                                        <span flex ng-repeat="i in page.xTits | limitTo: 8">{{i}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="numInput">
+                                <td ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
+                                    <div ng-repeat="item in page.monDataList[i * 3].monitorDataList | filter: { observeId: '91001' }:eq">{{item.value}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="16" class="echart1">
+                                    <div e-chart-old class="echarts" e-config="eConfig1" e-option="page.eOption1"></div>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="left in [0,1,2,3,4]" class="numInput">
+                                <td ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
+                                    <span ng-if="startOper.leftShowList[left] && startOper.leftShowList[left].eventName != 'I:E'">{{page.monDataList[i * 3].monitorDataList[left + 1].value}}</span>
+                                    <span ng-if="startOper.leftShowList[left] && startOper.leftShowList[left].eventName == 'I:E'">1:{{page.monDataList[i * 3].monitorDataList[left + 1].value}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="16" class="echart2">
+                                    <div e-chart-old class="echarts" e-config="eConfig2" e-option="page.eOption2"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div layout class="buttom">
+                    <table flex border="1 " bordercolor="red">
+                        <tr>
+                            <td class="text-center red">备注</td>
+                            <td>
+                                <div ng-if="docInfo.beCode == 'qnzrmyy' || docInfo.beCode == 'yxyy'">
+                                    总输液量：<strong>{{vm.IOAmout.infusion}}</strong>ml，总输血量：<strong>{{vm.IOAmout.blood}}</strong>ml<strong>{{vm.IOAmout.bloodDetail}}</strong>，总失血量：<strong>{{vm.IOAmout.bleeding}}</strong>ml，总尿量：<strong>{{vm.IOAmout.urine}}</strong>ml
+                                </div>
+                                <div class="backList">
+                                    <div ng-repeat="list in page.backList" style="max-width: 235px;height: initial;">
+                                        <span ng-if="list.isTitle" class="title">-----------{{list.name}}-----------</span>
+                                        <span ng-if="list.eventName == 'anaesevent'">{{$index}}、{{list.occurTime | date: 'HH:mm'}}&nbsp;{{list.codeName}}</span>
+                                        <span ng-if="list.eventName == 'medicalevent'">{{list.startTime | date: 'HH:mm'}}{{list.endTime ? '~' : ''}}{{list.endTime ? list.endTime : '' | date: 'HH:mm'}}&nbsp;{{list.name}}&nbsp;{{list.dosage + list.dosageUnit}}</span>
+                                        <span ng-if="list.eventName == 'egress'">{{list.startTime | date: 'HH:mm'}}&nbsp;{{list.name}}&nbsp;{{list.value + list.dosageUnit}}</span>
+                                        <span ng-if="list.eventName == 'ctlBreath'">{{list.startTime | date: 'HH:mm'}}&nbsp;{{list.type == 1 ? "自主呼吸" : ((list.type == 2) ? "辅助呼吸" : ((list.type == 3) ? "控制呼吸" : ""))}}</span>
+                                        <span ng-if="list.eventName == 'shiftChange'">{{list.shiftChangeTime | date: 'HH:mm'}}&nbsp;交班人:{{list.shiftChangedPeople}},接班人:{{list.shiftChangePeople}}</span>
+                                        <span ng-if="list.eventName == 'infusionList'">{{list.startTime | date: 'HH:mm'}}{{list.endTime ? ('~' + list.endTime | date: 'HH:mm') : ''}}&nbsp;{{list.name}}&nbsp;{{list.dosageAmount + list.dosageUnit}}</span>
+                                        <span ng-if="list.eventName == 'bloodList'">{{list.startTime | date: 'HH:mm'}}~{{list.endTime | date: 'HH:mm'}}&nbsp;{{list.name}}&nbsp;{{list.blood ? '血型:' + list.blood : ''}}&nbsp;{{list.dosageAmount + list.dosageUnit}}</span>
+                                        <span ng-if="list.eventName == 'checkeventList'">{{list.occurTime | date: 'HH:mm'}}&nbsp;{{list.cheEventName}}</span>
+                                        <span ng-if="list.eventName == 'checkdetail'">{{list.name}} {{list.value}}{{list.dosageUnit}}</span>
+                                        <span ng-if="list.eventName == 'sepecialMaterialEvent'">{{list.startTime | date: 'HH:mm'}}&nbsp;{{list.specialItemName}}</span>
+                                        <span ng-if="list.eventName == 'otherevent'">{{list.startTime | date: 'HH:mm'}}&nbsp;{{list.title}}</span>
+                                        <span ng-if="list.eventName == 'rescueevent'">{{list.startTime | date: 'HH:mm'}}&nbsp;{{list.model == 'save' ? '抢救模式' : '普通模式'}}</span>
+                                        <span ng-if="list.analgesicMethod.length > 0">{{list.analgesicMethod}}</span>
+                                        <span ng-if="list.flow.length > 0">{{list.flow}}</span>
+                                        <span ng-if="list.eventName == 'analgesicMedEvt'">{{list.name + list.dosage + list.dosageUnit}}</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div layout>
+                                    <div layout flex>
+                                        <span class="red" style="min-width:64px;">术后诊断</span>
+                                        <span  ng-class="{true: 'scale05'}[getListStrLen(startOper.optLatterDiagList) > 27]" >{{startOper.optLatterDiagList | nameString}}</span>
+                                    </div>
+                                    <div layout flex>
+                                        <span class="red" style="min-width:64px;">实施手术</span>
+                                        <span ng-class="{true: 'scale05'}[getListStrLen(startOper.optRealOperList) > 27]" >{{startOper.optRealOperList | nameString}}</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div layout>
+                                    <div layout flex>
+                                        <span class="red">麻醉者</span>
+                                        <a flex style="text-align: left;">{{startOper.anesDocList | nameString}}</a>
+                                    </div>
+                                    <div layout flex>
+                                        <span class="red">手术者</span>
+                                        <a flex>{{startOper.operatDocList | nameString}}</a>
+                                    </div>
+                                    <div layout flex>
+                                        <span class="red">洗手护士</span>
+                                        <a flex>{{startOper.instruNurseList | nameString}}</a>
+                                    </div>
+                                    <div layout flex>
+                                        <span class="red">巡回护士</span>
+                                        <a flex>{{startOper.nurseList | nameString}}</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </article>
+            <div layout layout-align="space-between center" class="paging">
+                <div>
+                    <span flex class="red text-right">第{{page.pageCur}}页/共{{view.pageCount}}页</span>
+                </div>
+                <div flex></div>
+                <div>
+                    <span class="red " ng-repeat="i in startOper.anaeseventList | filter: { code: 7 }:eq">{{i.occurTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+                    <span class="red " ng-repeat="i in startOper.anaeseventList | filter: { code: 9 }:eq">{{i.occurTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div flex>
+	<div layout flex style="height:305px;margin-bottom:10px;border:1px solid #ccc">
+	    <div layout="column" flex="40">
+	        <!-- <div class="pie" style="animation-delay: -20s;">　</div> -->
+	        <!-- <canvas id="pie" class="chart chart-pie chart-xs" chart-data="{{[20, 80]}}" chart-labels="{{['2x', '8x']}}"></canvas> -->
+	        <div e-chart class="echarts" e-config="eConfig" e-option="eOption"></div>
+	    </div>
+	    <div layout="column" flex="60">
+	        <div style="margin-top:40px;padding-left: 15px;"><i class="glyphicon glyphicon-asterisk"></i> 说明:中心静脉穿刺严重并发症是指由中心静脉穿刺、置管引起的气胸、血胸、局部血肿、导管或导丝异常等，需要外科手段（含介入治疗）干预的并发症。中心静脉穿刺严重并发症发生率，是指中心静脉穿刺严重并发症发生例数占同期中心静脉穿刺总例数的比例。
+	        </div>
+	        <div  style="margin-top:20px;">
+	        <div layout flex>
+	            <div layout="column" layout-align="center end" flex="25">
+	                <span style="padding-top:2px;white-space:nowrap;">中心静脉穿刺严重并发症发生率 &nbsp;&nbsp;=</span>
+	            </div>
+	            <div layout="column" layout-align="center center"  flex="35">
+		            <div layout="column">
+		                <div  style="white-space:nowrap;">
+		                    中心静脉穿刺严重并发症发生例数（{{OperByVenipunctyreRate.OperByDeath24Num}}）
+		                </div>
+		                <div>
+		                    <hr style="height:1px;background-color:#777;">
+		                </div>
+		                <div  style="white-space:nowrap;">
+		                    同期中心静脉穿刺总例数（{{OperByVenipunctyreRate.operTotal}}）
+		                </div>
+	                </div>
+	            </div>
+	            <div layout="column" layout-align="center start" flex="10">
+	                <span style="white-space:nowrap;"> &nbsp;&nbsp;x 100% &nbsp;&nbsp; = &nbsp;&nbsp;{{OperByVenipunctyreRate.rate}}%</span>
+	            </div>
+	        </div>
+	        </div>
+	    </div>	    
+	</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiOperByVenipunctyre');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsOperByVenipunctyre" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsOperByVenipunctyre" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsOperByVenipunctyre">暂无数据</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiOperByVenipunctyreRate');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsOperByVenipunctyreRate" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsOperByVenipunctyreRate" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsOperByVenipunctyreRate">暂无数据</div>
+</div>

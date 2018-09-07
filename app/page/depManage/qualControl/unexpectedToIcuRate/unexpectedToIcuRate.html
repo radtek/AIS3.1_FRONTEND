@@ -1,0 +1,50 @@
+<div flex>
+	<div layout flex style="height:305px;margin-bottom:10px;border:1px solid #ccc">
+	    <div layout="column" flex="40">
+	        <!-- <div class="pie" style="animation-delay: -20s;">　</div> -->
+	        <!-- <canvas id="pie" class="chart chart-pie chart-xs" chart-data="{{[20, 80]}}" chart-labels="{{['2x', '8x']}}"></canvas> -->
+	        <div e-chart class="echarts" e-config="eConfig" e-option="eOption"></div>
+	    </div>
+	    <div layout="column" flex="60">
+	        <div style="margin-top:40px;padding-left: 115px;"><i class="glyphicon glyphicon-asterisk"></i> 说明:非计划转入ICU是指在开始麻醉诱导前并无术后转入ICU的计划，而术中或术后决定转入ICU。非计划转入ICU率，是指非计划转入ICU患者数占同期转入ICU患者总数的比例。
+	        </div>
+	        <div  style="margin-top:20px;">
+	        <div layout flex>
+	            <div layout="column" layout-align="center end" flex="25">
+	                <span style="padding-top:2px;white-space:nowrap;">非计划转入ICU率 &nbsp;&nbsp;=</span>
+	            </div>
+	            <div layout="column" layout-align="center center"  flex="55">
+		            <div layout="column">
+		                <div  style="white-space:nowrap;">
+		                    开始麻醉诱导前并无术后转入ICU的计划,而术中或术后决定转入ICU的手术({{OperBynoticu.nonPlanICUNum}})
+		                </div>
+		                <div>
+		                    <hr style="height:1px;background-color:#777;">
+		                </div>
+		                <div  style="white-space:nowrap;">
+		                    同期转入ICU患者总数（{{OperBynoticu.toICUOperTotal}}）
+		                </div>
+	                </div>
+	            </div>
+	            <div layout="column" layout-align="center start" flex="10">
+	                <span style="white-space:nowrap;"> &nbsp;&nbsp;x 100% &nbsp;&nbsp; = &nbsp;&nbsp;{{OperBynoticu.rate}}%</span>
+	            </div>
+	        </div>
+	        </div>
+	    </div>	    
+	</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiOperBynoticu');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsOperBynoticu" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsOperBynoticu" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsOperBynoticu">暂无数据</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiOperBynoticuSameDate');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsOperBynoticuSameDate" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsOperBynoticuSameDate" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsOperBynoticuSameDate">暂无数据</div>
+</div>

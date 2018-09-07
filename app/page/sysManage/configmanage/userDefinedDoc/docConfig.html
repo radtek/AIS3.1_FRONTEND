@@ -1,0 +1,44 @@
+<div class="modal-header">    
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper" class="docConfig">
+    <form name="operation" class="panel panel-default" role="form" novalidate>
+    	<div class="wrap" layout layout-wrap="wrap">
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">　<em>*</em>文书名称：</label>
+                    <input flex type="text" name="docThemeName" class="form-control" ng-model="doc.docThemeName" ng-maxlength="100" ng-minlength='1' ng-blur="_docThemeName = true" required>
+                </div>
+                <p ng-if="!doc.docThemeName && _docThemeName" class="help-block text-right">文书名称不能为空</p>
+                <p ng-if="doc.docThemeName.$error.minlength && _docThemeName" class="help-block text-right">长度不能少于1个字符</p>
+                <p ng-if="doc.docThemeName.$error.maxlength && _docThemeName" class="help-block text-right">长度不能超过100个字符</p>
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">　<em>*</em>应用模块设置：</label>
+                    <ul class="ul-checkbox-line">
+                            <li ng-repeat="cItem in catalogList">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="daily"  ng-model="cItem.checked"  value="cItem.catalogId"> {{cItem.catalogName}} </label>
+                            </li>
+                        </ul>
+                </div>               
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">　<em>*</em>操作角色设置：</label>
+                    <ul class="ul-checkbox-line">
+                            <li ng-repeat="rItem in roleList">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="daily"  ng-model="rItem.checked"  value="rItem.roleId"> {{rItem.roleName}} </label>
+                            </li>
+                        </ul>
+                </div>               
+            </div>
+        </div>
+        <div class="modal-footer">
+        	<button class="btn btn-primary" ng-click="btnActive && saveDocSet()">保&nbsp;&nbsp;存</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+        </div>
+    </form>
+</div>

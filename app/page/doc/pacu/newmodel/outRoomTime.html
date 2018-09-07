@@ -1,0 +1,18 @@
+<div class="modal-header">    
+    <h4><span>出室时间</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="outRoom">
+    <div class="modal-body">
+        <div flex="70" class="input-wrap">
+            <div layout layout-align="center center" class="input-group">
+                <label class="tit"><em>*</em>出室时间：</label>
+                <datetime-picker flex ng-model="params.outRoomTime" name="outRoomTime" max="2200-01-01" required="true"></datetime-picker>
+            </div>
+            <p ng-if="form.outRoomTime.$error.required" class="help-block text-right">不能为空</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+<form id="schedule" role="form" layout class="navbar-btn btn-xs text-right c-el-10">
+    <div flex layout>
+        <div layout layout-align="start center" class="input-group">
+            <label class="control-label tit">手术日期：</label>
+            <button class="btn btn-primary up" ng-click="updateDay('sub');">上一天</button>
+            <datetime-picker   dateID="date-start-time" maxdate="2100-01-01" ng-model="queryObj.operDate" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>
+            <button class="btn btn-primary down" ng-click="updateDay('add');">下一天</button>
+        </div>
+        <div layout layout-align="start center" class="input-group">
+            <label class="control-label tit">姓名：</label>
+            <input  class="form-control" type="text" ng-model="queryObj.name"></input>
+        </div>
+        <div layout layout-align="start center" class="input-group">
+            <label class="control-label tit">住院号：</label>
+            <input  class="form-control" type="text" ng-model="queryObj.hid"></input>
+        </div>
+    </div>
+    <button class="btn btn-primary" ng-click="query();">查&nbsp;&nbsp;询</button>
+    <button class="btn btn-primary" ng-repeat="item in btnsMenu" ui-sref="{{item.url}}">{{item.name}}</button>
+    <button class="btn btn-primary" ng-click="query('today');" ng-if="permission.indexOf('Q_TODAY') >= 0">今日排班</button>
+    <button class="btn btn-primary" ng-click="pushInfo();" ng-if="permission.indexOf('APPR') >= 0">推&nbsp;&nbsp;送</button>
+    <button class="btn btn-primary" tk-print-region="list-scan" ng-click="print();" ng-if="permission.indexOf('PREVIEW') >= 0">打&nbsp;&nbsp;印</button>
+    <button class="btn btn-primary" tk-print-region="card-scan" ng-click="print();" ng-if="permission.indexOf('PATCARD') >= 0">病人指示卡</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('EXP') >= 0" ng-click="export();">导出Excel</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('UPD') >= 0" ng-click="save();">保&nbsp;&nbsp;存</button>
+</form>
+<section flex layout ui-view class="view-container"></section>

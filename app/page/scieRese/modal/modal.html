@@ -1,0 +1,655 @@
+<div class="modal-header">
+    <h4>
+        <span>{{opt.tit}}</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" role="form" novalidate>
+    <!-- 对比项 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'com_tpl'">
+        <table class="table table-striped table-hover table-style">
+            <tr>
+                <th>姓名</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <!-- 保存模板 -->
+    <div class="modal-body save-tpl" ng-if="opt.jsonName === 'save_tpl'">
+        <div class="input-wrap" flex="60">
+            <div layout layout-align="start center" class="input-group" style="width: inherit;">
+                <label class="tit"><em>*</em>模板名称</label>
+                <input type="text" name="tplName" class="form-control" ng-model="opt.obj.tmpName" maxlength="20" ng-blur="_tplName = true" required>
+            </div>
+            <p ng-if="form.tplName.$error.required && _tplName" class="help-block text-right">模板名称不能为空</p>
+        </div>
+        <div layout layout-align="start start" class="input-group" style="width: inherit;">
+            <label class="tit">描述</label>
+            <textarea class="form-control" style="width: 235px;" maxlength="100" rows="4" ng-model="opt.obj.remark"></textarea>
+        </div>
+    </div>
+    <!-- 选择模板 -->
+    <div class="modal-body selt_tpl" ng-if="opt.jsonName === 'selt_tpl'">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th style="width: 150px;">模板名称</th>
+                <th>描述</th>
+                <th style="width: 100px;">创建者</th>
+                <th style="width: 145px;">创建时间</th>
+                <th style="width: 95px;">操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array">
+                <td>{{item.tmpName}}</td>
+                <td>{{item.remark}}</td>
+                <td>{{item.createUsername}}</td>
+                <td>{{item.createTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                <td><a ng-click="toList(item)">应用</a>&nbsp;|&nbsp;<a ng-click="delTpl($index, item)">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <!-- 设置 > 性别 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'sex'">
+        <div layout layout-align="start center" class="input-group">
+            <label class="tit">性别</label>
+            <label class="titRadio">
+                <input required type="radio" name="sex" ng-checked="obj.value == '男'" ng-model="obj.value" value="男">男</input></label>
+            <label class="titRadio">
+                <input required type="radio" name="sex" ng-checked="obj.value == '女'" ng-model="obj.value" value="女">女</input></label>
+        </div>
+    </div>
+    <!-- 设置 > 年龄 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'age'">
+        <div layout layout-align="start center" class="input-group input-wrap" style="width: 100%;">
+            <label class="tit">年龄</label>
+            <div layout layout-align="start center">
+                <input type="number" transform="number" class="form-control" min="0" max="200" ng-model="obj.year1"></input><span>&nbsp;岁&nbsp;</span>
+                <input type="number" transform="number" class="form-control" min="0" max="12" ng-model="obj.month1"></input><span>&nbsp;月&nbsp;</span>
+                <input type="number" transform="number" class="form-control" min="0" max="31" ng-model="obj.day1"></input><span>&nbsp;天</span>
+            </div>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap" style="width: 100%;">
+            <label class="tit">至</label>
+            <div layout layout-align="start center">
+                <input type="number" transform="number" class="form-control" min="0" max="200" ng-model="obj.year2"></input><span>&nbsp;岁&nbsp;</span>
+                <input type="number" transform="number" class="form-control" min="0" max="12" ng-model="obj.month2"></input><span>&nbsp;月&nbsp;</span>
+                <input type="number" transform="number" class="form-control" min="0" max="31" ng-model="obj.day2"></input><span>&nbsp;天</span>
+            </div>
+        </div>
+    </div>
+    <!-- 设置 > 身高 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'height'">
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">身高</label>
+            <div layout layout-align="start center">
+                <input required type="number" transform="number" class="form-control w-70" min="0" max="250" ng-model="obj.bt1"></input>
+                <span>&nbsp;cm~&nbsp;</span>
+                <input required type="number" transform="number" class="form-control w-70" min="0" max="250" ng-model="obj.bt2"></input>
+                <span>&nbsp;cm</span>
+            </div>
+        </div>
+    </div>
+    <!-- 设置 > 体重 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'weight'">
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">体重</label>
+            <div layout layout-align="start center">
+                <input required type="number" transform="number" class="form-control w-70" min="0" max="250" ng-model="obj.bt1"></input>
+                <span>&nbsp;kg~&nbsp;</span>
+                <input required type="number" transform="number" class="form-control w-70" min="0" max="250" ng-model="obj.bt2"></input>
+                <span>&nbsp;kg</span>
+            </div>
+        </div>
+    </div>
+    <!-- 设置 > 手术日期 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'operaDate'">
+        <div layout layout-align="start center" class="input-group input-wrap" style="width: 350px;">
+            <label class="tit">手术日期</label>
+            <div layout layout-align="start center">
+                <datetime-picker  class="form-control" name="bt1" dateID="start-time" ng-model="obj.bt1" timepicker="false" format="Y-m-d" required="true"></datetime-picker>
+                <span>&nbsp;至&nbsp;</span>
+                <datetime-picker  class="form-control" name="bt2" dateID="end-time" ng-model="obj.bt2" timepicker="false" format="Y-m-d" required="true"></datetime-picker>
+            </div>
+        </div>
+    </div>
+    <!-- 设置 > 手术类型 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'emergency'">
+        <div layout layout-align="start center" class="input-group">
+            <label class="tit">手术类型</label>
+            <label class="titRadio">
+                <input required type="radio" name="emergency" ng-checked="obj.value == '1'" ng-model="obj.value" value="1">急诊</input>
+            </label>
+            <label class="titRadio">
+                <input required type="radio" name="emergency" ng-checked="obj.value == '0'" ng-model="obj.value" value="0">择期</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 拟施手术 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'designedOptCode'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>手术名称</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group w-420">
+                <label class="tit">拟施手术</label>
+                <oi-select flex name="designedOptCode" oi-options="item.name for item in queryList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', editItem: true, newItem: true, newItemModel: {name: $query} }" ng-model="obj.sel" ng-blur="_designedOptCode = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="designedOptCode" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="designedOptCode" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 实施手术 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'implOper'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>手术名称</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group w-420">
+                <label class="tit">实施手术</label>
+                <oi-select flex name="implOper" oi-options="item.name for item in queryList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', editItem: true, newItem: true, newItemModel: {name: $query} }" ng-model="obj.sel" ng-blur="_implOper = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="implOper" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="implOper" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 拟施诊断 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'diagnosisCode'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>诊断名称</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group w-420">
+                <label class="tit">拟施诊断</label>
+                <oi-select flex name="diagnosisCode" oi-options="item.name for item in diagnosedefList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', editItem: true, newItem: true, newItemModel: {name: $query} }" ng-model="obj.sel" ng-blur="diagnosisCode = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="diagnosisCode" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="diagnosisCode" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 实施诊断 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'implDiag'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>诊断名称</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group w-420">
+                <label class="tit">实施诊断</label>
+                <oi-select flex name="diagnosisCode" oi-options="item.name for item in diagnosedefList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', editItem: true, newItem: true, newItemModel: {name: $query} }" ng-model="obj.sel" ng-blur="diagnosisCode = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="diagnosisCode" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="diagnosisCode" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 拟施麻醉 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'designedAnaesMethodCode'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>麻醉方法</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">拟施麻醉</label>
+                <oi-select flex name="designedAnaesMethodCode" oi-options="item.name for item in anaesMethodList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="obj.sel" ng-blur="_designedAnaesMethodCode = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="designedAnaesMethodCode" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="designedAnaesMethodCode" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 实施麻醉 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'implAnaesMethod'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>麻醉方法</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">实施麻醉</label>
+                <oi-select flex name="implAnaesMethod" oi-options="item.name for item in anaesMethodList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="obj.sel" ng-blur="_implAnaesMethod = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="implAnaesMethod" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="implAnaesMethod" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 手术时长 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'operTimeLength'">
+        <div layout flex layout-align="start center" class="input-wrap input-group" style="width: 100%;">
+          <label class="tit">手术时长</label>
+          <div layout layout-align="start center">
+              <input required type="number" transform="number" class="form-control w-70" min="0" max="300" ng-model="obj.bt1"></input><span style="min-width:45px;">&nbsp;分钟~&nbsp;</span>
+              <input required type="number" transform="number" class="form-control w-70" min="0" max="300" ng-model="obj.bt2"></input><span style="min-width:45px;">&nbsp;分钟</span>
+          </div>
+        </div>
+    </div>
+    <!-- 设置 > 麻醉时长 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'anaesTimeLength'">
+      <div layout layout-align="start center" class="input-group input-wrap"style="width: 100%;">
+          <label class="tit">麻醉时长</label>
+          <div layout layout-align="start center">
+              <input required type="number" transform="number" class="form-control w-70" min="0" ng-model="obj.bt1"></input><span style="min-width:45px;">&nbsp;分钟~&nbsp;</span>
+              <input required type="number" transform="number" class="form-control w-70" min="0" ng-model="obj.bt2"></input><span style="min-width:45px;">&nbsp;分钟</span>
+          </div>
+      </div>
+    </div>
+    <!-- 设置 > 麻醉事件 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'anaesEvent'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>事件名称</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">麻醉事件</label>
+                <oi-select flex name="anaesEvent" oi-options="item.codeName for item in list | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="obj.sel" ng-blur="_anaesEvent = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="anaesEvent" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="anaesEvent" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 用药事件 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'medEvent'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>药品名称</th>
+                <th>范围(ml)</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td>{{item.min}}&nbsp;~&nbsp;{{item.max}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group" style="width: 400px;">
+                <label class="tit">用药</label>
+                <oi-select flex name="medEvent" oi-options="item.name for item in medEventList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="obj.sel" ng-blur="_medEvent = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">剂量</label>
+                  <input type="number" transform="number" class="form-control w-70" min="0" ng-model="obj.bt1"></input><span>&nbsp;ml~&nbsp;</span>
+                  <input type="number" transform="number" class="form-control w-70" min="0" ng-model="obj.bt2"></input><span>&nbsp;ml</span>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="medicalEvent" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="medicalEvent" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 入量事件 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'ioEvent'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>入量名称</th>
+                <th>范围(ml)</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td>{{item.min}}&nbsp;~&nbsp;{{item.max}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">入量</label>
+                <oi-select flex name="ioEvent" oi-options="item.name for item in list | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="obj.sel" ng-blur="_ioEvent = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">容量</label>
+                  <input type="number" transform="number" class="form-control w-70" min="0" ng-model="obj.bt1"></input><span>&nbsp;ml~&nbsp;</span>
+                  <input type="number" transform="number" class="form-control w-70" min="0" ng-model="obj.bt2"></input><span>&nbsp;ml</span>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="ioEvent" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="ioEvent" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 出量事件 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'egressEvent'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>出量名称</th>
+                <th>范围(ml)</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td>{{item.min}}&nbsp;~&nbsp;{{item.max}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">出量</label>
+                <oi-select flex name="egressEvent" oi-options="item.name for item in list | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="obj.sel" ng-blur="_egressEvent = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">数值</label>
+                  <input type="number" transform="number" class="form-control w-70" min="0" ng-model="obj.bt1"></input><span>&nbsp;ml~&nbsp;</span>
+                  <input type="number" transform="number" class="form-control w-70" min="0" ng-model="obj.bt2"></input><span>&nbsp;ml</span>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="egress" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="egress" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 体征 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'lifeSign'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>体征名称</th>
+                <th>范围(ml)</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td>{{item.min}}&nbsp;~&nbsp;{{item.max}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">体征</label>
+                <oi-select flex name="lifeSign" oi-options="item.eventDesc for item in list | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="obj.sel" ng-blur="_lifeSign = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">数值</label>
+                  <input type="number" transform="number" class="form-control" min="0" ng-model="obj.bt1"></input><span>&nbsp;~&nbsp;</span>
+                  <input type="number" transform="number" class="form-control" min="0" ng-model="obj.bt2"></input>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()" ng-disabled="form.$invalid || !obj.sel">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="lifeSign" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="lifeSign" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 体位 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'optBody'">
+        <div class="input-wrap" style="height: 35px;">
+            <div layout layout-align="start center" class="input-group" style="width: 550px;">
+                <label class="tit">手术体位</label>
+                <label class="titRadio" layout ng-repeat="item in list" style="min-width: 80px;">
+                    <input type="checkbox" name="optBody" ng-checked="item.checked" ng-model="item.checked" value="item.codeValue">{{item.codeName}}</input>
+                </label>
+            </div>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="optBody" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="optBody" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 评分 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'asaLevel'">
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">ASA分级</label>
+                <select required class="form-control" ng-model="obj.bt1" ng-options="item.codeValue as item.codeName for item in list"></select>
+                <label class="control-label">&nbsp;~&nbsp;</label>
+                <select required class="form-control" ng-model="obj.bt2" ng-options="item.codeValue as item.codeName for item in list"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="false">
+            <label class="col-sm-3 control-label">APATCHⅡ评分</label>
+            <div class="col-sm-9 form-inline">
+                <input type="number" transform="number" class="form-control" min="0"></input>
+                <label class="control-label">&nbsp;~&nbsp;</label>
+                <input type="number" transform="number" class="form-control" min="0"></input>
+            </div>
+        </div>
+        <div class="form-group" ng-if="false">
+            <label class="col-sm-3 control-label">TISS评分</label>
+            <div class="col-sm-9 form-inline">
+                <input type="number" transform="number" class="form-control" min="0"></input>
+                <label class="control-label">&nbsp;~&nbsp;</label>
+                <input type="number" transform="number" class="form-control" min="0"></input>
+            </div>
+        </div>
+        <div class="form-group" ng-if="false">
+            <label class="col-sm-3 control-label">PRAS评分</label>
+            <div class="col-sm-9 form-inline">
+                <input type="number" transform="number" class="form-control" min="0"></input>
+                <label class="control-label">&nbsp;~&nbsp;</label>
+                <input type="number" transform="number" class="form-control" min="0"></input>
+            </div>
+        </div>
+    </div>
+    <!-- 设置 > 器械 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'instrument'">
+        <table class="table table-striped table-hover table-style" ng-if="obj.array.length > 0">
+            <tr>
+                <th>器械名称</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in obj.array track by $index">
+                <td>{{item.name}}</td>
+                <td><a ng-click="delItem($index)">删除</a></td>
+            </tr>
+        </table>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">器械名称</label>
+                <oi-select  name="instrument" oi-options="item.name for item in getInstrumentList($query) | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="obj.sel" ng-blur="_instrument = true">
+                </oi-select>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;&nbsp;加</button>
+        </div>
+        <div layout layout-align="start center" class="input-group input-wrap">
+            <label class="tit">连接方式</label>
+            <label class="titRadio">
+                <input type="radio" name="instrument" ng-checked="obj.andor === 'or'" ng-model="obj.andor" value="or">或</input>
+            </label>
+            <label class="titRadio">
+                <input type="radio" name="instrument" ng-checked="obj.andor === 'and'" ng-model="obj.andor" value="and">与</input>
+            </label>
+        </div>
+    </div>
+    <!-- 设置 > 镇痛方式 -->
+    <div class="modal-body" ng-if="opt.jsonName === 'analgesic'">
+        <div layout layout-align="start center" class="input-group">
+            <label class="tit">镇痛方式</label>
+            <label class="titRadio" style="min-width: 80px;">
+                <input required type="radio" name="analgesic" value="0" ng-checked="obj.value == '0'" ng-model="obj.value">静脉</input>
+            </label>
+            <label class="titRadio" style="min-width: 80px;">
+                <input required type="radio" name="analgesic" value="1" ng-checked="obj.value == '1'" ng-model="obj.value">硬膜外</input>
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" ng-disabled="form.$invalid || (obj.type === 'andor' && opt.jsonName != 'optBody' && obj.array.length <= 0) || (opt.jsonName === 'optBody' && !opt_ck) || (opt.jsonName === 'age' && !obj.year1 && !obj.year2 && !obj.month1 && !obj.month2 && !obj.day1 && !obj.day2)" ng-if="opt.jsonName != 'selt_tpl' && opt.jsonName != 'com_tpl'">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-primary" ng-click="comp()" ng-disabled="obj.array.length <= 1" ng-if="opt.jsonName === 'com_tpl'">对&nbsp;&nbsp;比</button>
+        <button class="btn btn-default" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>
+<style type="text/css">
+.input-group {
+    width: 270px;
+}
+
+.w-70 {
+    width: 70px !important;
+}
+
+.w-420 {
+    width: 420px !important;
+}
+</style>

@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h4><span>麻醉监测标记点设置</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="modelIntrMong">
+    <div class="modal-body">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>显示项</th>
+                <th>描述</th>
+                <th>最大值</th>
+                <th>最小值</th>
+                <th>颜色</th>
+                <th>标记</th>
+                <th>图标宽高</th>
+                <th>采集来源</th>
+            </tr>
+            <tr ng-repeat="li in list" ng-init="li.checked = li.checked == 1 ? true : false; li.regOptId = regOptId">
+                <td>
+                    <label layout layout-align="start center" ng-click="check(li)"><input type="checkbox" ng-model="li.checked" ng-disabled="li.mustShow == '1'">&nbsp;&nbsp;{{li.eventName}}</label>
+                </td>
+                <td><span>{{li.eventDesc}}</span></td>
+                <td>
+                    <input ng-disabled="!li.checked" type="number" ng-model="li.max"></input>
+                </td>
+                <td>
+                    <input ng-disabled="!li.checked" type="number" ng-model="li.min"></input>
+                </td>
+                <td>
+                    <div colorpicker id="{{li.eventId}}" class="color-d" ng-model="li.color_" ng-change="setBgColor(li)"></div>
+                    <input type="hidden" ng-model="li.color" />
+                </td>
+                <td>
+                    <div ng-disabled="!li.checked || li.eventId == '31009'" icon-select ng-model="li.iconId" i-config="iConfig"></div>
+                </td>
+                <td>
+                    <input class="icon-w" ng-disabled="!li.checked" type="number" min="5" max="18" ng-model="li.widthAndHeight" ng-blur="checkWidth(li)"></input>
+                </td>
+                <td>
+                    <select ng-if="li.devEventIdList.length > 0" ng-model="li.eventId" ng-disabled="!li.checked" ng-options="dev.eventId as dev.devicemodel for dev in li.devEventIdList" ng-change="change(li, li.devEventIdList)"></select>
+                    <div ng-if="li.devEventIdList.length == 0">无采集设备</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid || !saved" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

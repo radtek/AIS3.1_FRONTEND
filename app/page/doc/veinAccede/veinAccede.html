@@ -1,0 +1,252 @@
+<div id="print-region">
+    <div id="veinAccede_hbgzb" class="page-print" ng-class="{true:'end-state'}[docVeinAccede.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>静脉麻醉知情同意书</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>患者姓名：<a class="dashed-line" flex>{{regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a class="dashed-line" flex>{{regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a class="dashed-line" flex>{{regOptItem.age}}</a></span>&nbsp;
+            <span layout>住院号：<a class="dashed-line" flex>{{regOptItem.hid}}</a></span>
+        </div>
+        <div layout class="form-group">
+            <span flex="50" layout>术前诊断：<a class="dashed-line" flex>{{regOptItem.diagnosisName}}</a></span>&nbsp;
+            <span flex="50" layout>手术名称：<a class="dashed-line" flex>{{regOptItem.designedOptName}}</a></span>
+        </div>
+        <div layout class="form-group">
+            <span layout>麻醉方式：<a class="noborder" flex>{{regOptItem.designedAnaesMethodName}}</a></span>&nbsp;
+            <span layout style="padding-left: 30px;">局麻强化/监测</span>&nbsp;
+            <span layout style="padding-left: 30px;">其他</span>&nbsp;
+            <span layout style="padding-left: 50px;">麻醉医师：
+                <oi-select class="noborder3 sign" name="anaesDoctor" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="docVeinAccede.anaesDoctor"></oi-select>
+            </span>
+        </div>
+        <div class="form-group">
+            <a flex layout style="border-bottom: 2px solid #333;"></a>
+        </div>
+        <div class="form-group">
+            <span class="indent">在麻醉、监护下进行检查/治疗，可以缓解紧张情绪，减轻痛苦，使检查/治疗得以顺利进行且更加舒适、安全，但少数情况下仍然可能发生一些风险，包括：</span>
+        </div>
+        <div layout="column" class="form-group" style="line-height: 2;">
+            <span>1、对药物的过敏（或高敏）反应、特异性反应，引发皮疹、瘙痒、休克，甚至呼吸心跳停止。</span>
+            <span>2、术中因呕吐引起误吸、窒息和吸入性肺炎。</span>
+            <span>3、心率失常、严重低血压、心衰、心肌缺血、心肌梗死等。</span>
+            <span>4、脑血管意外。</span>
+            <span>5、喉痉挛、支气管痉挛。</span>
+            <span>6、低氧血症。</span>
+            <span>7、清醒和呼吸恢复延迟。</span>
+            <span>8、必要时气管插管，引起牙齿松动或脱落、喉头水肿等损伤。</span>
+            <span>9、其他意想不到的情况。</span>
+        </div>
+        <div class="form-group">
+            <span class="indent">患者的麻醉高危因素包括：</span>
+            <checkbox ng-model="docVeinAccede.highRiskMap.a" ng-true-value="'1'" ng-false-value="'0'">高龄</checkbox>
+            <checkbox ng-model="docVeinAccede.highRiskMap.b" ng-true-value="'1'" ng-false-value="'0'">急症</checkbox>
+            <checkbox ng-model="docVeinAccede.highRiskMap.c" ng-true-value="'1'" ng-false-value="'0'">心肌梗塞病史</checkbox>
+            <checkbox ng-model="docVeinAccede.highRiskMap.d" ng-true-value="'1'" ng-false-value="'0'">脑卒中</checkbox>
+            <checkbox ng-model="docVeinAccede.highRiskMap.e" ng-true-value="'1'" ng-false-value="'0'">哮喘史</checkbox>
+            <checkbox ng-model="docVeinAccede.highRiskMap.f" ng-true-value="'1'" ng-false-value="'0'">严重感染</checkbox>
+            <checkbox ng-model="docVeinAccede.highRiskMap.g" ng-true-value="'1'" ng-false-value="'0'">糖尿病</checkbox>
+            <checkbox ng-model="docVeinAccede.highRiskMap.h" ng-true-value="'1'" ng-false-value="'0'">肾功能不全</checkbox>
+        </div>
+        <div class="form-group">
+            <span class="indent">医生针对上述情况会采取相应的预防、治疗措施，保障病人的安全。但极少数病人却有发生损伤、致残，甚至生命危险的情况。</span>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <span layout>谈话医师：<a class="dashed-line conver" flex></a></span>
+        </div>
+        <div class="form-group">
+            <span class="indent">经谈话医师详细介绍病情及麻醉过程中可能发生的情况，本人或家属（受委托人）表示理解，并愿承担可能发生的不良后果。同意在麻醉、监护下进行<input type="text" class="noborder3 dashed-line" ng-model="docVeinAccede.checkContent" maxlength="10">检查/治疗。</span>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <span layout>患者签字：<a class="dashed-line conver" flex></a></span>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <span layout>家属（委托人）签字：<a class="dashed-line conver" flex></a></span>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <span layout>日期&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;月&nbsp;&nbsp;日</span>
+        </div>
+    </div>
+    <div id="veinAccede_hbgzb" class="page-print" ng-class="{true:'end-state'}[docVeinAccede.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h4>麻醉实施前评估</h4>
+        </header>
+        <div layout class="form-group">
+            <span flex layout>病史：<input flex type="text" class="noborder3 dashed-line" ng-model="docVeinAccede.briefHis" maxlength="54"></span>
+        </div>
+        <div layout class="form-group">
+            <span>中心神经系统：</span>
+            <checkbox ng-model="docVeinAccede.nervous" ng-true-value="1" ng-false-value="0">否认</checkbox>
+            <checkbox ng-model="docVeinAccede.nervousMap.a" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.nervous == 1">脑血管意外</checkbox>
+            <checkbox ng-model="docVeinAccede.nervousMap.b" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.nervous == 1">癫痫</checkbox>
+            <checkbox ng-model="docVeinAccede.nervousMap.c" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.nervous == 1">精神疾病</checkbox>
+            <checkbox ng-model="docVeinAccede.nervousMap.d" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.nervous == 1" ng-click="docVeinAccede.nervousOther = ''">其他</checkbox>
+            <input type="text" ng-model="docVeinAccede.nervousOther" maxlength="10" class="noborder3 dashed-line" ng-disabled="docVeinAccede.nervous == 1 || docVeinAccede.nervousMap.d == 0">
+        </div>
+        <div layout class="form-group">
+            <span>呼吸系统：</span>
+            <checkbox ng-model="docVeinAccede.breath" ng-true-value="1" ng-false-value="0">否认</checkbox>
+            <checkbox ng-model="docVeinAccede.breathMap.a" ng-true-value="'1'" ng-false-value="'0'" ng-disabled="docVeinAccede.breath == 1">COPD</checkbox>
+            <checkbox ng-model="docVeinAccede.breathMap.b" ng-true-value="'1'" ng-false-value="'0'" ng-disabled="docVeinAccede.breath == 1">哮喘</checkbox>
+            <checkbox ng-model="docVeinAccede.breathMap.c" ng-true-value="'1'" ng-false-value="'0'" ng-disabled="docVeinAccede.breath == 1" ng-click="docVeinAccede.smokingFreq = '';docVeinAccede.smokingTime = ''">吸烟</checkbox>
+            <input type="number" ng-model="docVeinAccede.smokingFreq" class="noborder3 dashed-line short-input" ng-disabled="docVeinAccede.breath == 1">支/天<input type="number" ng-model="docVeinAccede.smokingTime" class="noborder3 dashed-line short-input" ng-disabled="docVeinAccede.breath == 1">年
+        </div>
+        <div layout class="form-group">
+            <span>心血管系统：</span>
+            <checkbox ng-model="docVeinAccede.heartBool" ng-true-value="1" ng-false-value="0">否认</checkbox>
+            <checkbox ng-model="docVeinAccede.heartBoolMap.a" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.heartBool == 1">冠心病</checkbox>
+            <checkbox ng-model="docVeinAccede.heartBoolMap.b" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.heartBool == 1">高血压</checkbox>
+            <checkbox ng-model="docVeinAccede.heartBoolMap.c" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.heartBool == 1">心律失常</checkbox>
+            <checkbox ng-model="docVeinAccede.heartBoolMap.d" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.heartBool == 1">心衰</checkbox>
+            <checkbox ng-model="docVeinAccede.heartBoolMap.e" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.heartBool == 1">先心病</checkbox>
+        </div>
+        <div layout class="form-group">
+            <span>遗传代谢：</span>
+            <checkbox ng-model="docVeinAccede.hereditary" ng-true-value="1" ng-false-value="0">否认</checkbox>
+            <checkbox ng-model="docVeinAccede.hereditaryMap.a" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.hereditary == 1">糖尿病</checkbox>
+            <checkbox ng-model="docVeinAccede.hereditaryMap.b" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.hereditary == 1">甲状腺</checkbox>
+            <checkbox ng-model="docVeinAccede.hereditaryMap.c" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.hereditary == 1">肝肾功能异常</checkbox>
+            <checkbox ng-model="docVeinAccede.hereditaryMap.d" ng-true-value="1" ng-false-value="0" ng-disabled="docVeinAccede.hereditary == 1" ng-click="docVeinAccede.hereditaryOther = ''">其他</checkbox>
+            <input type="text" ng-model="docVeinAccede.hereditaryOther" maxlength="10" class="noborder3 dashed-line" ng-disabled="docVeinAccede.hereditary == 1 || docVeinAccede.hereditaryMap.d == 0">
+        </div>
+        <div layout class="form-group">
+            <span>其他：</span>
+            <checkbox ng-model="docVeinAccede.otherMap.a" ng-true-value="1" ng-false-value="0">饱胃</checkbox>
+            <checkbox ng-model="docVeinAccede.otherMap.b" ng-true-value="1" ng-false-value="0">创伤</checkbox>
+            <checkbox ng-model="docVeinAccede.otherMap.c" ng-true-value="1" ng-false-value="0">血液疾病</checkbox>
+            <checkbox ng-model="docVeinAccede.otherMap.d" ng-true-value="1" ng-false-value="0">败血症</checkbox>
+            <checkbox ng-model="docVeinAccede.otherMap.e" ng-true-value="1" ng-false-value="0">异常出血</checkbox>
+            <checkbox ng-model="docVeinAccede.otherMap.f" ng-true-value="1" ng-false-value="0">反流</checkbox>
+        </div>
+        <div class="form-group">
+            <a flex layout style="border-bottom: 2px solid #333;"></a>
+        </div>
+        <div layout class="form-group">
+            <span>手术及麻醉史：</span>
+            <checkbox ng-model="docVeinAccede.anaes" ng-true-value="2">无</checkbox>
+            <checkbox ng-model="docVeinAccede.anaes" ng-true-value="1">有</checkbox>&nbsp;&nbsp;&nbsp;
+            <datetime-picker class='calendar sign dashed-line' name="anaesDate" id="datatime" dateID="signTimes-times" ng-model="docVeinAccede.anaesDate" timepicker="false" format="Y-m-d"></datetime-picker>&nbsp;&nbsp;&nbsp;
+            <span layout>麻醉方式：<a class="noborder" flex>{{regOptItem.designedAnaesMethodName}}</a></span>
+        </div>
+        <div layout class="form-group">
+            <span>特殊情况：</span>
+            <checkbox ng-model="docVeinAccede.specialCase" ng-true-value="2">无</checkbox>
+            <checkbox ng-model="docVeinAccede.specialCase" ng-true-value="1">有</checkbox>
+        </div>
+        <div class="form-group">
+            <a flex layout style="border-bottom: 2px solid #333;"></a>
+        </div>
+        <div layout class="form-group">
+            <span>药物服用情况：</span>
+            <checkbox ng-model="docVeinAccede.drugTaking" ng-true-value="2">无</checkbox>
+            <checkbox ng-model="docVeinAccede.drugTaking" ng-true-value="1">有</checkbox>
+        </div>
+        <div layout class="form-group pd20">
+            <span>药/食物过敏史：</span>
+            <checkbox ng-model="docVeinAccede.allergic" ng-true-value="2">无</checkbox>
+            <checkbox ng-model="docVeinAccede.allergic" ng-true-value="1">有</checkbox>
+        </div>
+        <div layout class="form-group">
+            <span>体格检查：身高</span>
+            <input type="number" ng-model="docVeinAccede.height" class="noborder3 dashed-line short-input">cm&nbsp;&nbsp;
+            <span>体重</span>
+            <input type="number" ng-model="docVeinAccede.weight" class="noborder3 dashed-line short-input">kg
+        </div>
+        <div class="form-group">
+            <span>呼吸道评估：</span>
+            <checkbox ng-model="docVeinAccede.breatheTract" ng-true-value="1" ng-click="docVeinAccede.breatheTractDetail = ''">正常</checkbox>
+            <checkbox ng-model="docVeinAccede.breatheTract" ng-true-value="2">困难</checkbox>
+            <span>具体：</span><input type="text" ng-model="docVeinAccede.breatheTractDetail" maxlength="6" class="noborder3 dashed-line short-input">
+            <span>牙齿：</span>
+            <checkbox ng-model="docVeinAccede.toothDetail" ng-true-value="1">正常</checkbox>
+            <checkbox ng-model="docVeinAccede.toothDetail" ng-true-value="2">松动</checkbox>
+            <checkbox ng-model="docVeinAccede.toothDetail" ng-true-value="3">缺失</checkbox>
+            <checkbox ng-model="docVeinAccede.toothDetail" ng-true-value="4">张口度＜4cm</checkbox>
+            <checkbox ng-model="docVeinAccede.toothDetail" ng-true-value="5">甲状软骨颏骨距＜6cm</checkbox>
+            <checkbox ng-model="docVeinAccede.toothDetail" ng-true-value="6">寰枕活动度＜15度</checkbox>
+        </div>
+        <div layout class="form-group">
+            <span>Mallampati分级：</span>
+            <checkbox ng-model="docVeinAccede.mallampatis" ng-true-value="1">Ⅰ</checkbox>
+            <checkbox ng-model="docVeinAccede.mallampatis" ng-true-value="2">Ⅱ</checkbox>
+            <checkbox ng-model="docVeinAccede.mallampatis" ng-true-value="3">Ⅲ</checkbox>
+            <checkbox ng-model="docVeinAccede.mallampatis" ng-true-value="4">Ⅳ</checkbox>
+        </div>
+        <div layout class="form-group">
+            <span>神经系统：</span>
+            <checkbox ng-model="docVeinAccede.nervousSys" ng-true-value="1" ng-click="docVeinAccede.nervousSysDetail = ''">正常</checkbox>
+            <checkbox ng-model="docVeinAccede.nervousSys" ng-true-value="2">异常</checkbox>&nbsp;&nbsp;
+            <span>具体：</span><input type="text" ng-model="docVeinAccede.nervousSysDetail" maxlength="10" class="noborder3 dashed-line">
+        </div>
+        <div layout class="form-group">
+            <span>呼吸系统：</span>
+            <checkbox ng-model="docVeinAccede.breathSys" ng-true-value="1" ng-click="docVeinAccede.breathSysDetail = ''">正常</checkbox>
+            <checkbox ng-model="docVeinAccede.breathSys" ng-true-value="2">异常</checkbox>&nbsp;&nbsp;
+            <span>具体：</span><input type="text" ng-model="docVeinAccede.breathSysDetail" maxlength="10" class="noborder3 dashed-line">
+        </div>
+        <div class="form-group">
+            <span>心血管系统：</span>
+            <checkbox ng-model="docVeinAccede.heartBoolSys" ng-true-value="1" ng-click="docVeinAccede.heartBoolSysDetail = ''">正常</checkbox>
+            <checkbox ng-model="docVeinAccede.heartBoolSys" ng-true-value="2">异常</checkbox>&nbsp;&nbsp;
+            <span>具体：</span><input type="text" ng-model="docVeinAccede.heartBoolSysDetail" maxlength="10" class="noborder3 dashed-line">&nbsp;
+            <span>心率：</span><input type="number" ng-model="docVeinAccede.heartrate" class="noborder3 dashed-line short-input">次/分&nbsp;
+            <span>血压：</span><input type="text" ng-model="docVeinAccede.bloodPre" maxlength="6" class="noborder3 dashed-line short-input">
+        </div>
+        <div layout class="form-group">
+            <span>实验室检查：</span>
+            <checkbox ng-model="docVeinAccede.laboratCheck" ng-true-value="1" ng-click="docVeinAccede.laboratCheckDetail = ''">正常</checkbox>
+            <checkbox ng-model="docVeinAccede.laboratCheck" ng-true-value="2">异常</checkbox>&nbsp;&nbsp;
+            <span>具体：</span><input type="text" ng-model="docVeinAccede.laboratCheckDetail" maxlength="10" class="noborder3 dashed-line">
+        </div>
+        <div layout class="form-group">
+            <span layout>Hb<br>K</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span layout>Plt<br>Na</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span layout>WBC<br>Cl</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span layout>PT<br>Glu</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span layout>APTT<br>PaCO2</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span layout>&nbsp;<br>PaO2</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div layout class="form-group">
+            <span>心电图：</span>
+            <checkbox ng-model="docVeinAccede.ecg" ng-true-value="1" ng-click="docVeinAccede.ecgDetail = ''">正常</checkbox>
+            <checkbox ng-model="docVeinAccede.ecg" ng-true-value="2">异常</checkbox>&nbsp;
+            <span>（简述）：</span><input type="text" ng-model="docVeinAccede.ecgDetail" maxlength="10" class="noborder3 dashed-line" ng-disabled="docVeinAccede.ecg != 2">
+        </div>
+        <div layout class="form-group pd50">
+            <span>胸片：</span>
+            <checkbox ng-model="docVeinAccede.rabat" ng-true-value="1" ng-click="docVeinAccede.rabatDetail = ''">正常</checkbox>
+            <checkbox ng-model="docVeinAccede.rabat" ng-true-value="2">异常</checkbox>&nbsp;
+            <span>（简述）：</span><input type="text" ng-model="docVeinAccede.rabatDetail" maxlength="10" class="noborder3 dashed-line" ng-disabled="docVeinAccede.rabat != 2">
+        </div>
+        <div layout class="form-group" ng-class='{true: "md-red"}[!docVeinAccede.asa && !docVeinAccede.asaE && verify]'>
+            <span><span class="md-red no-print">*</span>ASA分级：</span>
+            <checkbox ng-model="docVeinAccede.asa" ng-true-value="1">Ⅰ</checkbox>&nbsp;
+            <checkbox ng-model="docVeinAccede.asa" ng-true-value="2">Ⅱ</checkbox>&nbsp;
+            <checkbox ng-model="docVeinAccede.asa" ng-true-value="3">Ⅲ</checkbox>&nbsp;
+            <checkbox ng-model="docVeinAccede.asa" ng-true-value="4">Ⅳ</checkbox>&nbsp;
+            <checkbox ng-model="docVeinAccede.asa" ng-true-value="5">Ⅴ</checkbox>&nbsp;
+            <checkbox ng-model="docVeinAccede.asaE" ng-true-value="1">E</checkbox>
+        </div>
+        <div layout="column" class="form-group" style="line-height: 2;">
+            <span>Ⅰ级：病人心、肺、肝、肾、脑、内分泌等重要器官性病变</span>
+            <span>Ⅱ级：有轻度系统性疾病，但处于功能代偿阶段</span>
+            <span>Ⅲ级：有明显系统性疾病，功能处于早期失代偿阶段</span>
+            <span>Ⅳ级：有严重系统性疾病，功能处于失代偿阶段</span>
+            <span>Ⅴ级：濒死状态</span>
+            <span>E：是否急诊手术</span>
+        </div>
+        <div class="form-group" layout layout-align="end center" ng-class='{true: "md-red"}[!docVeinAccede.visitDoctor && verify]'>
+            <span layout><span class="md-red no-print">*</span>访视医师签字：</span>
+            <oi-select class="noborder3 sign" name="visitDoctor" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="docVeinAccede.visitDoctor"></oi-select>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <datetime-picker class='calendar sign dashed-line' name="date" id="datatime" dateID="signTimes-times" ng-model="docVeinAccede.date" timepicker="false" format="Y-m-d"></datetime-picker>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4>
+        <span>检验报告详情</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body err-wrap">
+        <div layout layout-align="space-between end" class="form-group">
+            <span flex>申请日期：<a>{{report.date}}</a></span>
+            <span flex>科室：<a>{{report.dep}}</a></span>
+            <span flex>医生：<a>{{report.reqDoctorId}}</a></span>
+            <span flex>报告日期：<a>{{report.reportDate}}</a></span>
+        </div>
+        <div layout layout-align="space-between end" class="form-group">
+            <span flex>详细信息：<a>{{report.instruction}}</a></span>
+            <span flex>样本：<a>{{report.samp}}</a></span>
+            <span flex>大类：<a>{{report.type}}</a></span>
+            <span flex>状态：<a>{{report.state}}</a></span>
+        </div>
+        <div ui-grid="gridOptions" class="form-group" style="height:400px;"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="cancel()">取消</button>
+    </div>
+</form>

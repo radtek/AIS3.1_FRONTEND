@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h4><span class="pull-right modal-container_close" ng-click="vm.cancel()">✖</span></h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body err-wrap" layout="column">
+        <label>请选择手术室：</label>
+        <select flex="50" ng-model="vm.curRoomId">
+            <option ng-repeat="item in vm.operRooms" value="item.operRoomId" ng-value="item.operRoomId">{{item.name}}</option>
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="vm.ok()" ng-disabled="form.$invalid">确定</button>
+        <button class="btn btn-default" ng-click="vm.cancel()">取消</button>
+    </div>
+</form>

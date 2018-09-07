@@ -1,0 +1,112 @@
+<div class="modal-header">
+    <h4><span>{{item.title}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" novalidate class="form-horizontal modal-body">
+    <div class="row form-group">
+        <div class="col-sm-6">
+            <label for="beid" class="col-sm-4 control-label"><span class="red">*</span>局点名称：</label>
+            <div class="col-sm-7">
+                <select class="form-control" name="beid" ng-options="item.beid as item.name for item in hospital" ng-model="obj.beid" required ng-disabled="item.opt"></select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label for="eventId" class="col-sm-4 control-label">指标ID：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="eventId" ng-model="obj.eventId" maxlength="30" ng-disabled="item.opt">
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-6">
+            <label for="eventName" class="col-sm-4 control-label">指标代码：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="eventName" ng-model="obj.eventName" maxlength="30">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label for="units" class="col-sm-4 control-label">单位：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="units" ng-model="obj.units" maxlength="30">
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-6">
+            <label for="precision" class="col-sm-4 control-label">采样精度：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="precision" ng-model="obj.precision" maxlength="30">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label for="frequency" class="col-sm-4 control-label">采样频率：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="frequency" ng-model="obj.frequency" maxlength="30">
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-6">
+            <label for="max" class="col-sm-4 control-label">阀值上限：</label>
+            <div class="col-sm-7">
+                <input type="number" class="form-control" name="max" ng-model="obj.max" max='999' min='0'>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label for="min" class="col-sm-4 control-label">阀值下限：</label>
+            <div class="col-sm-7">
+                <input type="number" class="form-control" name="min" ng-model="obj.min" max='999' min='0'>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-6">
+            <label for="color" class="col-sm-4 control-label">颜色：</label>
+            <div class="col-sm-2">
+                <input type="color" class="form-control" name="color" style="width: 50px;" ng-model="obj.color" maxlength="30">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label for="icon" class="col-sm-4 control-label">图标：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="icon" ng-model="obj.icon" maxlength="30">
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-6">
+            <label for="limitMax" class="col-sm-4 control-label">最高：</label>
+            <div class="col-sm-7">
+                <input type="number" class="form-control" name="limitMax" ng-model="obj.limitMax" max='999' min='0'>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label for="limitMin" class="col-sm-4 control-label">最低：</label>
+            <div class="col-sm-7">
+                <input type="number" class="form-control" name="limitMin" ng-model="obj.limitMin" max='999' min='0'>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-6">
+            <label for="amendFlag" class="col-sm-4 control-label">是否修正：</label>
+            <div class="col-sm-7" style="padding-top: 2px;">
+                <label class="radio-inline">
+                    <input type="radio" name="amendFlag" ng-value="1" ng-model="obj.amendFlag">修正
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="amendFlag" ng-value="0" ng-model="obj.amendFlag">缺失
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label for="eventDesc" class="col-sm-4 control-label">描述：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="eventDesc" ng-model="obj.eventDesc" maxlength="50">
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="form.$invalid">确&nbsp;&nbsp;定</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+</div>

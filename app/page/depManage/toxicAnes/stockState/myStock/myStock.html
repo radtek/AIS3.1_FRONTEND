@@ -1,0 +1,12 @@
+<div flex class="my-stock">
+    <div layout layout-wrap="wrap" style="height: 40px;text-align: right;">
+        <div flex class="text-right" style="margin: 0 15px;">开始时间</div>
+        <datetime-picker flex="10" dateID="date-start-time" ng-model="startTime"   class="form-control" required></datetime-picker>
+        <div flex="5" class="text-center" style="margin: 0 15px;">结束时间</div>
+        <datetime-picker flex="10" dateID="date-end-time" ng-model="endTime"   class="form-control" required></datetime-picker>
+        <button class="btn btn-primary" style="height: 32px; margin: 0 15px;" type="button" ng-click="query()">查&nbsp;&nbsp;询</button>
+        <button class="btn btn-primary" style="height: 32px;" type="button" ng-click="export()">导出EXCEL</button>
+    </div>
+    <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions.data" class="ui-grid-729"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+</div>

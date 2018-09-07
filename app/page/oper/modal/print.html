@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4>
+        <span>一键打印</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body" layout="column">
+        <div layout layout-align="space-between center">
+            <span>姓名：{{row.name}}</span>
+            <span>住院号：{{row.hid}}</span>
+            <span>手术日期：{{row.operaDate}}</span>
+        </div>
+        <hr>
+        <div ng-repeat="item in list" flex-offset="5" class="form-group">
+            <checkbox ng-model="item.checked" ng-true-value="'1'" ng-disabled="item.state != '完成'">{{item.name}}&nbsp;({{item.state}})</checkbox>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok(list)" ng-disabled="form.$invalid">打印</button>
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+</form>

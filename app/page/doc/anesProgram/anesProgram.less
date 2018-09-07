@@ -1,0 +1,97 @@
+#anesProgram {
+	.tab {
+	    width: 100%;
+	    border: 0px;
+	    font-family: "微软雅黑";
+	    tr{height: 28px;}
+	}
+
+	table td {
+	    padding: 0px 2px;
+	    border: 1px solid #333;
+	    height: 28px;
+	}
+
+	.td-class-label {
+		text-align: center;
+	    font-weight: bold;
+	    line-height: 20px;
+	}
+
+	.td-class-ctrl {
+	    text-align: left;
+	    line-height: 20px;
+	}
+	.anesProgram-table-div2 .td-class-ctrl {
+	    line-height: 24px;
+	}
+
+	.a-input-hour {
+	    width: 85px;
+	    border: none;
+	    border-bottom: 1px solid #000000;
+	    outline: none;
+	}
+
+	.ctrl-input-short {
+	    width: 30px;
+	    border-top: none;
+	    border-left: none;
+	    border-right: none;
+	    border-bottom-color: #aaa;
+    	border-bottom-width: 1px;
+	}
+
+	.ctrl-input-long {
+	    width: 200px;
+	    border-top: none;
+	    border-left: none;
+	    border-right: none;
+	    border-bottom-color: #aaa;
+    	border-bottom-width: 1px;
+	}
+
+	.noborder3{
+	    width: 100px;
+	    margin-bottom: 2px;
+	    border-top: none;
+	    border-left: none;
+	    border-right: none;
+	    border-bottom-color: #aaa;
+    	border-bottom-width: 1px;
+	}
+
+	.form-group {
+		margin-bottom: 2px;
+	}
+
+	.direction {
+	    margin: 0 auto;
+	    width: 20px;
+	    line-height: 15px;
+	    border: none;
+	}
+
+	input:not([type]):disabled{
+		background-color: #ffffff;
+	}
+
+	label.checkbox{margin-left: 10px; font-weight: normal;display: inline-block;}
+	label.checkbox>input[type='checkbox']{display: none}
+	label.checkbox>img{margin-right: 3px;}
+
+	@media print {
+	    table {
+	    	line-height: 17px;
+	    	td {
+	    		height: 28px;
+	    	}
+	    }
+	    table tr:last-child {
+	    	>td {
+	    		height: 35px;
+	    	}
+	    }
+	}
+
+}

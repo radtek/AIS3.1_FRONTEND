@@ -1,0 +1,22 @@
+<div class="modal-header">    
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form class="form-horizontal shiftIn-baseInfo" name="BaseInfoForm"  novalidate>
+    <div class="modal-body" style="padding-right:20px;">
+        <div class="patient-in-modal-form-div">
+            <div class="form-group">
+                <label class="control-label col-md-offset-1"><span class="red">*</span>{{vm.content}}</label>
+            </div>
+            <div class="form-group">
+                <div flex class="col-md-offset-1 col-md-10">
+                    <oi-select oi-options="item.name for item in instrsuitList | limitTo: 100" ng-model="vm.selectedItem" oi-select-options="{listFilter:'oiSelectAscSort:[\'name\', \'pinYin\']'}" required ></oi-select>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="vm.errorinfo" class="text-center" style="color:red;">{{vm.errorinfo}}</div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="BaseInfoForm.$invalid || !saved" type="button" ng-click="vm.add()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

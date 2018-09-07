@@ -1,0 +1,71 @@
+<div id="print-region">
+    <div id="recycleAutoBlood_syzxyy" class="page-print" ng-class="{true:'end-state'}[accedeItem.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if='docInfo.beName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.beName}}</h3>
+            <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h3>回收自体输血治疗知情同意书</h3>
+        </header>
+        <div class="form-group mar-left" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>患者姓名：{{vm.regOptItem.name}}</span>&nbsp;
+            <span layout>科室：{{vm.regOptItem.deptName}}</span>&nbsp;
+            <span layout>床号：{{vm.regOptItem.bed}}</span>&nbsp;
+            <span layout>住院号：{{vm.regOptItem.hid}}</span>
+        </div>
+        <div class="form-group mar-left">
+            <a flex layout style="border-bottom: 1px dashed #333;"></a>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left" layout>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输血治疗包括输注异体血和自体血，是临床治疗的重要措施之一，是抢救危重患者的有效手段。 异体输血是目前常用的输血手段，在现有医疗科学技术条件下，输异体血仍有可能发生某些无 法预料或者不能防范的不良后果，如过敏、发热、肝炎、艾滋病、梅毒等。
+                </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left" layout>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回收式自体输血就是当患者需要输血时，输入患者术中自体失血回收的血液。即通过自体血液回收设备收集术中、术后的出血，经过过滤、洗涤、浓缩，获得浓缩红细胞，可不用或少用异体血。
+                </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left" layout>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自体输血适应证：创伤出血手术、心脏、大血管手术、骨科大手术、肝脾手术、门脉高压分流术、 异位妊娠破裂大出血、神经外科手术及其他适合血液回收利用的情况等。禁忌证：血液被消毒液、细菌等污染时、回收血液出现大量溶血、回收血中有恶性肿瘤细胞时。
+                </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left">自体输血具有以下特点：</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <p class="pd-left">1、可避免输血相关性感染，如肝炎、艾滋病及其它血源性致病原。</p>
+            <p class="pd-left">2、既可避免同种抗体的产生，防止移植物抗宿主病，又可避免同种异体免疫作用所致的溶血、发热、过敏及异体输血配型失误所致的不幸事故。</p>
+            <p class="pd-left">3、可降低因异体输血引起的免疫抑制所致的手术后肿瘤早期复发率。</p>
+            <p class="pd-left">4、不需或减少交叉配血和输血前多项检査。</p>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自体输血是一种安全的输血方式，但在进行此项操作时，极少数仍有可能发生因血液污染引起的局部或全身感染性疾病及其它并发症（如非免疫性溶血、输血反应性发热、稀释性凝血功能减退、血红蛋白血症和血红蛋白尿、脂肪栓塞等）。
+                </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我院医师保证将以良好的医德医术为患者进行自体输血治疗，严格遵守医疗规范，密切观察病情，及时处理并发症和意外情况，力争降低风险。
+                </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因病患经详细检査和诊断后，认为需要施行自体输血治疗，有关输血中、输血后可能出现的各种并发症和可能发生的意外，医师己详细作了说明，我们已充分理解，经慎重考虑，愿意承担由于疾病 本身或现有医疗技术所限而致并发症及意外情况，并全权负责签字，同意医师施行术中回收式自体输血治疗。
+                </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout layout-align="start center" class="pd-left">患者（家属）签名：<input type="text" class="noborder3" style="width: 160px;" readonly /></span>
+            <span layout layout-align="start center" class="pd-left">经办医师签名：<input type="text" class="noborder3" style="width: 160px;" readonly /></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left">与患者本人关系：<input type="text" class="noborder3" style="width: 160px;" readonly /></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left"><input type="text" class="noborder3" style="width: 237px" value="                    年     月     日     时     分" readonly></input></span>
+            <div layout layout-align="space-between end">
+                <span>日期：</span>
+                <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="accedeItem.anaestheitistSignTime" ng-value="accedeItem.anaestheitistSignTime" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime" style="width: 90px!important;"></datetime-picker>
+            </div>
+        </div>
+    </div>
+</div>

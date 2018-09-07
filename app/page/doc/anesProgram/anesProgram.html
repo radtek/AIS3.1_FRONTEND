@@ -1,0 +1,393 @@
+<div id="print-region">
+    <div class="page-print" id="anesProgram" ng-class="{true: 'end-state'}[anaesPlan.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>麻&nbsp;醉&nbsp;计&nbsp;划</h4>
+        </header>
+        <table>
+            <tr>
+                <td style="width: 5%">姓名</td>
+                <td style="width: 13%" colspan="2">{{regOptItem.name}}</td>
+                <td style="width: 5%">性别</td>
+                <td style="width: 5%">{{regOptItem.sex}}</td>
+                <td style="width: 5%">年龄</td>
+                <td style="width: 5%">{{::regOptItem.age}}</td>
+                <td style="width: 5%">科室</td>
+                <td style="width: 15%" colspan="2">{{::regOptItem.deptName}}</td>
+                <td style="width: 5%">床号</td>
+                <td style="width: 6%">{{::regOptItem.bed}}</td>
+                <td style="width: 6%">住院号</td>
+                <td style="width: 13%">{{::regOptItem.hid}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">术前诊断</td>
+                <td colspan="5">{{::regOptItem.diagnosisName}}</td>
+                <td colspan="2" class="text-center">拟行手术名称</td>
+                <td colspan="5">{{::regOptItem.designedOptName}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">特殊情况</td>
+                <td colspan="5">
+                    <input class="noborder3" style="width: 100%" maxlength="16" ng-model="anaesPlan.specialCase" ng-value="anaesPlan.specialCase"></input>
+                </td>
+                <td colspan="2" ng-class="{true: 'md-red'}[!anaesPlan.asa && verify]" class="text-center">ASA分级</td>
+                <td colspan="5" ng-class="{true: 'md-red'}[!anaesPlan.asa && verify]">
+                    <checkbox ng-model="anaesPlan.asa" ng-true-value="1" ng-false-value="0">Ⅰ</checkbox>
+                    <checkbox ng-model="anaesPlan.asa" ng-true-value="2" ng-false-value="0">Ⅱ</checkbox>
+                    <checkbox ng-model="anaesPlan.asa" ng-true-value="3" ng-false-value="0">Ⅲ</checkbox>
+                    <checkbox ng-model="anaesPlan.asa" ng-true-value="4" ng-false-value="0">Ⅳ</checkbox>
+                    <checkbox ng-model="anaesPlan.asa" ng-true-value="5" ng-false-value="0">Ⅴ</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">麻醉方式</td>
+                <td colspan="12">{{::regOptItem.designedAnaesMethodName}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">监护项目</td>
+                <td colspan="12">
+                    <checkbox ng-model="guardianship_[0]" ng-true-value="'1'" ng-false-value="'0'">心电图；</checkbox>
+                    <checkbox ng-model="guardianship_[1]" ng-true-value="'2'" ng-false-value="'0'">无创血压；</checkbox>
+                    <checkbox ng-model="guardianship_[2]" ng-true-value="'3'" ng-false-value="'0'">脉搏氧饱和度；</checkbox>
+                    <checkbox ng-model="guardianship_[3]" ng-true-value="'4'" ng-false-value="'0'">呼气末二氧化碳分压；</checkbox>
+                    <checkbox ng-model="guardianship_[4]" ng-true-value="'5'" ng-false-value="'0'">肌松监测；</checkbox>
+                    <checkbox ng-model="guardianship_[5]" ng-true-value="'6'" ng-false-value="'0'">BIS；</checkbox>
+                    <checkbox ng-model="guardianship_[6]" ng-true-value="'7'" ng-false-value="'0'">中心静脉压；</checkbox>
+                    <checkbox ng-model="guardianship_[7]" ng-true-value="'8'" ng-false-value="'0'">连续有创血压；</checkbox>
+                    <checkbox ng-model="guardianship_[8]" ng-true-value="'9'" ng-false-value="'0'">体温；</checkbox>
+                    <checkbox ng-model="guardianship_[9]" ng-true-value="'10'" ng-false-value="'0'">血糖；</checkbox>
+                    <checkbox ng-model="guardianship_[10]" ng-true-value="'11'" ng-false-value="'0'">动脉血气</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">诱导方法</td>
+                <td colspan="12">
+                    <checkbox ng-model="inductionMethod_[0]" ng-true-value="'1'" ng-false-value="'0'">静脉快速诱导；</checkbox>
+                    <checkbox ng-model="inductionMethod_[1]" ng-true-value="'2'" ng-false-value="'0'">保留自主呼吸慢诱导；</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">人工气道</td>
+                <td colspan="12">
+                    <checkbox ng-model="artificialAirway_[0]" ng-true-value="'1'" ng-false-value="'0'">经口明视气管插管；</checkbox>
+                    <checkbox ng-model="artificialAirway_[1]" ng-true-value="'2'" ng-false-value="'0'">经鼻盲探气管插管；</checkbox>
+                    <checkbox ng-model="artificialAirway_[2]" ng-true-value="'3'" ng-false-value="'0'">可视喉镜下气管插管；</checkbox>
+                    <checkbox ng-model="artificialAirway_[3]" ng-true-value="'4'" ng-false-value="'0'">喉罩通气；</checkbox>
+                    <checkbox ng-model="artificialAirway_[4]" ng-true-value="'5'" ng-false-value="'0'">纤支镜引导下气管插管；</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">椎管内穿刺点</td>
+                <td colspan="5">
+                    <select ng-model="anaesPlan.puncPoint" class="a-input-hour">
+                        <option ng-repeat="item in puncturePointList" ng-value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>
+                </td>
+                <td colspan="2" class="text-center">神经阻滞方法</td>
+                <td colspan="5">
+                    <checkbox ng-model="nerveBlock_[0]" ng-true-value="'1'" ng-false-value="'0'">颈丛神经阻滞；</checkbox>
+                    <checkbox ng-model="nerveBlock_[1]" ng-true-value="'2'" ng-false-value="'0'">臂丛神经阻滞；</checkbox>
+                    <checkbox ng-model="nerveBlock_[2]" ng-true-value="'3'" ng-false-value="'0'">腰丛神经阻滞；</checkbox>
+                    <checkbox ng-model="nerveBlock_[3]" ng-true-value="'4'" ng-false-value="'0'">坐骨神经阻滞；</checkbox>
+                    <checkbox ng-model="nerveBlock_[4]" ng-true-value="'5'" ng-false-value="'0'">股神经阻滞；</checkbox>
+                    <checkbox ng-model="nerveBlock_[5]" ng-true-value="'6'" ng-false-value="'0'">股外侧皮神经阻滞；</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">特殊操作</td>
+                <td colspan="12">
+                    <checkbox ng-model="specialOperate_[0]" ng-true-value="'1'" ng-false-value="'0'">双腔气管插管；</checkbox>
+                    <checkbox ng-model="specialOperate_[1]" ng-true-value="'2'" ng-false-value="'0'">锁骨下静脉穿刺置管；</checkbox>
+                    <checkbox ng-model="specialOperate_[2]" ng-true-value="'3'" ng-false-value="'0'">颈内静脉穿刺置管；</checkbox>
+                    <checkbox ng-model="specialOperate_[3]" ng-true-value="'4'" ng-false-value="'0'">股动脉穿刺置管；</checkbox>
+                    <checkbox ng-model="specialOperate_[4]" ng-true-value="'5'" ng-false-value="'0'">桡动脉穿刺置管；</checkbox>
+                    <checkbox ng-model="specialOperate_[5]" ng-true-value="'6'" ng-false-value="'0'">足背动脉穿刺置管；</checkbox>
+                    <checkbox ng-model="specialOperate_[6]" ng-true-value="'7'" ng-false-value="'0'">术中自体血回输；</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">麻醉器械</td>
+                <td colspan="12">
+                    <checkbox ng-model="anaesInstrument_[0]" ng-true-value="'1'" ng-false-value="'0'">麻醉机；</checkbox>
+                    <checkbox ng-model="anaesInstrument_[1]" ng-true-value="'2'" ng-false-value="'0'">监护仪；</checkbox>
+                    <checkbox ng-model="anaesInstrument_[2]" ng-true-value="'3'" ng-false-value="'0'">吸痰用具：螺纹管</checkbox>
+                    (
+                    <checkbox ng-model="anaesPlan.threadedPipe" ng-true-value="1" ng-false-value="0">成人；</checkbox>
+                    <checkbox ng-model="anaesPlan.threadedPipe" ng-true-value="2" ng-false-value="0">小儿；</checkbox>)； 面罩(
+                    <checkbox ng-model="anaesPlan.mask" ng-true-value="1" ng-false-value="0">大</checkbox>
+                    <checkbox ng-model="anaesPlan.mask" ng-true-value="2" ng-false-value="0">中</checkbox>
+                    <checkbox ng-model="anaesPlan.mask" ng-true-value="3" ng-false-value="0">小</checkbox>)；
+                    <checkbox ng-model="anaesInstrument_[3]" ng-true-value="'4'" ng-false-value="'0'">椎管内麻醉穿刺包；</checkbox>
+                    喉镜(
+                    <checkbox ng-model="anaesPlan.laryngoscope" ng-true-value="1" ng-false-value="0">普通；</checkbox>
+                    <checkbox ng-model="anaesPlan.laryngoscope" ng-true-value="2" ng-false-value="0">困难；</checkbox>
+                    <checkbox ng-model="anaesPlan.laryngoscope" ng-true-value="3" ng-false-value="0">可视)；</checkbox>
+                    气管导管(
+                    <checkbox ng-model="anaesPlan.tracheaPipe" ng-true-value="1" ng-false-value="0">普通；</checkbox>
+                    <checkbox ng-model="anaesPlan.tracheaPipe" ng-true-value="2" ng-false-value="0">加强；</checkbox>
+                    <checkbox ng-model="anaesPlan.tracheaPipe" ng-true-value="3" ng-false-value="0">经鼻；</checkbox>) ID (
+                    <select ng-model="anaesPlan.tracheaPipeId" class="a-input-hour" ng-disabled="anaesPlan.tracheaPipe == 0">
+                        <option ng-repeat="item in catherIdList" ng-value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>)； 双腔气管导管(
+                    <checkbox ng-model="anaesPlan.doubleChamber" ng-true-value="1" ng-false-value="0">左；</checkbox>
+                    <checkbox ng-model="anaesPlan.doubleChamber" ng-true-value="2" ng-false-value="0">右；</checkbox>)ID (
+                    <select ng-model="anaesPlan.doubleChamberId" class="a-input-hour" ng-disabled="anaesPlan.doubleChamber == 0">
+                        <option ng-repeat="item in catherIdList" ng-value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>)；
+                    <checkbox ng-model="anaesInstrument_[4]" ng-true-value="'5'" ng-false-value="'0'" ng-click="anaesPlan.laryngealId=''">喉罩ID(</checkbox>
+                    <select ng-model="anaesPlan.laryngealId" class="a-input-hour" ng-disabled="anaesInstrument_[4] != '5'">
+                        <option ng-repeat="item in laryngealMaskList" ng-value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>)；
+                    <checkbox ng-model="anaesInstrument_[5]" ng-true-value="'6'" ng-false-value="'0'" ng-click="anaesPlan.centralVenous=''">中心静脉穿刺包(</checkbox>
+                    <input class="noborder3" type="number" min="0" style="width: 40px;" ng-model="anaesPlan.centralVenous" ng-value="anaesPlan.centralVenous" ng-disabled="anaesInstrument_[5] != '6'"></input>套)；
+                    <checkbox ng-model="anaesInstrument_[6]" ng-true-value="'7'" ng-false-value="'0'" ng-click="anaesPlan.pressureSensor=''">压力传感器(</checkbox>
+                    <input class="noborder3" type="number" min="0" style="width: 40px;" ng-model="anaesPlan.pressureSensor" ng-value="anaesPlan.pressureSensor" ng-disabled="anaesInstrument_[6] != '7'"></input>套)；
+                    <checkbox ng-model="anaesInstrument_[7]" ng-true-value="'8'" ng-false-value="'0'" ng-click="anaesPlan.arterialPuncture=''">动脉穿刺针(</checkbox>
+                    <input class="noborder3" type="number" min="0" style="width: 40px;" ng-model="anaesPlan.arterialPuncture" ng-value="anaesPlan.arterialPuncture" ng-disabled="anaesInstrument_[7] != '8'"></input>套)；
+                    <checkbox ng-model="anaesInstrument_[8]" ng-true-value="'9'" ng-false-value="'0'" ng-click="anaesPlan.microPump=''">微量泵(</checkbox>
+                    <select ng-model="anaesPlan.microPump" class="a-input-hour" ng-disabled="anaesInstrument_[8] != '9'">
+                        <option ng-repeat="item in microPumpList" ng-value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>通道)；
+                    <checkbox ng-model="anaesInstrument_[9]" ng-true-value="'10'" ng-false-value="'0'">神经刺激仪；</checkbox>
+                    <checkbox ng-model="anaesInstrument_[10]" ng-true-value="'11'" ng-false-value="'0'">自体血回收器械；</checkbox>
+                    <checkbox ng-model="anaesInstrument_[11]" ng-true-value="'12'" ng-false-value="'0'">镇痛泵；</checkbox>
+                    <checkbox ng-model="anaesInstrument_[12]" ng-true-value="'13'" ng-false-value="'0'" ng-click="anaesPlan.otherInstrument=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 260px;" maxlength="36" ng-model="anaesPlan.otherInstrument" ng-value="anaesPlan.otherInstrument" ng-disabled="anaesInstrument_[12]!='13'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="9">
+                    <div style="width: 18px; margin-left: 40px;">麻醉药品</div>
+                </td>
+                <td colspan="2" class="text-center">局麻药</td>
+                <td colspan="10">
+                    <checkbox ng-model="localAnest_[0]" ng-true-value="'1'" ng-false-value="'0'">利多卡因；</checkbox>
+                    <checkbox ng-model="localAnest_[1]" ng-true-value="'2'" ng-false-value="'0'">罗哌卡因；</checkbox>
+                    <checkbox ng-model="localAnest_[2]" ng-true-value="'3'" ng-false-value="'0'">布比卡因；</checkbox>
+                    <checkbox ng-model="localAnest_[3]" ng-true-value="'4'" ng-false-value="'0'">左旋布比卡因；</checkbox>
+                    <checkbox ng-model="localAnest_[4]" ng-true-value="'5'" ng-false-value="'0'">普鲁卡因；</checkbox>
+                    <checkbox ng-model="localAnest_[5]" ng-true-value="'6'" ng-false-value="'0'" ng-click="anaesPlan.otherlocalAnest=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 300px;" maxlength="35" ng-model="anaesPlan.otherlocalAnest" ng-disabled="localAnest_[5]!='6'" ng-value="anaesPlan.otherlocalAnest"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">镇静药</td>
+                <td colspan="10">
+                    <checkbox ng-model="sedatives_[0]" ng-true-value="'1'" ng-false-value="'0'">咪达唑仑；</checkbox>
+                    <checkbox ng-model="sedatives_[1]" ng-true-value="'2'" ng-false-value="'0'">右美托咪定；</checkbox>
+                    <checkbox ng-model="sedatives_[2]" ng-true-value="'3'" ng-false-value="'0'" ng-click="anaesPlan.otherSedatives=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 170px;" maxlength="20" ng-model="anaesPlan.otherSedatives" ng-value="anaesPlan.otherSedatives" ng-disabled="sedatives_[2]!='3'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">镇痛药</td>
+                <td colspan="10">
+                    <checkbox ng-model="analgesics_[0]" ng-true-value="'1'" ng-false-value="'0'">芬太尼；</checkbox>
+                    <checkbox ng-model="analgesics_[1]" ng-true-value="'2'" ng-false-value="'0'">舒芬太尼；</checkbox>
+                    <checkbox ng-model="analgesics_[2]" ng-true-value="'3'" ng-false-value="'0'">瑞芬太尼：</checkbox>
+                    <checkbox ng-model="analgesics_[3]" ng-true-value="'4'" ng-false-value="'0'" ng-click="anaesPlan.otherAnalgesics=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 500px;" maxlength="13" ng-model="anaesPlan.otherAnalgesics" ng-value="anaesPlan.otherAnalgesics" ng-disabled="analgesics_[3]!='4'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">肌松药</td>
+                <td colspan="10">
+                    <checkbox ng-model="muscleRelaxant_[0]" ng-true-value="'1'" ng-false-value="'0'">维库溴铵；</checkbox>
+                    <checkbox ng-model="muscleRelaxant_[1]" ng-true-value="'2'" ng-false-value="'0'">罗库溴铵；</checkbox>
+                    <checkbox ng-model="muscleRelaxant_[2]" ng-true-value="'3'" ng-false-value="'0'">顺苯磺酸阿曲库铵：</checkbox>
+                    <br/>
+                    <checkbox ng-model="muscleRelaxant_[3]" ng-true-value="'4'" ng-false-value="'0'" ng-click="anaesPlan.otherMuscleRelaxant=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 414px;" maxlength="36" ng-model="anaesPlan.otherMuscleRelaxant" ng-value="anaesPlan.otherMuscleRelaxant" ng-disabled="muscleRelaxant_[3]!='4'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">静脉全麻药</td>
+                <td colspan="10">
+                    <checkbox ng-model="intravenousAnest_[0]" ng-true-value="'1'" ng-false-value="'0'">丙泊酚；</checkbox>
+                    <checkbox ng-model="intravenousAnest_[1]" ng-true-value="'2'" ng-false-value="'0'">依托咪酯；</checkbox>
+                    <checkbox ng-model="intravenousAnest_[2]" ng-true-value="'3'" ng-false-value="'0'">氯胺酮：</checkbox>
+                    <checkbox ng-model="intravenousAnest_[3]" ng-true-value="'4'" ng-false-value="'0'" ng-click="anaesPlan.otherIntravenousAnest=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 500px;" maxlength="14" ng-model="anaesPlan.otherIntravenousAnest" ng-value="anaesPlan.otherIntravenousAnest" ng-disabled="intravenousAnest_[3]!='4'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">吸入麻醉药</td>
+                <td colspan="10">
+                    <checkbox ng-model="inhalationAnest_[0]" ng-true-value="'1'" ng-false-value="'0'">七氟烷；</checkbox>
+                    <checkbox ng-model="inhalationAnest_[1]" ng-true-value="'2'" ng-false-value="'0'">异氟烷；</checkbox>
+                    <checkbox ng-model="inhalationAnest_[2]" ng-true-value="'3'" ng-false-value="'0'" ng-click="anaesPlan.otherInhalationAnest=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 210px;" maxlength="23" ng-model="anaesPlan.otherInhalationAnest" ng-value="anaesPlan.otherInhalationAnest" ng-disabled="inhalationAnest_[2]!='3'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">辅助用药</td>
+                <td colspan="10">
+                    <checkbox ng-model="adjuvantTherapy_[0]" ng-true-value="'1'" ng-false-value="'0'">酒石酸布托啡诺；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[1]" ng-true-value="'2'" ng-false-value="'0'">氟比洛芬酯；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[2]" ng-true-value="'3'" ng-false-value="'0'">地佐辛；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[3]" ng-true-value="'4'" ng-false-value="'0'">曲马多；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[4]" ng-true-value="'5'" ng-false-value="'0'">帕瑞昔布钠；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[5]" ng-true-value="'6'" ng-false-value="'0'">托烷司琼；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[6]" ng-true-value="'7'" ng-false-value="'0'">格拉司琼；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[7]" ng-true-value="'8'" ng-false-value="'0'">盐酸戊乙奎醚；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[8]" ng-true-value="'9'" ng-false-value="'0'">新斯的明；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[9]" ng-true-value="'10'" ng-false-value="'0'">纳洛酮；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[10]" ng-true-value="'11'" ng-false-value="'0'">纳美芬；</checkbox>
+                    <checkbox ng-model="adjuvantTherapy_[11]" ng-true-value="'12'" ng-false-value="'0'">氟马西尼；</checkbox>
+                    <br/>
+                    <checkbox ng-model="adjuvantTherapy_[12]" ng-true-value="'13'" ng-false-value="'0'" ng-click="anaesPlan.otherAdjuvantTherapy=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 410px;" maxlength="36" ng-model="anaesPlan.otherAdjuvantTherapy" ng-value="anaesPlan.otherAdjuvantTherapy" ng-disabled="adjuvantTherapy_[12]!='13'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">急救用药</td>
+                <td colspan="10">
+                    <checkbox ng-model="aidMedication_[0]" ng-true-value="'1'" ng-false-value="'0'">麻黄碱；</checkbox>
+                    <checkbox ng-model="aidMedication_[1]" ng-true-value="'2'" ng-false-value="'0'">阿托品；</checkbox>
+                    <checkbox ng-model="aidMedication_[2]" ng-true-value="'3'" ng-false-value="'0'">多巴胺；</checkbox>
+                    <checkbox ng-model="aidMedication_[3]" ng-true-value="'4'" ng-false-value="'0'">去甲肾上腺素；</checkbox>
+                    <checkbox ng-model="aidMedication_[4]" ng-true-value="'5'" ng-false-value="'0'">肾上腺素；</checkbox>
+                    <checkbox ng-model="aidMedication_[5]" ng-true-value="'6'" ng-false-value="'0'">乌拉地尔；</checkbox>
+                    <checkbox ng-model="aidMedication_[6]" ng-true-value="'7'" ng-false-value="'0'">硝酸甘油；</checkbox>
+                    <checkbox ng-model="aidMedication_[7]" ng-true-value="'8'" ng-false-value="'0'">艾司洛尔；</checkbox>
+                    <checkbox ng-model="aidMedication_[8]" ng-true-value="'9'" ng-false-value="'0'">胺碘酮；</checkbox>
+                    <checkbox ng-model="aidMedication_[9]" ng-true-value="'10'" ng-false-value="'0'">地塞米松；</checkbox>
+                    <checkbox ng-model="aidMedication_[10]" ng-true-value="'11'" ng-false-value="'0'">氨茶碱；</checkbox>
+                    <checkbox ng-model="aidMedication_[11]" ng-true-value="'12'" ng-false-value="'0'" ng-click="anaesPlan.otherAidMedication=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 310px;" maxlength="29" ng-model="anaesPlan.otherAidMedication" ng-value="anaesPlan.otherAidMedication" ng-disabled="aidMedication_[11]!='12'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">输液</td>
+                <td colspan="10">
+                    <checkbox ng-model="infusion_[0]" ng-true-value="'1'" ng-false-value="'0'">林格氏液；</checkbox>
+                    <checkbox ng-model="infusion_[1]" ng-true-value="'2'" ng-false-value="'0'">5%葡萄糖；</checkbox>
+                    <checkbox ng-model="infusion_[2]" ng-true-value="'3'" ng-false-value="'0'">生理盐水；</checkbox>
+                    <checkbox ng-model="infusion_[3]" ng-true-value="'4'" ng-false-value="'0'">转化糖电解质；</checkbox>
+                    <checkbox ng-model="infusion_[4]" ng-true-value="'5'" ng-false-value="'0'">胶体；</checkbox>
+                    <checkbox ng-model="infusion_[5]" ng-true-value="'6'" ng-false-value="'0'" ng-click="anaesPlan.otherInfusion=''">其他：</checkbox>
+                    <input class="noborder3" style="width: 410px;" maxlength="36" ng-model="anaesPlan.otherInfusion" ng-value="anaesPlan.otherInfusion" ng-disabled="infusion_[5]!='6'"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">镇痛泵方案</td>
+                <td colspan="12">
+                    <input class="noborder3" style="width: 100%;" maxlength="49" ng-model="anaesPlan.analgesicPumpMethod" ng-value="anaesPlan.analgesicPumpMethod"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">术后去向</td>
+                <td colspan="12">
+                    <checkbox ng-model="anaesPlan.leaveTo" ng-true-value="1" ng-false-value="0">去病房；</checkbox>
+                    <checkbox ng-model="anaesPlan.leaveTo" ng-true-value="2" ng-false-value="0">去ICU；</checkbox>
+                    <checkbox ng-model="anaesPlan.leaveTo" ng-true-value="3" ng-false-value="0">PACU；</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" ng-class="{true: 'md-red'}[!anaesPlan.anaesDoctorId && verify]" class="text-center">麻醉医生</td>
+                <td colspan="5">
+                    <oi-select flex class="noborder3" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="anaesPlan.anaesDoctorId"></oi-select>
+                    <div class="eSignature">
+                        <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+                    </div>
+                </td>
+                <td colspan="2" ng-class="{true: 'md-red'}[!anaesPlan.date && verify]" class="text-center">时间</td>
+                <td colspan="5">
+                    <datetime-picker class='calendar sign' name="operaDate" dateID="signTimes-times" ng-model="anaesPlan.date" timepicker="false" format="Y-m-d" required></datetime-picker>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-print" id="anesProgram" ng-class="{true: 'end-state'}[anaesPlan.processState == 'END' && !saveActive || setting.readonly]">
+        <table style="margin-top: 50px;">
+            <tr>
+                <th colspan="4" class="text-center">可能出现的问题和对策</th>
+            </tr>
+            <tr>
+                <td style="width:13%;" class="text-center">麻醉方式</td>
+                <td style="width:13%;">出现的问题</td>
+                <td colspan="2">对 策</td>
+            </tr>
+            <tr>
+                <td style="width:13%;" rowspan="4">
+                    <div style="width: 18px; margin-left: 40px;"><checkbox ng-model="anaesPlan.intraspAnes" ng-true-value="1" ng-false-value="0">椎管内麻醉</checkbox></div>
+                </td>
+                <td style="width:13%;">麻醉平面过高</td>
+                <td colspan="2">谨慎给药，积极预防；面罩给氧；维持通气，必要时给予气管插管；及时快速补液，辅助血管活性药物维持循环稳定。</td>
+            </tr>
+            <tr>
+                <td style="width:13%;">麻醉效果欠佳</td>
+                <td colspan="2">重新穿刺，辅助静脉镇痛镇静药物或改用全身麻醉。</td>
+            </tr>
+            <tr>
+                <td style="width:13%;">局麻药中毒</td>
+                <td colspan="2">积极预防；立即停止给药；辅助静脉镇痛镇静药物；面罩给氧；维持通气，必要时给予肌松药气管插管；及时快速补液；辅助血管活性药物维持循环平稳；给予利尿剂。</td>
+            </tr>
+            <tr>
+                <td style="width:13%;">手术失血过多</td>
+                <td colspan="2">及时发现，快速补液，及时输血；辅助血管活性药物维持循环平稳；必要时进行中心静脉压及有创动脉压监测；血气分析及电解质检测；必要时暂停手术，压迫止血；改用全身麻醉；辅助止血药；根据术前评估准备术中自体血回收装置或血液稀释装置。</td>
+            </tr>
+            <tr>
+                <td style="width:13%;" rowspan="5">
+                    <div style="width: 18px; margin-left: 40px;"><checkbox ng-model="anaesPlan.generalAnes" ng-true-value="1" ng-false-value="0">全身麻醉</checkbox></div>
+                </td>
+                <td style="width:13%;">麻醉诱导期间血压波动过大</td>
+                <td colspan="2">缓慢注射全麻药，并预先给予小剂量升压药防止血压过低；达到足够麻醉深度后再插管，必要时辅助血管活性药物防止血压过高。</td>
+            </tr>
+            <tr>
+                <td style="width: 13%;">困难插管</td>
+                <td colspan="2">面罩或喉罩维持通气；请示上级医师处理；必要时清醒下气管插管。</td>
+            </tr>
+            <tr>
+                <td style="width: 13%;">手术失血过多</td>
+                <td colspan="2">及时发现，快速补液，及时输血；辅助血管活性药物维持循环平稳；必要时进行中心静脉压及有创动脉压监测；血气分析及电解质检测；必要时暂停手术，压迫止血；辅助止血药；根据术前评估准备术中自体血回收装置或血液稀释装置。</td>
+            </tr>
+            <tr>
+                <td style="width: 13%;">气管导管脱落</td>
+                <td colspan="2">严密观察，及时发现，重新插管。</td>
+            </tr>
+            <tr>
+                <td style="width: 13%;">苏醒延迟</td>
+                <td colspan="2">寻找病因；请示上级医师；送恢复室或重症监护室。</td>
+            </tr>
+            <tr>
+                <td style="width: 13%;" rowspan="3">
+                    <div style="width: 18px; margin-left: 40px;"><checkbox ng-model="anaesPlan.nerveBlockAnes" ng-true-value="1" ng-false-value="0">臂丛神经阻滞</checkbox></div>
+                </td>
+                <td style="width: 13%;">无法寻找异感</td>
+                <td colspan="2">辅助神经刺激仪重新寻找或更改为全身麻醉。</td>
+            </tr>
+            <tr>
+                <td style="width: 13%;">麻醉效果欠佳</td>
+                <td colspan="2">辅助静脉镇痛镇静药物或更改为全身麻醉。</td>
+            </tr>
+            <tr>
+                <td style="width: 13%;">局麻药中毒</td>
+                <td colspan="2">积极预防；立即停止给药；辅助静脉镇痛镇静药物；面罩给氧；维持通气，必要时给予肌松药气管插管；及时快速补液；辅助血管活性药物维持循环平稳；给予利尿剂。</td>
+            </tr>
+            <tr>
+                <td style="width: 13%;" class="text-center">备注</td>
+                <td style="text-align: left;" colspan="3">围术期出现意外事件，必要时及时和相关科室联系，共同合作处理。</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:13%;border-top: none;" ng-class="{true: 'md-red'}[!anaesPlan.anaesDoctorId && verify]" class="text-center">麻醉医生</td>
+                <td style="border-top: none;">
+                    <oi-select flex class="noborder3" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="anaesPlan.anaesDoctorId"></oi-select>
+                    <div class="eSignature">
+                        <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+                    </div>
+                </td>
+                <td style="border-top: none;" ng-class="{true: 'md-red'}[!anaesPlan.date && verify]" class="text-center">时间</td>
+                <td style="border-top: none;">
+                    <datetime-picker class='calendar sign' name="operaDate" dateID="signTimes-times" ng-model="anaesPlan.date" timepicker="false" format="Y-m-d" required></datetime-picker>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

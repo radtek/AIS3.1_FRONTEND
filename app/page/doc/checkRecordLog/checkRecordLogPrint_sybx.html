@@ -1,0 +1,271 @@
+<div id="print-region">
+<div class="page-print surgeryNursing" id="sur-nur-list">
+    <div layout="column" layout-align="center center">
+        <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+        <h4>手术清点记录</h4>
+    </div>
+    <div layout class="tab-warp">
+        <div layout layout-align="center center" class="tit-h text-center">
+            <span>姓名</span>
+        </div>
+        <div layout layout-align="center center" flex class="tit-h text-center">
+            {{vm.regOpt.name}}
+        </div>
+        <div layout layout-align="center center" class="tit-h text-center">
+            <span>性别</span>
+        </div>
+        <div layout layout-align="center center" flex class="tit-h text-center">
+            {{vm.regOpt.sex}}
+        </div>
+        <div layout layout-align="center center" class="tit-h text-center">
+            <span>年龄</span>
+        </div>
+        <div layout layout-align="center center" flex class="tit-h text-center">
+            {{vm.regOpt.age}}
+        </div>
+        <div layout layout-align="center center" class="tit-h text-center">
+            <span>科别</span>
+        </div>
+        <div layout layout-align="center center" flex class="tit-h text-center">
+            {{vm.regOpt.deptName}}
+        </div>
+        <div layout layout-align="center center" class="tit-h text-center">
+            <span>床号</span>
+        </div>
+        <div layout layout-align="center center" flex class="tit-h text-center">
+            {{vm.regOpt.bed}}
+        </div>
+        <div layout layout-align="center center" class="tit-h text-center">
+            <span>住院号</span>
+        </div>
+        <div layout layout-align="center center" flex class="text-center">
+            {{vm.regOpt.hid}}
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div layout layout-align="center center" class="tit-h text-center" style="line-height: 1.2;">
+            <span>术前诊断</span>
+        </div>
+        <div layout layout-align="start center" flex class="text-center" style="padding-left: 5px;">
+            {{vm.regOpt.diagnosisName}}
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div layout layout-align="center center" class="tit-h text-center" style="line-height: 1.2;">
+            <span>手术名称</span>
+        </div>
+        <div flex class="text-center" layout layout-align="start center" style="padding-left: 5px;">
+            {{operationNames}}
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div layout layout-align="center center" class="tit-h text-center" style="line-height: 1.2;">
+            <span>麻醉方式</span>
+        </div>
+        <div flex class="text-center" layout layout-align="start center" style="padding-left: 5px;">
+            {{anaesMethodNames}}
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div layout layout-align="center center" class="tit-h text-center" style="line-height: 1.2;">
+            <span>手术间号</span>
+        </div>
+        <div layout layout-align="start center" flex class="tit-h text-center" style="padding-left: 5px;">
+            {{vm.regOpt.operRoomName}}
+        </div>
+        <div layout layout-align="center center" class="tit-h text-center" style="width: 65px;line-height: 1.2;">
+            <span>入室时间</span>
+        </div>
+        <div layout layout-align="start center" flex class="text-center" style="padding-left: 5px;">
+            <input style="border:none !important" flex h-type="datetime-local" class="noborder3" ng-model="vm.optNurseItem.inOperRoomTime" ng-value="vm.optNurseItem.inOperRoomTime"></input>
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div layout layout-align="center center" class="tit-h text-center">
+            <span>护理情况</span>
+        </div>
+        <div flex>
+            <div layout class="tab-warp noborder">
+                <div flex layout="column" class="list-warp">
+                    <div layout>
+                        <span layout-algin="">术前：</span>
+                        <div flex class="list-warp">
+                            <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+                                <span>皮肤完整：</span>
+                                <select ng-model="vm.optNurseItem.preOperSkin">
+                                    <option ng-value="1">是</option>
+                                    <option ng-value="2">否</option>
+                                </select>&nbsp;&nbsp;
+                                <span>皮肤具体情况</span>
+                                <input type="text" class="noborder3" maxlength="28" ng-value="vm.optNurseItem.preOperSkinDetails" style="width: 365px;">
+                            </div>
+                            <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+                                <span>导尿：</span>
+                                <select ng-model="vm.optNurseItem.catheterization" ng-change="vm.changeCatheterization();">
+                                    <option ng-value="1">有</option>
+                                    <option ng-value="2">无</option>
+                                </select>&nbsp;&nbsp;
+                                <span>术中尿量：</span>
+                                <input type="text" class="noborder3" style="width: 80px;" maxlength="28" ng-value="vm.optNurseItem.urine">毫升&nbsp;&nbsp;
+                                <span>签名：{{vm.catheterizaSign}}</span>&nbsp;&nbsp;
+                                <span>时间：</span><a>{{vm.optNurseItem.catheterizaTime}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div layout>
+                        <span layout-algin="" style="padding-top:3px;">术中：</span>
+                        <div flex layout="column" class="list-warp">
+                            <div class="form-group" layout-align="start center">
+                                <span>体位：</span><a>{{vm.optBodyNames}}</a>&nbsp; 冰冻
+                                <select ng-model="vm.optNurseItem.frozen">
+                                <option ng-value="1">已送</option>
+                                <option ng-value="2">未送</option>
+                                </select>&nbsp;&nbsp;
+                                <span>术后病理：</span>
+                                <select ng-model="vm.optNurseItem.postOperPathology">
+                                    <option ng-value="1">已送</option>
+                                    <option ng-value="2">未送</option>
+                                </select>&nbsp;&nbsp;
+                                <span>签名：</span>{{vm.postOperPathSign}}&nbsp;&nbsp;
+                                <span>时间：</span><a>{{vm.optNurseItem.postOperPathTime}}</a>&nbsp;&nbsp;
+                                <span>引流：</span>
+                                <select ng-model="vm.optNurseItem.drainage">
+                                    <option ng-value="1">有</option>
+                                    <option ng-value="2">无</option>
+                                </select>
+                            </div>
+                            <div class="form-group" layout layout-align="start center">
+                                <span>输血血型：</span>
+                                <select ng-model="vm.optNurseItem.bloodType">
+                                    <option ng-repeat="v in vm.bloodTypeList" value="{{v.codeValue}}">{{v.codeName}}</option>
+                                </select>&nbsp;&nbsp;
+                                <span>签名：</span>{{vm.bloodSign}}&nbsp;&nbsp;
+                                <span>时间：</span><a>{{vm.optNurseItem.bloodTime}}</a>
+                            </div>
+                            <div class="form-group" layout layout-align="start center">
+                                <span>血量：</span>
+                                <span><span class="mar-right-30" ng-repeat="j in vm.bloodList">{{j.name}} {{j.dosageAmount}} {{j.dosageUnit}}</span></span>
+                            </div>
+                            <div class="form-group" layout layout-align="start center">
+                                <span>输液：</span>
+                                <div layout flex="90" layout-align="start center" style="height:20px;">
+                                    <span><span class="mar-right-30" ng-repeat="j in vm.transfusionList">{{j.name}} {{j.dosageAmount}} {{j.dosageUnit}}</span></span>
+                                </div>
+                            </div>
+                            <div class="form-group" layout layout-align="start center">
+                                <span>抗生素使用签名：</span>{{vm.antibioticSign}}&nbsp;&nbsp;
+                                <span>时间：</span><a>{{vm.optNurseItem.antibioticTime}}</a>&nbsp;&nbsp;
+                                <span>应用情况：</span>
+                                <select ng-model="vm.optNurseItem.antibiotic">
+                                    <option ng-value="1">已用</option>
+                                    <option ng-value="2">未用</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div layout>
+                        <span layout-algin="">术毕：</span>
+                        <div flex layout="column" class="list-warp">
+                            <div class="form-group" layout-align="start center">
+                                <span>皮肤完整：</span>
+                                <select ng-model="vm.optNurseItem.postOperSkin">
+                                    <option ng-value="1">是</option>
+                                    <option ng-value="2">否</option>
+                                </select>
+                                <span>皮肤具体情况：</span>
+                                <input type="text" class="noborder3" style="width: 342px;" maxlength="30" ng-value="vm.optNurseItem.postOperSkinDetails">
+                            </div>
+                            <div class="form-group" layout-align="start center">
+                                <span>出手术室时间：</span><a>{{vm.optNurseItem.outOperRoomTime}}</a>&nbsp;&nbsp;
+                                <span>术后送回：</span>
+                                <select ng-model="vm.optNurseItem.leaveTo">
+                                    <option ng-value="1">病房</option>
+                                    <option ng-value="2">PACU</option>
+                                    <option ng-value="3">ICU</option>
+                                    <option ng-value="4">死亡</option>
+                                </select>
+                            </div>
+                            <div class="form-group" layout-align="start center">
+                                <span>特殊情况记录：</span>
+                                <input type="text" class="noborder3" style="width: 645px;" maxlength="30" ng-value="vm.optNurseItem.excepCase">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="md-body-1 border-b tab-warp no-border-top" layout>
+        <div layout layout-align="center center" flex class="border-r">物品
+            <br>名称</div>
+        <div layout layout-align="center center" flex class="border-r">术前
+            <br>清点</div>
+        <div layout layout-align="center center" flex class="border-r">术中
+            <br>追加</div>
+        <div layout layout-align="center center" flex class="border-r">关前
+            <br>清点</div>
+        <div layout layout-align="center center" flex class="border-r">关后
+            <br>清点</div>
+        <div layout layout-align="center center" flex class="border-r">物品
+            <br>名称</div>
+        <div layout layout-align="center center" flex class="border-r">术前
+            <br>清点</div>
+        <div layout layout-align="center center" flex class="border-r">术中
+            <br>追加</div>
+        <div layout layout-align="center center" flex class="border-r">关前
+            <br>清点</div>
+        <div layout layout-align="center center" flex class="border-r">关后
+            <br>清点</div>
+        <div layout layout-align="center center" flex class="border-r">物品
+            <br>名称</div>
+        <div layout layout-align="center center" flex class="border-r">术前
+            <br>清点</div>
+        <div layout layout-align="center center" flex class="border-r">术中
+            <br>追加</div>
+        <div layout layout-align="center center" flex class="border-r">关前
+            <br>清点</div>
+        <div layout layout-align="center center" flex>关后
+            <br>清点</div>
+    </div>
+    <div class="md-body-1 tab-warp no-border-top" layout ng-repeat="item in vm.item">
+        <div flex class="border-r" style="word-break: break-all;line-height: 16px;">{{item.l.instruItemName}}&nbsp;</div>
+        <div flex class="border-r">{{item.l.origamount}}</div>
+        <div flex class="border-r">{{item.l.inaddInt}}</div>
+        <div flex class="border-r">{{item.l.cloBeBody}}</div>
+        <div flex class="border-r">{{item.l.cloAfBody}}</div>
+        <div flex class="border-r" style="word-break: break-all;line-height: 16px;">{{item.m.instruItemName}}&nbsp;</div>
+        <div flex class="border-r">{{item.m.origamount}}</div>
+        <div flex class="border-r">{{item.m.inaddInt}}</div>
+        <div flex class="border-r">{{item.m.cloBeBody}}</div>
+        <div flex class="border-r">{{item.m.cloAfBody}}</div>
+        <div flex class="border-r" style="word-break: break-all;line-height: 16px;">{{item.r.instruItemName}}&nbsp;</div>
+        <div flex class="border-r">{{item.r.origamount}}</div>
+        <div flex class="border-r">{{item.r.inaddInt}}</div>
+        <div flex class="border-r">{{item.r.cloBeBody}}</div>
+        <div flex>{{item.r.cloAfBody}}</div>
+    </div>
+    <div layout class="tab-warp no-border-top" style="padding-bottom: 2px;">
+        <span>备注：于</span>
+        <input style="width:135px;" h-type="datetime-local" class="noborder3" ng-value="vm.optNurseItem.outSickroomTime"></input>
+        <span>将患者接出病房，于</span>
+        <input style="width:135px;" h-type="datetime-local" class="noborder3" ng-value="vm.optNurseItem.backSickroomTime"></input>
+        <span>将患者送回病房，与病房护士交接</span>
+    </div>
+    <div layout>
+        <div layout="column" flex flex-offset="5">
+            <div layout>
+                <div layout flex>
+                    <span flex="30">器械护士签字：</span>
+                    {{instrnuseNames}}
+                </div>
+                <div layout flex>
+                    <span flex="30">巡回护士签字：</span>
+                    {{circunurseNames}}
+                </div>
+            </div>
+            <div layout><span flex="10">说明：</span>1、有选择项目的应在所选项目的左上方以“✔”号表示。</div>
+            <div layout><span flex flex-offset="10">2、以阿拉伯数字表示手术器械（物品）数目。</span></div>
+        </div>
+    </div>
+</div>
+</div>

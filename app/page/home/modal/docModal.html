@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h4>
+        <span>{{tit}}</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate style="max-height:700px; overflow-y:scroll; overflow-x:hidden;">
+    <!-- 待补文书 -->
+    <div class="modal-body vacaDocModal" ng-if="tit == '待补文书'">
+        <ul class="panel panel-body" ng-repeat="item in data">
+            <li layout class="patInfo">
+                <span flex>姓名：{{item.name}}</span>
+                <span flex>状态：{{item.state==="03" ? "术前" :"术后"}}</span>
+                <span flex>手术日期：{{item.operaDate}}</span>
+            </li>
+            <li  layout-wrap="wrap" layout-align="end center">
+                <button class="btn btn-default" ng-repeat="ins in item.documentStateList" ng-click="goto(ins.name, item)">{{ins.name}}</button>
+            </li>
+        </ul>
+    </div>
+    <!-- 今日手术 / 我的手术 / 待排班病人 -->
+    <div class="modal-body PatOptModal" ng-if="tit != '待补文书'">
+        <table class="table">
+            <tr>
+                <th>姓名</th>
+                <th>住院号</th>
+                <th style="width: 95px;">手术日期</th>
+                <th>手术名称</th>
+                <th style="min-width: 77px;">麻醉方法</th>
+                <th style="min-width: 77px;" ng-if="tit != '待排班病人'">麻醉医生</th>
+                <th style="min-width: 77px;" ng-if="tit != '待排班病人'">巡回护士</th>
+                <th style="min-width: 77px;">手术医生</th>
+                <th>病区</th>
+                <th>科室</th>
+                <th style="width: 93px;">手术室</th>
+                <th style="min-width: 77px;" ng-if="tit != '待排班病人'">手术状态</th>
+            </tr>
+            <tr ng-repeat="item in data">
+                <td>{{item.name}}</td>
+                <td>{{item.hid}}</td>
+                <td>{{item.operaDate}}</td>
+                <td>{{item.designedOptName}}</td>
+                <td>{{item.designedAnaesMethodName}}</td>
+                <td ng-if="tit != '待排班病人'">{{item.anesthetistName}}</td>
+                <td ng-if="tit != '待排班病人'">{{item.circunurseName}}</td>
+                <td>{{item.operatorName}}</td>
+                <td>{{item.regionName}}</td>
+                <td>{{item.deptName}}</td>
+                <td>{{item.operRoomName}}</td>
+                <td ng-if="tit != '待排班病人'">{{item.state}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer" ng-if="false">
+        <button class="btn btn-primary" ng-click="ok()">保存</button>
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+</form>

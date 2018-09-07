@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4><span>选择患者</span><span class="pull-right modal-container_close" ng-click="close()">✖</span></h4>
+</div>
+<form name='form' novalidate>
+    <div class="modal-body">
+        <div layout class="navbar-btn btn-xs text-right c-el-10">
+            <div flex layout>
+                <div layout layout-align="start center" class="input-group">
+                    <label class="control-label tit">恢复状态</label>
+                    <select flex class="form-control" style="width: 120px;" ng-model="params.anabioticstate">
+                        <option value="0">恢复未开始</option>
+                        <option value="2">恢复已结束</option>
+                    </select>
+                </div>
+                <div layout layout-align="start center" class="input-group">
+                    <label class="control-label tit">开始时间</label>
+                    <datetime-picker flex dateID="date-start-time" maxdate="2100-01-01" ng-model="params.startTime" timepicker="false" format="Y-m-d" class="form-control" style="width: 120px;" required></datetime-picker>
+                </div>
+                <div layout layout-align="start center" class="input-group">
+                    <label class="control-label tit">截止时间</label>
+                    <datetime-picker flex dateID="date-end-time" maxdate="2100-01-01" ng-model="params.endTime" timepicker="false" format="Y-m-d" class="form-control" style="width: 120px;" required></datetime-picker>
+                </div>
+                <div layout layout-align="start center" class="input-group">
+                    <label class="control-label tit">住院号</label>
+                    <input flex class="form-control" type="text" style="width: 120px;" ng-model="params.hid"></input>
+                </div>
+            </div>
+            <button class="btn btn-primary" ng-click="query();">查&nbsp;&nbsp;询</button>
+        </div>
+        <div ui-grid="gridOptions1" ui-grid-auto-resize ui-grid-pagination></div>
+    </div>
+</form>

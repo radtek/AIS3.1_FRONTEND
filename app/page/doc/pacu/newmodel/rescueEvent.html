@@ -1,0 +1,15 @@
+<div class="modal-header">    
+    <h4><span>抢救事件</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="rescueEvent">
+    <div class="modal-body">
+        <div layout="column">
+            <label layout layout-align="center center"><input type="radio" name="model" ng-model="model" value="normal">&nbsp;&nbsp;普通模式</label>
+            <label layout layout-align="center center"><input type="radio" name="model" ng-model="model" value="save">&nbsp;&nbsp;抢救模式</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

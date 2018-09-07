@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4>
+        <span>{{row.name}}&nbsp;--&nbsp;未完成的文书</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate>
+    <div layout layout-wrap="wrap" class="modal-body panel panel-body IncompleteDocList">
+        <a flex=50 ng-repeat="item in dataList" ng-click="ok(item)"><i class="glyphicon glyphicon-file"></i><span>{{item.name}}</span></a>
+    </div>
+</form>
+<style type="text/css">
+.modal-dialog {
+	width: 650px !important;
+}
+</style>

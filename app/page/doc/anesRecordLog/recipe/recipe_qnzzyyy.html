@@ -1,0 +1,406 @@
+<div class="print-progress">
+    <progressbar></progressbar>
+</div>
+<div flex>
+    <!-- 红处方 -->
+    <div class="A5-print recipe rRecipe" ng-if="rType == 'redPrescription'" ng-repeat='page in pageS'>
+        <header class="text-center">
+            <div layout layout-align="space-between" class="form-group">
+                <span flex class="text-right">麻醉</span>
+            </div>
+            <div layout layout-align="center center" class="form-group title">
+                <span style="padding-left: 90px;">黔南布衣族<br>苗族自治州</span>
+                <h3>中&nbsp;医&nbsp;医&nbsp;院&nbsp;处&nbsp;方&nbsp;笺</h3>
+                <span>No:{{regOpt.hid}}</span>
+            </div>
+        </header>
+        <div flex layout>
+            <div style="padding-right: 30px;">
+                <div layout="column" style="height: 15%; text-align: center;">
+                    <h4>收 费 通 知 单</h4>
+                    <div flex=10>{{currDay | date: 'yyyy年MM月dd日'}}</div>
+                </div>
+                <div>
+                    <table class="left-table">
+                        <tr>
+                            <td>姓&nbsp;&nbsp;名</td>
+                            <td>{{regOpt.name}}&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>科&nbsp;&nbsp;室</td>
+                            <td>{{regOpt.deptName}}&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>手术费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>治疗费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>注射费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>西&nbsp;&nbsp;药</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>其&nbsp;&nbsp;他</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>合&nbsp;&nbsp;计</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr ng-repeat='i in [0, 1, 2, 3]'>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <div class="inPadd" style="position: relative;">
+                    <div class="form-group line1" layout layout-align='space-between center'>
+                        <div flex=35>{{currDay | date: 'yyyy年MM月dd日'}}</div>
+                        <div flex=25>科 室：{{regOpt.deptName}}</div>
+                    </div>
+                    <div class="form-group" layout layout-align='space-between center'>
+                        <div flex=25>姓名：{{regOpt.name}}</div>
+                        <div flex=15>性别：{{regOpt.sex}}</div>
+                        <div flex=15>年龄：{{regOpt.age}}</div>
+                        <div flex=40>身份证号：{{user.idCard}}</div>
+                    </div>
+                    <div class="form-group" layout layout-align='space-between center'>
+                        <div flex=25>代办人姓名：{{user.agent}}</div>
+                        <div flex=15>性别：{{user.sex}}</div>
+                        <div flex=15>年龄：{{user.age}}</div>
+                        <div flex=40>身份证号：{{user.identityCard}}</div>
+                    </div>
+                    <div class="form-group detail" style="border: 1px solid; height: 100%; min-height: 314px;">
+                        <div style="height: 100px; border-bottom: 1px solid;">
+                            <span>病情及诊断：{{regOpt.diagnosisName}}</span>
+                        </div>
+                        <div>
+                            <strong class="ps">R:</strong>
+                        </div>
+                        <div style="height: 100%; min-height: 152px; margin-bottom: 2px;">
+                            <table>
+                                <tr ng-repeat='item in page.detailList'>
+                                    <td class="text-right" style="padding-right: 20px;">{{item.name}}</td>
+                                    <td>
+                                        <div ng-if='!item.isAddTo'>
+                                            <span>{{item.spec}}</span>
+                                            <span ng-if='item.quantity' style="margin-left: 10px; margin-right: 10px;">x</span>
+                                            <span ng-if='item.quantity'>{{item.quantity + item.unit}}</span>
+                                        </div>
+                                        <div ng-if='item.isAddTo'>
+                                            <span style="display: inline-block; width: 80px;">{{item.dosage + item.dosageUnit}}</span>
+                                            <span style="display: inline-block; min-width: 80px;">{{item.medWay}}</span>
+                                            <span>{{item.medWayExp}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="border-top: 1px solid;">
+                            <span>注：处方当日有效</span>
+                        </div>
+                    </div>
+                </div>
+                <div layout class="form-group" layout-align="end end">
+                    <span style="padding-right: 100px;">医师签名：</span>
+                </div>
+                <div layout class="form-group">
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>审核：<input ng-model="user.audit" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>调配：<input ng-model="user.deploy" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>核对：<input ng-model="user.check" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout>
+                        <span>发药：<input ng-model="user.allotment" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 白处方 -->
+    <div class="A5-print recipe rRecipe" ng-if="rType == 'whitePrescription'" ng-repeat='page in pageS'>
+        <header class="text-center">
+            <div layout layout-align="space-between" class="form-group">
+                <span flex class="text-right">精二</span>
+            </div>
+            <div layout layout-align="center center" class="form-group title">
+                <span>黔南布衣族<br>苗族自治州</span>
+                <h3>中&nbsp;医&nbsp;医&nbsp;院&nbsp;处&nbsp;方&nbsp;笺</h3>
+                <span>No:{{regOpt.hid}}</span>
+            </div>
+        </header>
+        <div flex layout>
+            <div style="padding-right: 30px;">
+                <div layout="column" style="height: 15%; text-align: center;">
+                    <h4>收 费 通 知 单</h4>
+                    <div flex=10>{{currDay | date: 'yyyy年MM月dd日'}}</div>
+                </div>
+                <div>
+                    <table class="left-table">
+                        <tr>
+                            <td>姓&nbsp;&nbsp;名</td>
+                            <td>{{regOpt.name}}&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>科&nbsp;&nbsp;室</td>
+                            <td>{{regOpt.deptName}}&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>手术费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>治疗费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>注射费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>西&nbsp;&nbsp;药</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr ng-repeat='i in [0, 1, 2, 3, 4, 5]'>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>其&nbsp;&nbsp;他</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>合&nbsp;&nbsp;计</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <div class="inPadd" style="position: relative;">
+                    <div class="form-group line1" layout layout-align='space-between center'>
+                        <div flex=35>{{currDay | date: 'yyyy年MM月dd日'}}</div>
+                        <div flex=25>科 室：{{regOpt.deptName}}</div>
+                    </div>
+                    <div class="form-group" layout layout-align='space-between center'>
+                        <div flex=25>姓名：{{regOpt.name}}</div>
+                        <div flex=15>性别：{{regOpt.sex}}</div>
+                        <div flex=15>年龄：{{regOpt.age}}</div>
+                        <div flex=40>身份证号：{{user.idCard}}</div>
+                    </div>
+                    <div class="form-group" layout layout-align='space-between center'>
+                        <div flex=25>代办人姓名：{{user.agent}}</div>
+                        <div flex=15>性别：{{user.sex}}</div>
+                        <div flex=15>年龄：{{user.age}}</div>
+                        <div flex=40>身份证号：{{user.identityCard}}</div>
+                    </div>
+                    <div class="form-group detail" style="border: 1px solid; height: 100%; min-height: 314px;">
+                        <div style="height: 100px; border-bottom: 1px solid;">
+                            <span>病情及诊断：{{regOpt.diagnosisName}}</span>
+                        </div>
+                        <div>
+                            <strong class="ps">R:</strong>
+                        </div>
+                        <div style="height: 100%; min-height: 152px; margin-bottom: 2px;">
+                            <table>
+                                <tr ng-repeat='item in page.detailList'>
+                                    <td class="text-right" style="padding-right: 20px;">{{item.name}}</td>
+                                    <td>
+                                        <div ng-if='!item.isAddTo'>
+                                            <span>{{item.spec}}</span>
+                                            <span ng-if='item.quantity' style="margin-left: 10px; margin-right: 10px;">x</span>
+                                            <span ng-if='item.quantity'>{{item.quantity + item.unit}}</span>
+                                        </div>
+                                        <div ng-if='item.isAddTo'>
+                                            <span style="display: inline-block; width: 80px;">{{item.dosage + item.dosageUnit}}</span>
+                                            <span style="display: inline-block; min-width: 80px;">{{item.medWay}}</span>
+                                            <span>{{item.medWayExp}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- <img src="/app/img/xg.png"> -->
+                        </div>
+                        <div style="border-top: 1px solid;">
+                            <span>注：处方当日有效</span>
+                        </div>
+                    </div>
+                </div>
+                <div layout class="form-group" layout-align="end end">
+                    <span style="padding-right: 100px;">医师签名：</span>
+                </div>
+                <div layout class="form-group">
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>审核：<input ng-model="user.audit" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>调配：<input ng-model="user.deploy" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>核对：<input ng-model="user.check" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout>
+                        <span>发药：<input ng-model="user.allotment" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 精一 -->
+    <div class="A5-print recipe rRecipe" ng-if="rType == 'jingyi'" ng-repeat='page in pageS'>
+        <header class="text-center">
+            <div layout layout-align="space-between" class="form-group">
+                <span flex class="text-right">精一</span>
+            </div>
+            <div layout layout-align="center center" class="form-group title">
+                <span style="padding-left: 90px;">黔南布衣族<br>苗族自治州</span>
+                <h3>中&nbsp;医&nbsp;医&nbsp;院&nbsp;处&nbsp;方&nbsp;笺</h3>
+                <span>No:{{regOpt.hid}}</span>
+            </div>
+        </header>
+        <div flex layout>
+            <div style="padding-right: 30px;">
+                <div layout="column" style="height: 15%; text-align: center;">
+                    <h4>收 费 通 知 单</h4>
+                    <div flex=10>{{currDay | date: 'yyyy年MM月dd日'}}</div>
+                </div>
+                <div>
+                    <table class="left-table">
+                        <tr>
+                            <td>姓&nbsp;&nbsp;名</td>
+                            <td>{{regOpt.name}}&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>科&nbsp;&nbsp;室</td>
+                            <td>{{regOpt.deptName}}&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>手术费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>治疗费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>注射费</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>西&nbsp;&nbsp;药</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>其&nbsp;&nbsp;他</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>合&nbsp;&nbsp;计</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr ng-repeat='i in [0, 1, 2, 3]'>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <div class="inPadd" style="position: relative;">
+                    <div class="form-group line1" layout layout-align='space-between center'>
+                        <div flex=35>{{currDay | date: 'yyyy年MM月dd日'}}</div>
+                        <div flex=25>科 室：{{regOpt.deptName}}</div>
+                    </div>
+                    <div class="form-group" layout layout-align='space-between center'>
+                        <div flex=25>姓名：{{regOpt.name}}</div>
+                        <div flex=15>性别：{{regOpt.sex}}</div>
+                        <div flex=15>年龄：{{regOpt.age}}</div>
+                        <div flex=40>身份证号：{{user.idCard}}</div>
+                    </div>
+                    <div class="form-group" layout layout-align='space-between center'>
+                        <div flex=25>代办人姓名：{{user.agent}}</div>
+                        <div flex=15>性别：{{user.sex}}</div>
+                        <div flex=15>年龄：{{user.age}}</div>
+                        <div flex=40>身份证号：{{user.identityCard}}</div>
+                    </div>
+                    <div class="form-group detail" style="border: 1px solid; height: 100%; min-height: 314px;">
+                        <div style="height: 100px; border-bottom: 1px solid;">
+                            <span>病情及诊断：{{regOpt.diagnosisName}}</span>
+                        </div>
+                        <div>
+                            <strong class="ps">R:</strong>
+                        </div>
+                        <div style="height: 100%; min-height: 152px; margin-bottom: 2px;">
+                            <table>
+                                <tr ng-repeat='item in page.detailList'>
+                                    <td class="text-right" style="padding-right: 20px;">{{item.name}}</td>
+                                    <td>
+                                        <div ng-if='!item.isAddTo'>
+                                            <span>{{item.spec}}</span>
+                                            <span ng-if='item.quantity' style="margin-left: 10px; margin-right: 10px;">x</span>
+                                            <span ng-if='item.quantity'>{{item.quantity + item.unit}}</span>
+                                        </div>
+                                        <div ng-if='item.isAddTo'>
+                                            <span style="display: inline-block; width: 80px;">{{item.dosage + item.dosageUnit}}</span>
+                                            <span style="display: inline-block; min-width: 80px;">{{item.medWay}}</span>
+                                            <span>{{item.medWayExp}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="border-top: 1px solid;">
+                            <span>注：处方当日有效</span>
+                        </div>
+                    </div>
+                </div>
+                <div layout class="form-group" layout-align="end end">
+                    <span style="padding-right: 100px;">医师签名：</span>
+                </div>
+                <div layout class="form-group">
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>审核：<input ng-model="user.audit" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>调配：<input ng-model="user.deploy" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout style="margin-right: 15px;">
+                        <span>核对：<input ng-model="user.check" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                    <div flex=30 layout>
+                        <span>发药：<input ng-model="user.allotment" style="width: 99px;border-bottom: 1px solid #000; border: none;" readonly></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

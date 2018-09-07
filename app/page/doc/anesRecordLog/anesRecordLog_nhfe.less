@@ -1,0 +1,707 @@
+#anesRecord_nhfe {
+    @lineH: 28px;
+    @color: red;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    select {
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+    input[type=checkbox],
+    input[type=radio] {
+        margin: 0;
+    }
+    .red,
+    *.red {
+        color: @color!important;
+    }
+    table {
+        width: 100%;
+        th,
+        td {
+            border: 1px solid @color;
+            padding: 0;
+        }
+    }
+    >aside {
+        width: 76px;
+        margin-right: 10px;
+        >button {
+            margin-bottom: 5px;
+            padding: 6px 3px;
+            min-width: auto;
+        }
+    }    
+    .anaes-times{ padding: 0 1px !important;white-space: nowrap;}
+    .anaes-goto{ padding: 0 0px !important;white-space: nowrap;letter-spacing: -1px;}
+    .black{color:#000000;}
+    main {
+        overflow: auto;
+        page-break-after: always;
+        page-break-inside: avoid;
+        header {
+            margin-bottom: 5px;
+        }
+        h3,
+        h4 {
+            display: inline-block;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        a,
+        input,
+        select {
+            height: 22px;
+            color: black;
+            text-align: center;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid @color;
+        }
+        td[ng-click],
+        div[ng-click],
+        span[ng-click] {
+            cursor: pointer;
+        }
+        .nowrap {
+            white-space: nowrap;
+        }
+
+        a.a-backshow {
+            text-align: center;
+            border-bottom: 1px dashed red;
+        }
+        a.a-backshow.text-left {
+            text-align: left;
+            height: auto;
+        }
+        a.a-backshow-40 {
+            text-align: center;
+            border-bottom: 1px dashed red;
+            min-width: 40px;
+        }
+        a.a-backshow-60 {
+            text-align: center;
+            border-bottom: 1px dashed red;
+            min-width: 60px;
+        }
+        a.a-backshow-100 {
+            text-align: center;
+            border-bottom: 1px dashed red;
+            min-width: 100px;
+        }
+        article {
+            border: 1px solid @color;
+            .lineH {
+                height: @lineH;
+                line-height: @lineH;
+            }
+            .blockDis {
+                background: #efefef;
+                padding: 1px 5px;
+                margin-right: 4px;
+            }
+            .head {
+                padding: 5px;
+                border: 1px solid @color;
+                /* select {
+                    padding: 0 69px;
+                } */
+                .bSpecial {
+                    padding: 1px;
+                    border: 1px solid @color;
+                    border-radius: 3px;
+                    margin: 1px;
+                    margin-left: 10px;
+                    textarea {
+                        border: none;
+                        outline: none;
+                        resize: none;
+                    }
+                }
+                .anaesthetic {
+                    a {
+                        line-height: 22px;
+                    }
+                }
+            }
+            .body {
+                table {
+                    tr {
+                        height: @lineH;
+                    }
+                    td {
+                        width: @lineH;
+                    }
+                }
+                .left {
+                    width: 280px;
+                    .pullLR {
+                        position: relative;
+                        div {
+                            position: absolute;
+                            line-height: @lineH;
+                            width: 500px;
+                            top: 0;
+                            color:#000000;
+                        }
+                    }
+                    table tr:nth-last-child(2) {
+                        td div {
+                            height: @lineH;
+                        }
+                    }
+                    .mon {
+                        td:first-child {
+                            border-right: 0;
+                            >div {
+                                padding: 0 10px 0 2px;
+                                height: @lineH;
+                                img {
+                                    height: @lineH - 10;
+                                }
+                            }
+                            >div.otherImg {
+                                height: 10 * @lineH + 2;
+                                div {
+                                    height: @lineH;
+                                }
+                            }
+                            >div.clickSpan {
+                                span[ng-click] {
+                                    background-color: #e3e3e3;
+                                }
+                                a {
+                                    width: 40px;
+                                }
+                            }
+                        }
+                        td:nth-child(2),
+                        td:nth-child(3) {
+                            border-left: 0;
+                            border-right: 0;
+                        }
+                        td:last-child {
+                            border-left: 0;
+                            width: 45px;
+                        }
+                        .checkLeaveTo {
+                            background-color: #A9A9A9!important;
+                        }
+                    }
+                }
+                .middle {
+                    table {
+                        tr:first-child div {
+                            width: 100%;
+                        }
+                        td.echart1 {
+                            >div {
+                                height: 20 * @lineH;
+                                width: 100%;
+                            }
+                        }
+                        td.echart2 {
+                            height: 25 * @lineH;
+                            width: 100%;
+                            position: relative;
+                            .title {
+                                top: 2px;
+                                right: 2px;
+                                position: absolute;
+                                background-color: #ccc;
+                                padding: 2px;
+                                border-radius: 2px;
+                                z-index: 1;
+                            }
+                            .headView {
+                                width: 100%;
+                                background-color: #fff;
+                                margin-bottom: 0;
+                                position: absolute;
+                                top: 0;
+                                height: @lineH;
+                                line-height: @lineH;
+                                text-align: center;
+                                span {
+                                    margin: 0 5px;
+                                    width: 80px;
+                                }
+                            }
+                            .dataView {
+                                width: 100%;
+                                background-color: #fff;
+                                height: 23 * @lineH;
+                                position: absolute;
+                                top: @lineH;
+                                overflow: auto;
+                                div {
+                                    height: @lineH;
+                                    line-height: @lineH;
+                                    text-align: center;
+                                    span {
+                                        margin: 0 5px;
+                                        width: 80px;
+                                    }
+                                }
+                                input {
+                                    border: none;
+                                    width: 80px;
+                                    border-bottom: 1px solid #ccc;
+                                }
+                            }
+                            .buttomView {
+                                width: 100%;
+                                bottom: 0;
+                                height: @lineH;
+                                position: absolute;
+                                background-color: #fff;
+                                input {
+                                    height: @lineH;
+                                    border: none;
+                                    text-align: left;
+                                    padding-left: 10px;
+                                }
+                                span {
+                                    line-height: @lineH;
+                                    background-color: #ccc;
+                                    padding: 0 4px;
+                                    border-radius: 2px;
+                                    margin: 0 10px;
+                                }
+                            }
+                        }
+                        td>input.mon-left-ie {
+                            max-width: 75%;
+                        }
+                        tr.numInput td input,
+                        tr.numInput td select {
+                            width: 100%;
+                            height: @lineH - 1;
+                            border: none;
+                            text-align: left;
+                        }
+                    }
+                }
+                .right {
+                    width: 200px;
+                    table tr:first-child {
+                        height: 2 * @lineH;
+                    }
+                    table tr:nth-child(2) td {
+                        height: 44 * @lineH + 3;
+                    }
+                    table tr:last-child {
+                        >td {
+                            >div {
+                                padding: 0 10px;
+                                height: @lineH;
+                                img {
+                                    height: @lineH - 10;
+                                }
+                            }
+                            >div.otherImg {
+                                height: 10 * @lineH + 2;
+                                overflow: auto;
+                                div {
+                                    height: @lineH;
+                                }
+                            }
+                            >div.clickSpan {
+                                a {
+                                    width: 50px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .buttom {
+                table {
+                    tr:first-child {
+                        td:first-child {
+                            width: @lineH;
+                            height: 9 * @lineH;
+                        }
+                        td:nth-child(2) {
+                            height: 3 * @lineH;
+                            padding-left: 10px;
+                        }
+                        td:last-child {
+                            width: auto;
+                            .backList {
+                                height: 9 * @lineH;
+                                display: flex;
+                                flex: auto;
+                                flex-direction: column;
+                                flex-wrap: wrap;
+                                >div {
+                                    height: @lineH;
+                                    padding: 0 2px;
+                                    flex: auto;
+                                    .title {
+                                        font-weight: bold;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    tr:nth-child(n+1) {
+                        td:first-child {
+                            height: inherit;
+                            padding: 0 5px;
+                            >div {
+                                height: @lineH;
+                                line-height: @lineH;
+                                select {
+                                    height: 25px;
+                                }
+                                checkbox {
+                                    margin: 0 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+                select {
+                    padding-left: 20px;
+                }
+                input[type=checkbox],
+                input[type=radio] {
+                    margin-top: 3px;
+                }
+                .analgesicMed {
+                    line-height: 22px;
+                    text-align: left;
+                }
+            }
+        }
+        article.tour {
+            input,
+            select,
+            textarea,
+            oi-select,
+            [ng-click]:not(.toPage) {
+                pointer-events: none;
+            }
+        }
+        .paging {
+            a {
+                border: none;
+            }
+            >span {
+                pointer-events: auto;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .done {
+                pointer-events: none;
+                cursor: not-allowed;
+            }
+        }
+        footer {
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            .cor-515 {
+                color: rgb(50, 163, 57);
+            }
+            .cor-422 {
+                color: rgb(40, 216, 247);
+            }
+            .cor-242 {
+                color: rgb(215, 46, 28)
+            }
+            .cor-512 {
+                color: rgb(50, 117, 224);
+            }
+            .cor-224 {
+                color: rgb(255, 240, 4);
+            }
+            >div {
+                border: 1px solid #fff;
+                border-radius: 4px;
+                overflow: hidden;
+                width: 100px;
+                text-align: center;
+                >div {
+                    padding: 0;
+                    line-height: 26px;
+                }
+            }
+        }
+    }
+}
+
+#anesRecord_nhfe.page-print {
+    font-size: 12px;
+    @lineH: 15px;
+    @lineE: 15px;
+    main {
+        a,
+        input,
+        select {
+            height: @lineH;
+        }
+        .paging {
+            height: @lineH;
+            span {
+                height: @lineH;
+            }
+        }
+        header {
+            h3,
+            h4 {
+                margin-top: -3px;
+                margin-bottom: 3;
+            }
+            h4 {
+                margin-bottom: 0;
+            }
+        }
+        article {
+            .lineH {
+                height: @lineH;
+                line-height: @lineH;
+            }
+            .blockDis {
+                padding: 0;
+                margin-right: 2px;
+            }
+            .head {
+                padding: 1px;
+                .bSpecial {
+                    margin-left: 2px;
+                    div {
+                        line-height: @lineH - 1;
+                    }
+                }
+            }
+            .body {
+                table {
+                    tr {
+                        height: @lineH;
+                    }
+                    td {
+                        width: @lineH;
+                        line-height: @lineH;
+                    }
+                    td {
+                        >div:not(.echarts) {
+                            height: @lineH;
+                            line-height: @lineH;
+                        }
+                    }
+                }
+                .left {
+                    width: 171px;
+                    table tr:nth-last-child(2) {
+                        td div {
+                            height: @lineH;
+                        }
+                    }
+                    .mon {
+                        span {
+                            display: inline-block;
+                            height: inherit;
+                        }
+                        td:first-child {
+                            >div {
+                                padding-right: 2px;
+                                height: @lineH;
+                                img {
+                                    height: @lineH - 6;
+                                }
+                            }
+                            >div.otherImg {
+                                height: 7 * @lineH;
+                                div {
+                                    height: @lineH;
+                                }
+                            }
+                        }
+                    }
+                }
+                .middle {
+                    table {
+                        td.echart1 {
+                            position: relative;
+                            >div {
+                                height: 20 * @lineE;
+                            }
+                            >.grid {
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                pointer-events: none;
+                            }
+                        }
+                        td.echart2 {
+                            height: 25 * @lineH;
+                        }
+                        tr.numInput {
+                            height: @lineH + 1;
+                        }
+                        tr.numInput td input,
+                        tr.numInput td select {
+                            height: @lineH - 4;
+                        }
+                    }
+                }
+                .right {
+                    width: 110px;
+                    table tr:first-child {
+                        height: 2 * @lineH;
+                    }
+                    table tr:nth-child(2) td {
+                        height: 44 * @lineH + 1;
+                    }
+                }
+            }
+            .scale05{transform:scale(0.8,0.6); letter-spacing: -1.5px; line-height: 12px;  position: relative; top:-3px;}
+            .buttom {
+                table {
+                    .check-box {
+                        font-size: 12px;
+                        .checkInput {
+                            width: 10px;
+                            height: 10px;
+                        }
+                        .checkInput:after {
+                            top: 3px;
+                        }
+                    }
+                    tr:first-child {
+                        td:first-child {
+                            width: @lineH - 2;
+                            height: 7 * @lineH;
+                        }
+                        td:nth-child(2) {
+                            height: 3 * @lineH;
+                            padding-left: 2px;
+                        }
+                        td:last-child {
+                            .backList {
+                                height: 7 * @lineH;
+                                >div {
+                                    height: @lineH;
+                                }
+                            }
+                        }
+                    }
+                    tr:nth-child(n+1) {
+                        td:first-child {
+                            padding: 0;
+                            >div {
+                                height: @lineH;
+                                line-height: @lineH;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#modelAnaesthetic,
+#modelERespire,
+#inputInfo,
+#outIoevent,
+#remarkInfo,
+#modelHzTime,
+#saveAsTemp,
+#fastAddEvent,
+#outRoom {
+    tr {
+        cursor: pointer;
+    }
+    input[type=checkbox] {
+        margin: 0;
+        height: 30px;
+    }
+    select {
+        height: 26px;
+    }
+    datetime-picker {
+        height: 26px;
+        border: 1px solid #aaa;
+    }
+    .required {
+        margin-top: 17px;
+        min-width: 45px!important;
+        padding-right: 2px!important;
+    }
+}
+
+#monitorConfig {
+    table {
+        margin: 0px;
+    }
+}
+
+#modelIntrMong {
+    input[type=checkbox] {
+        margin: 0;
+    }
+    select {
+        height: 26px;
+        width: 80%;
+    }
+    label {
+        height: 26px;
+        line-height: 26px;
+        margin: 0;
+    }
+    tr td:last-child div {
+        height: 26px;
+        line-height: 26px;
+    }
+}
+
+#modelERespire,
+#rescueEvent {
+    input[type=radio] {
+        margin: 0px;
+    }
+    label {
+        margin: 10px auto;
+    }
+}
+
+#inspectionEvent {
+    tr {
+        cursor: pointer;
+    }
+    .allCheckItem {
+        height: 580px;
+        overflow: auto;
+    }
+}
+
+#modelHzTime {
+    label {
+        width: 220px;
+    }
+}
+
+#loadTemp {
+    [ng-model=lv] {
+        height: 26px;
+        width: 174px;
+    }
+    [ui-grid] {
+        margin-top: 20px;
+    }
+}
+oi-select .select-dropdown {
+    max-height: 345px;
+}

@@ -1,0 +1,274 @@
+<div id="print-region">
+    <div class="page-print anesthesiaSummaryNhfe" ng-class="{true: 'end-state'}[processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center" class="noTop">
+            <h3 ng-if='docInfo.beName && docInfo.beCode != "syzxyy"'>{{docInfo.beName}}</h3>
+            <h4 ng-if='docInfo.subName && docInfo.beCode != "syzxyy"'>{{docInfo.subName}}</h4>
+            <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h4>麻醉记录单二</h4>
+        </header>
+        <div class="form-group" layout layout-align="space-between end">
+            <span layout style='min-width: 100px;'>姓名：<a flex>{{regOpt.name}}</a></span>
+            <span layout>性别：<a flex>{{regOpt.sex}}</a></span>
+            <span layout>年龄：<a flex>{{regOpt.age}}</a></span>
+            <span layout style='min-width: 100px;'>科室：<a flex>{{regOpt.deptName}}</a></span>
+            <span layout style='min-width: 100px;'>床号：<a flex>{{regOpt.beid}}</a></span>
+            <span layout style='min-width: 100px;'>住院号：<a flex>{{regOpt.hid}}</a></span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>术后诊断：<a flex>{{vm.optLatterDiagStr}}</a></span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>实施手术：<a flex>{{vm.optRealOperStr}}</a></span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>实施麻醉：<a flex>{{vm.realAnaesStr || regOpt.designedAnaesMethodName}}</a></span>
+        </div>
+        <div class="form-group">
+            <span>麻醉实施情况：</span>
+        </div>
+        <div class="form-group" flex layout>
+            <div style="width: 240px;">
+                <span class="tit">椎管内穿刺：</span>
+                <checkbox ng-model="vm.spinalCanalPuncture.puncBodyPointMap.a" ng-true-value="'1'" ng-false-value="'0'">硬</checkbox>
+                <checkbox ng-model="vm.spinalCanalPuncture.puncBodyPointMap.b" ng-true-value="'2'" ng-false-value="'0'">腰</checkbox>
+            </div>
+            <div>
+                <span class="tit">穿刺时体位：</span>
+                <select style="width: 100px;border:none;border-bottom:1px solid #333;" ng-model="vm.spinalCanalPuncture.puncPosi">
+                    <option ng-repeat="item in vm.puncPosiList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                </select>
+            </div>
+            <div>
+                <span class="tit">穿刺点：</span>
+                <select style="width: 100px;border:none;border-bottom:1px solid #333;" ng-model="vm.spinalCanalPuncture.puncPoint">
+                    <option ng-repeat="item in vm.puncPointList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div style="width: 240px;">
+                <span class="tit">穿刺：</span>
+                <checkbox ng-model="vm.spinalCanalPuncture.isSucc" ng-true-value="'1'" ng-false-value="'0'">顺利</checkbox>
+                <checkbox ng-model="vm.spinalCanalPuncture.isSucc" ng-true-value="'2'" ng-false-value="'0'">不顺利</checkbox>
+            </div>
+            <div>
+                <span class="tit">黄韧带感：</span>
+                <checkbox ng-model="vm.spinalCanalPuncture.bubbleCompress" ng-true-value="'1'" ng-false-value="'0'">气泡压缩</checkbox>
+                <checkbox ng-model="vm.spinalCanalPuncture.resistanceDisappear" ng-true-value="'1'" ng-false-value="'0'">阻力消失</checkbox>
+                <checkbox ng-model="vm.spinalCanalPuncture.negativePressure" ng-true-value="'1'" ng-false-value="'0'">负压气泡外漏</checkbox>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div style="width: 240px;">
+                <span class="tit">置管：</span>
+                <checkbox ng-model="vm.spinalCanalPuncture.intubationMap.a" ng-true-value="'1'" ng-false-value="'0'">顺利</checkbox>
+                <checkbox ng-model="vm.spinalCanalPuncture.intubationMap.a" ng-true-value="'2'" ng-false-value="'0'">不顺利</checkbox>
+            </div>
+            <div>
+                <span class="tit">阻力：</span>
+                <checkbox ng-model="vm.spinalCanalPuncture.intubationMap.b" ng-true-value="'1'" ng-false-value="'0'">有</checkbox>
+                <checkbox ng-model="vm.spinalCanalPuncture.intubationMap.b" ng-true-value="'2'" ng-false-value="'0'">无</checkbox>
+            </div>
+            <div>
+                <span class="tit">异感：</span>
+                <checkbox ng-model="vm.spinalCanalPuncture.intubationMap.c" ng-true-value="'1'" ng-false-value="'0'">有</checkbox>
+                <checkbox ng-model="vm.spinalCanalPuncture.intubationMap.c" ng-true-value="'2'" ng-false-value="'0'">无</checkbox>
+            </div>
+            <div>
+                <span class="tit">导管回血：</span>
+                <checkbox ng-model="vm.spinalCanalPuncture.intubationMap.d" ng-true-value="'1'" ng-false-value="'0'">有</checkbox>
+                <checkbox ng-model="vm.spinalCanalPuncture.intubationMap.d" ng-true-value="'2'" ng-false-value="'0'">无</checkbox>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div style="width: 240px;">
+                <span class="tit">试验剂量：</span>
+                <input type="number" transform='number' min="0" class="noborder3" style="width: 75px;" maxlength="8" ng-model="vm.spinalCanalPuncture.experDose" ng-value="vm.spinalCanalPuncture.experDose">（ml）
+            </div>
+            <div>
+                <span class="tit">麻醉范围：</span>
+                <input type="text" class="noborder3" style="width: 75px;" maxlength="8" ng-model="vm.spinalCanalPuncture.anaesRange" ng-value="vm.spinalCanalPuncture.anaesRange">
+            </div>
+            <div>
+                <span class="tit">不良反应：</span>
+                <checkbox ng-model="vm.spinalCanalPuncture.untowardEffect" ng-true-value="'1'" ng-false-value="'0'">有</checkbox>&nbsp;
+                <checkbox ng-model="vm.spinalCanalPuncture.untowardEffect" ng-true-value="'2'" ng-false-value="'0'">无</checkbox>
+            </div>
+        </div>
+        <div class="form-group" flex layout style="margin-top: 20px;">
+            <div flex layout>
+                <span class="tit">神经阻滞：</span>
+                <div flex layout>
+                    <span>部位</span>
+                    <input flex type="text" class="noborder3" maxlength="20" ng-model="vm.nerveBlock.blockPoint" ng-value="vm.nerveBlock.blockPoint">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div style="width: 240px;">
+                <span class="tit">穿刺：</span>
+                <checkbox ng-model="vm.nerveBlock.isSucc" ng-true-value="'1'" ng-false-value="'0'">顺利</checkbox>&nbsp;
+                <checkbox ng-model="vm.nerveBlock.isSucc" ng-true-value="'2'" ng-false-value="'0'">不顺利</checkbox>
+            </div>
+            <div>
+                <span class="tit">异感：</span>
+                <checkbox ng-model="vm.nerveBlock.diffFeel" ng-true-value="'1'" ng-false-value="'0'">有</checkbox>&nbsp;
+                <checkbox ng-model="vm.nerveBlock.diffFeel" ng-true-value="'2'" ng-false-value="'0'">无</checkbox>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div style="width: 240px;">
+                <span class="tit">回抽：</span>
+                <checkbox ng-model="vm.nerveBlock.backBlood" ng-true-value="'1'" ng-false-value="'0'">有血</checkbox>&nbsp;
+                <checkbox ng-model="vm.nerveBlock.backBlood" ng-true-value="'2'" ng-false-value="'0'">无血</checkbox>
+            </div>
+            <div>
+                <span class="tit">试验剂量：</span>
+                <input type="number" transform='number' min="0" class="noborder3" style="width: 50px;" maxlength="8" ng-model="vm.nerveBlock.experDose" ng-value="vm.nerveBlock.experDose">（ml）
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div style="width: 240px;">
+                <span class="tit">不良反应：</span>
+                <checkbox ng-model="vm.nerveBlock.untowardEffect" ng-true-value="'1'" ng-false-value="'0'">有</checkbox>&nbsp;
+                <checkbox ng-model="vm.nerveBlock.untowardEffect" ng-true-value="'2'" ng-false-value="'0'">无</checkbox>
+            </div>
+            <div>
+                <span style='margin-left: 30px;'>第</span>                
+                <input type="number" min="1" max="200" transform="number" class="noborder3" style="width: 75px;" maxlength="8" ng-model="vm.nerveBlock.succCnt" ng-value="vm.nerveBlock.succCnt">
+                <!-- <select style="width: 75px; border:none;border-bottom:1px solid #333;" ng-model="vm.nerveBlock.succCnt">
+                    <option ng-repeat="item in cg_cishu" value="{{item}}">{{item}}</option>
+                </select> -->次成功
+            </div>
+        </div>
+        <div class="form-group" flex layout style="margin-top: 20px;">
+            <div>
+                <span class="tit">全身麻醉：</span>
+                <span>诱导：</span>
+                <checkbox ng-model="vm.generalAnaes.induce" ng-true-value="'1'" ng-false-value="'0'">快</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.induce" ng-true-value="'2'" ng-false-value="'0'">慢</checkbox>
+            </div>
+            <div>
+                <span class="tit">清醒插管：</span>
+                <checkbox ng-model="vm.generalAnaes.isSoberIntubation" ng-true-value="'1'" ng-false-value="'0'">顺利</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.isSoberIntubation" ng-true-value="'2'" ng-false-value="'0'">不顺利</checkbox>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div flex layout>
+                <span class="tit">声门暴露分级：</span>
+                <div layout='column'>
+                    <checkbox class='form-group' ng-model="vm.generalAnaes.glottisExpClass" ng-true-value="'1'" ng-false-value="'0'">Ⅰ级：声门完全暴露，可见声门前后联合</checkbox>
+                    <checkbox class='form-group' ng-model="vm.generalAnaes.glottisExpClass" ng-true-value="'2'" ng-false-value="'0'">Ⅱ级：声门部分暴露，可见声门后联合</checkbox>
+                    <checkbox class='form-group' ng-model="vm.generalAnaes.glottisExpClass" ng-true-value="'3'" ng-false-value="'0'">Ⅲ级：不能暴露声门，能看见会厌</checkbox>
+                    <checkbox class='form-group' ng-model="vm.generalAnaes.glottisExpClass" ng-true-value="'4'" ng-false-value="'0'">Ⅳ级：声门和会厌均不能看见（会厌见不到）</checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div style="width: 240px;">
+                <span class="tit">插管：</span>
+                <checkbox ng-model="vm.generalAnaes.isIntubation" ng-true-value="'1'">顺利</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.isIntubation" ng-true-value="'2'">不顺利</checkbox>
+            </div>
+            <div>
+                <span style='margin-left: 30px;'>第</span>
+                <input type="number" min="1" max="200" transform="number" class="noborder3" style="width: 75px;" maxlength="8" ng-model="vm.generalAnaes.succCnt" ng-value="vm.generalAnaes.succCnt">
+                <!-- <select style="width: 75px; border:none;border-bottom:1px solid #333;" ng-model="vm.generalAnaes.succCnt">
+                    <option ng-repeat="item in cg_cishu" value="{{item}}">{{item}}</option>
+                </select> -->次成功
+            </div>
+            <div style='margin-left: 30px;'>
+                <div class="form-group">
+                    <checkbox ng-model="vm.generalAnaes.catheterFlag" ng-true-value="'1'" ng-false-value="'0'">气管导管ID号：</checkbox>
+                    <input type="text" class="noborder3" style="width: 75px;" maxlength="25" ng-model="vm.generalAnaes.catheterId" ng-value="vm.generalAnaes.catheterId">
+                </div>
+                <div class="form-group">
+                    <checkbox ng-model="vm.generalAnaes.doubleCavityFlag" ng-true-value="'1'" ng-false-value="'0'">双腔气管导管：</checkbox>
+                    <input type="text" class="noborder3" style="width: 75px;" maxlength="25" ng-model="vm.generalAnaes.doubleCavityCatheter" ng-value="vm.generalAnaes.doubleCavityCatheter">
+                </div>
+                <div class="form-group">
+                    <checkbox ng-model="vm.generalAnaes.laryngealMaskFlag" ng-true-value="'1'" ng-false-value="'0'">喉罩：</checkbox>
+                    <input type="text" class="noborder3" style="width: 75px;" maxlength="25" ng-model="vm.generalAnaes.laryngealMask" ng-value="vm.generalAnaes.laryngealMask">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div flex layout>
+                <span class="tit">插管深度：</span>
+                <input type="text" class="noborder3" style="width: 75px;" maxlength="25" ng-model="vm.generalAnaes.intubationDepth" ng-value="vm.generalAnaes.intubationDepth">cm
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div flex layout>
+                <span class="tit">苏醒：</span>
+                <checkbox ng-model="vm.generalAnaes.isWake" ng-true-value="'1'" ng-false-value="'0'">顺利</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.pharyngealReflex" ng-true-value="'1'" ng-false-value="'0'">咽反射恢复</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.canAnswer" ng-true-value="'1'" ng-false-value="'0'">能回答</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.excitement" ng-true-value="'1'" ng-false-value="'0'">激动</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.vomiting" ng-true-value="'1'" ng-false-value="'0'">呕吐</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.cyanosis" ng-true-value="'1'" ng-false-value="'0'">发绀</checkbox>
+            </div>
+        </div>
+        <!-- <div class="form-group" flex layout>
+            <div flex layout>
+                <span class="tit">清醒程度：</span>
+                <checkbox ng-model="vm.generalAnaes.isWake" ng-true-value="'1'" ng-false-value="'0'">2分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.pharyngealReflex" ng-true-value="'1'" ng-false-value="'0'">1分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.canAnswer" ng-true-value="'1'" ng-false-value="'0'">0分</checkbox>
+            </div>
+            <div flex layout>
+                <span class="tit" style="width: auto;">呼吸道畅通程度：</span>
+                <checkbox ng-model="vm.generalAnaes.isWake" ng-true-value="'1'" ng-false-value="'0'">2分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.pharyngealReflex" ng-true-value="'1'" ng-false-value="'0'">1分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.canAnswer" ng-true-value="'1'" ng-false-value="'0'">0分</checkbox>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div layout>
+                <span class="tit">支体活动度：</span>
+                <checkbox ng-model="vm.generalAnaes.isWake" ng-true-value="'1'" ng-false-value="'0'">2分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.pharyngealReflex" ng-true-value="'1'" ng-false-value="'0'">1分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.canAnswer" ng-true-value="'1'" ng-false-value="'0'">0分</checkbox>
+            </div>
+        </div>
+        <div class="form-group" flex layout>
+            <div flex layout>
+                <span class="tit">Steward评分：</span>
+                <checkbox ng-model="vm.generalAnaes.isWake" ng-true-value="'1'" ng-false-value="'0'">6分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.pharyngealReflex" ng-true-value="'1'" ng-false-value="'0'">5分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.canAnswer" ng-true-value="'1'" ng-false-value="'0'">4分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.isWake" ng-true-value="'1'" ng-false-value="'0'">3分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.pharyngealReflex" ng-true-value="'1'" ng-false-value="'0'">2分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.pharyngealReflex" ng-true-value="'1'" ng-false-value="'0'">1分</checkbox>&nbsp;
+                <checkbox ng-model="vm.generalAnaes.canAnswer" ng-true-value="'1'" ng-false-value="'0'">0分</checkbox>
+            </div>
+        </div> -->
+        <div class="form-group" flex layout>
+            <div flex layout ng-class="{true: 'md-red'}[!vm.nerveBlock.anaesFeel && verify]">
+                <span class="tit"><em class="no-print">*</em>麻醉效果：</span>
+                <checkbox ng-model="vm.nerveBlock.anaesFeel" ng-true-value="'1'" ng-false-value="'0'">优</checkbox>&nbsp;
+                <checkbox ng-model="vm.nerveBlock.anaesFeel" ng-true-value="'2'" ng-false-value="'0'">良</checkbox>&nbsp;
+                <checkbox ng-model="vm.nerveBlock.anaesFeel" ng-true-value="'3'" ng-false-value="'0'">一般</checkbox>&nbsp;
+                <checkbox ng-model="vm.nerveBlock.anaesFeel" ng-true-value="'4'" ng-false-value="'0'">差</checkbox>
+            </div>
+        </div>
+        <div class="form-group" flex layout ng-class="{true: 'md-red'}[!vm.anaesSummary.anestSummary && verify]">
+            <span class="tit"><em class="no-print">*</em>麻醉小结：</span>
+            <div flex layout>
+                <textarea flex style="height: 80px;" ng-model="vm.anaesSummary.anestSummary" ng-value="vm.anaesSummary.anestSummary" maxlength="200">{{vm.anaesSummary.anestSummary}}</textarea>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="end center" ng-class="{true: 'md-red'}[!vm.anaesSummary.anaesDocList && verify]">
+            <span><em class="no-print">*</em>麻醉医师：</span>
+            <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetist" oi-options="item.userName as item.name for item in getAnesList($query) | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="vm.anaesSummary.anesthetistId"></oi-select>
+            <div class="eSignature">
+                <img ng-repeat="item in eSignatureAnesthetist" src="{{item.path}}" ng-if="item.hasPath" />
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="end center" ng-class="{true: 'md-red'}[!vm.anaesSummary.operaDate && verify]">
+            <span><em class="no-print">*</em>日期：</span>
+            <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.anaesSummary.operaDate" timepicker="false" format="Y-m-d" ng-value="vm.anaesSummary.operaDate" class="noborder3 calendar sign" id="datatime"></datetime-picker>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title><script type="text/javascript">
+//<![CDATA[
+window.__cfRocketOptions = {byc:0,p:0,petok:"901a2c49a2bc1adb3630108807a70a9e4ff571f8-1513665610-1800"};
+//]]>
+</script>
+<script type="text/javascript" src="https://ajax.cloudflare.com/cdn-cgi/scripts/9014afdb/cloudflare-static/rocket.min.js"></script>
+<style></style></head><body id="preview">
+<h4><a id="AIS_0"></a>AIS运行环境</h4>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th></th>
+<th>dev</th>
+<th>pro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>控制中心</td>
+<td>localhost:8080/#!/</td>
+<td><a href="http://192.168.5.5:8080">http://192.168.5.5:8080</a></td>
+</tr>
+<tr>
+<td>复苏室</td>
+<td>localhost:8080/#!/pacu</td>
+<td><a href="http://192.168.5.5:8080/pacu">http://192.168.5.5:8080/pacu</a></td>
+</tr>
+<tr>
+<td>手术室</td>
+<td>localhost:8080/oprm#!/</td>
+<td><a href="http://192.168.5.5:8081">http://192.168.5.5:8081</a></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>运行和打包<br>
+1)npm run dev   开发环境<br>
+2)npm run build 生产环境打包</p>
+</li>
+<li>
+<p>打包后注意(手动操作)：<br>
+1)在build打包文件下新建两个文件夹，仅供参考分别取名（app-控制中心和app-手术室）<br>
+2)将build文件下打包生成的文件分别复制到这两个新建文件夹内<br>
+3)这时需要同时删除（app-控制中心和app-手术室）js和css文件下多余的文件，并且修改index.html文件引用的js和css路径。</p>
+</li>
+</ul>
+<h4><a id="_16"></a>第三方组件</h4>
+<blockquote>
+<p>Angular oi.select<br>
+<a href="https://github.com/tamtakoe/oi.select">https://github.com/tamtakoe/oi.select</a></p>
+</blockquote>
+<blockquote>
+<p>Angular UI-Router<br>
+<a href="http://www.tuicool.com/articles/zeiy6ff">http://www.tuicool.com/articles/zeiy6ff</a></p>
+</blockquote>
+<blockquote>
+<p>Webpack知识<br>
+<a href="https://www.cnblogs.com/sloong/p/5570774.html">http://www.cnblogs.com/sloong/p/5570774.html</a><br>
+<a href="https://webpack.github.io/docs/multiple-entry-points.html">http://webpack.github.io/docs/multiple-entry-points.html</a></p>
+</blockquote>
+<blockquote>
+<p>bootstrap icon<br>
+<a href="http://glyphicons.bootstrapcheatsheets.com/">http://glyphicons.bootstrapcheatsheets.com/</a><br>
+<a href="https://www.tutorialspoint.com/bootstrap/bootstrap_glyph_icons.htm">http://www.tutorialspoint.com/bootstrap/bootstrap_glyph_icons.htm</a></p>
+</blockquote>
+<blockquote>
+<p>angular-ui-grid<br>
+<a href="http://ui-grid.info/docs/#/tutorial">http://ui-grid.info/docs/#/tutorial</a></p>
+</blockquote>
+<blockquote>
+<p>angular-toastr<br>
+<a href="https://github.com/Foxandxss/angular-toastr">https://github.com/Foxandxss/angular-toastr</a></p>
+</blockquote>
+<blockquote>
+<p>flex<br>
+<a href="https://material.angularjs.org/latest/layout/introduction">https://material.angularjs.org/latest/layout/introduction</a></p>
+</blockquote>
+<blockquote>
+<p>ngAnimate<br>
+<a href="https://augus.github.io/ngAnimate/">http://augus.github.io/ngAnimate/</a><br>
+<a href="http://www.jb51.net/article/68107.htm">http://www.jb51.net/article/68107.htm</a><br>
+<a href="http://embed.plnkr.co/0r7GdM91jU2NWsqPtruh/">http://embed.plnkr.co/0r7GdM91jU2NWsqPtruh/</a></p>
+</blockquote>
+<h4><a id="_45"></a>前端框架</h4>
+<ul>
+<li>angular1 + webpack2 + bootstrap3 + flex</li>
+</ul>
+<h4><a id="_48"></a>开发时注意</h4>
+<ul>
+<li>如需登录、验证、获取权限、用户信息、退出，可以引入’auth’服务</li>
+<li>调用后台接口需引入’IHttp’</li>
+<li>开发时，不需要再引入 ‘$state’ 和 ‘$stateParams’，只需要引入$rootScope即可。
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>使用时：$rootScope.$state 和 $rootScope.$stateParams</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>文书样式，将页面私有的样式，用id选择器单独写在一个文件里。</li>
+<li>尽量使用bootstrap字体图标，链接上面有 【bootstrap icon】</li>
+<li>ui-grid  引入uiGridServe服务
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>具体看uiGridServe.factory.js</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+
+</body></html>

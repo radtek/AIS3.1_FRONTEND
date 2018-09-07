@@ -1,0 +1,72 @@
+<div class="modal-header">    
+    <h4><span>血气分析</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="inspectionEvent">
+    <div class="modal-body">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>时间</th>
+                    <th width="8%" class="text-center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in item">
+                    <td ng-click="edit(row)">{{row.cheEventName}}</td>
+                    <td ng-click="edit(row)">{{row.occurTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                    <td class="text-center"><span class="glyphicon glyphicon-trash" ng-click="delete(row.cheEventId)"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div layout>
+            <div flex="50" class="input-wrap">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit"><em>*</em>名&nbsp;&nbsp;称</label>
+                    <input flex ng-model="param.cheEventName" required name="cheEventName" ng-blur="_cheEventName = true">
+                </div>
+                <p ng-if="form.cheEventName.$error.required && _cheEventName" class="help-block text-right">不能为空</p>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>时&nbsp;&nbsp;间</label>
+                    <datetime-picker flex ng-model="param.occurTime_" name="occurTime" required="true"></datetime-picker>
+                </div>
+                <p ng-if="form.occurTime.$error.required && _occurTime" class="help-block text-right">不能为空</p>
+            </div>
+        </div>
+        <div layout>
+            <div flex="50" class="input-wrap">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit">总&nbsp;&nbsp;结</label>
+                    <input flex ng-model="param.resultSummary">
+                </div>
+            </div>
+        </div>
+        <div class="allCheckItem">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>检验名称</th>
+                        <th>数值</th>
+                        <th>单位</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in list" ng-init="row.docId = docId">
+                        <td>{{row.name}}</td>
+                        <td ng-init="row.value = !!row.value ? (row.value - 0) : ''"><input type="number" ng-model="row.value"></td>
+                        <td>{{row.unit}}</td>
+                        <td><input ng-model="row.resultDescribe"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="add(); _cheEventName = false">清&nbsp;&nbsp;空</button>
+        <button class="btn btn-primary" ng-disabled="form.$invalid || !saved" type="button" ng-click="save(); _cheEventName = false">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

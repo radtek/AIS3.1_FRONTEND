@@ -1,0 +1,11 @@
+<div class="modal-header">    
+    <h4><span>取药记录</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form name="MedFinanceForm" class="form-horizontal" novalidate>
+    <div class="modal-body">
+        <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ui-grid-pagination ng-if="gridOptions" style="height: 500px;"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

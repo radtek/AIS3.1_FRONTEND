@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h4>
+    	<span>留置管路其他</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body err-wrap">
+        <div flex class="form-group" layout layout-align="end center">
+            <div flex layout layout-align="center center">
+                <checkbox class="chk92" md-no-ink ng-true-value="'鼻肠管'" ng-model="pipe[0]">鼻肠管</checkbox>
+                <checkbox class="chk106" md-no-ink ng-true-value="'胃管'" ng-model="pipe[1]">胃管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'鼻胆管'" ng-model="pipe[2]">鼻胆管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'胃造瘘管'" ng-model="pipe[3]">胃造瘘管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'膀胱造瘘管'" ng-model="pipe[4]">膀胱造瘘管</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <div flex layout layout-align="center center">
+                <checkbox class="chk92" md-no-ink ng-true-value="'T管引流管'" ng-model="pipe[5]">T管引流管</checkbox>
+                <checkbox class="chk106" md-no-ink ng-true-value="'文氏孔引流管'" ng-model="pipe[6]">文氏孔引流管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'肾造瘘管'" ng-model="pipe[7]">肾造瘘管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'肝周引流管'" ng-model="pipe[8]">肝周引流管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'VSD引流管'" ng-model="pipe[9]">VSD引流管</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <div flex layout layout-align="center center">
+                <checkbox class="chk92" md-no-ink ng-true-value="'腹膜透析管'" ng-model="pipe[10]">腹膜透析管</checkbox>
+                <checkbox class="chk106" md-no-ink ng-true-value="'腹膜后引流管'" ng-model="pipe[11]">腹膜后引流管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'盆腔引流管'" ng-model="pipe[12]">盆腔引流管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'腹腔引流管'" ng-model="pipe[13]">腹腔引流管</checkbox>
+                <checkbox class="chk92" md-no-ink ng-true-value="'脑室引流管'" ng-model="pipe[14]">脑室引流管</checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="save()" ng-disabled="form.$invalid">保存</button>
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+</form>

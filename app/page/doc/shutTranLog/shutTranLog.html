@@ -1,0 +1,324 @@
+<div id="print-region">
+    <div class="page-print beforemagin" id="shutTranLog">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>手术患者接送交接单</h4>
+        </header>
+        <div class=" beforeline beforemagin " ng-class="{true: 'end-state'}[patShuttleTransfer.processState == 'END' && !saveActive || setting.readonly]">
+            <div class="md-body-1 table-top-txt" layout="row" layout-align="space-between end">
+                <span layout flex>患者姓名：<a flex>{{regOptItem.name}}</a></span>
+                <span layout flex>性别：<a flex>{{regOptItem.sex}}</a></span>
+                <span layout flex>病区：<a flex>{{regOptItem.regionName}}</a></span>
+                <span layout flex>床号：<a flex>{{regOptItem.bed}}</a></span>
+                <span layout flex>住院号：<a flex>{{regOptItem.hid}}</a></span>
+            </div>
+            <div class="md-body-1 table-top-txt" layout="row" layout-align="space-between end">
+                <span layout flex>诊断：<a flex>{{regOptItem.diagnosisName}}</a></span>
+                <span layout flex>手术名称：<a flex>{{regOptItem.designedOptName}}</a></span>
+            </div>
+            <div layout-align="center center " class="tabletrhe">
+                <table>
+                    <tr>
+                        <td class="td-class-label" colspan="2">病房护士/手术室护士核对内容</td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-label" width="65%">患者核对内容</td>
+                        <td class="td-class-label" width="35%">带入物品</td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl">
+                            <checkbox ng-model="patShuttleTransfer.nameChk" ng-true-value="1" ng-false-value="0">姓名</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.sexChk" ng-true-value="1" ng-false-value="0">性别</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.ageChk" ng-true-value="1" ng-false-value="0">年龄</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.roomChk" ng-true-value="1" ng-false-value="0">病室</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.bedChk" ng-true-value="1" ng-false-value="0">床号</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.hidChk" ng-true-value="1" ng-false-value="0">住院号</checkbox>
+                            <br/>
+                            <checkbox ng-model="patShuttleTransfer.diagChk" ng-true-value="1" ng-false-value="0">诊断</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.operTimeChk" ng-true-value="1" ng-false-value="0">手术时间</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.operNameChk" ng-true-value="1" ng-false-value="0">手术名称</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.operBodyChk" ng-true-value="1" ng-false-value="0">手术部位</checkbox>
+                        </td>
+                        <td class="td-class-ctrl">
+                            <checkbox ng-model="patShuttleTransfer.patCase" ng-true-value="1" ng-false-value="0">病历</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" style="padding-bottom: 5px;">
+                            <checkbox ng-model="patShuttleTransfer.skinPlanChk" ng-true-value="1" ng-false-value="0">检查患者皮肤准备情况</checkbox>
+                            <br/>
+                            <checkbox ng-model="patShuttleTransfer.preCleanChk" ng-true-value="1" ng-false-value="0">术前用清洁剂和温水彻底进行皮肤清洁（包括脐部）</checkbox>
+                            <br/>
+                            <checkbox ng-model="patShuttleTransfer.worn.a.checked" ng-true-value="'2'" ng-false-value="'0'" ng-click="patShuttleTransfer.worn.a.content=''">皮肤完整</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.worn.a.checked" ng-true-value="'1'" ng-false-value="'0'" ng-change="vm.clearOther('patShuttleTransfer.worn.a.content')">破损部位</checkbox>
+                            <input maxlength="50" ng-model="patShuttleTransfer.worn.a.content" ng-disabled="patShuttleTransfer.worn.a.checked !='1'" ng-value="patShuttleTransfer.worn.a.content" style="width: 64%;" />
+                        </td>
+                        <td class="td-class-ctrl">
+                            <checkbox ng-model="patShuttleTransfer.preMedChk" ng-true-value="1" ng-false-value="0">术前用药</checkbox>
+                            <br/>
+                            <checkbox ng-model="patShuttleTransfer.specMedChk" ng-true-value="1" ng-false-value="0">特殊用药</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl">
+                            <checkbox ng-model="patShuttleTransfer.dressingChk" ng-true-value="1" ng-false-value="0">更衣</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.wearCapChk" ng-true-value="1" ng-false-value="0">戴手术帽</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.spireChk" ng-true-value="1" ng-false-value="0">腕带</checkbox>
+                            <br/> 下列物品是否除去：
+                            <br/>
+                            <checkbox ng-model="patShuttleTransfer.goodsRemove.a.checked" ng-true-value="'1'" ng-false-value="'0'">内衣</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.goodsRemove.b.checked" ng-true-value="'2'" ng-false-value="'0'">假牙</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.goodsRemove.c.checked" ng-true-value="'3'" ng-false-value="'0'">眼镜</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.goodsRemove.d.checked" ng-true-value="'4'" ng-false-value="'0'">金属物品</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.goodsRemove.e.checked" ng-true-value="'5'" ng-false-value="'0'">首饰</checkbox>
+                        </td>
+                        <td class="td-class-ctrl">
+                            <checkbox ng-model="patShuttleTransfer.xPianChk" ng-true-value="1" ng-false-value="0">X片</checkbox>
+                            <br/>
+                            <checkbox ng-model="patShuttleTransfer.ctChk" ng-true-value="1" ng-false-value="0">CT</checkbox>
+                            <br/>
+                            <checkbox ng-model="patShuttleTransfer.mriChk" ng-true-value="1" ng-false-value="0">MRI</checkbox>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="td-class-ctrl" style="border-top: none;" colspan="3">
+                            术前医嘱执行情况：
+                            <checkbox ng-model="patShuttleTransfer.preAdviceExec.a.checked" ng-true-value="'1'" ng-false-value="'0'">禁食</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.preAdviceExec.b.checked" ng-true-value="'2'" ng-false-value="'0'">药物过敏试验</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.preAdviceExec.c.checked" ng-true-value="'3'" ng-false-value="'0'">备血</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.preAdviceExec.d.checked" ng-true-value="'4'" ng-false-value="'0'">术前四项化验单
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="3">
+                            静脉通路部位：
+                            <checkbox ng-model="patShuttleTransfer.veinBody.a.checked" ng-true-value="'1'" ng-false-value="'0'">上肢</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.veinBody.b.checked" ng-true-value="'1'" ng-false-value="'0'">下肢</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.veinBody.c.checked" ng-true-value="'1'" ng-false-value="'0'">颈内外</checkbox>
+                            <checkbox ng-model="patShuttleTransfer.veinBody.d.checked" ng-true-value="'1'" ng-false-value="'0'">股静脉</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="3">
+                            其他：
+                            <input maxlength="80" ng-model="patShuttleTransfer.other" ng-value="patShuttleTransfer.other" style="width: 93%;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-left" width="30%">
+                            病房护士签名/日期时间
+                        </td>
+                        <td class="td-class-ctrl" colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-left" width="30%">
+                            手术室护士签名/日期时间
+                        </td>
+                        <td class="td-class-ctrl" colspan="2">
+                            <div layout>
+                                <oi-select class="noborder3 sign" name="operator" oi-options="item.userName as item.name for item in singUserItem | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="patShuttleTransfer.signUser" ng-blur="_operator = true" required>
+                                </oi-select>/
+                                <datetime-picker class='calendar sign' name="signTime" dateID="signTime-time" ng-model="patShuttleTransfer.signTime" timepicker="false" format="Y-m-d" ng-blur="_operaDate = true" id="datatime"></datetime-picker>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-left" width="30%">
+                            手术间护士签名/日期时间
+                        </td>
+                        <td class="td-class-ctrl" colspan="2">
+                            <div layout>
+                                <oi-select class="noborder3 sign" name="nurseSignUser" oi-options="item.userName as item.name for item in singUserItem | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="patShuttleTransfer.nurseSignUser" required>
+                                </oi-select>/
+                                <datetime-picker class='calendar sign' name="nuserSignTime" dateID="signTime-time" ng-model="patShuttleTransfer.nuserSignTime" timepicker="false" format="Y-m-d" id="datatime"></datetime-picker>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-label" colspan="2" width="50%">
+                            手术室与复苏室护士核对内容
+                        </td>
+                        <td class="td-class-label" colspan="2" width="50%">
+                            复苏 / 手术室与病房护士核对内容
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            <checkbox ng-model="content1.correctIden" ng-true-value="1" ng-false-value="0">核对患者身份正确</checkbox>
+                        </td>
+                        <td class="td-class-ctrl">
+                            <checkbox ng-model="content2.correctIden" ng-true-value="1" ng-false-value="0">核对患者身份正确</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            未用完的药：
+                            <checkbox ng-model="content1.unuseDrug.a.checked" ng-true-value="'1'" ng-false-value="'0'" ng-click="content1.unuseDrug.a.content = '';content1.unuseDrug.b.checked = '0'">有</checkbox>
+                            药名：
+                            <input class="ctrl-input-mid" ng-disabled="content1.unuseDrug.a.checked!='1'" ng-model="content1.unuseDrug.a.content" ng-value="content1.unuseDrug.a.content" />
+                            <checkbox ng-model="content1.unuseDrug.b.checked" ng-true-value="'1'" ng-false-value="'0'" ng-click="content1.unuseDrug.a.content = '';content1.unuseDrug.a.checked = '0'">无</checkbox>
+                        </td>
+                        <td class="td-class-ctrl">
+                            未用完的药：
+                            <checkbox ng-model="content2.unuseDrug.a.checked" ng-true-value="'1'" ng-false-value="'0'" ng-click="content2.unuseDrug.a.content = '';content2.unuseDrug.b.checked = '0'">有</checkbox>
+                            药名：
+                            <input class="ctrl-input-mid" ng-disabled="content2.unuseDrug.a.checked!='1'" ng-model="content2.unuseDrug.a.content" ng-value="content2.unuseDrug.a.content" />
+                            <checkbox ng-model="content2.unuseDrug.b.checked" ng-true-value="'1'" ng-false-value="'0'" ng-click="content2.unuseDrug.a.content = '';content2.unuseDrug.a.checked = '0'">无</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            未用完的血制品：
+                            <checkbox ng-model="content1.unuseBloodProduct" ng-true-value="1" ng-false-value="0">有</checkbox>
+                            <checkbox ng-model="content1.unuseBloodProduct" ng-true-value="2" ng-false-value="0">无</checkbox>
+                            <br/> 剩余量：
+                            <checkbox ng-model="content1.surplus.a.checked" ng-true-value="'1'" ng-false-value="'0'">少白红细胞（</checkbox>
+                            <input class="ctrl-input-short" ng-model="content1.surplus.a.content" ng-value="content1.surplus.a.content" />）u
+                            <br/>
+                            <checkbox ng-model="content1.surplus.b.checked" ng-true-value="'1'" ng-false-value="'0'">血浆（</checkbox>
+                            <input class="ctrl-input-short noborder-bottom" ng-model="content1.surplus.b.content" ng-value="content1.surplus.b.content" />）ml &nbsp;&nbsp;
+                            <checkbox ng-model="content1.surplus.c.checked" ng-true-value="'1'" ng-false-value="'0'">其他：（</checkbox>
+                            <input class="ctrl-input-short noborder-bottom" ng-model="content1.surplus.c.content" ng-value="content1.surplus.c.content" />）
+                        </td>
+                        <td class="td-class-ctrl">
+                            未用完的血制品：
+                            <checkbox ng-model="content2.unuseBloodProduct" ng-true-value="1" ng-false-value="0">有</checkbox>
+                            <checkbox ng-model="content2.unuseBloodProduct" ng-true-value="2" ng-false-value="0">无</checkbox>
+                            <br/> 剩余量：
+                            <checkbox ng-model="content2.surplus.a.checked" ng-true-value="'1'" ng-false-value="'0'">少白红细胞（</checkbox>
+                            <input class="ctrl-input-short" ng-model="content2.surplus.a.content"></input>）u
+                            <br/>
+                            <checkbox ng-model="content2.surplus.b.checked" ng-true-value="'1'" ng-false-value="'0'">血浆（</checkbox>
+                            <input class="ctrl-input-short noborder-bottom" ng-model="content2.surplus.b.content" ng-value="content2.surplus.b.content" />）ml &nbsp;&nbsp;
+                            <checkbox ng-model="content2.surplus.c.checked" ng-true-value="'1'" ng-false-value="'0'">其他：（</checkbox>
+                            <input class="ctrl-input-short" ng-model="content2.surplus.c.content" ng-value="content2.surplus.c.content" />）
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            术中用药有无过敏：
+                            <checkbox ng-model="content1.medAllergy" ng-true-value="1" ng-false-value="0">有&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content1.medAllergy" ng-true-value="2" ng-false-value="0">无</checkbox>
+                            <br/> 术中输血有无过敏：
+                            <checkbox ng-model="content1.transfusionAllergy" ng-true-value="1" ng-false-value="0">有&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content1.transfusionAllergy" ng-true-value="2" ng-false-value="0">无</checkbox>
+                        </td>
+                        <td class="td-class-ctrl">
+                            复苏/手术室用药有无过敏：
+                            <checkbox ng-model="content2.medAllergy" ng-true-value="1" ng-false-value="0">有&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.medAllergy" ng-true-value="2" ng-false-value="0">无</checkbox>
+                            <br/> 复苏/手术室输血有无过敏：
+                            <checkbox ng-model="content2.transfusionAllergy" ng-true-value="1" ng-false-value="0">有&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.transfusionAllergy" ng-true-value="2" ng-false-value="0">无</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            <checkbox ng-model="content1.skinFull.a.checked" ng-true-value="'1'" ng-false-value="'0'" ng-click="content1.skinFull.b.content=''">皮肤完整&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content1.skinFull.a.checked" ng-true-value="'2'" ng-false-value="'0'" ng-click="content1.skinFull.b.content = ''">破损</checkbox>
+                            <input ng-disabled="content1.skinFull.a.checked!='2'" class="noborder-bottom" ng-model="content1.skinFull.b.content" ng-value="content1.skinFull.b.content" style="width: 52%;" />
+                        </td>
+                        <td class="td-class-ctrl">
+                            <checkbox ng-model="content2.skinFull.a.checked" ng-true-value="'1'" ng-false-value="'0'" ng-click="content2.skinFull.b.content=''">皮肤完整&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.skinFull.a.checked" ng-true-value="'2'" ng-false-value="'0'" ng-click="content2.skinFull.b.content = ''">破损</checkbox>
+                            <input ng-disabled="content2.skinFull.a.checked!='2'" ng-model="content2.skinFull.b.content" ng-value="content2.skinFull.b.content" style="width: 52%;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            手术室带回：
+                            <checkbox ng-model="content1.operroomTake.a.checked" ng-true-value="'1'" ng-false-value="'0'">CT&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content1.operroomTake.b.checked" ng-true-value="'1'" ng-false-value="'0'">MRI&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content1.operroomTake.c.checked" ng-true-value="'1'" ng-false-value="'0'">X片</checkbox>
+                        </td>
+                        <td class="td-class-ctrl">
+                            复苏/手术室带回：
+                            <checkbox ng-model="content2.operroomTake.a.checked" ng-true-value="'1'" ng-false-value="'0'">CT&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.operroomTake.b.checked" ng-true-value="'1'" ng-false-value="'0'">MRI&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.operroomTake.c.checked" ng-true-value="'1'" ng-false-value="'0'">X片</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            止痛泵：
+                            <checkbox ng-model="content1.pcia" ng-true-value="1" ng-false-value="0">硬膜外&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content1.pcia" ng-true-value="2" ng-false-value="0">静脉</checkbox>
+                        </td>
+                        <td class="td-class-ctrl">
+                            止痛泵：
+                            <checkbox ng-model="content2.pcia" ng-true-value="1" ng-false-value="0">硬膜外&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.pcia" ng-true-value="2" ng-false-value="0">静脉</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            静脉通路部位：
+                            <br />
+                            <checkbox ng-model="content1.veinBody.a.checked" ng-true-value="'1'" ng-false-value="'0'">上肢&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content1.veinBody.b.checked" ng-true-value="'1'" ng-false-value="'0'">下肢&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content1.veinBody.c.checked" ng-true-value="'1'" ng-false-value="'0'">颈内外&nbsp;&nbsp;</checkbox>
+                            <br>
+                            <checkbox ng-model="content1.veinBody.d.checked" ng-true-value="'1'" ng-false-value="'0'">股静脉</checkbox>
+                        </td>
+                        <td class="td-class-ctrl" colspan="2">
+                            静脉通路部位：
+                            <br />
+                            <checkbox ng-model="content2.veinBody.a.checked" ng-true-value="'1'" ng-false-value="'0'">上肢&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.veinBody.b.checked" ng-true-value="'1'" ng-false-value="'0'">下肢&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.veinBody.c.checked" ng-true-value="'1'" ng-false-value="'0'">颈内外&nbsp;&nbsp;</checkbox>
+                            <checkbox ng-model="content2.veinBody.d.checked" ng-true-value="'1'" ng-false-value="'0'">股静脉</checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-ctrl" colspan="2">
+                            其他：
+                            <input class="noborder-bottom" maxlength="50" ng-model="content1.other.a.content" ng-value="content1.other.a.content" style="width: 86%;" />
+                        </td>
+                        <td class="td-class-ctrl">
+                            其他：
+                            <input maxlength="50" ng-model="content2.other.a.content" ng-value="content2.other.a.content" style="width: 86%;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-left" colspan="2">
+                            <div layout style="margin-top: 18px;">
+                                手术室护士签名/日期时间：
+                                <oi-select class="noborder3 sign" name="operator" oi-options="item.userName as item.name for item in singUserItem | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="content1.signUser" ng-blur="_operator = true" required>
+                                </oi-select>/
+                                <datetime-picker class='calendar sign' name="dsignTime" dateID="sdignTime-time" ng-model="content1.signTime" timepicker="false" format="Y-m-d" ng-blur="_operaDate = true" id="datatime"></datetime-picker>
+                            </div>
+                        </td>
+                        <td class="td-class-left">
+                            复苏/手术室护士签名/日期时间：
+                            <div layout>
+                                <oi-select class="noborder3 sign" name="operator" oi-options="item.userName as item.name for item in singUserItem | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="content2.signUser" ng-blur="_operator = true" required>
+                                </oi-select>/
+                                <datetime-picker class='calendar sign' name="sTime" dateID="sTime-times" ng-model="content2.signTime" timepicker="false" format="Y-m-d" ng-blur="_operaDate = true" id="datatime"></datetime-picker>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-class-left" colspan="2">
+                            <div layout>
+                                复苏室护士签名/日期时间：
+                                <oi-select class="noborder3 sign" name="operator" oi-options="item.userName as item.name for item in singUserItem | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="content2.signUser" ng-blur="_operator = true" required>
+                                </oi-select>/ 
+                                <datetime-picker class='calendar sign' name="signTimes" dateID="signTimes-times" ng-model="content2.signTime" timepicker="false" format="Y-m-d" ng-blur="_operaDate = true" id="datatime"></datetime-picker>
+                            </div>
+                        </td>
+                        <td class="td-class-left">
+                            病房护士签名/日期时间：
+                        </td>
+                    </tr>
+                </table>
+                <span>注：在<checkbox class="print-box" disabled></checkbox>打钩以示执行或所在部位</span>
+            </div>
+        </div>
+    </div>
+</div>

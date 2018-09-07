@@ -1,0 +1,50 @@
+<div flex>
+	<div layout flex style="height:305px;margin-bottom:10px;border:1px solid #ccc">
+	    <div layout="column" flex="40">
+	        <!-- <div class="pie" style="animation-delay: -20s;">　</div> -->
+	        <!-- <canvas id="pie" class="chart chart-pie chart-xs" chart-data="{{[20, 80]}}" chart-labels="{{['2x', '8x']}}"></canvas> -->
+	        <div e-chart class="echarts" e-config="eConfig" e-option="eOption"></div>
+	    </div>
+	    <div layout="column" flex="60">
+	        <div style="margin-top:40px;padding-left: 1px;"><i class="glyphicon glyphicon-asterisk"></i> 说明:椎管内麻醉后严重神经并发症，是指在椎管内麻醉后新发的重度头痛、局部感觉异常（麻木或异感）、运动异常（肌无力甚至瘫痪）等，持续超过72小时，并排除其他病因者。椎管内麻醉后严重神经并发症发生率，是指椎管内麻醉后严重神经并发症发生例数占同期椎管内麻醉总例数的比例。
+	        </div>
+	        <div  style="margin-top:20px;">
+	        <div layout flex>
+	            <div layout="column" layout-align="center end" flex="25">
+	                <span style="padding-top:2px;white-space:nowrap;">椎管内麻醉后严重神经并发症发生率 &nbsp;&nbsp;=</span>
+	            </div>
+	            <div layout="column" layout-align="center center"  flex="35">
+		            <div layout="column">
+		                <div  style="white-space:nowrap;">
+		                    椎管内麻醉后严重神经并发症发生例数（{{SpinalAnaesNeuralComplicat.spinalComplicatTotal}}）
+		                </div>
+		                <div>
+		                    <hr style="height:1px;background-color:#777;">
+		                </div>
+		                <div  style="white-space:nowrap;">
+		                    同期椎管内麻醉总例数（{{SpinalAnaesNeuralComplicat.spinalTotal}}）
+		                </div>
+	                </div>
+	            </div>
+	            <div layout="column" layout-align="center start" flex="10">
+	                <span style="white-space:nowrap;"> &nbsp;&nbsp;x 100% &nbsp;&nbsp; = &nbsp;&nbsp;{{SpinalAnaesNeuralComplicat.rate}}%</span>
+	            </div>
+	        </div>
+	        </div>
+	    </div>	    
+	</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiSpinalAnaesNeuralComplicattop');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsSpinalAnaesNeuralComplicattop" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsSpinalAnaesNeuralComplicattop" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsSpinalAnaesNeuralComplicattop">暂无数据</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiSpinalAnaesNeuralComplicat');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsSpinalAnaesNeuralComplicat" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsSpinalAnaesNeuralComplicat" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsSpinalAnaesNeuralComplicat">暂无数据</div>
+</div>

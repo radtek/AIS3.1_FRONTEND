@@ -1,0 +1,26 @@
+<div layout flex id="knowledge">
+    <div class="ztree-div">
+        <z-tree id="ztree" class="ztree" z-option="option" z-config="config" ztree="ztree"></z-tree>
+    </div>
+    <div flex>
+        <div layout>
+            <div layout flex>
+                <input flex="80" type="text" class="form-control" ng-model="anaesKndgName" placeholder="请输入搜索条件...">
+                <div flex="5"></div>
+                <button class="btn btn-primary" ng-click="query()">查&nbsp;&nbsp;询</button>
+            </div>
+            <div flex></div>
+        </div>
+        <div>
+            <h3>{{treeNode.name}}</h3>
+        </div>
+        <div layout class="text-zsk">
+            <textarea flex="70" ng-model="treeNode.content"></textarea>
+        </div>
+        <div layout>
+            <div flex="70" layout>
+            	<div flex></div><button class="btn btn-primary" ng-click="saveContent()">保&nbsp;&nbsp;存</button>
+            </div>
+        </div>
+    </div>
+</div>

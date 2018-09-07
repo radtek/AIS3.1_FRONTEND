@@ -1,0 +1,51 @@
+<div id="print-region">
+    <div id="inspReport" class="page-print" ng-if="docInfo.beCode !== 'syzxyy' && docInfo.beCode != 'cshtyy'" ng-class="{true:'end-state'}[setting.readonly]">
+        <div layout layout-align="space-between end" class="form-group" style="white-space:nowrap;">
+            <span flex layout>姓名：<a flex>{{vm.regOpt.name}}</a></span>
+            <span flex layout>性别：<a flex>{{vm.regOpt.sex}}</a></span>
+            <span flex layout>年龄：<a flex>{{vm.regOpt.age}}</a></span>
+            <span flex layout>科室：<a flex>{{vm.regOpt.deptName}}</a></span>
+            <span flex layout>床号：<a flex>{{vm.regOpt.bed}}</a></span>
+            <span flex layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+        </div>
+        <div layout class="form-group" layout-align="space-between end">
+            <span flex layout>术前诊断：<a flex>{{vm.regOpt.diagnosisName}}</a></span>
+        </div>
+        <div layout class="form-group" layout-align="space-between end">
+            <span flex layout>拟施手术：<a flex>{{vm.regOpt.designedOptName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end center">
+            <button class="btn btn-primary" ng-click="import($event)">HIS导入</button>
+        </div>
+        <div class="form-group ui-table" style="max-height: 630px; overflow-y: auto;">
+            <ul layout>
+                <li layout style="width: 14%;">申请日期</li> 
+                <li layout style="width: 14%;" >报告日期</li>
+                <li layout style="width: 14%;" >申请科室</li>
+                <li layout  style="width: 22%;">详细信息</li>
+                <li layout style="width: 12%;" >申请医生</li>
+                <li layout style="width: 8%;" >备注</li>
+                <li layout style="width: 8%;" >状态</li>
+                <li layout style="width: 8%;" class="no-print">操作</li>
+            </ul>
+            <ul layout ng-repeat="i in griddata">
+            <li layout="column" style="width: 14%;">{{i.date}}
+            </li>
+            <li layout="column" style="width: 14%;">{{i.reportDate}}
+            </li>
+            <li layout="column" style="width: 14%;">{{i.dep}}
+            </li>
+            <li layout="column"  style="width: 22%;">{{i.instruction}}
+            </li>
+            <li layout="column" style="width: 12%;">{{i.reqDoctorId}}
+            </li>
+            <li layout="column" style="width: 8%;">{{i.remark}}
+            </li>
+            <li layout="column" style="width: 8%;">{{i.state}}
+            </li>
+            <li layout="column" class="no-print" style="width: 8%;"><a class="viewa" ng-click="toView(i)">查看</a>
+            </li>
+            </ul>
+        </ul>    
+    </div>
+</div>

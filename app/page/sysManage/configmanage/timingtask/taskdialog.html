@@ -1,0 +1,84 @@
+<div class="modal-header"> 
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper">
+    <form name="formName" class="panel panel-default" role="form" novalidate>
+    	<div class="wrap" layout layout-wrap="wrap">
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>任务名称</label>
+                    <input flex type="text" name="taskName" class="form-control" ng-model="taskParams.taskName" ng-maxlength="30" ng-minlength="3" ng-blur="_taskName = true" required>
+                </div>
+                <p ng-if="formName.taskName.$invalid&& _taskName&&!formName.taskName.$error.minlength&&!formName.taskName.$error.maxlength" class="help-block text-right">任务名称不能为空</p>
+                <p ng-if="formName.taskName.$error.minlength&& _taskName&&formName.taskName.$invalid" class="help-block text-right">长度不能少于3个字符</p>
+                <p ng-if="formName.taskName.$error.maxlength&& _taskName&&formName.taskName.$invalid" class="help-block text-right">长度不能超过30个字符</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>任务组</label>
+                    <input flex type="text" name="taskGroup" class="form-control" ng-model="taskParams.taskGroup" ng-maxlength="30" ng-minlength='3' ng-blur="_taskGroup = true" required>
+                </div>
+                <p ng-if="formName.taskGroup.$invalid&& _taskGroup&&!formName.taskGroup.$error.minlength&&!formName.taskGroup.$error.maxlength" class="help-block text-right">组名称不能为空</p>
+                <p ng-if="formName.taskGroup.$error.minlength&& _taskGroup&&formName.taskGroup.$invalid" class="help-block text-right">长度不能少于3个字符</p>
+                <p ng-if="formName.taskGroup.$error.maxlength&& _taskGroup&&formName.taskGroup.$invalid" class="help-block text-right">长度不能超过30个字符</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>是否启用</label>
+                    <!-- <input flex type="number" name="tableNum" class="form-control" ng-model="operRoom.tableNum" ng-blur="_tablenum = true" min="0" required> -->
+                    <select flex name="taskStatus" ng-options=" item.value as item.name for item in flaglist" class="form-control" ng-model="taskParams.taskStatus" ng-blur="_taskStatus = true" required>
+                       <!--  <option value=1 >启用</option>
+                        <option value=0 >禁用</option> -->
+                    </select>
+
+                </div>
+                <p ng-if="formName.taskStatus.$invalid&&_taskStatus" class="help-block text-right">请选择是否启用</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>表达式</label>
+                    <input flex type="text" name="cronExpression" class="form-control" ng-model="taskParams.cronExpression" ng-blur="_cronExpression = true" min="0" required>
+                </div>
+                <p ng-if="(taskParams.cronExpression == undefined) &&_cronExpression" 
+                class="help-block text-right">表达式不能为空</p>
+            </div>
+            <!-- <div flex="45" class="input-wrap"> -->
+               <!--  <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>定时类</label>
+                    <input flex type="text" name="operLevel" class="form-control" ng-model="operRoom.operLevel" ng-blur="_operLevel = true" ng-maxlength="20" required>
+                </div> -->
+                <!-- <p ng-if="!operRoom.operLevel && (_operLevel || verify == false)" class="help-block text-right">开始时间不能为空</p> -->
+                <!-- <p ng-if="operation.operLevel.$error.maxlength && _operLevel" class="help-block text-right">长度不能超过20个字符</p> -->
+            <!-- </div> -->
+           <!--  <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>描述</label>
+                    <select flex name="roomType" class="form-control" ng-model="operRoom.roomType" ng-blur="_roomType = true" required>
+                        <option value="01">手术室</option>
+                        <option value="02">恢复室</option>
+                    </select>
+                </div>
+                <p ng-if="!operRoom.roomType && (_roomType || verify == false)" class="help-block text-right">类型不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>是否有效</label>
+                    <select flex name="enable" class="form-control" ng-model="operRoom.enable" ng-blur="_enable = true" required>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+                <p ng-if="(operRoom.enable == undefined) && (_enable || verify == false)" class="help-block text-right">状态不能为空</p>
+            </div> -->
+
+
+        
+        </div>
+
+
+        <div class="modal-footer">
+        	<button class="btn btn-primary" ng-click="btnActive && saveOperationRoom()">保&nbsp;&nbsp;存</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+        </div>
+    </form>
+</div>

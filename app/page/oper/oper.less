@@ -1,0 +1,32 @@
+#doc-all {
+    margin: auto;
+    background-color: #fff;
+    .search-label{font-size: 14px;}
+    .layout-warp {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background-color: #fff;
+        display: flex;
+    }
+    .timer-warp{
+        margin: auto;
+        text-align: center;
+    }
+    .timer {
+        background-color: #eee;
+        font-size: 90px;
+    }
+    .ex{
+        line-height: 40px;
+    }
+
+    @media print {
+        .layout-warp {
+            display: none;
+        }
+    }
+}

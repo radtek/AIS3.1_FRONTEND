@@ -1,0 +1,86 @@
+<div class="modal-header">    
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form class="form-horizontal shiftIn-baseInfo" name="BaseInfoForm"  novalidate>
+    <div class="modal-body">
+        <div class="patient-in-modal-form-div">
+            <div class="form-group">
+                <label for="beid" class="col-sm-2 control-label"><span class="red">*</span>局点:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="vm.user.beid" ng-change="vm.changebeid()" required>
+                        <option value="">--请选择--</option>
+                        <option ng-repeat="item in vm.bus" value="{{item.beid}}">{{item.name}}</option>
+                    </select>
+                    <div class="form-error-info" ng-show="BaseInfoForm.beid.$dirty && !BaseInfoForm.beid.$valid"> <span>局点不能为空</span> </div>
+                </div>                
+            </div>
+            <div class="form-group">
+                <label for="bloodType" class="col-sm-2 control-label"><span class="red">*</span>姓名:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="name" ng-model="vm.user.name" required>
+                    <div class="form-error-info" ng-show="BaseInfoForm.name.$dirty && !BaseInfoForm.name.$valid"> <span>姓名不能为空</span> </div>
+                </div>
+                <label for="bloodType" class="col-sm-2 control-label"><span class="red">*</span>用户账号:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="username" ng-model="vm.user.userName" ng-disabled="vm.state==='edit'" required>
+                    <div class="form-error-info" ng-show="BaseInfoForm.username.$dirty && !BaseInfoForm.username.$valid"> <span>用户账号不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">职称:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="vm.user.professionalTitle" >
+                        <option value="">--请选择--</option>
+                        <option ng-repeat="item in vm.professionalTitle" value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>
+                </div>
+                <label class="col-sm-2 control-label">行政级别:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="vm.user.executiveLevel" >
+                        <option value="">--请选择--</option>
+                        <option ng-repeat="item in vm.executiveLevel" value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">用户类型:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="vm.user.userType" >
+                        <option value="">--请选择--</option>
+                        <option ng-repeat="item in vm.userType" value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>
+                </div>
+                <label class="col-sm-2 control-label"><span class="red">*</span>角色:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="vm.user.roleId" required>
+                        <option value="">--请选择--</option>
+                        <option ng-repeat="item in vm.role" value="{{item.id}}">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="red">*</span>是否锁定:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="vm.user.locked" required>
+                        <option value="">--请选择--</option>
+                        <option value="0">正常</option>
+                        <option value="1">锁定</option>
+                    </select>
+                </div>
+                <label class="col-sm-2 control-label"><span class="red">*</span>是否可用:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="vm.user.enable" required>
+                        <option value="">--请选择--</option>
+                        <option value="0">禁用</option>
+                        <option value="1">启用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="vm.errorinfo" class="text-center" style="color:red;">{{vm.errorinfo}}</div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="BaseInfoForm.$invalid" type="button" ng-click="vm.save()">保存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取消</button>
+    </div>
+</form>

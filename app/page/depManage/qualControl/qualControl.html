@@ -1,0 +1,74 @@
+<div id="qualControl" layout="column" flex>
+	<form role="form" class="navbar-btn btn-xs text-right c-el-10">
+		<div layout class="col-md-2" ng-if="stateName == 'docPatientRate'">
+		    <label class="radio-inline">年份</label>
+		    <select flex class="form-control" ng-model="queryObj.year" style="max-width: 80px;">
+		        <option value="2018">2018</option>
+		        <option value="2019">2019</option>
+		        <option value="2020">2020</option>
+		    </select>
+	    </div>
+	    <div layout class="col-md-2" ng-if="stateName == 'docPatientRate'">
+		    <label class="radio-inline">月份</label>
+		    <select flex class="form-control" ng-model="queryObj.month" style="max-width: 80px;">
+		        <option value="01">1月</option>
+		        <option value="02">2月</option>
+		        <option value="03">3月</option>
+		        <option value="04">4月</option>
+		        <option value="05">5月</option>
+		        <option value="06">6月</option>
+		        <option value="07">7月</option>
+		        <option value="08">8月</option>
+		        <option value="09">9月</option>
+		        <option value="10">10月</option>
+		        <option value="11">11月</option>
+		        <option value="12">12月</option>
+		    </select>
+	    </div>
+		<div layout class="col-md-2" ng-if="stateName !== 'docPatientRate'">
+		    <label class="radio-inline">
+		        <input ng-model="queryObj.timeType" type="radio" name="sex" value="1">月报</input>
+		    </label>
+		    <select flex class="form-control" ng-model="queryObj.timeRange1">
+		        <option value="0">当前月</option>
+		        <option value="1">最近1月</option>
+		        <option value="2">最近2月</option>
+		    </select>
+	    </div>
+	    <div layout class="col-md-2" ng-if="stateName !== 'docPatientRate'">
+		    <label class="radio-inline">
+		        <input ng-model="queryObj.timeType" type="radio" name="sex" value="2">季报</input>
+		    </label>
+		    <select flex class="form-control"  ng-model="queryObj.timeRange2">
+		        <option value="0">当前季度</option>
+		        <option value="1">最近1季度</option>
+		        <option value="2">最近2季度</option>
+		        <option value="3">最近3季度</option>
+		    </select>
+	    </div>
+	    <div layout class="col-md-2" ng-if="stateName !== 'docPatientRate'">
+		    <label class="radio-inline">
+		        <input ng-model="queryObj.timeType" type="radio" name="sex" value="3">年报</input>
+		    </label>
+		    <select flex class="form-control"  ng-model="queryObj.timeRange3">
+		        <option value="0">当前年</option>
+		        <option value="1">最近1年</option>
+		        <option value="2">最近2年</option>
+		    </select>
+	    </div>
+	    <div layout class="col-md-4" ng-if="stateName !== 'docPatientRate'">
+		    <label class="radio-inline">
+		        <input ng-model="queryObj.timeType" type="radio" name="sex" value="4">日期范围</input>
+		    </label>
+	    	<div>
+	    		<datetime-picker flex dateID="date-start-time" ng-model="queryObj.startTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>
+			</div>
+	    	<div style="margin: 5px 10px 0 10px;"><span>到</span></div>
+	    	<div>
+	    		<datetime-picker flex dateID="date-end-time" ng-model="queryObj.endTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>
+	    	</div>
+	    </div>
+	    <button class="btn btn-primary pull-right" type="button" ng-click="query();">查&nbsp;&nbsp;询</button>
+	</form>
+	<section flex layout ui-view class="view-container"></section>
+</div>

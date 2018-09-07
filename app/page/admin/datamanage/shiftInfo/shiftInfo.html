@@ -1,0 +1,16 @@
+<div layout='column' flex id="doctorType">
+    <div class="text-right form-group">
+        <button type="submit" class="btn btn-default" ng-click="btnImport()" ng-if='!hideImport'>数据导入</button>
+        <button type="submit" class="btn btn-default" ng-click="btnAdd()">添&nbsp;&nbsp;加</button>
+    </div>
+    <div layout flex>
+        <ul class="tabs">
+            <li ng-click="tabView(0)" ng-class="{true: 'active'}[tabIndex == 0]">医生班次</li>
+            <li ng-click="tabView(1)" ng-class="{true: 'active'}[tabIndex == 1]">护士班次</li>
+            <li ng-click="tabView(2)" ng-class="{true: 'active'}[tabIndex == 2]">护理记录单出入量小结</li>
+        </ul>
+        <div flex>
+            <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination></div>
+        </div>
+    </div>
+</div>

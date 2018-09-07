@@ -1,0 +1,76 @@
+<div class="modal-header">    
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form class="form-horizontal shiftIn-baseInfo" name="BaseInfoForm"  novalidate>
+    <div class="modal-body">
+        <div class="patient-in-modal-form-div">
+            <div class="form-group">
+                <label for="beid" class="col-sm-4 control-label"><span class="red">*</span>局点ID:</label>
+                <div class="col-sm-5">
+                    <input type="number" ng-readOnly="item != undefined" class="form-control" name="beid" ng-model="vm.bus.beid" required>
+                    <div class="form-error-info" ng-show="BaseInfoForm.beid.$dirty && !BaseInfoForm.beid.$valid"> <span>局点ID不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group" ng-if="!vm.flag">
+                <label for="beid" class="col-sm-4 control-label"><span class="red">*</span>源局点ID:</label>
+                <div class="col-sm-5">
+                    <input type="number" ng-readOnly="item != undefined" class="form-control" name="sourceBeid" placeholder="请输入数据来源的局点ID" ng-model="vm.bus.sourceBeid" required>
+                    <div class="form-error-info" ng-show="BaseInfoForm.sourceBeid.$dirty && !BaseInfoForm.sourceBeid.$valid"> <span>源局点ID不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bloodType" class="col-sm-4 control-label"><span class="red">*</span>局点名称:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="name" ng-model="vm.bus.name" required>
+                    <div class="form-error-info" ng-show="BaseInfoForm.name.$dirty && !BaseInfoForm.name.$valid"> <span class="md-red">局点名称不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bloodType" class="col-sm-4 control-label"><span class="red">*</span>局点编码:</label>
+                <div class="col-sm-5">
+                    <input type="text" ng-readOnly="item != undefined" class="form-control" name="code" ng-model="vm.bus.code" required>
+                    <div class="form-error-info" ng-show="BaseInfoForm.code.$dirty && !BaseInfoForm.code.$valid"> <span>局点编码不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bloodType" class="col-sm-4 control-label">其他名称:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="subname" ng-model="vm.bus.subName" >
+                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-sm-4 control-label">地址:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="address" ng-model="vm.bus.address" >                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tel" class="col-sm-4 control-label">电话:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="tel" ng-model="vm.bus.tel" >                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-4 control-label">信息备注:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="description" ng-model="vm.bus.description" >                   
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="enable" class="col-sm-4 control-label"><span class="red">*</span>状态:</label>
+                <div class="col-sm-5">
+                    <select class="form-control" ng-model="vm.bus.enable" name="enable" required>
+                      <option value="1">启用</option>
+                      <option value="0">停用</option>
+                    </select>
+                    <div class="form-error-info" ng-show="BaseInfoForm.enable.$dirty && !BaseInfoForm.enable.$valid"> <span>状态不能为空</span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="BaseInfoForm.$invalid" type="button" ng-click="vm.save()">保存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取消</button>
+    </div>
+</form>

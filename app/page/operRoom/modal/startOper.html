@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h4>
+        <span>设备连接</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body">
+        <div layout layout-align="space-between center"><h5>检查设备</h5><span>{{times}}&nbsp;秒</span></div>
+        <p ng-repeat="item in devList" layout layout-align="start center">
+            <small>{{item.deviceName}}&nbsp;&nbsp;{{item.statusName}}</small>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="keepOn()" ng-show="isFinish">检查设备</button>
+        <button class="btn btn-primary" ng-click="ok()">继续手术</button>
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+<div flex>
+	<div layout flex style="height:305px;margin-bottom:10px;border:1px solid #ccc">
+	    <div layout="column" flex="40">
+	        <!-- <div class="pie" style="animation-delay: -20s;">　</div> -->
+	        <!-- <canvas id="pie" class="chart chart-pie chart-xs" chart-data="{{[20, 80]}}" chart-labels="{{['2x', '8x']}}"></canvas> -->
+	        <div e-chart class="echarts" e-config="eConfig" e-option="eOption"></div>
+	    </div>
+	    <div layout="column" flex="60">
+	        <div style="margin-top:40px;padding-left: 70px;"><i class="glyphicon glyphicon-asterisk"></i> 说明:麻醉后新发昏迷是指麻醉前清醒患者麻醉手术后没有苏醒，持续昏迷超过24小时；昏迷原因可包括患者本身疾患、手术、麻醉以及其它任何因素，除外因医疗目的给予镇静催眠者。麻醉后新发昏迷发生率，是指麻醉后新发昏迷发生例数占同期麻醉总例数的比例。
+	        </div>
+	        <div  style="margin-top:20px;">
+	        <div layout flex>
+	            <div layout="column" layout-align="center end" flex="25">
+	                <span style="padding-top:2px;white-space:nowrap;">麻醉后新发昏迷发生率 &nbsp;&nbsp;=</span>
+	            </div>
+	            <div layout="column" layout-align="center center"  flex="35">
+		            <div layout="column">
+		                <div  style="white-space:nowrap;">
+		                    麻醉后新发昏迷发生例数（{{OperByAnesComaRate.comaListTotal}}）
+		                </div>
+		                <div>
+		                    <hr style="height:1px;background-color:#777;">
+		                </div>
+		                <div  style="white-space:nowrap;">
+		                    同期麻醉总例数（{{OperByAnesComaRate.operTotal}}）
+		                </div>
+	                </div>
+	            </div>
+	            <div layout="column" layout-align="center start" flex="10">
+	                <span style="white-space:nowrap;">  &nbsp;&nbsp;x 1000‰ &nbsp;&nbsp; = &nbsp;&nbsp;{{OperByAnesComaRate.rate}}‰</span>
+	            </div>
+	        </div>
+	        </div>
+	    </div>	    
+	</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiOperByAnesComa');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsOperByAnesComa" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsOperByAnesComa" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsOperByAnesComa">暂无数据</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiOperByAnesComaRate');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsOperByAnesComaRate" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsOperByAnesComaRate" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsOperByAnesComaRate">暂无数据</div>
+</div>

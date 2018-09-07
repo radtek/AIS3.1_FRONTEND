@@ -1,0 +1,50 @@
+<div flex>
+	<div layout flex style="height:305px;margin-bottom:10px;border:1px solid #ccc">
+	    <div layout="column" flex="40">
+	        <!-- <div class="pie" style="animation-delay: -20s;">　</div> -->
+	        <!-- <canvas id="pie" class="chart chart-pie chart-xs" chart-data="{{[20, 80]}}" chart-labels="{{['2x', '8x']}}"></canvas> -->
+	        <div e-chart class="echarts" e-config="eConfig" e-option="eOption"></div>
+	    </div>
+	    <div layout="column" flex="60">
+	        <div style="margin-top:40px;padding-left: 1px;"><i class="glyphicon glyphicon-asterisk"></i> 说明:全麻气管插管拔管后声音嘶哑，是指新发的、在拔管后72小时内没有恢复的声音嘶哑，排除咽喉、颈部以及胸部手术等原因。全麻气管插管拔管后声音嘶哑发生率，是指全麻气管插管拔管后声音嘶哑发生例数占同期全麻气管插管总例数的比例。
+	        </div>
+	        <div  style="margin-top:20px;">
+	        <div layout flex>
+	            <div layout="column" layout-align="center end" flex="25">
+	                <span style="padding-top:2px;white-space:nowrap;">全麻气管插管拔管后声音嘶哑发生率 &nbsp;&nbsp;=</span>
+	            </div>
+	            <div layout="column" layout-align="center center"  flex="35">
+		            <div layout="column">
+		                <div  style="white-space:nowrap;">
+		                    全麻气管插管拔管后声音嘶哑发生例数（{{GenAnesHoarse.extubatTotal}}）
+		                </div>
+		                <div>
+		                    <hr style="height:1px;background-color:#777;">
+		                </div>
+		                <div  style="white-space:nowrap;">
+		                    同期麻醉科完成麻醉总例次数（{{GenAnesHoarse.tubesTotal}}）
+		                </div>
+	                </div>
+	            </div>
+	            <div layout="column" layout-align="center start" flex="10">
+	                <span style="white-space:nowrap;"> &nbsp;&nbsp;x 1000‰ &nbsp;&nbsp; = &nbsp;&nbsp;{{GenAnesHoarse.rate}}‰</span>
+	            </div>
+	        </div>
+	        </div>
+	    </div>	   
+	</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiGenAnesHoarsetop');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsGenAnesHoarsetop" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsGenAnesHoarsetop" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsGenAnesHoarsetop">暂无数据</div>
+
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiGenAnesHoarse');">导&nbsp;&nbsp;出</button>
+	</div>
+
+    <div ui-grid="gridOptionsGenAnesHoarse" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptionsGenAnesHoarse" class="ui-grid-400"></div>
+    <div class="noData" ng-if="!gridOptionsGenAnesHoarse">暂无数据</div>
+</div>

@@ -1,0 +1,135 @@
+<div id="print-region">
+    <div class="page-print" id="postVisitLogSyzxyy" ng-class="{true: 'end-state'}[postFollowRecord.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if='docInfo.beName && docInfo.beCode != "syzxyy"'>{{docInfo.beName}}</h3>
+            <img ng-if="docInfo.beCode =='syzxyy'" src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h4>{{docInfo.subName}}麻醉后访视记录</h4>
+        </header>
+        <div class="form-group" layout layout-align="end end">
+            <span flex=25>住院号：{{rs.regOpt.hid}}&nbsp;</span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span flex=75 layout>
+                   <span flex=20>姓名：{{rs.regOpt.name}}&nbsp;</span>
+            <span flex=20>性别：{{rs.regOpt.sex}}&nbsp;</span>
+            <span flex=20>年龄：{{rs.regOpt.age}}&nbsp;</span>
+            <span flex>科别：{{rs.regOpt.deptName}}&nbsp;</span>
+            </span>
+            <span flex=25>床号：{{rs.regOpt.bed}}&nbsp;</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout><b>术后诊断：</b>{{rs.regOpt.diagnosisName}}</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout><b>实施手术：</b>{{rs.regOpt.designedOptName}}</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout><b>实施麻醉：</b>{{rs.regOpt.designedAnaesMethodName}}</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>一、患者麻醉后离开手术室时情况：{{rs.optRealOperStr}}</span>
+        </div>
+        <div class="form-group" layout>
+            <span>基本情况：</span>
+            <div flex layout>
+                <span flex layout>血压：<input type="text" class="noborder5" ng-model="docPostFollowYxrm.beforeBloodPre" ng-value="docPostFollowYxrm.beforeBloodPre" maxlength="20" />mmHg</span>
+                <span flex layout>心率：<input type="number" class="noborder5" ng-model="docPostFollowYxrm.beforeHeartrate" ng-value="docPostFollowYxrm.beforeHeartrate" max="1000" />次/分</span>
+                <span flex layout>呼吸：<input type="number" class="noborder5" ng-model="docPostFollowYxrm.beforeBreath" ng-value="docPostFollowYxrm.beforeBreath" maxlength="20" />次/分</span>
+                <span flex layout>氧饱和度：<input type="number" class="noborder5" ng-model="docPostFollowYxrm.spo2" ng-value="docPostFollowYxrm.spo2" maxlength="20" />%</span>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <span>神经系统：</span>
+            <div flex layout>
+                <span flex layout>意识：
+                     <select style="width: 110px;border:none;border-bottom:1px solid #333;" ng-model="docPostFollowYxrm.beforeMentalState">
+                    <option ng-repeat="item in awarenessList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                </select>
+                </span>
+                <span flex layout>感觉：
+                     <select style="width: 110px;border:none;border-bottom:1px solid #333;" ng-model="docPostFollowYxrm.beforeFeel">
+                    <option ng-repeat="item in feelList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                </select>
+                </span>
+                <span flex layout>运动功能：
+                     <select style="width: 110px;border:none;border-bottom:1px solid #333;" ng-model="docPostFollowYxrm.beforeMotorFunction">
+                    <option ng-repeat="item in sportsList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                </select>
+
+                </span>
+            </div>
+        </div>
+        <div class="form-group" layout="column">
+            <span flex layout>其他情况：</span>
+            <textarea class="no-triangle" cols="120" rows="8" ng-model="docPostFollowYxrm.beforeOther" maxlength="255"></textarea>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>二、麻醉后访视情况：</span>
+        </div>
+        <div class="form-group" layout>
+            <span>基本情况：</span>
+            <div flex layout>
+                <span flex layout>血压：<input type="text" class="noborder5" ng-model="docPostFollowYxrm.afterBloodPre" ng-value="docPostFollowYxrm.afterBloodPre" maxlength="20" />mmHg</span>
+                <span flex layout>心率：<input type="number" class="noborder5" ng-model="docPostFollowYxrm.afterHeartrate" ng-value="docPostFollowYxrm.afterHeartrate" maxlength="20" />次/分</span>
+                <span flex layout>呼吸：<input type="number" class="noborder5" ng-model="docPostFollowYxrm.afterBreath" ng-value="docPostFollowYxrm.afterBreath" maxlength="20" />次/分</span>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <span>神经系统：</span>
+            <div flex layout>
+                <span flex layout>意识：
+                    <select style="width: 110px;border:none;border-bottom:1px solid #333;" ng-model="docPostFollowYxrm.afterMentalState">
+                        <option ng-repeat="item in awarenessList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>
+                </span>
+                <span flex layout>感觉：
+                     <select style="width: 110px;border:none;border-bottom:1px solid #333;" ng-model="docPostFollowYxrm.afterFeel">
+                    <option ng-repeat="item in feelList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                </select>
+                </span>
+                <span flex layout>运动功能：
+                     <select style="width: 110px;border:none;border-bottom:1px solid #333;" ng-model="docPostFollowYxrm.afterMotorFunction">
+                    <option ng-repeat="item in sportsList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                </select>
+
+                </span>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <span>麻醉操作部位情况：</span>
+            <input flex type="text" class="noborder5" ng-model="docPostFollowYxrm.anaesPointCase" ng-value="docPostFollowYxrm.anaesPointCase" maxlength="20" />
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>术后镇痛：
+                <checkbox ng-model="docPostFollowYxrm.postAnalgesia" ng-true-value="1" ng-false-value="">PCIA</checkbox>
+                <checkbox ng-model="docPostFollowYxrm.postAnalgesia" ng-true-value="2" ng-false-value="">PCEA</checkbox>
+                <checkbox ng-model="docPostFollowYxrm.postAnalgesia" ng-true-value="3" ng-false-value="">无</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>镇痛效果：
+                <checkbox ng-model="docPostFollowYxrm.analgesicEffect" ng-true-value="1" ng-false-value="">优</checkbox>
+                <checkbox ng-model="docPostFollowYxrm.analgesicEffect" ng-true-value="2" ng-false-value="">良</checkbox>
+                <checkbox ng-model="docPostFollowYxrm.analgesicEffect" ng-true-value="3" ng-false-value="">差</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout="column">
+            <span flex layout>其他情况：</span>
+            <textarea class="no-triangle" cols="120" rows="8" ng-model="docPostFollowYxrm.afterOther" maxlength="255"></textarea>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+            <div flex="40" layout class="pd-left">麻醉医师签名：
+                <oi-select flex multiple class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetistIdList" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="docPostFollowYxrm.anesthetistIdList"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+            <div layout layout-align="space-between end">
+                <span>日期：</span>
+                <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="docPostFollowYxrm.signTime" ng-value="docPostFollowYxrm.signTime" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime" style="width: 90px!important;"></datetime-picker>
+            </div>
+        </div>
+    </div>
+</div>

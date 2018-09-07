@@ -1,0 +1,51 @@
+#overMediLog {
+    .content-ul {
+        min-height: 38px;
+    }
+
+    .overName,.overReason {
+        width: 28%;
+    }
+
+    .overDoctor {
+        width: 12%;
+    }
+
+    .overOther {
+        width: 18%;
+    }
+    @media print {
+        .content-ul {
+            min-height: 32px !important;
+        }
+        .overName,.overReason {
+            width: 40% !important;
+        }
+        .overDoctor {
+            width: 13% !important;
+        }
+        .overOther {
+            width: 16% !important;
+        }
+        .no-print {
+            display: none;
+        }
+    }
+}
+
+#overMediLog_sybx {
+    table tr {
+        height: 28px;
+        line-height: 28px;
+    }
+
+    @media print {
+        table tr {
+            height: 21px;
+            line-height: 21px;
+        }
+        .form-group {
+            margin-bottom: 3px !important;
+        }
+    }
+}

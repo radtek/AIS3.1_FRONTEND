@@ -1,0 +1,117 @@
+<div class="page-print metachysis" ng-class="{true: 'end-state'}[processState == 'END' && !saveActive || setting.readonly]">
+    <header layout="column" layout-align="center center" class="noTop">
+        <h3>{{docInfo.beName}}临床输血记录单</h3>
+    </header>
+    <div class="form-group" layout layout-align="space-between">
+        <span layout flex>病人姓名：<a flex>{{regOpt.name}}</a></span>
+        <span layout flex>性别：<a flex>{{regOpt.sex}}</a></span>
+        <span layout flex>年龄：<a flex>{{regOpt.age}}</a></span>
+    </div>
+    <div class="form-group" layout layout-align="space-between end">
+        <span layout flex>科别：<a flex>{{regOpt.deptName}}</a></span>
+        <span layout flex>床号：<a flex>{{regOpt.bed}}</a></span>
+        <span layout flex>住院号：<a flex>{{regOpt.hid}}</a></span>
+    </div>
+    <div class="form-group" layout>
+        <span layout flex>诊断：<a flex>{{regOpt.diagnosisName}}</a></span>
+    </div>
+    <div class="form-group" layout>
+        <div flex layout>
+            <span>既往输血史：</span>
+            <div layout>
+                <checkbox ng-model="bloodTransRecord.bloodHis" ng-true-value="'1'">有</checkbox>
+                <checkbox ng-model="bloodTransRecord.bloodHis" ng-true-value="'2'" ng-click="bloodTransRecord.bloodType=''; bloodTransRecord.rhType='';">无</checkbox>
+            </div>
+        </div>
+        <div flex layout>
+            <span>血型ABO：</span>
+            <select style="width: 75px;" class="noborder3" ng-model="bloodTransRecord.bloodType" ng-disabled="bloodTransRecord.bloodHis!='1'">
+                <option ng-repeat="item in arr_BloodType" value="{{item}}">{{item}}</option>
+            </select>
+        </div>
+        <div flex layout>
+            <span>RH(D)：</span>
+            <select style="width: 75px;" class="noborder3" ng-model="bloodTransRecord.rhType" ng-disabled="bloodTransRecord.bloodHis!='1'">
+                <option ng-repeat="item in arr_RH" value="{{item}}">{{item}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" layout>
+        <span>输血时间：</span>
+        <datetime-picker name="transTime" dateID="transTime-times" ng-model="bloodTransRecord.transTime" ng-value="bloodTransRecord.transTime" timepicker="true" class="noborder3 calendar sign"></datetime-picker>
+    </div>
+    <div class="form-group">
+        <span>血液成分：</span>
+        <input class="noborder3" ng-model='bloodTransRecord.composition1' ng-value="bloodTransRecord.composition1">
+        <span>输血剂量：</span>
+        <input class="noborder3" ng-model='bloodTransRecord.dosage1' ng-value="bloodTransRecord.dosage1">
+    </div>
+    <div class="form-group">
+        <input class="noborder3" ng-model='bloodTransRecord.composition2' ng-value="bloodTransRecord.composition2" style="margin-left: 76px;">
+        <span>输血剂量：</span>
+        <input class="noborder3" ng-model='bloodTransRecord.dosage2' ng-value="bloodTransRecord.dosage2">
+    </div>
+    <div class="form-group" layout>
+        <span>发生反应时间：</span>
+        <datetime-picker name="reactTime" dateID="reactTime-times" ng-model="bloodTransRecord.reactTime" ng-value="bloodTransRecord.reactTime" timepicker="true" class="noborder3 calendar sign"></datetime-picker>
+    </div>
+    <div class="form-group"><span>反应类别及诊断：</span></div>
+    <div class="form-group">
+        1、无反应
+        <checkbox ng-model="bloodTransRecord.isReact" ng-true-value="'1'"></checkbox>
+    </div>
+    <div class="form-group">
+        2、溶血反应
+    </div>
+    <div class="form-group" layout>
+        <span flex='20'>1)、<checkbox ng-model="bloodTransRecord.hemolysisReact1Map.a" ng-true-value="'1'">头胀痛</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.hemolysisReact1Map.b" ng-true-value="'1'">心前区紧迫</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.hemolysisReact1Map.c" ng-true-value="'1'">腰部剧痛</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.hemolysisReact1Map.d" ng-true-value="'1'">寒战及发热</checkbox></span>
+    </div>
+    <div class="form-group" layout>
+        <span flex='20'>2)、<checkbox ng-model="bloodTransRecord.hemolysisReact2Map.a" ng-true-value="'1'">黄疸</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.hemolysisReact2Map.b" ng-true-value="'1'">血红蛋白尿</checkbox></span>
+    </div>
+    <div class="form-group" layout>
+        <span flex='20'>3)、<checkbox ng-model="bloodTransRecord.hemolysisReact3Map.a" ng-true-value="'1'">少尿</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.hemolysisReact3Map.b" ng-true-value="'1'">无尿</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.hemolysisReact3Map.c" ng-true-value="'1'">休克</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.hemolysisReact3Map.d" ng-true-value="'1'">尿毒症</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.hemolysisReact3Map.e" ng-true-value="'1'">死亡</checkbox></span>
+    </div>
+    <div class="form-group">
+        3、过敏性反应
+    </div>
+    <div class="form-group" layout>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.allergicReactMap.a" ng-true-value="'1'">皮疹</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.allergicReactMap.b" ng-true-value="'1'">血管神经性水肿</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.allergicReactMap.c" ng-true-value="'1'">喉头水肿</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.allergicReactMap.d" ng-true-value="'1'">过敏性休克</checkbox></span>
+        <span flex='20'><checkbox ng-model="bloodTransRecord.allergicReactMap.e" ng-true-value="'1'">死亡</checkbox></span>
+    </div>
+    <div class="form-group">
+        4、发热反应
+    </div>
+    <div class="form-group" layout>
+        <span><checkbox ng-model="bloodTransRecord.feverReact" ng-true-value="'1'">以发热寒战为主要征象，停止输血后缓解</checkbox></span>
+    </div>
+    <div class="form-group">
+        5、其它反应
+    </div>
+    <div class="form-group" layout>
+        <input class="noborder3" flex ng-model="bloodTransRecord.otherReact" ng-value='bloodTransRecord.otherReact'>
+    </div>
+    <div class="form-group" layout layout-align="end center">
+        <span>医生签名：</span>
+        <oi-select class="noborder3 sign signature" name="anaestheitistId" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="bloodTransRecord.anaestheitistId"></oi-select>
+        <div class="eSignature" style="width: 150px;">
+            <img ng-repeat="sig in eSignatureAnaestheitist" src="{{sig}}" ng-if="sig.indexOf('http')>=0" />
+        </div>
+    </div>
+    <div class="form-group" layout layout-align="end center">
+        <span>日期：</span>
+        <datetime-picker name="createTime" dateID="createTime-times" ng-model="bloodTransRecord.createTime" ng-value="bloodTransRecord.createTime" timepicker="true" class="noborder3 calendar sign"></datetime-picker>
+    </div>
+    <small>本记录单输血后由医师填写后入病房管理</small>
+</div>

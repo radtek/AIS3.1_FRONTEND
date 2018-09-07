@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <h4>
+    	<span>复苏{{opt.bedName}}采集配置</span>
+    	<span class="pull-right modal-container_close" ng-click="close()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>设备类型</th>
+                    <th>设备型号</th>
+                    <th>接口类型</th>
+                    <th>状态</th>
+                    <th class="text-center" style="width: 50px;">操作</th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr ng-repeat="row in list">
+                    <td ng-click="edit(row)">{{row.deviceName}}</td>
+                    <td ng-click="edit(row)">{{row.devicemodel}}</td>
+                    <td ng-click="edit(row)">{{row.interfaceName}}</td>
+                    <td ng-click="edit(row)">{{row.enable == 1 ? '已启用' : '未启用'}}</td>
+                    <td class="text-center">
+                        <span style="cursor: pointer;" class="glyphicon glyphicon-trash" ng-click="delete(row)"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div layout>
+            <div flex layout="column">
+                <div class="input-wrap">
+                    <div layout layout-align="start center" class="input-group">
+                        <label class="tit"><em>*</em>设备型号：</label>
+                        <select name='device' class="form-control" ng-model="param.deviceId" ng-options="item.deviceId as item.devicemodel group by item.deviceName disable when item.disabled for item in devList" ng-change="changeDev(param.deviceId)" required></select>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div layout layout-align="start center" class="input-group">
+                        <label class="tit">接口类型：</label>
+                        <input flex class="form-control" ng-model="param.interfaceName" disabled>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div layout layout-align="start center" class="input-group">
+                        <label class="tit">状态：</label>
+                        <checkbox ng-model="param.enable" ng-true-value="1">启用</checkbox>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <checkbox ng-model="param.enable" ng-true-value="2">停用</checkbox>
+                    </div>
+                </div>
+            </div>
+            <div flex layout="column">
+                <div ng-repeat="item in param.bedEventConfigList" style="padding-left: 100px;">
+                    <checkbox ng-model="item.checked" ng-disabled="item.optDisplay == 'M' || item.mustShow">{{item.eventName}}</checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="replay()">清&nbsp;&nbsp;空</button>
+        <button class="btn btn-primary" ng-click="save()" ng-disabled="form.$invalid">保存</button>
+        <button class="btn btn-default" ng-click="close()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

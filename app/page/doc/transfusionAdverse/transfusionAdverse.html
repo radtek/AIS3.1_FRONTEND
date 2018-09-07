@@ -1,0 +1,105 @@
+<div id="print-region">
+    <div class="page-print transfusionAdverse">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>患者输血不良反应回报单</h4>
+        </header>
+        <div class="form-group" layout>
+            <span flex layout>科别<a flex>{{::vm.regOptItem.deptName}}</a></span>&nbsp;
+            <span flex layout>病区<a flex>{{::vm.regOptItem.regionName}}</a></span>&nbsp;
+            <span flex layout>床号<a flex>{{::vm.regOptItem.bed}}</a></span>&nbsp;
+            <span flex layout>NO<a flex></a></span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>受血者姓名：<a flex>{{::vm.regOptItem.name}}</a></span>&nbsp;
+            <span flex layout>性别：<a flex>{{::vm.regOptItem.sex}}</a></span>&nbsp;
+            <span flex layout>年龄：<a flex>{{::vm.regOptItem.age}}</a></span>&nbsp;
+            <span flex layout>住院病历号：<a flex>{{::vm.regOptItem.hid}}</a></span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>血型（ABO）：<a flex></a></span>&nbsp;
+            <span flex layout>Rh（D）：<a flex></a></span>&nbsp;
+            <span flex layout>临床诊断：<a flex></a></span>
+        </div>
+        <table class="form-group">
+            <tr>
+                <th>献血编号或者条形码</th>
+                <th style="width: 90px;">血液成分（品名）</th>
+                <th style="width: 90px;">血型（ABO）/ Rh（D）</th>
+                <th style="width: 80px;">血理（U/治疗量）</th>
+            </tr>
+            <tr style="line-height: 50px;">
+                <td>1、</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="line-height: 50px;">
+                <td>2、</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="line-height: 50px;">
+                <td>3、</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="line-height: 50px;">
+                <td>4、</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="line-height: 50px;">
+                <td>5、</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="line-height: 50px;">
+                <td>6、</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="form-group" layout>
+            输血时间：从 　　年　　月　　日　　时　　分至 　　年 　　月 　　日 　　时 　　分（以血液输入至输完为准）
+        </div>
+        <hr>
+        <div class="form-group end-state" layout>
+            输血不良反应：
+            <checkbox ng-model="vm.comorbidity_[2]" ng-true-value="'1'" ng-false-value="0" disabled>无</checkbox>
+            <checkbox ng-model="vm.comorbidity_[2]" ng-true-value="'1'" ng-false-value="0">有</checkbox>。 其主要症状（如：发冷发热、过敏、溶血、细菌、血红蛋白尿、其他等）:
+        </div>
+        <div class="form-group" layout layout-align="end center" style="margin-top: 50px;">
+            记录人签名：　　　　年　　　月　　　日　　　时　　　分
+        </div>
+        <hr>
+        <div class="form-group" layout>
+            发生输血不良反应的主要处理措施及结果：
+        </div>
+        <div class="form-group" layout layout-align="end center" style="margin-top: 50px;">
+            执行人（签字）：　　　　年　　　月　　　日　　　时　　　分
+        </div>
+        <hr>
+        <div class="form-group" layout layout-align="space-between center">
+            <span>填单人（签字）：</span>
+            <span>收单人（签字）：　　　　年　　　月　　　日　　　时　　　分</span>
+        </div>
+        <hr>
+        <div class="form-group" layout>说明：</div>
+        <div class="form-group" layout style="text-indent: 20px;">
+            （1）本回报单由临床医护员务必认真填写，按每份申请输血（量/次）为一次，每次输血完毕时，无论是否发生输血不良反应，均如实填写一份。
+        </div>
+        <div class="form-group" layout style="text-indent: 20px;">
+            （2）本回报单连同输血完毕后的血袋及时送回输血科（血库），由血库按月统计上报院医务主管部门。
+        </div>
+    </div>
+</div>

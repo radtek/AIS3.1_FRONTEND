@@ -1,0 +1,23 @@
+<!-- 加载中 -->
+<div class="print-progress">
+    <progressbar></progressbar>
+</div>
+<div id="doc-all">
+    <!-- 文书 -->
+    <access-log ng-if="doc_pre_post_visit"></access-log>
+    <shut-tran-log ng-if="doc_pat_shuttle_transfer"></shut-tran-log>
+    <risk-asse-log ng-if="doc_risk_evaluat_prevent_care"></risk-asse-log>
+    <pre-visit-qnz-log ng-if="doc_pre_visit"></pre-visit-qnz-log>
+    <anes-program ng-if="doc_anaes_plan"></anes-program>
+    <info-cons-qnz ng-if="doc_accede"></info-cons-qnz>
+    <over-medi-log ng-if="doc_pat_out_range_agree"></over-medi-log>
+    <nurs-record-log ng-if="doc_opt_care_record"></nurs-record-log>
+    <check-record-log ng-if="doc_opt_nurse"></check-record-log>
+    <safety-verif-log ng-if="doc_safe_check"></safety-verif-log>
+    <post-visit-log ng-if="doc_post_follow_record"></post-visit-log>
+    <anesthesia-summary ng-if="doc_anaes_summary"></anesthesia-summary>
+    <anes-record-log-print ng-if="doc_anaes_record"></anes-record-log-print>
+    <vein-accede ng-if="doc_vein_accede"></vein-accede>
+    <anaes-medicine-qnz ng-if="doc_anaes_medicine_accede"></anaes-medicine-qnz>
+    <self-pay-instrument-qnz ng-if="doc_self_pay_instrument_accede"></self-pay-instrument-qnz>
+</div>

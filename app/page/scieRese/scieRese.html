@@ -1,0 +1,26 @@
+<div flex layout="column" id="scieRese">
+    <div id="condition" class="panel-body condition" ng-show="condition.length > 0">
+        <span ng-repeat="item in condition">{{item.remark}}：{{item.str}}<i class="glyphicon glyphicon-remove" ng-click="delItem($index, item)"></i></span>
+    </div>
+    <div class="navbar-btn btn-xs text-right c-el-10">
+        <button class="btn btn-primary" ng-click="compare()" ng-disabled="comNums.length <= 0">对&nbsp;&nbsp;比({{comNums.length}})</button>
+        <button class="btn btn-primary" ng-click="save_tpl()" ng-disabled="!condition || condition.length <= 0">保存模板</button>
+        <button class="btn btn-primary" ng-click="selt_tpl()">选择模板</button>
+        <button class="btn btn-primary" ng-click="export()">导出数据</button>
+    </div>
+    <div flex layout>
+        <div flex layout>
+            <div flex style="overflow: auto;">
+                <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-exporter ng-if="gridOptions" ></div>
+                <div class="noData" ng-if="!gridOptions">暂无数据</div>
+            </div>
+            <div layout layout-align="center center" class="zoom" ng-click="zoom()"><i class="glyphicon glyphicon-option-vertical"></i></div>
+        </div>
+        <div layout="column" class="setting" ng-class="{true : 'hide'}[narrow]">
+            <div class="btn-set">搜索条件设置</div>
+            <ul class="ev-list">
+                <li ng-repeat="item in units" ng-click="evDialog($event, item.jsonName, item.fieldName)" ng-if="item.isShow === 1">{{item.name}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

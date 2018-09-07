@@ -1,0 +1,78 @@
+<div id="print-region">
+    <div class="page-print beforemagin" id="shutTranLog">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl && docInfo.beCode != 'syzxyy' && docInfo.beCode != 'cshtyy'">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl && docInfo.beCode != 'syzxyy'" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h4>麻醉科术前讨论记录单</h4>
+        </header>
+        <div class=" beforeline beforemagin " ng-class="{true: 'end-state'}[patShuttleTransfer.processState == 'END' && !saveActive || setting.readonly]">
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>姓名：<a flex>{{vm.regOptItem.name}}</a></span>
+                <span layout flex>性别：<a flex>{{vm.regOptItem.sex}}</a></span>
+                <span layout flex>年龄：<a flex>{{vm.regOptItem.age}}</a></span>
+                <span layout flex>科别：<a flex>{{vm.regOptItem.deptName}}</a></span>
+                <span layout flex>床号：<a flex>{{vm.regOptItem.bed}}</a></span>
+                <span layout flex>住院号：<a flex>{{vm.regOptItem.hid}}</a></span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>讨论时间：
+                    <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.discussRecord.discussTime" ng-value="vm.discussRecord.discussTime" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime" style="width: 90px!important;"></datetime-picker>
+                </span>
+                <span layout flex>讨论地点：
+                    <input type="text" class="noborder4" ng-model="vm.discussRecord.discussPlace" ng-value="vm.discussRecord.discussPlace" maxlength="10" />
+                </span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>主持人：
+                    <input type="text" class="noborder4" ng-model="vm.discussRecord.host" ng-value="vm.discussRecord.host" maxlength="10" />
+                </span>
+                <span layout flex>病历报告人：
+                    <input type="text" class="noborder4" ng-model="vm.discussRecord.reporter" ng-value="vm.discussRecord.reporter" maxlength="10" />
+                </span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span>参加人员及职称：</span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <textarea class="no-triangle" cols="120" rows="4" ng-model="vm.discussRecord.participant" maxlength="220">{{vm.discussRecord.participant}}</textarea>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span flex layout>术前诊断：<a flex>{{vm.regOptItem.diagnosisName}}</a></span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span flex layout>拟施手术：<a flex>{{vm.regOptItem.designedOptName}}</a></span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>拟施麻醉：
+                    <oi-select flex multiple class="noborder3 sign" style="min-width: 180px;height: 20px;border-bottom: 1px solid #CCC;" ng-model="vm.discussRecord.designedAnaesMethodCodes" oi-options="item.anaMedId as item.name for item in vm.anaesMethodList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+                </span>
+                <span layout flex>拟施手术时间：
+                    <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.discussRecord.designedTime" ng-value="vm.discussRecord.designedTime" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime" style="width: 90px!important;"></datetime-picker>
+                </span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span>1、病历摘要：</span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <textarea class="no-triangle" cols="120" rows="8" ng-model="vm.discussRecord.caseSummary" maxlength="445">{{vm.discussRecord.caseSummary}}</textarea>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span>2、麻醉要点：</span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <textarea class="no-triangle" cols="120" rows="8" ng-model="vm.discussRecord.anaesEssential" maxlength="445">{{vm.discussRecord.anaesEssential}}</textarea>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span class="pd-left">记录人<input type="text" class="noborder4" ng-model="vm.discussRecord.recorder" ng-value="vm.discussRecord.recorder" maxlength="10" /></span>
+                <div layout layout-align="space-between end">
+                    <span>记录日期：</span>
+                    <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.discussRecord.recordTime" ng-value="vm.discussRecord.recordTime" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime" style="width: 90px!important;"></datetime-picker>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

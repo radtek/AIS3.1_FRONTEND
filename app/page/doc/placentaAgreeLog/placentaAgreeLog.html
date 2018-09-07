@@ -1,0 +1,58 @@
+<div id="print-region">
+    <div id="placentaAgreeLog" class="page-print" ng-class="{true: 'end-state'}[placentaHandleAgree.processState === 'END' || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>胎盘处置知情同意书</h4>
+        </header>
+        <div class="regOptInfo" layout layout-align="space-between end">
+            <span layout>患者姓名：<a flex>{{vm.regOptItem.name}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{vm.regOptItem.age}}</a></span>&nbsp;
+            <span layout>住院号：<a flex>{{vm.regOptItem.hid}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="center center" style="width: 90%;padding-left: 10%;padding-bottom: 20px;">
+            <div class="spancontentfirst">根据《卫生部关于产妇分娩后胎盘处理修复问题的批复》，产妇分娩后胎</div>
+            <div class="spancontent">盘应当归产妇所有，如果胎盘可能造成传染病传播的，医院及时告知产妇后按</div>
+            <div class="spancontent">照《传染病防治法》、《医疗废物管理条件》的有关规定进行消毒处理，并按</div>
+            <div class="spancontentlast">照医疗废物进行处置。</div>
+            <div style="padding-right: 88px;padding-bottom: 20px;">根据入院查体及辅助检查结果，初步判定胎盘情况为：</div>
+            <div ng-class="{true: 'md-red'}[!placentaHandleAgree.placentaCase && verify]" style="padding-right: 252px;padding-bottom: 20px;">
+                <checkbox ng-model="placentaHandleAgree.placentaCase" ng-true-value="1">1、不会造成感染病传播：</checkbox>
+            </div>
+            <div ng-class="{true: 'md-red'}[!placentaHandleAgree.placentaCase && verify]" style="padding-right: 266px;">
+                <checkbox ng-model="placentaHandleAgree.placentaCase" ng-true-value="2">2、会造成传染病传播：</checkbox>
+            </div>
+        </div>
+        <div flex class="form-group" layout layout-wrap="wrap" layout-align="center center" style="padding-left: 20%;">医护人员签名：</div>
+        <div flex class="form-group" layout layout-wrap="wrap" layout-align="center center">
+            -------------------------------------------------------------------
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start center" style="width: 78%;padding-left: 21%;">
+            <div>
+                上述情况一明知，孕妇要求对不会造成传染病传播的胎盘进行如下处理 （在选项前打✔）
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start center" ng-class="{true: 'md-red'}[!placentaHandleAgree.placentaHandle && verify]" style="padding-left: 130px;">
+            <div style="padding-right: 252px;padding-bottom: 20px;">
+            
+                <checkbox ng-model="placentaHandleAgree.placentaHandle" ng-true-value="1">1、要回并自行处理；</checkbox>
+            </div>
+            <div style="padding-right: 252px;">
+            
+                <checkbox ng-model="placentaHandleAgree.placentaHandle" ng-true-value="2">2、放弃，由医院按照规定处置；</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start center" style="padding-left: 140px;">
+            产妇本人或产妇家属签名：　　　　　　　　与产妇关系：
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start center" ng-class="{true: 'md-red'}[!placentaHandleAgree.docSign && verify]" style="padding-left: 170px;">
+            医护人员签名：
+            <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="docSign" oi-options="item.userName as item.name for item in nurseList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="placentaHandleAgree.docSign"></oi-select>
+            <div class="eSignature">
+                <img ng-repeat="item in eSignatureAnesthetist" src="{{item.path}}" ng-if="item.hasPath" />
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end center" style="padding-right: 150px;">
+            年　　月　　日
+        </div>
+    </div>
+</div>

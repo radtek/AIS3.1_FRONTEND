@@ -1,0 +1,86 @@
+<div flex ng-show="!check">
+    <div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+        <button class="btn btn-primary" ng-click="editDiagnosistrue()">
+            添加药品
+        </button>
+        <button class="btn btn-primary" ng-click="refresh()">
+            刷&nbsp;&nbsp;新
+        </button>
+    </div>
+    <div ui-grid="gridDrugStorage" ui-grid-pagination ui-grid-auto-resize class="ui-grid-729"></div>
+</div>
+<div flex ng-show="check">
+	<h2 style="margin: 20px 0 30px 0;">查看药品</h2>
+	<div layout>
+		<div flex class="input-wrap">
+	        <div layout layout-align="start center" class="input-group">
+	            <label class="tit">药品名称</label>
+	            <input flex type="text" class="form-control" ng-model="medicine.name" readonly>
+	        </div>
+	    </div>
+		<div flex class="input-wrap">
+	        <div layout layout-align="start center" class="input-group">
+	            <label class="tit">是否有效</label>
+	            <select flex class="form-control" ng-model="medicine.enable" readonly disabled>
+	            	<option value="1">启用</option>
+                    <option value="0">禁用</option>
+	            </select>
+	        </div>
+	    </div>
+	    <div flex class="input-wrap">
+	        <div layout layout-align="start center" class="input-group">
+	            <label class="tit">简称</label>
+	            <input flex type="text" class="form-control" ng-model="medicine.briefName" readonly>
+	        </div>
+	    </div>
+	    <div flex class="input-wrap">
+	        <div layout layout-align="start center" class="input-group">
+	            <label class="tit">剂量单位</label>
+	            <select flex class="form-control" ng-model="medicine.dosageUnit" readonly disabled>
+	            	<option value="mg">mg</option>
+                    <option value="ug">ug</option>
+                    <option value="u">u</option>
+                    <option value="万u">万u</option>
+                    <option value="片">片</option>
+                    <option value="支">支</option>
+                    <option value="g">g</option>
+                    <option value="kg">kg</option>
+                    <option value="l">l</option>
+                    <option value="ml">ml</option>
+	            </select>
+	        </div>
+	    </div>
+	</div>
+	<div layout>
+		<div flex class="input-wrap">
+			<div layout layout-align="start center" class="input-group">
+	            <label class="tit">每小包剂量</label>
+	            <input flex type="text" class="form-control" ng-model="medicine.packageDosageAmount" readonly>
+	        </div>
+		</div>
+		<div flex class="input-wrap">
+			<div layout layout-align="start center" class="input-group">
+	            <label class="tit">药品分类</label>
+	            <select flex class="form-control" ng-model="medicine.type" readonly disabled>
+	            	<option value="01">治疗用药</option>
+                    <option value="02">麻醉用药</option>
+	            </select>
+	        </div>
+		</div>
+		<div flex class="input-wrap">
+			<div layout layout-align="start center" class="input-group">
+	            <label class="tit">规格</label>
+	            <input flex type="text" class="form-control" ng-model="medicine.spec" readonly>
+	        </div>
+		</div>
+		<div flex></div>
+	</div>
+	<div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+	    	<button class="btn btn-primary" ng-disabled="userform.$invalid" type="button" ng-click="openPrice()">添加供应商</button>
+	    </div>
+	    <div ui-grid="gridPriceList" ui-grid-auto-resize  style="height: 500px;"></div>
+	    <div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+	    	<!-- <button class="btn btn-primary" type="button" ng-click="save()">保&nbsp;&nbsp;存</button> -->
+	        <button class="btn btn-primary" type="button" ng-click="cancel()">返&nbsp;&nbsp;回</button>	
+	    </div>
+</div>

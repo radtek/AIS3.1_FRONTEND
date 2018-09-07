@@ -1,0 +1,36 @@
+<div flex layout="column" id="mypatient" >
+	<div class="wrap" layout layout-wrap="wrap">
+        <div flex="50"  style="border: solid 2px #ccc; padding: 10px; " >
+        <div layout layout-wrap="wrap" class="form-group">
+    		<div flex="15" class="text-center" style="margin: 5px 10px 0 10px;">预约手术日期　从</div>	
+            <datetime-picker  flex="15"  dateID="date-start-time" ng-model="startTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>    	
+            <div  flex="5"  class="text-center" style="margin: 5px 10px 0 10px;">到</div>
+            <datetime-picker  flex="15"  dateID="date-end-time" ng-model="endTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>       
+        　  <button class="btn btn-primary pull-right" type="button" ng-click="query();">查&nbsp;&nbsp;询</button>
+        </div>
+        <div class="div1-tab" >
+                <span class="span-tab" ng-class="{'active': talkInfo==0}" ng-click="setTalkInfo(0)">未取药手术信息</span><span class="span-tab" ng-class="{'active': talkInfo==1}"  ng-click="setTalkInfo(1)">已取药手术信息</span>
+        </div>
+        <div ng-if="talkInfo==0">
+                <div ui-grid="gridOptions" style="height:730px;" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+                <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+            </div>
+            <div ng-if="talkInfo==1">
+                <div ui-grid="gridOptions1" style="height:730px;" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions1"></div>
+                <div class="noData" ng-if="!gridOptions1">暂无数据</div>
+            </div>
+        </div>
+		<div flex="50"  >
+			<div style="border: solid 2px #ccc; padding: 10px;margin-left: 10px;">
+			<h5><b>用药情况</b></h5>
+			<div ui-grid="gridOptions2" style="height: 352px;"  ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+        	<div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+        	</div>
+        	<div style="border: solid 2px #ccc; padding: 8px;margin-left: 10px; margin-top: 10px;">
+        	<h5><b>取药记录</b></h5>
+        	<div ui-grid="gridOptions3" style="height: 352px;"  ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+        	<div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+        	</div>
+        </div>
+	</div>
+</div>

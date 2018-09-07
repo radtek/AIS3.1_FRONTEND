@@ -1,0 +1,64 @@
+<div class="modal-header">    
+    <h4><span>{{title}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="fastAddEvent">
+	<div class="modal-body">
+        <div layout>
+            <div flex="70" class="input-wrap">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit"><em>*</em>药品名称</label>
+                    <input flex ng-model="evObj.name" readonly>
+                </div>
+            </div>
+        </div>
+        <div layout>
+            <div flex="70" class="input-wrap" ng-if="evObj.showOption == '1'">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit"><em>*</em>流速</label>
+                    <input flex type="number" ng-model="evObj.flow" name="flow" required ng-blur="_flow = true">
+                    <span> {{evObj.flowUnit}}</span>
+                </div>
+                <p ng-if="form.flow.$error.required && _flow" class="help-block text-right">不能为空</p>
+            </div>
+        </div>
+        <div layout>
+            <div flex="70" class="input-wrap" ng-if="evObj.showOption == '2'">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit"><em>*</em>浓度</label>
+                    <input flex type="number" ng-model="evObj.thickness" name="thickness" required ng-blur="_thickness = true">
+                    <span> {{evObj.thicknessUnit}}</span>
+                </div>
+                <p ng-if="form.thickness.$error.required && _thickness" class="help-block text-right">不能为空</p>
+            </div>
+        </div>
+        <div layout>
+            <div flex="70" class="input-wrap" ng-if="evObj.showOption == '3'">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit"><em>*</em>剂量</label>
+                    <input flex type="number" ng-model="evObj.dosage" name="dosage" required ng-blur="_dosage = true">
+                    <span> {{evObj.dosageUnit}}</span>
+                </div>
+                <p ng-if="form.dosage.$error.required && _dosage" class="help-block text-right">不能为空</p>
+            </div>
+        </div>
+        <div layout>
+            <div flex="50" class="input-wrap">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit"><em>*</em>开始时间</label>
+                    <datetime-picker flex ng-class="{true: 'shadow'}[!showEndTime]" ng-model="evObj.startTime" name="startTime" required></datetime-picker>
+                </div>
+            </div>
+            <div flex="50" class="input-wrap" ng-if="showEndTime">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit"><em>*</em>结束时间</label>
+                    <datetime-picker flex ng-model="evObj.endTime" name="endTime" required></datetime-picker>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="delete()" ng-if="isDelete">删&nbsp;&nbsp;除</button>
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

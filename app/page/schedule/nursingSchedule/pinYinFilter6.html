@@ -1,0 +1,10 @@
+<!-- 手术室名称 -->
+<oi-select 
+	ng-class="{true: 'oi-select'}[!(row.entity.state == '04' || row.entity.state == '05' || row.entity.state == '06' || row.entity.state == '07') ]"
+	ng-change="grid.appScope.blurFn(row.entity,col,'isSameNurs');"
+	 ng-disabled=" row.entity.state == '04' || row.entity.state == '05' || row.entity.state == '06' || row.entity.state == '07' "
+           ng-click="grid.appScope.focus(row.entity, col);" 
+           oi-options="item.operRoomId as item.name for item in col.colDef.editDropdownOptionsArray track by item.operRoomId | limitTo: 100" 
+           ng-model="row.entity.operRoomId" 
+           oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}">
+</oi-select>

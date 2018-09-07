@@ -1,0 +1,33 @@
+<div class="navbar-btn text-right c-el-10">
+    <div layout layout-align='start center' class="col-md-6" ng-if="permission.indexOf('Q_LIST') >= 0">
+        <label style="margin-right: 15px;">
+            日期范围
+        </label>
+        <div style="width: 120px;">
+            <datetime-picker flex dateID="date-start-time" ng-model="queryObj.startTime" maxdate="2100-01-01" timepicker="false" format="Y-m-d" class="form-control" ng-change='stateChange(queryObj)' required></datetime-picker>
+        </div>
+        <span style="margin-left: 15px; margin-right: 15px;">到</span>
+        <div style="width: 120px;">
+            <datetime-picker flex dateID="date-end-time" ng-model="queryObj.endTime" maxdate="2100-01-01" timepicker="false" format="Y-m-d" class="form-control" ng-change='stateChange(queryObj)' required></datetime-picker>
+        </div>
+        <div ng-if='beCode == "syzxyy" || beCode == "cshtyy" || beCode == "base"'>
+            <label style='margin-left: 15px;'>状态</label>
+            <checkbox style='margin-left: 15px;' ng-model="queryObj.state" ng-true-value="'03'" ng-false-value="''" ng-change='stateChange(queryObj)'>术前</checkbox>
+            <checkbox style='margin-left: 15px;' ng-model="queryObj.state" ng-true-value="'04'" ng-false-value="''" ng-change='stateChange(queryObj)'>术中</checkbox>
+            <checkbox style='margin-left: 15px;' ng-model="queryObj.state" ng-true-value="'06'" ng-false-value="''" ng-change='stateChange(queryObj)'>术后</checkbox>
+        </div>
+    </div>
+    <button class="btn btn-primary" ng-if="permission.indexOf('APPR') >= 0" ng-click="ratify()">批准手术</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('ADD') >= 0" ng-click="add()">手动录入</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('H_SYNC') >= 0" ng-click="hisImport()">HIS导入</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('Q_LIST') >= 0 && (beCode != 'syzxyy' || beCode != 'cshtyy' || beCode != 'base')" ng-click="search()">查&nbsp;&nbsp;询</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('FILE') >= 0 && !isArch && beCode != 'syzxyy' && beCode != 'cshtyy'" ng-click="placeOnFile(true)">归&nbsp;&nbsp;档</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('RETREAT') >= 0 && isArch && beCode != 'syzxyy' && beCode != 'cshtyy'" ng-click="placeOnFile(false)">退&nbsp;&nbsp;档</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('ARCH') >= 0 && !isArch && beCode != 'syzxyy' && beCode != 'cshtyy'" ng-click="archived(true)">已归档病历</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('ARCH') >= 0 && isArch" ng-click="archived(false)">返&nbsp;&nbsp;回</button>
+    <button class="btn btn-primary" ng-if="!isArch && (beCode != 'syzxyy' || beCode != 'cshtyy' || beCode != 'base')" ng-click="refresh()">刷&nbsp;&nbsp;新</button>
+</div>
+<div flex>
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ui-grid-resize-columns ui-grid-pagination ng-if="gridOptions.paginationState"></div>
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ui-grid-resize-columns ng-if="!gridOptions.paginationState"></div>
+</div>

@@ -1,0 +1,40 @@
+﻿body{ font-size:12px} 
+#tab{ border-collapse: collapse;width: 100%;} 
+.edit{ height:16px; width:98%; background-color:#EFF7FF; font-size:12px; border:0px;} 
+#tab tbody td{ overflow:hidden} 
+#tab td{border: 1px solid #CECFCE;vertical-align:middle; } 
+#tab td.tc{text-align:center;} 
+.cc{width:16px;height:16px; background-image:url(move.png); position:absolute; display:none;} 
+#tab td.red{border-color:#f30;  } 
+.ww{height:100%;width:3px; float:right; cursor:col-resize;} 
+.line{ width:2px; background-color:#999999; position:absolute; display:none; } 
+
+#tab>thead>tr>td>span{ cursor:pointer} 
+.weiruanyahei>a{ font-family: '微软雅黑' }
+.songti>a{ font-family: '宋体' }
+.fangsong>a{ font-family: '仿宋' }
+.heiti>a{ font-family: '黑体' }
+.btn-toolbar > .btn-group{ margin-left:0px;}
+.btn-toolbar .btn{padding: 6px 6px;}
+.dropdown-menu{min-width:72px;}
+.color-menu>li>a,.bgcolor-menu>li>a,.fontname-menu>li>a{min-width: 70%;margin: 0 10px;}
+.btn-toolbar{position: absolute;padding-left: 5px;background-color: #f5f5f5;}
+#divTitle{text-align: center; font-size:32px;display: inline-block;width: 100%;margin: 0 auto;    padding-left: 25px; }
+#divTitle>input{text-align: center; min-height:40px; font-size:32px;}
+#tab tr{ min-height:50px; line-height:50px;}
+#tab td{ text-align: center; }
+#div_big{ padding:10px 2px 0 3px;text-align: center;}
+thead tr{ font-size:28px;}
+tbody tr{ font-size:24px;}
+#hiddenCells{ min-width: 90px; padding-left: 8px;}
+#hiddenCells input{ vertical-align: top;}
+#hiddenCells label{ font-weight:normal;}
+#sortCells{ min-width: 90px; padding-left: 8px;}
+#sortCells input{ vertical-align: top;}
+#sortCells label{ font-weight:normal;}
+#page_currentpage,#page_count,#time{font-size:24px; padding:0px 25px 0 0;  }
+.divTitle-left{ text-align: left;display: inline-block;  }
+.divTitle-right{ text-align: right;display: inline-block;  float: right; }
+.div-head{width: 100%;  display: block;text-align: left;padding-bottom: 1px;    margin-bottom: 10px;}
+.list-unstyled li{ display: inline-block; padding-right: 50px; list-style: none; } 
+#div_gonggao li{font-size: 24px;line-height: 70px; height: 70px; font-family: '微软雅黑'}

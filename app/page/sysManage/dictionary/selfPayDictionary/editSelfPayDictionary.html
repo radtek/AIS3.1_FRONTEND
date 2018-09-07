@@ -1,0 +1,55 @@
+<div class="modal-header">    
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper">
+    <form name="selfPayform" class="panel panel-default" role="form" novalidate>
+    	<div class="wrap" layout layout-wrap="wrap">
+	    	<div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>名&nbsp;&nbsp;称</label>
+                    <input flex type="text" name="name" class="form-control" ng-model="selfPay.name" ng-maxlength="30" ng-blur="_name = true" required>
+                </div>
+                <p ng-if="!selfPay.name && (_name || verify == false)" class="help-block text-right">名称名不能为空</p>
+                <p ng-if="selfPayform.name.$error.maxlength && _name" class="help-block text-right">长度不能超过30个字符</p>
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" ng-if="beCode !== 'syzxyy' && beCode != 'cshtyy'&&beCode!='llzyyy'"><em>*</em>单&nbsp;&nbsp;价</label>
+                    <label class="tit" ng-if="beCode === 'syzxyy' || beCode == 'cshtyy'||beCode=='llzyyy'"><em ng-if="selfPay.type !== 3">*</em>自负</label>
+                    <input flex type="number" name="price" min="0" class="form-control" ng-model="selfPay.price" ng-blur="_price = true"
+                    ng-required="beCode != 'syzxyy' && beCode != 'cshtyy'&&beCode!='llzyyy' || ((beCode == 'syzxyy' || beCode == 'cshtyy'||beCode=='llzyyy') && selfPay.type !== 3)">%
+                </div>
+                <p ng-if="(beCode != 'syzxyy' && beCode != 'cshtyy'&&beCode!='llzyyy' && selfPay.price == undefined) || ((beCode === 'syzxyy' || beCode == 'cshtyy'||beCode=='llzyyy') && selfPay.type !== 3 && selfPay.price == undefined) && (_price || verify == false)" class="help-block text-right">单价不能为空</p>
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>类&nbsp;&nbsp;型</label>
+                    <select flex name="type" class="form-control" ng-model="selfPay.type" ng-blur="_type = true" ng-if="beCode !== 'syzxyy' && beCode != 'cshtyy'" required>
+                        <option ng-value="1">自费</option>
+                        <option ng-value="2">高价</option>
+                    </select>
+                    <select flex name="type" class="form-control" ng-model="selfPay.type" ng-blur="_type = true" ng-if="beCode === 'syzxyy' || beCode == 'cshtyy'" required>
+                        <option ng-value="1">医保病人自负项目-材料</option>
+                        <option ng-value="2">医保病人自负项目-药品</option>
+                        <option ng-value="3">农合病人自负项目</option>
+                    </select>
+                </div>
+                <p ng-if="!selfPay.type && (_type || verify == false)" class="help-block text-right">类型不能为空</p>
+            </div>
+	    	<div flex="90" class="input-wrap">
+	    		<div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>是否有效</label>
+                    <select flex name="enable" class="form-control" ng-model="selfPay.enable" ng-blur="_enable = true" required>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+                <p ng-if="!selfPay.enable && (_enable || verify == false)" class="help-block text-right">状态不能为空</p>
+	    	</div>
+        </div>
+        <div class="modal-footer">
+        	<button class="btn btn-primary" ng-click="btnActive && saveSelfPay()">保&nbsp;&nbsp;存</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+.medicalRecord {
+    .tb-rl {
+        width: 45px;
+        writing-mode: tb-rl;
+    }
+    .text {
+        line-height: 1.5em;
+        letter-spacing: 0.2em;
+    }
+
+    .ui-table {
+        .lih {
+            height: 80px;
+        }
+        .lih2n {
+            height: 160px;
+        }
+        .lih4n {
+            height: 240px;
+        }
+        .lih6n {
+            height: 480px;
+        }
+        li {
+            line-height: 30px;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-align: left;
+        }
+    }
+    @media print {
+        .ui-table {
+            .lih2n {
+                height: 160px;
+            }
+        }
+        .form-group {
+            font-size: 14px;
+            margin-bottom: 2px !important;
+        }
+    }
+}

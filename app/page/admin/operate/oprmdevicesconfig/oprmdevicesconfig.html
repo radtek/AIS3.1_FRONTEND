@@ -1,0 +1,18 @@
+<div flex id="oprmconfig">
+    <div layout layout-align="space-between center" class="form-group" style="">
+        <div style="width: 260px" >
+            <label style="line-height: 30px;font-weight: 700;font-size: 14px;margin:0;margin-left: 20px">局点:&nbsp&nbsp</label>
+            <!-- <select class="form-control" style="width:190px;display: inline-block;" ng-options="item as item.name for item in hospital" ng-model="selHospModel" ng-change="initbeidFn()"  ng-selected="item.beid==selHospModel.beid" > -->
+            <select class="form-control" style="width:190px;display: inline-block;"  ng-model="selHospModel" ng-change="initbeidFn()"   >
+            <option  ng-repeat="item in hospital" ng-selected="item.beid==selHospModel.beid" >{{item.name}}</option>
+            </select>
+        </div>
+        <div style="width: 200px" >
+            &nbsp;&nbsp;
+            <button class="btn btn-primary" ng-click="refresh()" style="float: right;">
+                刷&nbsp;&nbsp;新
+            </button>
+        </div>
+    </div>
+    <div ui-grid="gridoperaRoom" style="height: 720px;" ui-grid-pagination ui-grid-auto-resize ui-grid-expandable ></div>
+</div>

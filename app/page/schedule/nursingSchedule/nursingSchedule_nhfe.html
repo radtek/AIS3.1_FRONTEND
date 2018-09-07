@@ -1,0 +1,110 @@
+<div flex layout="column">
+    <div flex id="schedule">
+        <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ng-if="gridOptions" class="ui-grid-729"></div>
+        <div class="noData" ng-if="!gridOptions">暂无数据</div>
+    </div>
+    <div flex style="display: none;">
+        <div id="list-scan">
+            <div layout="column" layout-align="center center">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if='docInfo.subName'>{{docInfo.subName}}</h4>
+                <h4>手术安排表</h4>
+                <h5>{{operDate}}</h5>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <td style="width: 47px;">手术室</td>
+                    <td style="width: 40px;">台次</td>
+                    <td>科室</td>
+                    <td>床号</td>
+                    <td>姓名</td>
+                    <td style="width: 40px;">性别</td>
+                    <td style="width: 45px;">年龄</td>
+                    <td style="min-width: 62px;">手术名称</td>
+                    <td style="min-width: 62px;">麻醉方法</td>
+                    <td style="min-width: 62px;">手术医生</td>
+                    <td style="min-width: 62px;">洗手护士</td>
+                    <td style="min-width: 62px;">巡回护士</td>
+                    <td style="min-width: 62px;">麻醉医生</td>
+                    <td style="width: 62px;">手术等级</td>
+                    <td style="width: 62px;">切口等级</td>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in gridOptions.data">
+                        <td>
+                            <div>{{item.operRoomId}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.pcs}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.deptName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.bed}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.name}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.sex}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.age}}</div>
+                        </td>
+                        <td>
+                            <div class="text-left">{{item.designedOptName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.designedAnaesMethodName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.operatorName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.instrnurseName1}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.circunurseName1}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.anesthetistName}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.optLevel}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.cutLevelName}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="card-scan">
+            <div layout="column" layout-align="center center">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if='docInfo.subName'>{{docInfo.subName}}</h4>
+                <h4>手术安排表</h4>
+                <h5>{{operDate}}</h5>
+            </div>
+            <table class="table table-bordered" ng-repeat="item in gridOptions.data">
+                <tr>
+                    <td>手术间：{{item.operRoomName}}</td>
+                    <td>科室：{{item.deptName}}</td>
+                    <td>床号：{{item.bed}}</td>
+                    <td>姓名：{{item.name}}</td>
+                    <td>性别：{{item.sex}}</td>
+                    <td>年龄：{{item.age}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">手术日期：{{item.operaDate}}</td>
+                    <td colspan="2">住院号：{{item.hid}}</td>
+                    <td colspan="2">手术医生：{{item.operatorName}}</td>
+                </tr>
+                <tr>
+                    <td colspan="6">手术名称：{{item.designedOptName}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

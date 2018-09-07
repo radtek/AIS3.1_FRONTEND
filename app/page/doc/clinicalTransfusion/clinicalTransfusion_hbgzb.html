@@ -1,0 +1,194 @@
+<div id="print-region">
+    <div class="page-print clinicalTransfusionHbgzb" ng-class="{true: 'end-state'}[bean.processState == 'END'] || setting.readonly">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>临床输血申请单</h4>
+        </header>
+        <hr>
+        <div layout layout-align="space-between end" class="form-group">
+            <span flex layout>预定输血日期：<a flex></a>年<a flex></a>月<a flex></a>日</span>
+            <span flex-offset=5>输血需求状态：
+                <checkbox ng-model="bean.patientinitdate" ng-true-value="'1'" ng-false-value="'0'">常态</checkbox>
+                <checkbox ng-model="bean.patientinitdate" ng-true-value="'2'" ng-false-value="'0'">紧急</checkbox>
+                <checkbox ng-model="bean.patientinitdate" ng-true-value="'3'" ng-false-value="'0'">大量</checkbox>
+                <checkbox ng-model="bean.patientinitdate" ng-true-value="'4'" ng-false-value="'0'">特殊</checkbox>
+            </span>
+        </div>
+        <div layout class="form-group">
+            预定输血成分（品名）及用血量（U/治疗量）：
+            <a flex></a>
+        </div>
+        <div layout class="form-group">
+            按规定是否需报医务主管部门/授权人批准：
+            <checkbox ng-model="bean.patientMind" ng-true-value="'1'" ng-false-value="'0'">1、无需报批</checkbox>
+            <checkbox ng-model="bean.patientMind" ng-true-value="'2'" ng-false-value="'0'">2、应报未报</checkbox>
+            <checkbox ng-model="bean.patientMind" ng-true-value="'3'" ng-false-value="'0'">3、已报批准</checkbox>
+        </div>
+        <div layout flex-offset=50 class="form-group">
+            已报批准时间：
+            <a flex></a>年
+            <a flex></a>月
+            <a flex></a>日
+            <a flex></a>时
+            <a flex></a>分
+        </div>
+        <hr>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a flex>{{::regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{::regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{::regOptItem.age}}</a></span>&nbsp;
+            <span layout>科别：<a flex>{{::regOptItem.deptName}}</a></span>&nbsp;
+            <span layout>病区：<a flex>{{::regOptItem.regionName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{::regOptItem.bed}}</a></span>&nbsp;
+            <span layout>住院病历号：<a flex>{{::regOptItem.hid}}</a></span>
+        </div>
+        <div class="form-group" layout>
+            临床诊断：<a flex>{{::regOptItem.designedOptName}}</a>
+        </div>
+        <div class="form-group" layout>
+            输血史：
+            <checkbox ng-model="bean.patientMind1" ng-true-value="'1'" ng-false-value="'0'">无</checkbox>
+            <checkbox ng-model="bean.patientMind1" ng-true-value="'2'" ng-false-value="'0'">有</checkbox>。 生育史：孕
+            <a flex=10></a>产
+            <a flex=10></a>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>输血目的：<a flex></a></span>
+            <span style="margin-left: 10px;">
+                受血者户籍属地：
+                <checkbox ng-model="bean.patientMind2" ng-true-value="'1'" ng-false-value="'0'">本市</checkbox>
+                <checkbox ng-model="bean.patientMind2" ng-true-value="'2'" ng-false-value="'0'">外埠</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout>
+            <b>受血者输血前检测下列项目：</b>（应由申请医师逐项如实填写，不填写的必须注明“√”相关原图）
+        </div>
+        <div class="form-group" layout flex=60>
+            血型（ABO）：
+            <a flex></a>&nbsp;Rh（D）
+            <a flex></a>；
+        </div>
+        <div class="form-group" layout>
+            血红蛋白：
+            <a flex></a>g/L；HCT
+            <a flex></a>；血小板计数
+            <a flex></a>
+        </div>
+        <div class="form-group" layout flex=60>
+            ALT：
+            <a flex></a>U/L；HbsAg：
+            <a flex></a>
+        </div>
+        <div class="form-group" layout>
+            Anti-HCV：
+            <a flex></a>；Anti-HIV 1/2：
+            <a flex></a>；梅毒：
+            <a flex></a>。
+        </div>
+        <div class="form-group" layout>
+            <b>注明：</b>
+            <div layout="column" flex>
+                <checkbox ng-model="bean.patientMind3" ng-true-value="'1'" ng-false-value="'0'">1、因紧急输血，以上共九项检测结果，待检测，报告发出后及时到血库补填。</checkbox>
+                <div class="form-group" layout>
+                    <checkbox ng-model="bean.patientMind4" ng-true-value="'2'" ng-false-value="'0'">2、受血者输血前的以上五项检测，因患者（或代理人）拒绝检测，故无数据。
+                    </checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <div layout="column" flex style="margin-right: 20px;">
+                <span flex layout class="form-group">
+                    <b>申请（经治）医师签名：</b><a flex></a>
+                </span>
+                <span flex layout>
+                    申请时间：<a flex></a>年<a flex></a>月<a flex></a>日<a flex></a>时<a flex></a>分
+                </span>
+            </div>
+            <div layout="column" flex>
+                <span flex layout class="form-group">
+                    <b>上级（主治以上）医师审核签名：</b><a flex></a>
+                </span>
+                <span flex layout>
+                    <a flex></a>年<a flex></a>月<a flex></a>日<a flex></a>时<a flex></a>分
+                </span>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <b>受血者血样采集及送达交接等相关情况：</b>
+        </div>
+        <div class="form-group">
+            1.受血者血样已经与患者当面核对采集血液标本。
+        </div>
+        <div class="form-group" layout style="margin-left: 15px!important;">
+            <b>采集血样执行者签名：</b>
+            <a flex style="margin-right: 20px;"></a>
+            <span layout flex="60">采集时间：<a flex></a>年<a flex></a>月<a flex></a>日<a flex></a>时<a flex></a>分</span>
+        </div>
+        <div class="form-group" layout>
+            2.由申请用血科室医护人员或专门人员，将受血者血样（贴好标签的试管）连同本单送交院 输
+        </div>
+        <div class="form-group" layout style="margin-left: 15px!important;">
+            血科（血库），经双方医护人员逐项核对无误，同意办理交接手续。
+        </div>
+        <div class="form-group" layout style="margin-left: 15px!important;">
+            <div layout="column" flex style="margin-right: 20px;">
+                <span flex layout class="form-group">
+                    <b>送交人签名：</b><a flex></a>
+                </span>
+                <span flex layout>
+                    时间：<a flex></a>年<a flex></a>月<a flex></a>日<a flex></a>时<a flex></a>分
+                </span>
+            </div>
+            <div layout="column" flex>
+                <span flex layout class="form-group">
+                    <b>接交人签名：</b><a flex></a>
+                </span>
+                <span flex layout>
+                    时间：<a flex></a>年<a flex></a>月<a flex></a>日<a flex></a>时<a flex></a>分
+                </span>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            3.按规定补充填写受血者输血前接受血液检测项目的结果（共
+            <a flex=5></a>项）。
+        </div>
+        <div class="form-group" layout style="margin-left: 15px!important;">
+            <b>填写人签名</b>
+            <a flex style="margin-right: 20px;"></a>
+            <span layout flex="60">填写时间：<a flex></a>年<a flex></a>月<a flex></a>日<a flex></a>时<a flex></a>分</span>
+        </div>
+        <div class="form-group" layout>
+            （备注：本申请单由院输血科（血库）负责按供血的原始记录应当至少保存十年，但不归入病历之中）
+        </div>
+        <div layout style="border-top: 1px solid #666; border-bottom: 1px solid #666;">
+            <div flex layout="column" style="padding: 3px; border-right: 1px solid #666;">
+                <span class="form-group">血库备查标签：</span>
+                <div class="form-group" layout>
+                    <span flex layout>受血者姓名：<a flex></a></span>
+                    <span flex layout>住院号：<a flex></a></span>
+                </div>
+                <div layout>
+                    <span flex layout>病区：<a flex></a></span>
+                    <span flex layout>床号：<a flex></a></span>
+                </div>
+            </div>
+            <div flex layout="column" style="padding: 3px;">
+                <span class="form-group">剪贴血样试管标签：</span>
+                <div class="form-group" layout>
+                    <span flex layout>受血者姓名：<a flex></a></span>
+                    <span flex layout>住院号：<a flex></a></span>
+                </div>
+                <div layout>
+                    <span flex layout>病区：<a flex></a></span>
+                    <span flex layout>床号：<a flex></a></span>
+                    <span flex layout>采集时间：<a flex></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

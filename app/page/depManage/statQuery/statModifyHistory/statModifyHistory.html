@@ -1,0 +1,4 @@
+<div layout="column" flex style="padding-top: 12px;">
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ui-grid-pagination  ui-grid-exporter ng-if="gridOptions"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+</div>

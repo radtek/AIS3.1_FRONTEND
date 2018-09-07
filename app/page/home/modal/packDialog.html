@@ -1,0 +1,42 @@
+<div class="modal-header">    
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form name="PackDialogForm" class="form-horizontal" novalidate>
+    <div class="modal-body">
+        <table class="table">
+            <tr>
+                <td style="width: 130px;"></td>
+                <td>名称</td>
+                <td ng-if="costType == 1">规格</td>
+                <td style="width: 70px">单价</td>
+            </tr>
+            <tr>
+                <td class="text-right"><strong>将收费包中所有</strong></td>
+                <td>{{opt.name}}</td>
+                <td ng-if="costType == 1">{{opt.spec}}</td>
+                <td>{{opt.price}}</td>
+            </tr>
+            <tr>
+                <td class="text-right"><strong>替换为</strong></td>
+                <td>
+                    <oi-select ng-if="costType == 1" style="width: 300px;" oi-options="item.name for item in getItems($query) | limitTo: 100" ng-model="item.name" placeholder="输入汉字或拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                    <oi-select ng-if="costType == 2" style="width: 300px;" oi-options="item.chargeItemName for item in getItems($query) | limitTo: 100" ng-model="item.chargeItemName" placeholder="输入汉字或拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                </td>
+                <td ng-if="costType == 1">{{cur.spec}}</td>
+                <td>{{costType == 1 ? cur.priceMinPackage : cur.price}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="PackDialogForm.$invalid" type="button" ng-click="vm.replace()">替&nbsp;&nbsp;换</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>
+<style type="text/css">
+.modal-mg {
+    width: 700px;
+}
+.table {
+    margin-bottom: 0px !important;
+}
+</style>

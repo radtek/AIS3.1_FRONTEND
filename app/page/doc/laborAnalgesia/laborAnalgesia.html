@@ -1,0 +1,66 @@
+<div id="print-region">
+    <div id="laborAnalgesia" class="page-print selfPayInstrument-syzxyy" ng-class="{true: 'end-state'}[processState==='END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center" class="noTop">
+            <h3 ng-if='docInfo.beName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.beName}}</h3>
+            <h4 ng-if='docInfo.subName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.subName}}</h4>
+            <img ng-if="docInfo.beCode =='syzxyy'" src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h4>分 娩 镇 痛 同 意 书</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a >{{vm.regOpt.name}}</a></span>&nbsp;
+            <span layout>年龄：<a >{{vm.regOpt.age}}</a></span>&nbsp;
+            <span layout>性别：<a >{{vm.regOpt.sex}}</a></span>&nbsp;
+            <span layout>科室：<a >{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a >{{vm.regOpt.bed}}</a></span>
+            <span layout>住院号：<a >{{vm.regOpt.hid}}</a></span>&nbsp;
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            术前诊断：
+            <a flex >{{vm.regOpt.diagnosisName}}</a>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            麻醉方法：
+            <a flex >{{vm.regOpt.designedAnaesMethodName}}</a>
+        </div>
+        <div style="font-size: 16px;line-height: 34px;padding: 10px 50px">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;分娩镇痛是减轻产妇分娩时宫缩疼痛的最有效的方法,可减轻机体应激反应,帮助产妇顺利完成产程。分娩镇痛存在一定风险,现将可能发生的并发症和风险告知如下：</p>
+            <p> 1.对麻醉药物过敏(或高敏)反应或局麻药毒性反应,可能引起休克、严重脏器功能损害、呼吸心跳骤停,危及产妇及胎儿生命。</p>
+            <p> 2.椎管内穿刺可能引起神经、脊髓等组织结构损伤,可出现腰痛、头痛、椎管内感染、全脊髓麻醉、截瘫、肢体伤残等。</p>
+            <p>3.椎管内穿刺可能引起局部出血、局部血肿、出现血肿压迫神经或脊髓引起相应的神经或脊髓损伤。 </p>
+            <p>4.分娩镇痛可能引起下肢皮肤瘙痒、无力麻木、恶心、呕吐、误吸、窒息等。 </p>
+            <p>5.按计划实施的镇痛方法可能镇痛不全,需要辅助其他的镇痛方法。 </p>
+            <p>6.少数病人分娩镇痛可导致孕妇产程延长,助产率增加,必要时行剖宫产。 </p>
+            <p> 7.分娩镇痛的药品及耗材需自费或部分自费。 </p>
+            <p> 8.其他。</p>
+            <br>
+            <br>
+            <p>
+                我们对上述情况均已了解清楚，自愿要求分娩镇痛，理解并愿意承担分娩镇痛可能引起的各种风险及费用。
+            </p>
+            <br>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout layout-align="start center" class="pd-left">患者（或法定代理人）签字：<input type="text" class="noborder3" style="width: 160px;" readonly /></span>
+            <div layout flex=30  layout-wrap="wrap"  layout-align="space-between end">
+                <span>麻醉医生：</span>
+                <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anaestheitistId" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="vm.laborAccede.anaestheitistId"></oi-select>
+                <div class="eSignature" flex=40 ng-if="hasSig" >
+                    <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span class="pd-left">与患者关系：<input type="text" class="noborder3" style="width: 160px;" readonly /></span>
+            <div layout flex=30 layout-align="space-between end">
+                <span>签字地点：</span>
+                <input type="text" class="noborder3 sign" ng-model="vm.laborAccede.talkLocation" ng-value="vm.laborAccede.talkLocation" maxlength="10" />
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+            <div layout layout-align="space-between end">
+                <span>日期：</span>
+                <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.laborAccede.anaestheitistSignTime" ng-value="vm.laborAccede.anaestheitistSignTime" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime" style="width: 120px!important;"></datetime-picker>
+            </div>
+        </div>
+    </div>
+</div>

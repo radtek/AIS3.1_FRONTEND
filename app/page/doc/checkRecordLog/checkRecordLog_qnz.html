@@ -1,0 +1,193 @@
+<div id="qxfllist" class="page-print surgeryNursing" ng-class="{true:'end-state'}[processState == 'END' && !saveActive || setting.readonly]">
+    <header layout="column" layout-align="center center" class="noTop" style="margin-top: -5px;">
+        <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+        <h4>器械清点单</h4>
+    </header>
+    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+        <span layout>病人姓名：<a flex>{{vm.regOpt.name}}</a></span>&nbsp;
+        <span layout>性别：<a flex>{{vm.regOpt.sex}}</a></span>&nbsp;
+        <span layout>年龄：<a flex>{{vm.regOpt.age}}</a></span>&nbsp;
+        <span layout>科室：<a flex>{{vm.regOpt.deptName}}</a></span>&nbsp;
+        <span layout>床号：<a flex>{{vm.regOpt.bed}}</a></span>&nbsp;
+        <span layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+    </div>
+    <div class="form-group" layout layout-wrap="wrap">
+        <span layout>手术日期：<a flex>{{vm.regOpt.operaDate}}</a></span>&nbsp;
+        <span layout style="margin-left: 118px;">手术间：<a flex>{{vm.regOpt.operRoomName}}</a></span>
+    </div>
+    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+        <span layout flex>手术名称：<a flex>{{vm.optNurseItem.operatorName}}</a></span>
+    </div>
+    <div>
+        <div style="border: 1px solid #000; border-right: 0; margin-top: 10px;" layout>
+            <div layout flex="50" style="height: 70px; line-height: 70px;" class="border-r">
+                <div flex class="text-center">器械名称</div>
+                <div style="width: 160px; line-height: normal;">
+                    <div layout-align="center center" class="border-l border-b text-center" style="height: 20px; line-height: 20px;">数量</div>
+                    <div layout style="height: 50px;">
+                        <div flex class="border-l text-center">术前清点</div>
+                        <div flex class="border-l text-center">术中加数</div>
+                        <div flex class="border-l text-center" style="line-height: 16px"   style="line-height: 16px" >关闭脏器前</div>
+                        <div flex class="border-l text-center">关前清点</div>
+                        <div flex class="border-l text-center">关后清点</div>
+                    </div>
+                </div>
+                <div class="text-center border-l not-print" style="width: 40px;">操作</div>
+            </div>
+            <div layout flex="50" style="height: 70px; line-height: 70px;" class="border-r">
+                <div flex class="text-center">器械名称</div>
+                <div style="width: 160px; line-height: normal;">
+                    <div layout-align="center center" class="border-l border-b text-center" style="height: 20px; line-height: 20px;">数量</div>
+                    <div layout style="height: 50px;">
+                        <div flex class="border-l text-center">术前清点</div>
+                        <div flex class="border-l text-center">术中加数</div>
+                        <div flex class="border-l text-center" style="line-height: 16px" >关闭脏器前</div>
+                        <div flex class="border-l text-center">关前清点</div>
+                        <div flex class="border-l text-center">关后清点</div>
+                    </div>
+                </div>
+                <div class="text-center border-l not-print" style="width: 40px;">操作</div>
+            </div>
+        </div>
+        <div layout layout-wrap="wrap" style="border-left: 1px solid #000;" class="tableList">
+            <div layout flex="50" class="border-r border-b" style="min-height: 30px;" ng-repeat="item in vm.qxArr track by $index">
+                <div flex style="word-break: break-all; display: flex; align-items: center; justify-content: center;">{{item.instruItemName}}</div>
+                <div layout style="width: 160px;">
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input type="number" transform="number" min="0" ng-disabled="!item.instruItemName" ng-model="item.origamount" ng-value="item.origamount" ng-if="!item.slash" auto-focus="item.slash" class="not-print">
+                        <input ng-change="item.slash=item.slash!==''?'/':''" style="text-align: center" ng-model="item.slash" ng-if="item.slash" class="not-print">
+                        <span class="not-display">{{item.origamount}}</span>
+                    </div>
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input ng-disabled="!item.instruItemName" class="text-center not-print" ng-model="item.inadd" ng-value="item.inadd" ng-if="!item.slash">
+                        <span class="not-display">{{item.inadd}}</span>
+                    </div>
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input ng-disabled="!item.instruItemName" class="text-center not-print" ng-model="item.hollowViscus" ng-value="item.hollowViscus" ng-if="!item.slash">
+                        <span class="not-display">{{item.hollowViscus}}</span>
+                    </div>
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input type="number" transform="number" min="0" class="not-print" ng-disabled="!item.instruItemName" ng-model="item.cloBeBody" ng-value="item.cloBeBody" ng-if="!item.slash">
+                        <span class="not-display">{{item.cloBeBody}}</span>
+                    </div>
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input type="number" transform="number" min="0" class="not-print" ng-disabled="!item.instruItemName" ng-model="item.cloAfBody" ng-value="item.cloAfBody" ng-if="!item.slash">
+                        <span class="not-display">{{item.cloAfBody}}</span>
+                    </div>
+
+                </div>
+                <div class="text-center border-l not-print" style="width: 40px;" layout layout-align='center center'>
+                    <span flex style="cursor:pointer;" class="glyphicon glyphicon-remove" ng-if="item.instruItemName" ng-click="vm.deleteInstrsuit(item)"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h4 class="tit1">敷料清点单</h4>
+        <div style="border: 1px solid #000; border-right: 0; margin-top: 10px;" layout>
+            <div layout flex="50" style="height: 70px; line-height: 70px;" class="border-r">
+                <div flex class="text-center">名称</div>
+                <div style="width: 160px; line-height: normal;">
+                    <div layout-align="center center" class="border-l border-b text-center" style="height: 20px; line-height: 20px;">数量</div>
+                    <div layout style="height: 50px;">
+                        <div flex class="border-l text-center">术前清点</div>
+                        <div flex class="border-l text-center">术中加数</div>
+                         <div flex class="border-l text-center"   style="line-height: 16px" >关闭脏器前</div>
+                        <div flex class="border-l text-center">关前清点</div>
+                        <div flex class="border-l text-center">关后清点</div>
+                    </div>
+                </div>
+                <div class="text-center border-l not-print" style="width: 40px;">操作</div>
+            </div>
+            <div layout flex="50" style="height: 70px; line-height: 70px;" class="border-r">
+                <div flex class="text-center">名称</div>
+                <div style="width: 160px; line-height: normal;">
+                    <div layout-align="center center" class="border-l border-b text-center" style="height: 20px; line-height: 20px;">数量</div>
+                    <div layout style="height: 50px;">
+                        <div flex class="border-l text-center">术前清点</div>
+                        <div flex class="border-l text-center">术中加数</div>
+                         <div flex class="border-l text-center"   style="line-height: 16px" >关闭脏器前</div>
+                        <div flex class="border-l text-center">关前清点</div>
+                        <div flex class="border-l text-center">关后清点</div>
+                    </div>
+                </div>
+                <div class="text-center border-l not-print" style="width: 40px;">操作</div>
+            </div>
+        </div>
+        <div layout layout-wrap="wrap" style="border-left: 1px solid #000;" class="tableList">
+            <div layout flex="50" class="border-r border-b" style="min-height: 30px;" ng-repeat="item in vm.flArr track by $index">
+                <div flex style="word-break: break-all; display: flex; align-items: center; justify-content: center;">{{item.instruItemName}}</div>
+                <div layout style="width: 160px;">
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input type="number" transform="number" min="0" ng-disabled="!item.instruItemName" ng-model="item.origamount" ng-value="item.origamount" ng-if="!item.slash" auto-focus="item.slash" class="not-print">
+                        <input ng-change="item.slash=item.slash!==''?'/':''" style="text-align: center" ng-model="item.slash" ng-if="item.slash" class="not-print">
+                        <span class="not-display">{{item.origamount}}</span>
+                    </div>
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input ng-disabled="!item.instruItemName" class="text-center not-print" ng-model="item.inadd" ng-value="item.inadd" ng-if="!item.slash">
+                        <span class="not-display">{{item.inadd}}</span>
+                    </div>
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input ng-disabled="!item.instruItemName" class="text-center not-print" ng-model="item.hollowViscus" ng-value="item.hollowViscus" ng-if="!item.slash">
+                        <span class="not-display">{{item.hollowViscus}}</span>
+                    </div>
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input type="number" transform="number" min="0" class="not-print" ng-disabled="!item.instruItemName" ng-model="item.cloBeBody" ng-value="item.cloBeBody" ng-if="!item.slash">
+                        <span class="not-display">{{item.cloBeBody}}</span>
+                    </div>
+                    <div layout flex class="border-l" layout-align='center center'>
+                        <input type="number" transform="number" min="0" class="not-print" ng-disabled="!item.instruItemName" ng-model="item.cloAfBody" ng-value="item.cloAfBody" ng-if="!item.slash">
+                        <span class="not-display">{{item.cloAfBody}}</span>
+                    </div>
+                </div>
+                <div class="text-center border-l not-print" style="width: 40px;" layout layout-align='center center'>
+                    <span flex style="cursor:pointer;" class="glyphicon glyphicon-remove" ng-if="item.instruItemName" ng-click="vm.deleteInstrsuit(item)"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="md-body-1" layout style="margin-top: 10px;">
+        <div layout flex ng-class="{true: 'md-red'}[vm.optNurseItem.instrnuseList.length <= 0 && verify]">
+            <div><span class="md-red not-print">*</span>器械护士:</div>
+            <oi-select flex multiple class="noborder3 sign signature" ng-model="vm.optNurseItem.instrnuseList" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+            <div class="eSignature">
+                <!-- <img ng-repeat="item in eSignatureInstrnuseList" src="{{item.path}}" ng-if="item.hasPath" /> -->
+                <input type="text" class="noborder3" style="width: 150px;" />
+            </div>
+        </div>
+        <div layout flex style="margin-left: 5px; margin-right: 5px;">
+            <div>接班器械护士：</div>
+            <oi-select flex multiple class="noborder3 sign signature" ng-model="vm.optNurseItem.shiftInstrnuseList" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+            <div class="eSignature">
+                <!-- <img ng-repeat="item in eSignatureShiftInstrnuseList" src="{{item.path}}" ng-if="item.hasPath" /> -->
+                <input type="text" class="noborder3" style="width: 150px;" />
+            </div>
+        </div>
+        <div layout flex>
+            <div>交班时间：</div>
+            <datetime-picker name="shiftInstrnuseTime" dateID="operaDate-times" ng-model="vm.optNurseItem.shiftInstrnuseTime" ng-value="vm.optNurseItem.shiftInstrnuseTime" timepicker="true" class="noborder3 calendar sign" id="datatime"></datetime-picker>
+        </div>
+    </div>
+    <div class="md-body-1" layout style="margin-top: 10px;">
+        <div layout flex ng-class="{true: 'md-red'}[vm.optNurseItem.circunurseList.length <= 0 && verify]">
+            <div> <span class="md-red not-print">*</span>巡回护士:</div>
+            <oi-select flex multiple class="noborder3 sign signature" ng-model="vm.optNurseItem.circunurseList" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+            <div class="eSignature">
+                <!-- <img ng-repeat="item in eSignatureCircunurseList" src="{{item.path}}" ng-if="item.hasPath" /> -->
+                <input type="text" class="noborder3" style="width: 150px;" />
+            </div>
+        </div>
+        <div layout flex style="margin-left: 5px; margin-right: 5px;">
+            <div>接班巡回护士：</div>
+            <oi-select flex multiple class="noborder3 sign signature" ng-model="vm.optNurseItem.shiftCircunurseList" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+            <div class="eSignature">
+                <!-- <img ng-repeat="item in eSignatureShiftCircunurseList" src="{{item.path}}" ng-if="item.hasPath" /> -->
+                <input type="text" class="noborder3" style="width: 150px;" />
+            </div>
+        </div>
+        <div layout flex>
+            <div>交班时间：</div>
+            <datetime-picker name="shiftCircunurseTime" dateID="operaDate-times" ng-model="vm.optNurseItem.shiftCircunurseTime" ng-value="vm.optNurseItem.shiftCircunurseTime" timepicker="true" class="noborder3 calendar sign" id="datatime"></datetime-picker>
+        </div>
+    </div>
+</div>

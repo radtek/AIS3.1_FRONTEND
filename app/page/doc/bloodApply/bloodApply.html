@@ -1,0 +1,82 @@
+<div id="print-region">
+    <div id="bloodApplyNhfe" class="page-print" ng-class="{true:'end-state'}[setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3>{{docInfo.beName}}临床用血取血单</h3>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>患者姓名：<a flex>{{vm.regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{vm.regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{vm.regOptItem.age}}</a></span>&nbsp;
+            <span layout>科别：<a flex>{{vm.regOptItem.deptName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>病区：<a flex>{{vm.regOptItem.regionName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{vm.regOptItem.bed}}</a></span>&nbsp;
+            <span layout>病案号：<a flex>{{vm.regOptItem.hid}}</a></span>&nbsp;
+            <span layout>直接抗人球蛋白实验：
+                <select class="not-print" ng-model="bloodTransRecord.antGlo" ng-options="item for item in vm.selectList" ng-change="update($event, bloodTransRecord.antGlo)"></select>
+                <a flex class="is-print">{{bloodTransRecord.antGlo}}</a>
+            </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end" style="margin-bottom: 20px !important;">
+            <span layout>诊断：<a flex>{{vm.regOptItem.diagnosisName}}</a></span>&nbsp;
+            <span layout>ABO血型：
+                <select class="not-print" ng-model="bloodTransRecord.bloodType" ng-options="item for item in vm.bloodTypeList" ng-change="update($event, bloodTransRecord.bloodType)"></select>
+                <a flex class="is-print">{{bloodTransRecord.bloodType}}</a>
+            </span>&nbsp;
+            <span layout>Rh(D)血型：
+                <select class="not-print" ng-model="bloodTransRecord.rhType" ng-options="item for item in vm.selectList" ng-change="update($event, bloodTransRecord.rhType)"></select>
+                <a flex class="is-print">{{bloodTransRecord.rhType}}</a>
+            </span>&nbsp;
+            <span layout>不规则抗体筛查：
+                <select class="not-print" ng-model="bloodTransRecord.antScr" ng-options="item for item in vm.selectList" ng-change="update($event, bloodTransRecord.antScr)"></select>
+                <a flex class="is-print">{{bloodTransRecord.antScr}}</a>
+            </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end center" style="margin-bottom: 20px !important;">
+            <button class="btn btn-primary" ng-click="add()">添&nbsp;加</button>
+        </div>
+        <div ui-grid="gridOptions" class="form-group grid" style="height: 430px;"></div>
+        <div layout style="padding: 1px;">
+            <table flex class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>血液品种</th>
+                        <th>输血剂量</th>
+                        <th>单位</th>
+                        <th>血型</th>
+                        <th>取血时间</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in gridOptions.data">
+                        <td>{{item.bloodName}}</td>
+                        <td>{{item.bloodDosage}}</td>
+                        <td>{{item.bloodUnit}}</td>
+                        <td>{{item.bloodType}}</td>
+                        <td>{{item.date_}}</td>
+                        <td>{{item.status_}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group" layout layout-align="space-between center">
+            <div>发血人：
+                <input type="text" class="noborder3" ng-model="bloodTransRecord.sendUser" ng-value="bloodTransRecord.sendUser" ng-blur="update($event, bloodTransRecord.sendUser)" maxlength="10">
+            </div>
+            <div>取血人：
+                <input type="text" class="noborder3" ng-model="bloodTransRecord.getUser" ng-value="bloodTransRecord.getUser" ng-blur="update($event, bloodTransRecord.getUser)" maxlength="10">
+            </div>
+            <span layout>手术间号：<a flex>{{dispatch.operRoomId}}</a></span>
+            <div>台次：
+                <select class="not-print" ng-model="bloodTransRecord.pcs" ng-options="item for item in vm.pcsList" ng-change="update($event, bloodTransRecord.pcs)"></select>
+                <a flex class="is-print">{{bloodTransRecord.pcs}}&nbsp;</a>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="start center">
+            <span>打印时间：</span>
+            <datetime-picker class='calendar sign' name="createTime" id="datatime" dateID="signTimes-times" ng-model="bloodTransRecord.createTime" ng-change="update($event, bloodTransRecord.createTime)" timepicker="true" format="Y-m-d H:i"></datetime-picker>
+        </div>
+    </div>
+</div>

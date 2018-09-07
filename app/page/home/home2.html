@@ -1,0 +1,130 @@
+<div flex layout="column" id="home">
+    <div flex layout>
+       <div flex layout="column" class="panel panel-default duraStat">
+            <div class="panel-heading">今日患者列表<div ng-if="permission.indexOf('ADD') >= 0" ng-click="add()" class="pull-right notice-add">+ 创建急诊</div></div>
+            <div flex class="panel-body">
+                <div flex layout>
+                    <ul flex layout class="nav nav-tabs index-tabs-ul">
+                        <li ng-class="{true: 'active'}[tabIndex == 0]" ng-mouseover="switchTab(0,0);"><a>本人</a></li>       
+                        <li ng-class="{true: 'active'}[tabIndex == 1]" ng-mouseover="switchTab(0,1);" ng-mouseleave="tabMenu1=false;">
+                            <a><span>{{statestr}}</span> <span class="caret"></span></a>
+                            <ul ng-if="tabMenu1==true" class="tab-menu">
+                                <li ng-click="setState('03,04,06')"><a>全部</a><li>
+                                <li ng-click="setState('03')"><a>术前</a><li>
+                                <li ng-click="setState('04')"><a>术中</a><li>
+                                <li ng-click="setState('06')"><a>术后</a><li>
+                            </ul>
+                        </li>
+                        <li ng-class="{true: 'active'}[tabIndex == 2]" ng-mouseover="switchTab(0,2);" ng-mouseleave="tabMenu2=false;">
+                            <a><span>{{operRoomstr}}</span><span class="caret"></span></a>
+                            <ul ng-if="tabMenu2==true" class="tab-menu">
+                                <li ng-repeat="room in roomList" ng-click="setOperRoom(0,room.operRoomId)"><a>{{room.name}}</a><li>
+                            </ul>
+                        </li>                    
+                    </ul>
+                    <div flex layout-align="end center" class="mypager"  ng-if="showpager">
+                        
+                        <span ng-click="prevPage(0)"  ng-if="prev">上一页</span>
+                        <span ng-click="nextPage(0)"  ng-if="next">下一页</span>
+                        <span>共{{grid_totalItems}}条</span>
+                    </div>  
+                </div>
+                <div flex layout class="grid-div">
+                    <ul flex>
+                    <li layout ng-repeat="row in grid_data" ng-click="query(row)" ng-class="{true: 'active'}[tabli2 == true]" ng-mouseover="tabli2=true;"  ng-mouseleave="tabli2=false;">
+                    <span>{{row.operRoomId}}</span>间&nbsp;<span>{{row.pcs}}</span>台&nbsp;<span>{{row.name}}</span>&nbsp;<span>{{row.sex}}</span>&nbsp;<span>{{row.age}}</span>&nbsp;<span class="hid_span">{{row.hid}}</span>&nbsp;<span>{{row.bed}}</span>床&nbsp;<span>{{row.deptName}}</span>&nbsp;<span>麻醉:{{row.anesthetistName}}</span>&nbsp;<span>手术:{{row.operatorName}}</span>&nbsp;<span  class="stateColor{{row.state}}">{{row.stateName}}</span>
+                    </li>   
+                    </ul>                 
+                </div>                            
+            </div>
+        </div>
+        <div flex layout="column" class="panel panel-default tcsStat ml-15">
+            <div class="panel-heading">明日患者列表</div>
+            <div flex class="panel-body">
+                <div flex layout>
+                <ul flex layout class="nav nav-tabs index-tabs-ul">
+                    <li ng-class="{true: 'active'}[tabIndex1 == 0]" ng-mouseover="switchTab(1,0);"><a>本人</a></li>       
+                    <li ng-class="{true: 'active'}[tabIndex1 == 1]" ng-mouseover="switchTab(1,1);">
+                        <a>全部 </a>                        
+                    </li>
+                    <li ng-class="{true: 'active'}[tabIndex1 == 2]" ng-mouseover="switchTab(1,2);" ng-mouseleave="tabMenu4=false;">
+                        <a>手术室 <span class="caret"></span></a>
+                        <ul ng-if="tabMenu4==true" class="tab-menu">                           
+                            <li ng-repeat="room in roomList" ng-click="setOperRoom(1,room.operRoomId)"><a>{{room.name}}</a><li>
+                        </ul>
+                    </li>
+                </ul> 
+                <div flex layout-align="end center" class="mypager"  ng-if="showpager1">
+                   
+                    <span ng-click="prevPage(1)"  ng-if="prev1">上一页</span>
+                    <span ng-click="nextPage(1)"  ng-if="next1">下一页</span>
+                    <span>共{{grid1_totalItems}}条</span>
+                </div> 
+                </div>               
+                <div flex layout class="grid-div">
+                    <ul flex>
+                    <li layout ng-repeat="row in grid1_data" ng-click="query(row)" ng-class="{true: 'active'}[tabli2 == true]" ng-mouseover="tabli2=true;"  ng-mouseleave="tabli2=false;">
+                    <span>{{row.operRoomId}}</span>间&nbsp;<span>{{row.pcs}}</span>台&nbsp;<span>{{row.name}}</span>&nbsp;<span>{{row.sex}}</span>&nbsp;<span>{{row.age}}</span>&nbsp;<span class="hid_span">{{row.hid}}</span>&nbsp;<span>{{row.bed}}</span>床&nbsp;<span>{{row.deptName}}</span>&nbsp;<span>麻醉:{{row.anesthetistName}}</span>&nbsp;<span>手术:{{row.operatorName}}</span>
+                    </li>   
+                    </ul>                 
+                </div> 
+            </div>
+        </div>
+        <div flex layout="column" class="panel panel-default todo">
+            <div class="panel-heading">本周完成手术</div>
+            <div flex class="panel-body">
+                <div flex layout>
+                <ul  flex layout  class="nav nav-tabs index-tabs-ul">
+                   <li ng-class="{true: 'active'}[tabIndex2 == 0]" ng-mouseover="switchTab(2,0);"><a>本人</a></li>       
+                   <li ng-class="{true: 'active'}[tabIndex2 == 1]" ng-mouseover="switchTab(2,1);">
+                       <a>全部</a>
+                   </li>
+                   <li ng-class="{true: 'active'}[tabIndex2 == 2]" ng-mouseover="switchTab(2,2);"  ng-mouseleave="tabMenu6=false;">
+                       <a>手术室 <span class="caret"></span></a>
+                       <ul ng-if="tabMenu6==true" class="tab-menu">                           
+                           <li ng-repeat="room in roomList" ng-click="setOperRoom(2,room.operRoomId)"><a>{{room.name}}</a><li>
+                       </ul>
+                   </li>
+                </ul>
+                <div flex layout-align="end center" class="mypager" ng-if="showpager2" >
+                   
+                    <span ng-click="prevPage(2)"  ng-if="prev2">上一页</span>
+                    <span ng-click="nextPage(2)"  ng-if="next2">下一页</span>
+                    <span>共{{grid2_totalItems}}条</span>
+                </div>  
+                </div>
+                <div flex layout class="grid-div">
+                    <ul flex>
+                    <li layout ng-repeat="row in grid2_data" ng-click="query(row)" ng-class="{true: 'active'}[tabli2 == true]" ng-mouseover="tabli2=true;"  ng-mouseleave="tabli2=false;">
+                    <span>{{row.operRoomId}}</span>间&nbsp;<span>{{row.pcs}}</span>台&nbsp;<span>{{row.name}}</span>&nbsp;<span>{{row.sex}}</span>&nbsp;<span>{{row.age}}</span>&nbsp;<span class="hid_span">{{row.hid}}</span>&nbsp;<span>{{row.bed}}</span>床&nbsp;<span>{{row.deptName}}</span>&nbsp;<span>麻醉:{{row.anesthetistName}}</span>&nbsp;<span>手术:{{row.operatorName}}</span>
+                    </li>
+                    </ul> 
+                </div> 
+            </div> 
+        </div>
+    </div>
+    <div flex layout>
+        <div flex layout="column" class="panel panel-default duraStat">
+            <div class="panel-heading">手术时长统计</div>
+            <div flex layout class="panel-body">
+                <div e-chart class="echarts" e-config="eConfig" e-option="duraStat"></div>
+            </div>
+        </div>
+        <div flex layout="column" class="panel panel-default tcsStat ml-15" ng-if="beid!=='107'">
+            <div class="panel-heading">手术台次统计</div>
+            <div flex layout class="panel-body">
+                <div e-chart class="echarts" e-config="eConfig2" e-option="tcsStat"></div>
+            </div>
+        </div>
+        <div flex layout="column" class="panel panel-default todo">
+            <div class="panel-heading">信息公告
+                <div ng-if="permission.indexOf('ADD') >= 0" ng-click="editAnnouncement()" class="pull-right notice-add">+ 发布公告</div>
+            </div>
+            <div class="panel-body notice-wrap" layout flex>
+                <ul flex>
+                    <scroll-up data="notice"></scroll-up>
+                </ul>
+            </div>            
+        </div>
+    </div>    
+</div>

@@ -1,0 +1,31 @@
+<div class="modal-header">    
+    <h4><span>另存模板</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form name="SaveAsTempForm" class="form-horizontal" novalidate>
+    <div class="modal-body">
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit"><em>*</em>模板名称</label>
+                <input style="width: 280px;" ng-model="tempName" name="tempName" required>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit"><em>*</em>应用级别</label>
+                <select ng-model="lv" class="formTextborder formInputheight" ng-disabled="true" required>
+                    <option ng-repeat="item in lvList" value="{{item.id}}">{{item.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">模板描述</label>
+                <textarea class="form-control autosizeme" maxlength="200" ng-model="desc" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="SaveAsTempForm.$invalid" type="button" ng-click="vm.save()">保存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close('cancel')">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

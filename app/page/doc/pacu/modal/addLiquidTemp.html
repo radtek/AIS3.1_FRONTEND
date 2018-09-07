@@ -1,0 +1,20 @@
+<div class="modal-header">    
+    <h4><span>模板管理</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form name="AddLiquidTempForm" class="form-horizontal" novalidate>
+    <div class="modal-body">
+        <div layout class="navbar-btn text-right c-el-10">
+            <div flex layout>
+                <div layout layout-align="start center" class="input-group">
+                    <label class="control-label tit">模板内容：</label>
+                    <input type="text" class="form-control" ng-model="LiquidTemp.tempContent" style="width: 570px;">
+                </div>
+            </div>
+            <button class="btn btn-primary" ng-click="saveTemp()">保&nbsp;&nbsp;存</button>
+        </div>
+        <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ui-grid-pagination ng-if="gridOptions" style="height: 500px;"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

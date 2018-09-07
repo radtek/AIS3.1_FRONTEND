@@ -1,0 +1,51 @@
+<div id="print-region">
+    <div class="page-print" id="overMediLog">
+        <header layout="column" layout-align="center center" class="noTop">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>医疗保险病人超范围用药（或材料、项目）同意书</h4>
+        </header>
+        <div class="ui-table" ng-class="{true: 'end-state'}[pat.processState == 'END' && !saveActive || setting.readonly]">
+            <ul layout style="min-height:38px;">
+                <li layout layout-align="center center" style="width: 12%;">姓名</li>
+                <li layout layout-align="center center" style="width: 10%;">{{regOpt.name}}</li>
+                <li layout layout-align="center center" style="width: 8%">床号</li>
+                <li layout layout-align="center center" style="width: 10%">{{regOpt.bed}}</li>
+                <li layout layout-align="center center" style="width: 8%">诊断</li>
+                <li layout layout-align="center center" style="width: 25%">{{regOpt.diagnosisName}}</li>
+                <li layout layout-align="center center" style="width: 8%">科室</li>
+                <li layout layout-align="center center" flex>{{regOpt.deptName}}</li>
+            </ul>
+            <ul layout class="content-ul">
+                <li layout layout-align="center center" class="overName">药品（或材料、项目）</li>
+                <li layout layout-align="center center" class="overReason">事由</li>
+                <!-- <li layout layout-align="center center" class="overDoctor">医师</li> -->
+                <li layout flex layout-align="center center" class="overOther">患者或授权委托人</li>
+                <li layout layout-align="center center" flex class="no-print" ng-if="pat.processState != 'END' || saveActive">操作</li>
+            </ul>
+            <ul layout class="content-ul" ng-repeat="item in list track by $index">
+                <li layout layout-align="center center" class="overName">{{item.itemName}}</li>
+                <li layout layout-align="center center" class="overReason">{{item.reason}}</li>
+                <!-- <li layout layout-align="center center" class="overDoctor">{{item.doctorName}}</li> -->
+                <li layout flex layout-align="center center" class="overOther">{{}}</li>
+                <li layout layout-align="center center" flex class="no-print" ng-if="pat.processState != 'END' || saveActive">
+                    <i class="glyphicon glyphicon-edit" style="cursor: pointer; margin-right: 10px;" ng-click="add(item)" ng-if="!!item.id"></i>
+                    <i class="glyphicon glyphicon-remove" style="cursor: pointer;" ng-click="delete(item.id)" ng-if="!!item.id"></i>
+                </li>
+            </ul>
+        </div>
+        <div layout="column" class="form-group">
+            <div>注：本表适合社会医疗保险、商业保险、协约单位等。</div>
+            <div>执行科室：麻醉科</div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="end center">
+            <span>医生签名：</span><input type="text" class="noborder3 sign" readonly></input>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="end center">
+            <span>日期：</span><a style="width: 60px;">&nbsp;&nbsp;</a>年<a>&nbsp;</a>月<a>&nbsp;</a>日<a>&nbsp;</a>时<a>&nbsp;</a>分
+        </div>
+    </div>
+</div>

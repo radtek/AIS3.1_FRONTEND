@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>麻醉中央监控</title>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/centralMonitoring.css">
+<script language="javascript" src="bootstrap/js/angular.min.js"></script>
+</head>
+
+<body class="cent-mon" ng-app="centralMonitoring">
+<div  ng-controller="centralMonitoringCtrl">
+    <div class="cm-top" >
+	    <span class="hosname">医院中央监控</span>
+	    <span class="right-span">
+		    <span class="date">{{nowdate | date:'yyyy/MM/dd HH:mm:ss'}}</span>
+		    <span class="page" ng-if="pageCount>1">　第<span>{{pageNo}}</span>页/共<span>{{pageCount}}</span>页</span>
+		    <span style="font-size: 16px;" ng-if="pageCount>1">　翻页时间(秒)</span><select  ng-if="pageCount>1" ng-model="flipTime" ng-change="changePageTime()" ng-options="item for item in miao" ><option>--请选择--</option></select>
+		    <label style="font-size: 16px;" >显示空床<input type="checkbox" ng-click="changeNullBed()" ng-model="showFree" ng-true-value="'1'"  ng-false-value="'0'" />
+	        </label>　
+        </span> 
+    </div>
+    <div class="pcard-div" >    
+	    <div ng-repeat="patient in resultList" ng-if="!patient.notshow">
+	    <div class="div-top">
+		    <div class="bedname"><div>{{patient.operRoomId}}</div><div class="pname">{{patient.name}}</div></div>
+		    <div class="nibpart">
+		    <div class="nibp"><span class="blue">NIBP</span><span class="yellow"><span ng-class="{'red': patient.nibpSysState==1}">{{patient.nibpSysValue}}</span><span ng-if="patient.nibpSysValue || patient.nibpDiasValue">/</span><span ng-class="{'red': patient.nibpDiasState==1}">{{patient.nibpDiasValue}}</span></span></div>
+		    <div class="art"><span class="blue">ART</span><span class="yellow"><span ng-class="{'red': patient.abpSysState==1}">{{patient.abpSysValue}}</span><span ng-if="patient.abpSysValue || patient.abpDiasValue">/</span><span ng-class="{'red': patient.abpDiasValue==1}">{{patient.abpDiasValue}}</span></span></div>
+		    </div>
+	    </div>
+	    <div class="div-foot">
+		    <div class="pb"><div class="blue">PR</div><div class="green"><span ng-class="{'red': patient.prState==1}">{{patient.prValue}}</span></div></div>
+		    <div class="hr"><div class="blue">HR</div><div class="green"><span ng-class="{'red': patient.hrState==1}">{{patient.hrValue}}</span></div></div>
+		    <div><div class="blue">RESP</div><div class="green"><span ng-class="{'red': patient.respState==1}">{{patient.respValue}}</span></div></div>
+	    </div>
+	    <div class="docs"><span class="name-text"><img src="./bootstrap/css/doc2.png" /><span class="longstr">{{patient.anesthetistName}}</span></span>　<span class="name-text"><img src="./bootstrap/css/nurse2.png" /><span class="longstr">{{patient.circunurseName}}</span></span></div>
+	    </div>
+    </div>    
+</div>
+<script type="text/javascript">
+var ipPort="192.168.5.5:8189/";//ajax服务器地址
+var pageSize=24;//默认一页有多少条	
+</script>
+<script language="javascript"  src="bootstrap/js/centralMonitoring.js"></script>
+</body>
+</html>

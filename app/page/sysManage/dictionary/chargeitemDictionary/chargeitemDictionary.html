@@ -1,0 +1,50 @@
+<div flex ng-show="!check">
+    <div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+    	<button class="btn btn-primary" ng-click="editChargePackages()">
+            添加收费项目包
+        </button>
+        <button class="btn btn-primary" ng-click="refresh()">
+            刷&nbsp;&nbsp;新
+        </button>
+    </div>
+    <div ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize  style="height: 700px;"></div>
+</div>
+<div flex ng-show="check">
+	<form name="chargeItemForm" class="panel panel-default" role="form" novalidate>
+		<h2 style="margin: 20px 0 30px 0;">{{lable}}收费项目包</h2>
+		<div layout>
+			<div flex class="input-wrap">
+		        <div layout layout-align="start center" class="input-group">
+		            <label class="tit"><em>*</em>收费项目包名称</label>
+		            <input flex type="text" name="chargePackagesName" class="form-control" ng-model="chargePkg.chargePackagesName" ng-blur="_chargePackagesName = true" required>
+		        </div>
+	            <p ng-if="!chargePkg.chargePackagesName && (_chargePackagesName || verify == false)" class="help-block text-right">收费项目包名称不能为空</p>
+		    </div>
+			<div flex class="input-wrap">
+		        <div layout layout-align="start center" class="input-group">
+		            <label class="tit"><em>*</em>是否有效</label>
+		            <select flex name="enable" class="form-control" ng-model="chargePkg.enable" ng-blur="_enable = true" required>
+		            	<option value="1">启用</option>
+	                    <option value="0">禁用</option>
+		            </select>
+		        </div>
+	             <p ng-if="(chargePkg.enable == undefined) && (_enable || verify == false)" class="help-block text-right">状态不能为空</p>
+		    </div>
+			<div flex class="input-wrap">
+		        <div layout layout-align="start center" class="input-group">
+		            <label class="tit"><em>*</em>类型</label>
+		            <input flex type="text" name="type" class="form-control" minlength="1" maxlength="2" ng-model="chargePkg.type" ng-blur="_type = true" required>
+		        </div>
+	            <p ng-if="!chargePkg.type && (_type || verify == false)" class="help-block text-right">类型不能为空</p>
+		    </div>
+		    </div>
+		<div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+		    	<button class="btn btn-primary" ng-disabled="userform.$invalid" type="button" ng-click="addChargeitemDictionary()">添加收费项目</button>
+		    </div>
+		    <div ui-grid="gridchargePkg" ui-grid-pagination ui-grid-auto-resize  style="height: 550px;"></div>
+		    <div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+		        <button class="btn btn-primary" ng-click="btnActive && save()">保&nbsp;&nbsp;存</button>
+		        <button class="btn btn-primary" type="button" ng-click="cancel()">返&nbsp;&nbsp;回</button>	
+		    </div>
+	</form>
+</div>

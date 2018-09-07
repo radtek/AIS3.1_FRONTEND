@@ -1,0 +1,138 @@
+#frame {
+    @col-bottom: #267ED5;
+    overflow: hidden;
+    .login-icon {
+        border-radius: 50%;
+        overflow: hidden;
+        background: url(../../img/5.png) no-repeat;
+    }
+    .menu-wrap {
+        min-width: 210px;
+        width: 210px;
+        background-color: #106cc8;
+        .menu-header {
+            height: 64px;
+            margin: 0;
+            border-bottom: 1px solid @col-bottom;
+        }
+        .menu-header-login {
+            display: inline-block;
+            width: 100%;
+            height: 31px;
+            background: url(../../img/frame-logo.png) no-repeat;
+            background-size: contain;
+        }
+        .login-wrap {
+            height: 120px;
+            border-bottom: 1px solid @col-bottom;
+            cursor: pointer;
+        }
+        .login-icon {
+            height: 70px;
+            width: 70px;
+        }
+        .login-user {
+            margin-left: 15px;
+        }
+        .login-user span {
+            color: #fff;
+        }
+        .login-user span:nth-child(1) {
+            margin-bottom: 5px;
+        }
+        .menu-item {
+            border-bottom: 1px solid @col-bottom;
+            padding: 5px 0;
+            color: #fff;
+        }
+        .menu-item .nav-link {
+            padding-left: 15px;
+            padding-right: 15px;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            line-height: 40px;
+            width: 100%;
+        }
+        .menu-item .sub-menu .nav-link {
+            padding-left: 30px;
+        }
+        .menu-item .nav-link.active {
+            background-color: @col-bottom!important;
+        }
+        .menu-item .nav-link:hover {
+            background-color: rgba(158, 158, 158, 0.2);
+        }
+        .menu-item .nav-link .arrow {
+            font-size: 12px;
+            float: right;
+            line-height: 38px;
+        }
+    }
+    .view-header {
+        height: 64px;
+        margin: 0;
+        background-color: #f5f5f5;
+        box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+        nav {
+            line-height: 64px;
+        }
+        .login-icon {
+            height: 50px;
+            width: 50px;
+        }
+        .nav-crumbs {
+            .icon i {
+                color: #3478b3;
+                margin-right: 5px;
+            }
+            .item a {
+                padding: 2px 5px;
+            }
+            .item i {
+                font-size: 12px;
+                color: #ccc;
+            }
+            .menu-header {
+                height: 64px;
+                width: 210px;
+                margin: 0;
+                border-bottom: 1px solid @col-bottom;
+            }
+            .menu-header-login {
+                display: inline-block;
+                width: 100%;
+                height: 31px;
+                background: url(../../img/frame-logo.png) no-repeat;
+                background-size: contain;
+            }
+        }
+        .nav-btn>a {
+            margin-left: 30px;
+        }
+        .selRoom {
+            background-color: transparent;
+            border: 0;
+            >option {
+                color: #666;
+                font-size: 16px;
+            }
+        }
+    }
+    .view-header.bgColor {
+        background-color: #106cc8;
+        color: #fff;
+        .glyphicon {
+            color: #fff;
+        }
+        h3 {
+            margin-left: -11%;
+        }
+    }
+    .view-container {
+        overflow: auto;
+        .navbar-btn {
+            padding: 0;
+        }
+    }
+}

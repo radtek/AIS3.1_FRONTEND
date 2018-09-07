@@ -1,0 +1,12 @@
+<div id="toxicAnes" layout="column" flex>
+    <div id="tabs">
+        <nav layout class="navbar-btn" id="nav-tab">
+            <div flex class="nav-wrap not-print" id="digi-tabs-container">
+                <div class="digi-tabs" id="digi-tabs" style="left:0">
+                    <a ng-repeat="item in currentMenu" ui-sref="{{item.url}}" ng-class="{true: 'active', false: ''}[state.current.name.toLocaleLowerCase().indexOf(item.url.toLocaleLowerCase())>-1 ]"> {{item.name}}</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <section flex layout ui-view class="view-container"></section>
+</div>

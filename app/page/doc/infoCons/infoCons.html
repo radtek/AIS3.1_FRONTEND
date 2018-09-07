@@ -1,0 +1,156 @@
+<div id="print-region">
+    <div id="infoCons_hbgzb" class="page-print" ng-class="{true:'end-state'}[accedeItem.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>麻醉知情同意书</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a flex>{{regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{regOptItem.age}}</a></span>&nbsp;
+            <span layout>科别：<a flex>{{regOptItem.deptName}}</a></span>&nbsp;
+            <span layout>病区：<a flex>{{regOptItem.regionName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{regOptItem.bed}}</a></span>&nbsp;
+            <span layout>住院病历号：<a flex>{{regOptItem.hid}}</a></span>
+        </div>
+        <div class="form-group">
+            <p>术前诊断：</p>
+            <p class="indent">
+                患者因患<a>{{::regOptItem.diagnosisName}}</a>疾病，拟行<a>{{::regOptItem.designedOptName}}</a>手术治疗，根据患者病情，拟在<a>{{::regOptItem.designedAnaesMethodName}}</a>麻醉方式下行手术治疗。此麻醉方式需（可能）进行
+                <span ng-class="{true: 'md-red'}[!accedeItem.trachealTntubation && !accedeItem.catheterizationArtery && !accedeItem.centralCatheter && !accedeItem.spinalPuncture && !accedeItem.laryngeal && !accedeItem.brachialPlexusBlock && verify]">
+                <checkbox ng-model="accedeItem.trachealTntubation" ng-true-value="1"  ng-false-value="0">气管插管</checkbox>
+                <checkbox ng-model="accedeItem.catheterizationArtery" ng-true-value="1" ng-false-value="0">动脉穿刺置管</checkbox>
+                <checkbox ng-model="accedeItem.centralCatheter" ng-true-value="1" ng-false-value="0">中心静脉穿刺置管</checkbox>
+                <checkbox ng-model="accedeItem.spinalPuncture" ng-true-value="1" ng-false-value="0">椎管内穿刺</checkbox>
+                <checkbox ng-model="accedeItem.laryngeal" ng-true-value="1" ng-false-value="0">喉罩</checkbox>
+                <checkbox ng-model="accedeItem.brachialPlexusBlock" ng-true-value="1" ng-false-value="0">神经阻滞</checkbox>
+                </span>操作，麻醉医师将严格遵守医疗原则，按麻醉操作规范认真进行操作。但是，在现在医学科技条件下，仍可能出现某些无法预料或不可防范的不良后果。本麻醉医师已针对患者病情，结合既往病史、药物反应等情况，提出了适合患者的麻醉方案，且向患者（代理人）充分说明了选择该麻醉方式的理由及优点、缺点。并说明了在病情出现变化和手术需要的基础上需要调整麻醉方案。同时将有可能出现的风险充分向患者（代理人）交代，一旦发生上述情况，可能加重原有病情、出现新的病变（损害）甚至危及患者生命，医务人员将按医疗原则予以尽力抢救，但仍然可能出现不良后果。是否同意实施此麻醉方案，请书面表明意愿并签字。
+            </p>
+            <div layout layout-align="end center">
+                麻醉医生签名：
+                <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="accedeItem.anaestheitistId"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+            </div>
+            <p layout layout-align="end center">
+                <input type="text" class="noborder3" style="width: 254px" value="                    年     月     日     时     分" readonly></input>
+            </p>
+        </div>
+        <div class="form-group">
+            <p class="indent">
+                本人系患者（代理人），（患者）因患<a>{{::regOptItem.diagnosisName}}</a>疾病，拟接受手术治疗，经麻醉医师向我交代选择上述麻醉方式或相关的操作的理由及优、缺点以及可能出现的风险后，对医师说明及本页背面举例讲解的告知内容我已充分理解，且愿意承担上述麻醉风险，同意并委托麻醉医师实施以上麻醉方案，并授权医师在基于病情及手术需要的基础上调整麻醉方案。因系本人意愿，目前及以后不再对以上问题提出异议。
+            </p>
+            <p layout layout-align="start center">
+                患者（代理人）签名：
+                <input type="text" class="noborder3 sign" readonly></input>
+            </p>
+            <p layout layout-align="space-between center">
+                <span>
+                    患者近亲属签名：<input type="text" class="noborder3 sign" readonly></input>
+                </span>
+                <span>
+                    与患者的关系：<input type="text" class="noborder3 sign" readonly></input>
+                </span>
+            </p>
+            <p layout layout-align="end center">
+                <input type="text" class="noborder3" style="width: 254px" value="                    年     月     日     时     分" readonly></input>
+            </p>
+        </div>
+        <div class="form-group">
+            <p class="indent">
+                本人系患者（代理人），（患者）因患
+                <a>{{::regOptItem.diagnosisName}}</a>疾病，拟行手术治疗，经麻醉医师向我交代选择上述麻醉方式或相关的操作的理由及优、缺点以及可能出现的风险后，我已充分理解以上说明及本页背面举例讲解的告知内容，并充分理解拒绝麻醉将导致停止手术并引发相应的风险。我仍然决定拒绝接受上述麻醉方案。因系本人意愿，目前及以后对此不再提出异议。
+            </p>
+            <p layout layout-align="start center">
+                患者（代理人）签名：
+                <input type="text" class="noborder3 sign" readonly></input>
+            </p>
+            <p layout layout-align="space-between center">
+                <span>
+                    患者近亲属签名：<input type="text" class="noborder3 sign" readonly></input>
+                </span>
+                <span>
+                    与患者的关系：<input type="text" class="noborder3 sign" readonly></input>
+                </span>
+            </p>
+            <p layout layout-align="end center">
+                <input type="text" class="noborder3" style="width: 254px" value="                    年     月     日     时     分" readonly></input>
+            </p>
+        </div>
+    </div>
+    <div id="infoCons_hbgzb" class="page-print" ng-class="{true:'end-state'}[accedeItem.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout layout-align="center center" style="margin-top: 50px;">
+            <h3>麻醉不良后果及医疗风险告知内容</h3>
+        </header>
+        <div class="form-group" style="line-height: 2;">
+            <p class="indent">麻醉前准备、麻醉中及麻醉后可能出现的并发症及不良后果告知（谈话）的基本内容列如下：</p>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[0]" ng-true-value="'1'" ng-false-value="'0'">（1）&nbsp;</checkbox></div>
+                <div class="textdiv">麻醉意外（麻醉药过敏、呼吸心跳骤停等）</div>
+            </div>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[1]" ng-true-value="'1'" ng-false-value="'0'">（2）&nbsp;</checkbox></div>
+                <div class="textdiv">出血、血肿形成。</div>
+            </div>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[2]" ng-true-value="'1'" ng-false-value="'0'">（3）&nbsp;</checkbox></div>
+                <div class="textdiv">组织损伤（如神经组织损伤）</div>
+            </div>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[3]" ng-true-value="'1'" ng-false-value="'0'">（4）&nbsp;</checkbox></div>
+                <div class="textdiv">感染。</div>
+            </div>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[4]" ng-true-value="'1'" ng-false-value="'0'">（5）&nbsp;</checkbox></div>
+                <div class="textdiv">各种不同麻醉方式所特有的并发症及不良后果等。</div>
+            </div>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[5]" ng-true-value="'1'" ng-false-value="'0'">（6）&nbsp;</checkbox></div>
+                <div class="textdiv">神经阻滞麻醉并发症：局麻药中毒，血胸、气胸，神经损伤，误入椎管内等。</div>
+            </div>
+            <div layout flex>
+                <div layout class="nodiv"><checkbox ng-model="selectedList_[6]" ng-true-value="'1'" ng-false-value="'0'">（7）&nbsp;</checkbox></div>
+                <div layout class="textdiv">椎管内麻醉并发症：硬膜穿破（臻头痛等），全脊髓麻醉，神经根损伤，硬膜外血肿，颅神经症状，脓肿，导管折断，栓塞甚至截瘫等。</div>
+            </div>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[7]" ng-true-value="'1'" ng-false-value="'0'">（8）&nbsp;</checkbox></div>
+                <div class="textdiv">全身麻醉并发症：因困难气管插管而导致呼吸道损伤（唇、牙齿、咽喉、气管等），喉痉挛、支气管痉挛，误吸、吸入性肺炎，呼吸抑制，肺部不张，肺栓塞、张力性气胸，脑血管意外（痉挛、血栓、破裂），循环衰竭，呼吸衰竭，恶性高热，苏醒延迟，术后声嘶、环杓关节脱位等。</div>
+            </div>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[8]" ng-true-value="'1'" ng-false-value="'0'">（9）&nbsp;</checkbox></div>
+                <div class="textdiv">动静脉穿刺并发症：出血、血肿形成，栓塞（血栓、气栓），肢体缺血坏死，血胸、气胸，心包填塞、心率失常、循环衰竭等。</div>
+            </div>
+            <div layout>
+                <div class="nodiv"><checkbox ng-model="selectedList_[9]" ng-true-value="'1'" ng-false-value="'0'">（10）&nbsp;</checkbox></div>
+                <div class="textdiv">其他无法预料或者不能防范的不良后果和医疗风险。</div>
+            </div>
+            <div layout>
+                <div class="nodiv">&nbsp;</div>
+                <div class="textdiv">以上<input type="number" ng-model="accedeItem.selectNum" class="noborder3" style="max-width: 50px;height: 20px;">项风险均已告知并充分理解。</div>
+            </div>
+            <p class="addData" ng-repeat="item in trData track by $index" layout>
+                （
+                <input class="noborder text-center" style="height: inherit; width: 16px;" ng-model="item.id" ng-value="item.id">）
+                <input flex class="noborder" style="height: inherit; text-indent: 5px;" maxlength="255" ng-model="item.content" ng-value="item.content"></input>
+                <span style="cursor:pointer; display: inline-block;" class="glyphicon glyphicon-remove" ng-if="accedeItem.processState == 'NO_END'" ng-click="delete(item, $index);"></span>
+            </p>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="end center">
+                <span>患者（代理人）签名：</span><input type="text" class="noborder3 sign" readonly></input>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="end center">
+                <span>患者近亲属签名：</span><input type="text" class="noborder3 sign" readonly></input>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="end center">
+                <span>与患者关系：</span><input type="text" class="noborder3 sign" readonly></input>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="end center">
+                <span>日期：</span><input type="text" class="noborder3" style="width: 273px" value="         年     月     日     时     分" readonly></input></input>
+            </div>
+        </div>
+    </div>
+</div>

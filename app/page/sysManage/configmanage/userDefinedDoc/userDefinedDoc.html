@@ -1,0 +1,15 @@
+<div flex>
+    <div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+        <button class="btn btn-primary" ng-if="!indeled" ng-click="setDoc()">
+            添加自定义文书
+        </button>        
+        <button class="btn btn-primary" ng-if="!indeled" ng-click="getDeleted()">
+            回收站
+        </button>
+        <span ng-if="indeled" style="padding-right: 750px;font-size: 16px;color: red;" >自定义文书回收站</span>
+        <button class="btn btn-primary" ng-if="indeled" ng-click="refresh()">
+            返&nbsp;&nbsp;回
+        </button>
+    </div>
+    <div ui-grid="gridDoc" style="height: 700px;" ui-grid-pagination ui-grid-auto-resize></div>
+</div>

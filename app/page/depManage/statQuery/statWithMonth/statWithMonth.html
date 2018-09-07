@@ -1,0 +1,7 @@
+<div layout="column" flex>
+    <div ng-show="tabIndex===0" ui-grid="gridOptions" ui-grid-auto-resize  ui-grid-exporter  ui-grid-pagination ng-if="gridOptions"></div>
+    <div ng-show="tabIndex===1">
+    	<span class="pull-right">单位：例</span>
+    	<div e-chart class="echarts" style="min-height: 560px;" e-config="eConfig" e-option="eOption"></div>
+    </div>
+</div>

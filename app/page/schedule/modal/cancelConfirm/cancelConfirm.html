@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body" layout layout-wrap='wrap'>
+        <div flex=40 flex-offset=10 class="input-wrap check">
+            <checkbox ng-model="opt.a" ng-true-value="'患者恐惧'">患者恐惧</checkbox>
+        </div>
+        <div flex=50 class="input-wrap check">
+            <checkbox ng-model="opt.b" ng-true-value="'患者沟通不良'">患者沟通不良</checkbox>
+        </div>
+        <div flex=40 flex-offset=10 class="input-wrap check">
+            <checkbox ng-model="opt.c" ng-true-value="'患者出现新的不稳定情况'">患者出现新的不稳定情况</checkbox>
+        </div>
+        <div flex=50 class="input-wrap check">
+            <checkbox ng-model="opt.d" ng-true-value="'特殊手术器械不到位'">特殊手术器械不到位</checkbox>
+        </div>
+        <div flex=40 flex-offset=10 class="input-wrap check">
+            <checkbox ng-model="opt.e" ng-true-value="'患者经济不到位'">患者经济不到位</checkbox>
+        </div>
+        <div flex=50 class="input-wrap check">
+            <checkbox ng-model="opt.f" ng-true-value="'手术医师不到位'">手术医师不到位</checkbox>
+        </div>
+        <div flex=40 flex-offset=10 class="input-wrap check">
+            <checkbox ng-model="opt.g" ng-true-value="'患者拒绝手术'">患者拒绝手术</checkbox>
+        </div>
+        <div flex=50 class="input-wrap check">
+            <checkbox ng-model="opt.h" ng-true-value="'麻醉许可原因'">麻醉许可原因</checkbox>
+        </div>
+        <div flex=40 flex-offset=10 class="input-wrap check">
+            <checkbox ng-model="opt.i" ng-true-value="'术前常规检查不全'">术前常规检查不全</checkbox>
+        </div>
+        <div flex=50 class="input-wrap check">
+            <checkbox ng-model="opt.j" ng-true-value="'麻醉技术原因'">麻醉技术原因</checkbox>
+        </div>
+        <div flex=40 flex-offset=10 class="input-wrap check">
+            <checkbox ng-model="opt.k" ng-true-value="'术前患者准备不到位'">术前患者准备不到位</checkbox>
+        </div>
+        <div flex=50 class="input-wrap check">
+            <checkbox ng-model="opt.l" ng-true-value="'手术室准备不到位'">手术室准备不到位</checkbox>
+        </div>
+        <div flex=80 flex-offset=10>
+            <label class="control-label">{{vm.content}}</label>
+            <div flex>
+                <textarea name="resonse" ng-model="resonse" md-minlength="2" ng-maxlength="100" maxlength="100" rows="2" style="width: 100%; height: 80px; margin-top: 5px;"></textarea>
+                <!-- <div class="form-error-info" ng-show="form.resonse.$dirty && !form.resonse.$valid"><span>耗材名称不能为空</span></div> -->
+            </div>
+        </div>
+    </div>
+    <div ng-if="vm.errorinfo" class="text-center" style="color:red;">{{vm.errorinfo}}</div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="!resonse && !opt.a && !opt.b && !opt.c && !opt.d && !opt.e && !opt.f && !opt.g && !opt.h && !opt.i && !opt.j && !opt.k && !opt.l" type="button" ng-click="vm.save()">保存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取消</button>
+    </div>
+</form>

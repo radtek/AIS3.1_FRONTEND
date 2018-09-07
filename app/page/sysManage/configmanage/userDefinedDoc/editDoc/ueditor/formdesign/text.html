@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>文本框</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">    
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript">
+    function createElement(type, name){
+        var element = null;     
+        try {        
+            element = document.createElement('<'+type+' name="'+name+'">');     
+        } catch (e) {}   
+        if(element==null) {     
+            element = document.createElement(type);     
+            element.name = name;     
+        } 
+        return element;     
+    }
+    function setorgtype(){
+        var orgtype = document.getElementById("orgtype").value;
+        if(orgtype==='text'){
+            document.getElementById("maxlengthspan").style.display='block';
+            document.getElementById("maxlength").style.display='block';
+            document.getElementById("maxminspan").style.display='none';
+            document.getElementById("max").style.display='none';
+            document.getElementById("min").style.display='none';
+        }else{
+            document.getElementById("maxlengthspan").style.display='inline-block';
+            document.getElementById("maxlength").style.display='inline-block';
+            document.getElementById("maxminspan").style.display='inline-block';
+            document.getElementById("max").style.display='inline-block';
+            document.getElementById("min").style.display='inline-block';        
+        }
+    }
+    </script>
+</head>
+<body>
+<div class="content">
+    <table class="table table-bordered table-striped table-hover">
+     <tr>
+        <th><span>控件名称</span><span class="label label-important">*</span></th>
+        <th><span>控件类型</span> </th>
+    </tr>
+    <tr>
+        <td><input type="text" id="orgname" placeholder="必填项"></td>
+        <td><select id="orgtype" onchange="setorgtype()">
+                <option value="text">普通文本</option>
+                <option value="int">整数</option>
+                <option value="float1">小数(小数位数为1)</option>
+                <option value="float2">小数(小数位数为2)</option>
+            </select> 
+        </td>
+    </tr>
+    <tr>
+        <th><span>默认值</span> </th>
+        <th><span>提示文本</span> </th>
+    </tr>
+    <tr>
+        <td>
+            <select id="orgvalue">
+                <option value="">无默认值</option>                
+                <option value="name">当前患者的姓名</option>
+                <option value="sex">当前患者的性别</option>
+                <option value="age">当前患者年龄</option>
+                <option value="deptName">当前患者科室</option>
+                <option value="bed">当前患者床号</option>
+                <option value="hid">当前患者住院号</option>
+                <option value="diagnosisName">当前患者术前诊断</option>
+                <option value="operaDate">当前患者手术日期</option>
+                <option value="designedOptName">当前患者拟施手术</option>
+                <option value="designedAnaesMethodName">当前患者拟施麻醉</option>
+                <option value="operRoomName">当前患者手术间</option>
+                <option value="anesthetistName">当前患者麻醉医师</option>
+                <option value="healthNurseName">当前患者卫生护士</option>
+                <option value="instrnurseName1">当前患者器械护士1</option>
+                <option value="instrnurseName2">当前患者器械护士2</option>
+                <option value="circunurseName1">当前患者巡回护士1</option>
+                <option value="circunurseName2">当前患者巡回护士2</option>
+                <option value="operatorName">当前患者主刀医生</option>
+                <option value="perfusiondoctorName">当前患者灌注医生</option>                
+                <option value="datetime">当前日期时间</option>
+                <option value="date">当前日期</option>              
+            </select> 
+             <label class="checkbox inline"><input id="isreadonly" type="checkbox"/> 只读 </label>  
+        </td>
+        <td><input type="text" id="orgplaceholder" placeholder="无则不填">
+            
+        </td>
+    </tr> 
+
+    <tr>
+        <th><span>&nbsp;&nbsp;&nbsp;&nbsp;宽&nbsp;&nbsp;&nbsp;&&nbsp;&nbsp;&nbsp;字体大小</span> </th>
+        <th><span>边框</span> </th>
+    </tr>
+    <tr>
+        <td>
+            <input id="orgwidth" type="text" value="150" class="input-small span1" placeholder="auto"/>
+            &
+            <input id="orgfontsize" type="text"  value="" class="input-small span1" placeholder="auto"/> px
+        </td>
+        <td>
+            <select id="orgborder">
+                <option value="1px solid #333">上下左右边框</option>
+                <option value="bottom">仅下边框</option> 
+                <option value="none">无边框</option>               
+            </select>            
+        </td>
+    </tr>
+    <tr>
+        <th><span id="maxminspan" style="display: none;" >最大值&nbsp;最小值</span><span id="maxlengthspan">　最大字符长度<span class="label label-important">*</span></span></th>
+        <th><span>是否必填</span> </th>
+    </tr>
+    <tr>
+        <td>
+            <span><input id="max" type="number" value=""  style="display: none;width: 60px;" class="input-small span2" placeholder="最大值"/></span>&nbsp;<span><input id="min" type="number" value="" style="display: none;width: 60px;" class="input-small span2" placeholder="最小值"/></span>&nbsp;
+            <input id="maxlength" type="number"  value="10" class="input-small span2" placeholder="1个中文为2个字符"/>
+        </td>
+        <td>            
+            <label class="checkbox inline"><input id="ismast" type="checkbox"/> 必填 </label>
+        </td>
+    </tr>
+
+    </table>
+</div>
+<script type="text/javascript">
+var oNode = null,thePlugins = 'text';
+window.onload = function() {
+    if( UE.plugins[thePlugins].editdom ){
+        oNode = UE.plugins[thePlugins].editdom;
+		var gValue = '';
+		if(oNode.getAttribute('title'))
+			gValue = oNode.getAttribute('gvalue');
+		var gTitle=oNode.getAttribute('title');
+        var gismast=oNode.getAttribute('ismast');
+        var gFontSize=oNode.getAttribute('orgfontsize');
+        var gAlign=oNode.getAttribute('orgborder');
+        var gWidth=oNode.getAttribute('orgwidth');
+        var gType=oNode.getAttribute('orgtype');
+        var gmax=oNode.getAttribute('max');
+
+        var gmin=oNode.getAttribute('min');        
+        var gmaxlength=oNode.getAttribute('maxlength');
+        var gplaceholder = oNode.getAttribute('placeholder');
+        var greadonly=oNode.getAttribute('readonly');
+		gValue = gValue==null ? '' : gValue;
+        gTitle = gTitle==null ? '' : gTitle;
+		$G('orgvalue').value = gValue;
+        $G('orgname').value = gTitle;
+        if (gismast == '1')
+        {
+            $G('ismast').checked = true;
+        }
+        $G('orgfontsize').value = gFontSize;
+        $G('orgwidth').value = gWidth;        
+        $G('orgborder').value = gAlign;
+        $G('orgtype').value = gType;
+        $G('orgplaceholder').value = gplaceholder;
+        $G('min').value = gmin;
+        $G('max').value = gmax;
+        $G('maxlength').value = gmaxlength;
+        $G('isreadonly').checked=greadonly=="1"?true:false;
+    }
+}
+dialog.oncancel = function () {
+    if( UE.plugins[thePlugins].editdom ) {
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+dialog.onok = function (){
+    if($G('orgname').value==''){
+        alert('请输入控件名称');
+        return false;
+    }
+    if($G('orgname').value.length>12){
+        alert('控件名称不能超过12个字');
+        return false;
+    }
+    if($G('orgtype').value==="text" && $G('maxlength').value==''){
+        alert('请输入最大长度');
+        return false;
+    }
+    
+    
+    var gValue=$G('orgvalue').value,gTitle=$G('orgname').value,gFontSize=$G('orgfontsize').value,gAlign=$G('orgborder').value,gWidth=$G('orgwidth').value,gType=$G('orgtype').value,gmax=$G('max').value,gmin=$G('min').value,gmaxlength=$G('maxlength').value,gplaceholder = $G('orgplaceholder').value;
+    
+    if( !oNode ) {
+        try {
+            oNode = createElement('input','leipiNewField');
+            oNode.setAttribute('type',(gType=='text'?'text':'number'));
+            if( gType != '' ) {
+                oNode.setAttribute('orgtype',gType );
+            }
+            oNode.setAttribute('title',gTitle);
+            if(gValue){
+            oNode.setAttribute('gvalue',gValue);
+            oNode.setAttribute('ng-model',"vm.regOptItem."+gValue);
+            }
+            oNode.setAttribute('name','leipiNewField');
+            oNode.setAttribute('leipiPlugins',thePlugins);
+            if(!!gmax)
+            oNode.setAttribute('max',gmax);
+            if(!!gmin)
+            oNode.setAttribute('min',gmin);
+            if(!!gmaxlength)
+            oNode.setAttribute('maxlength',gmaxlength);
+            if(!!gplaceholder)
+            oNode.setAttribute('placeholder',gplaceholder);
+            if ( $G('ismast').checked ) {
+                oNode.setAttribute('ismast',1);
+            } else {
+                oNode.setAttribute('ismast',0);
+            }
+            if ( $G('isreadonly').checked ) {
+                oNode.setAttribute('readonly',1);
+            } 
+            if( gFontSize != '' ) {
+                oNode.style.fontSize = gFontSize + 'px';
+                //style += 'font-size:' + gFontSize + 'px;';
+                oNode.setAttribute('orgfontsize',gFontSize );
+            }
+            if( gAlign != '' ) {
+                //style += 'text-align:' + gAlign + ';';
+                if(gAlign!='bottom'){
+                    oNode.style.border = gAlign;
+                }
+                else{
+                    oNode.style.border = "none";
+                    oNode.style.borderBottom="1px solid #333";
+                }
+                oNode.setAttribute('orgborder',gAlign );                
+            }
+            if( gWidth != '' ) {
+                oNode.style.width = gWidth+ 'px';
+                //style += 'width:' + gWidth + 'px;';
+                oNode.setAttribute('orgwidth',gWidth );
+            }
+           
+            
+            //oNode.setAttribute('style',style );
+            //oNode.style.cssText=style;//ie7
+            editor.execCommand('insertHtml',oNode.outerHTML);
+        } catch (e) {
+            try {
+                editor.execCommand('error');
+            } catch ( e ) {
+                alert('控件异常，请联系管理员！');
+            }
+            return false;
+        }
+    } else {
+        oNode.setAttribute('type',(gType=='text'?'text':'number'));
+        oNode.setAttribute('title', gTitle);
+        if(gValue){
+        oNode.setAttribute('gvalue', gValue);
+        oNode.setAttribute('ng-model',"vm.regOptItem."+gValue);
+        }
+        if(!!gmax)
+        oNode.setAttribute('max',gmax);
+        if(!!gmin)
+        oNode.setAttribute('min',gmin);
+        if(!!gmaxlength)
+        oNode.setAttribute('maxlength',gmaxlength);
+        if(!!gplaceholder)
+        oNode.setAttribute('placeholder',gplaceholder);
+
+        if( $G('ismast').checked ) {
+            oNode.setAttribute('ismast', 1);
+        } else {
+            oNode.setAttribute('ismast', 0);
+        }
+        if ( $G('isreadonly').checked ) {
+            oNode.setAttribute('readonly',1);
+        } 
+        if( gFontSize != '' ) {
+            oNode.style.fontSize = gFontSize+ 'px';
+            oNode.setAttribute('orgfontsize',gFontSize );
+        }else{
+            oNode.style.fontSize = '';
+            oNode.setAttribute('orgfontsize', '');
+        }
+        if( gAlign != '' ) {
+            //oNode.style.border = gAlign;
+            if(gAlign!='bottom'){
+                    oNode.style.border = gAlign;
+                }
+                else{
+                    oNode.style.border = "none";
+                    oNode.style.borderBottom="1px solid #333";
+                }
+            oNode.setAttribute('orgborder',gAlign );
+        }else{
+            oNode.style.border = '';
+            oNode.style.borderBottom = '';
+            oNode.setAttribute('orgborder', '');
+        }
+        if( gWidth != '' ) {
+            oNode.style.width = gWidth+ 'px';
+            oNode.setAttribute('orgwidth',gWidth );
+        }else{
+            oNode.style.width = '';
+            oNode.setAttribute('orgwidth', '');
+        }
+        
+        if( gType != '' ) {
+            oNode.setAttribute('orgtype',gType );
+        }else{
+            oNode.setAttribute('orgtype', '');
+        }
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+</script>
+</body>
+</html>

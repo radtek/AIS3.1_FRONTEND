@@ -1,0 +1,50 @@
+<div class="modal-header">    
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper docNecessary-div">
+    <form name="operation" class="panel-default" role="form" novalidate>
+    	<div class="wrap" layout layout-wrap="wrap">
+            <div flex="90" class="input-wrap" style="padding-top:20px; ">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">　<em>*</em>访问资源URI：</label>
+                    <input flex type="text" name="uri" class="form-control" ng-model="doc.uri" ng-maxlength="100" ng-minlength='1' ng-blur="_uri = true" required>
+                </div>
+                <p ng-if="!doc.uri && (_uri || verify == false)" class="help-block text-right">访问资源URI不能为空</p>
+                <p ng-if="doc.uri.$error.minlength && _uri" class="help-block text-right">长度不能少于1个字符</p>
+                <p ng-if="doc.uri.$error.maxlength && _uri" class="help-block text-right">长度不能超过100个字符</p>
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">　<em>*</em>对应的类：</label>
+                    <input flex type="text" name="clazzUri" class="form-control" ng-model="doc.clazzUri" ng-maxlength="100" ng-minlength='1' ng-blur="_clazzUri = true" required>                    
+                </div> 
+                <p ng-if="!doc.clazzUri && (_clazzUri || verify == false)" class="help-block text-right">对应的类不能为空</p>
+                <p ng-if="doc.clazzUri.$error.minlength && _clazzUri" class="help-block text-right">长度不能少于1个字符</p>
+                <p ng-if="doc.clazzUri.$error.maxlength && _clazzUri" class="help-block text-right">长度不能超过100个字符</p>              
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">对应的方法：</label>
+                    <input flex type="text" name="method" class="form-control" ng-model="doc.method"  >
+                </div>                                
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">别名：</label>
+                    <input flex type="text" name="aliasName" class="form-control" ng-model="doc.aliasName"  >
+                </div>               
+            </div>
+            
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">描述：</label>
+                    <textarea flex  name="description" class="form-control" style="height: 60px;" ng-model="doc.description" ng-maxlength="500"  ></textarea>                    
+                </div>                
+            </div>
+        </div>
+        <div class="modal-footer">
+        	<button class="btn btn-primary" ng-click="btnActive && saveOperationRoom()">保&nbsp;&nbsp;存<i class="loading" ng-if="!btnActive"></i></button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+        </div>
+    </form>
+</div>

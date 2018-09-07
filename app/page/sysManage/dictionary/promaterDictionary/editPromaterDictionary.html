@@ -1,0 +1,58 @@
+<div class="modal-header">    
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper">
+    <form name="promaterDict" class="panel panel-default" role="form" novalidate>
+    	<div class="wrap" layout layout-wrap="wrap">
+	    	<div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>收费名称</label>
+                    <input flex type="text" name="chargeItemName" class="form-control" ng-model="promaterDictionary.chargeItemName" ng-blur="_chargeItemName = true" required>
+                </div>
+                <p ng-if="!promaterDictionary.chargeItemName && (_chargeItemName || verify == false)" class="help-block text-right">收费名称不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>规格</label>
+                    <input flex type="text" name="spec" class="form-control" ng-model="promaterDictionary.spec" ng-maxlength="10" ng-blur="_spec = true" required>
+                </div>
+                <p ng-if="!promaterDictionary.spec && (_spec || verify == false)" class="help-block text-right">规格不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>价格</label>
+                    <input flex type="number" name="price" class="form-control" ng-model="promaterDictionary.price" min="0" ng-maxlength="10" ng-blur="_price = true" required>
+                </div>
+                <p ng-if="(promaterDictionary.price == undefined) && (_price || verify == false)" class="help-block text-right">价格不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>类型</label>
+                    <input flex type="text" name="type" class="form-control" ng-model="promaterDictionary.type" ng-maxlength="10" ng-blur="_type = true" required>
+                </div>
+                <p ng-if="!promaterDictionary.type && (_type || verify == false)" class="help-block text-right">类型不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>单位</label>
+                    <input flex type="text" name="unit" class="form-control" ng-model="promaterDictionary.unit" ng-maxlength="10" ng-blur="_unit = true" required>
+                </div>
+                <p ng-if="!promaterDictionary.unit && (_unit || verify == false)" class="help-block text-right">单位不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>是否有效</label>
+                    <select flex name="enable" class="form-control" ng-model="promaterDictionary.enable" ng-blur="_enable = true" required>
+                        <option ng-value="1">启用</option>
+                        <option ng-value="0">禁用</option>
+                    </select>
+                </div>
+                <p ng-if="(promaterDictionary.enable == undefined) && (_enable || verify == false)" class="help-block text-right">状态不能为空</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+        	<button class="btn btn-primary" ng-click="btnActive && save()">保&nbsp;&nbsp;存</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+        </div>
+    </form>
+</div>

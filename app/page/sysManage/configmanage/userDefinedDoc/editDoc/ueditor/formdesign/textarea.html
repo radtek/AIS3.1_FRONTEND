@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>文本框</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+</head>
+<body>
+<div class="content">
+    <table class="table table-bordered table-striped table-hover">
+     <tr>
+        <th><span>控件名称</span><span class="label label-important">*</span></th>
+        <th><span>最大字符长度</span><span class="label label-important">*</span> </th>
+    </tr>
+    <tr>
+        <td><input id="orgname" type="text" placeholder="必填项"/></td>
+        <td><input id="maxlength" type="text"  value="100" class="input-small span1" /> </td>
+    </tr>
+    <tr>
+        <th><span>输入框样式</span> </th>
+        <th><span>是否必填</span> </th>
+    </tr>
+    <tr>
+        <td>
+            宽 <input id="orgwidth" type="text" value="300" class="input-small span1" placeholder="auto"/> px
+            &nbsp;&nbsp;
+            高 <input id="orgheight" type="text" value="80" class="input-small span1" placeholder="auto"/> px
+        </td>
+        <td> <label class="checkbox"><input id="ismast" type="checkbox"  /> 必填 </label> </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <label for="orgvalue">默认值</label>
+            <textarea class="input-block-level" rows="3" id="orgvalue" placeholder="多行文本框默认值..."></textarea>
+        </td>
+    </tr>
+    </table>
+</div>
+<script type="text/javascript">
+var oNode = null,thePlugins = 'textarea';;
+window.onload = function() {
+    if( UE.plugins[thePlugins].editdom ){
+        oNode = UE.plugins[thePlugins].editdom;
+        var gValue = oNode.getAttribute('value'),gTitle=oNode.getAttribute('title'),gWidth=oNode.getAttribute('orgwidth'),gHeight=oNode.getAttribute('orgheight'),gRich=oNode.getAttribute('ismast'),gmaxlength = oNode.getAttribute('maxlength');
+        
+        gValue = gValue==null ? '' : gValue;
+        gTitle = gTitle==null ? '' : gTitle;
+        $G('orgvalue').value = gValue;
+        $G('orgname').value = gTitle;
+        if ( gRich == '1' ) {
+            $G('ismast').checked = true ;
+        }      
+        $G('orgwidth').value = gWidth;
+        $G('orgheight').value = gHeight;
+        $G('maxlength').value = gmaxlength;
+    }
+}
+dialog.oncancel = function () {
+    if( UE.plugins[thePlugins].editdom ) {
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+dialog.onok = function (){
+    if($G('orgname').value==''){
+        alert('请输入控件名称');
+        return false;
+    }
+    if($G('orgname').value.length>12){
+        alert('控件名称不能超过12个字');
+        return false;
+    }
+    if($G('maxlength').value==''){
+        alert('请输入最大长度');
+        return false;
+    }
+
+    var gValue=$G('orgvalue').value,gTitle=$G('orgname').value,gmaxlength=$G('maxlength').value,gWidth=$G('orgwidth').value,gHeight=$G('orgheight').value;
+
+    if( !oNode ) {
+        try {
+            var html = '<textarea ';
+            html += ' title = "' + gTitle + '"';
+            html += ' name = "leipiNewField"';
+            html += ' leipiPlugins = "'+thePlugins+'"';
+            html += ' value = "' + gValue + '"';
+            html += ' maxlength = "' + gmaxlength + '"';
+            if ( $G('ismast').checked ) {
+                html += ' ismast = "1"';
+            } else {
+                html += ' ismast = "0"';
+            }            
+            if( gWidth != '' ) {
+                html += ' orgwidth = "' + gWidth + '"';
+            } else {
+                html += ' orgwidth = ""';
+            }
+            if(gHeight != '') {
+                html += ' orgheight = "' + gHeight + '"';
+            } else {
+                html += ' orgheight = ""';
+            }
+            
+            html += ' style = "';            
+            if( gWidth != '' ) {
+                html += 'width:' + gWidth + 'px;';
+            }
+            if( gHeight != '' ) {
+                html += 'height:' + gHeight + 'px;';
+            }
+            html += '">';
+            html += gValue + '</textarea>';
+            editor.execCommand('insertHtml',html);
+        } catch (e) {
+            try {
+                editor.execCommand('error');
+            } catch ( e ) {
+                alert('控件异常，请联系管理员！');
+            }
+            return false;
+        }
+    } else {
+        oNode.setAttribute('title', gTitle);
+        oNode.setAttribute('value',gValue);
+        oNode.innerHTML = gValue;
+        if( $G('ismast').checked ) {
+            oNode.setAttribute('ismast', 1);
+        } else {
+            oNode.setAttribute('ismast', 0);
+        }
+        if(gmaxlength)
+            oNode.setAttribute('maxlength',gmaxlength);
+        
+        if( gWidth != '' ) {
+            oNode.style.width = gWidth+ 'px';
+            oNode.setAttribute('orgwidth',gWidth );
+        }else{
+            oNode.setAttribute('orgwidth', '');
+        }
+        if( gHeight != '' ) {
+            oNode.style.height = gHeight+ 'px';
+            oNode.setAttribute('orgheight',gHeight );
+        }else{
+            oNode.setAttribute('orgheight', '');
+        }
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+</script>
+</body>
+</html>

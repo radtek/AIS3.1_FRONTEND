@@ -1,0 +1,91 @@
+<div id="print-region">
+    <div id="operRoomNurNhfe" class="page-print" ng-class="{true:'end-state'}[processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3>{{docInfo.beName}}手术室护理工作访视记录</h3>
+        </header>
+        <div class="form-group2" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a felx>{{vm.regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a felx>{{vm.regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{vm.regOptItem.age}}</a></span>&nbsp;
+            <span layout>科室：<a flex>{{vm.regOptItem.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{vm.regOptItem.bed}}</a></span>&nbsp;
+            <span layout>住院号：<a flex>{{vm.regOptItem.hid}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>拟施手术：<a felx>{{vm.regOptItem.designedOptName}}</a></span>
+        </div>
+        <div class="form-group2" layout layout-wrap="wrap" layout-align="center end">
+            <span class="tit">一、术前访视</span>
+        </div>
+        <div class="form-group2" layout-wrap="wrap" layout-align="space-between end">
+            查阅病历资料：
+            <checkbox ng-model="vm.bean.medicalRecord.a.checked" ng-true-value="'1'" ng-false-value="0"><span>病史</span></checkbox>
+            <checkbox ng-model="vm.bean.medicalRecord.b.checked" ng-true-value="'1'" ng-false-value="'0'">过敏史</checkbox>
+            <checkbox ng-model="vm.bean.medicalRecord.c.checked" ng-true-value="'1'" ng-false-value="'0'">相关检验结果</checkbox>
+        </div>
+        <div class="form-group2" layout-wrap="wrap" layout-align="space-between end">
+            相关情况介绍：
+            <checkbox ng-model="vm.bean.conditionIntroduce.a.checked" ng-true-value="'1'" ng-false-value="'0'">自我介绍</checkbox>
+            <checkbox ng-model="vm.bean.conditionIntroduce.b.checked" ng-true-value="'1'" ng-false-value="'0'">手术间环境及设施</checkbox>
+        </div>
+        <div class="form-group2" layout-wrap="wrap" layout-align="space-between end">
+            患者心理情况：
+            <checkbox ng-model="vm.bean.patientMind" ng-true-value="1" ng-false-value="0">恐惧</checkbox>
+            <checkbox ng-model="vm.bean.patientMind" ng-true-value="2" ng-false-value="0">焦虑</checkbox>
+            <checkbox ng-model="vm.bean.patientMind" ng-true-value="3" ng-false-value="0">正常</checkbox>
+        </div>
+        <div class="form-group2" layout-wrap="wrap" layout-align="space-between end">
+            术前准备情况：
+            <checkbox ng-model="vm.bean.prePrepareCase.a.checked" ng-true-value="'1'" ng-false-value="'0'">禁食禁饮</checkbox>
+            <checkbox ng-model="vm.bean.prePrepareCase.c.checked" ng-true-value="'1'" ng-false-value="'0'">备皮</checkbox>
+            <checkbox ng-model="vm.bean.prePrepareCase.d.checked" ng-true-value="'1'" ng-false-value="'0'">药物过敏试验</checkbox>
+        </div>
+        <div class="form-group2 lineheight35" layout-wrap="wrap" layout-align="space-between end">
+            术前事项交待：
+            <checkbox ng-model="vm.bean.preOperExplain.a.checked" ng-true-value="'1'" ng-false-value="'0'">着棉质病服</checkbox>
+            <checkbox ng-model="vm.bean.preOperExplain.b.checked" ng-true-value="'1'" ng-false-value="'0'">摘下首饰</checkbox>
+            <checkbox ng-model="vm.bean.preOperExplain.c.checked" ng-true-value="'1'" ng-false-value="'0'">手表</checkbox>
+            <checkbox ng-model="vm.bean.preOperExplain.d.checked" ng-true-value="'1'" ng-false-value="'0'">假牙等</checkbox>
+            <checkbox ng-model="vm.bean.preOperExplain.e.checked" ng-true-value="'1'" ng-false-value="'0'">不带贵重物品至手术间</checkbox><br>
+            <checkbox class="ckbox" ng-model="vm.bean.preOperExplain.f.checked" ng-true-value="'1'" ng-false-value="'0'">禁止化妆涂口红，以免影响观察病情</checkbox><br>
+            <checkbox class="ckbox" ng-model="vm.bean.preOperExplain.i.checked" ng-true-value="'1'" ng-false-value="'0'">交待术日接入手术室的时间，请患者及家属在病房内等候</checkbox><br>
+            <checkbox class="ckbox" ng-model="vm.bean.preOperExplain.j.checked" ng-true-value="'1'" ng-false-value="'0'">术前晚保证充足的睡眠并防止受凉</checkbox><br>
+            <checkbox class="ckbox" ng-model="vm.bean.preOperExplain.k.checked" ng-true-value="'1'" ng-false-value="'0'">如有不适应及时告知主管医生或护士</checkbox>
+        </div>
+        <div class="form-group2 lineheight35" layout-wrap="wrap" layout-align="space-between end">
+            术中可能发生压疮：
+            <checkbox ng-model="vm.bean.operPressureSore.a.checked" ng-true-value="'1'" ng-false-value="'0'">手术时间长，全麻，低体温，末梢循环差</checkbox><br>
+            <checkbox class="ckbox3" ng-model="vm.bean.operPressureSore.b.checked" ng-true-value="'1'" ng-false-value="'0'">因为手术需要，摆放特殊体位，局部皮肤压力较大</checkbox><br>
+            <span class="ckbox3">
+                病人自身情况
+                <checkbox ng-model="vm.bean.operPressureSore.c.checked" ng-true-value="'1'" ng-false-value="'0'">肥胖 </checkbox>
+                <checkbox ng-model="vm.bean.operPressureSore.c.checked" ng-true-value="'2'" ng-false-value="'0'">消瘦 </checkbox>
+                <checkbox ng-model="vm.bean.operPressureSore.e.checked" ng-true-value="'1'" ng-false-value="'0'">基础疾病</checkbox>
+            </span><br>
+            <checkbox class="ckbox3" ng-model="vm.bean.operPressureSore.f.checked" ng-true-value="'1'" ng-false-value="'0'">骨科需使用电动气压止血带的手术病人，袖带压迫处，皮肤易出现水泡</checkbox>
+        </div>
+        <div class="form-group2 lineheight35" layout-wrap="wrap" layout-align="space-between end">
+            预防压疮采取的措施：
+            <checkbox ng-model="vm.bean.preventPressureMeasure.g.checked" ng-true-value="'1'" ng-false-value="'0'">保持手术床干燥，平整，使用柔软，吸水性强的床单，患者皮肤不直接接触橡胶，塑料等；</checkbox><br>
+            <checkbox class="ckbox2" ng-model="vm.bean.preventPressureMeasure.h.checked" ng-true-value="'1'" ng-false-value="'0'">避免各种导线、导管压迫皮肤；棉垫保护受压部及骨隆突出处；</checkbox><br>
+            <checkbox class="ckbox2" ng-model="vm.bean.preventPressureMeasure.i.checked" ng-true-value="'1'" ng-false-value="'0'" style="margin-right: 0; width: 15px; min-width: 15px;">使用电动气压止血带最长时间不超过1.5小时，二次使用时需间隔10-15分钟，避免长时间压迫肢体；</checkbox><br>
+            <checkbox class="ckbox2" ng-model="vm.bean.preventPressureMeasure.j.checked" ng-true-value="'1'" ng-false-value="'0'">约束带适当固定患者，以免术中移位或压伤，约束带松紧应适宜；</checkbox><br>
+            <checkbox class="ckbox2" ng-model="vm.bean.preventPressureMeasure.k.checked" ng-true-value="'1'" ng-false-value="'0'">侧卧位肾脏手术腰桥不要太高，以免损伤腰部软组织；</checkbox><br>
+            <checkbox class="ckbox2" ng-model="vm.bean.preventPressureMeasure.n.checked" ng-true-value="'1'" ng-false-value="'0'">截石位两腿宽度为生理跨度45度。高度适当，避免过分牵拉大腿内收肌；</checkbox><br>
+            <checkbox class="ckbox2" ng-model="vm.bean.preventPressureMeasure.m.checked" ng-true-value="'1'" ng-false-value="'0'">俯卧位时使用大小合适头架。支撑点垫棉垫保护受压处皮肤</checkbox>
+        </div>
+        <div flex layout layout-wrap="wrap" class="form-group">
+            <span ng-class="{true: 'md-red'}[!vm.bean.interviewUser && verify]">访视者签名：</span>
+            <oi-select flex name="circunurse" class="noborder3" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" oi-options="item.userName as item.name for item in circunurseList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="vm.bean.interviewUser"></oi-select>
+            <div class="eSignature" style="margin-top: -10px;">
+                <img ng-repeat="sig in eSignatureCircuNurse" src="{{sig.path}}" ng-if="sig.hasPath" />
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span>患者或家属签名：</span>
+            <input flex type="text" class="noborder3" ng-model="vm.bean.interviewRelation" ng-value="vm.bean.interviewRelation">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span ng-class="{true: 'md-red'}[!vm.bean.interviewTime && verify]">访视时间：</span>
+            <datetime-picker flex class='calendar sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="vm.bean.interviewTime" timepicker="true" format="Y-m-d H:i" style="margin-bottom: 15px;"></datetime-picker>
+        </div>
+    </div>
+</div>

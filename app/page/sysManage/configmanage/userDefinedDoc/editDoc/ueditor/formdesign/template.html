@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>表单模板</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <script type="text/javascript" charset="utf-8" src="jquery-1.7.2.min.js?2023"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <style type="text/css">
+.wrap{ padding: 5px;font-size: 14px;}
+.left{width:425px;float: left;}
+.right{width:160px;border: 1px solid #ccc;float: right;padding: 5px;margin-right: 5px;}
+.right .pre{height: 332px;overflow-y: auto;}
+.right .preitem{border: white 1px solid;margin: 5px 0;padding: 2px 0;}
+.right .preitem:hover{background-color: lemonChiffon;cursor: pointer;border: #ccc 1px solid;}
+.right .preitem img{display: block;margin: 0 auto;width:100px;}
+.clear{clear: both;}
+.top{height:26px;line-height: 26px;padding: 5px;}
+.bottom{height:320px;width:100%;margin: 0 auto;}
+.transparent{ background: url("template/images/bg.gif") repeat;}
+.bottom table tr td{border:1px dashed #ccc;}
+#colorPicker{width: 17px;height: 17px;border: 1px solid #CCC;display: inline-block;border-radius: 3px;box-shadow: 2px 2px 5px #D3D6DA;}
+.border_style1{padding:2px;border: 1px solid #ccc;border-radius: 5px;box-shadow:2px 2px 5px #d3d6da;}
+p{margin: 5px 0}
+table{clear:both;margin-bottom:10px;border-collapse:collapse;word-break:break-all;}
+li{clear:both}
+ol{padding-left:40px; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="left">
+            <div class="top">
+                <label><var id="lang_template_clear">保留原有内容</var>：<input id="issave" type="checkbox"></label>
+            </div>
+            <div class="bottom border_style1" id="preview"></div>
+        </div>
+        <fieldset  class="right border_style1">
+            <legend><var id="lang_template_select"></var></legend>
+            <div class="pre" id="preitem"></div>
+        </fieldset>
+        <div class="clear"></div>
+    </div>
+    <script type="text/javascript">
+/**
+* Templates.
+* 添加模板，以下面配置即可
+*/
+var templates = [
+    {
+        "pre":"pre0.png",//预览图
+        'title':"表单设计器模板",//标题
+        //预览html
+        'preHtml':'<p style="text-align: center;"><span style="font-size: 24px;">示例</span></p><hr/>表单设计器模板，注意控件：name="leipiNewField"',
+        //确认后到编辑器的html
+        "html":'<p style="text-align: center;"><span style="font-size: 24px;">示例</span></p><hr/>表单设计器模板，注意控件：name="leipiNewField"'
+    }
+];
+
+/**
+ *  Templates.
+ */
+(function () {
+    var url =window.parent.location.href;
+    var docThemeId = sessionStorage.getItem('docThemeId');//url.split('/')[url.split('/').length-1];
+    var user = JSON.parse(sessionStorage.getItem('user'));
+    var roomId = sessionStorage.getItem('roomId');
+    var ipPort = 'http://192.168.5.5:8189/';
+    var me = editor,
+            preview = $G( "preview" ),
+            preitem = $G( "preitem" ),
+            tmps,currentTmp;
+    initTemp();
+    function initTemp(){
+        $.ajax({
+            type: 'POST',               
+            contentType:'application/json;charset=UTF-8',               
+            url : ipPort+'document/searchDocTheme',
+            dataType : 'json',
+            processData:false,
+            headers: { 'x-token': user.token, 'beid': user.beid, 'roomId': roomId, 'username': user.userName,'Accept': 'application/json, text/plain, */*'},// 
+            data : JSON.stringify({"pageNo":1,"pageSize":100,"sort":"","orderBy":"","filters":[{"field":"isDelete","value":0},{"field":"themeState","value":3}]}),
+            success : function(data){
+                templates= data.docThemeList; 
+                tmps = templates;
+                //debugger; 
+                if(tmps){
+                    initPre();
+                    window.pre = pre;
+                    pre(1) 
+                }                                    
+            }
+        }); 
+    }
+    
+    var initPre = function () {
+        var str = "";
+        //for ( var i = 0, tmp; tmp = tmps[i++]; ) {
+        for ( var i = 0 ; i < tmps.length ; i++ ) {       
+            str += '<div class="preitem" onclick="pre(' + i + ')">' + tmps[i].docThemeName + '</div>';
+        }
+        preitem.innerHTML = str;
+    };
+    var pre = function ( n ) {
+        var tmp = tmps[n];
+        currentTmp = tmp;
+        clearItem();
+        domUtils.setStyles( preitem.childNodes[n], {
+            "background-color":"lemonChiffon",
+            "border":"#ccc 1px solid"
+        } );
+       // debugger;
+       // if(!tmp.originalHtml){
+            $.ajax({
+                type: 'POST',               
+                contentType:'application/json;charset=UTF-8',               
+                url : ipPort+'document/seachDocThemeById', 
+                dataType : 'json',
+                processData:false,
+                headers: { 'x-token': user.token, 'beid': user.beid, 'roomId': roomId, 'username': user.userName,'Accept': 'application/json, text/plain, */*'},// 
+                data : JSON.stringify({"docThemeId":tmp.docThemeId}),
+                success : function(data){
+                    preview.innerHTML = data.docTheme.originalHtml;
+                    currentTmp = data.docTheme;
+
+                }
+            }); 
+       // }else{
+       //     preview.innerHTML = tmp.originalHtml ? tmp.originalHtml : "";
+       // }
+    };
+    var clearItem = function () {
+        var items = preitem.children;
+        for ( var i = 0, item; item = items[i++]; ) {
+            domUtils.setStyles( item, {
+                "background-color":"",
+                "border":"white 1px solid"
+            } );
+        }
+    };
+    dialog.onok = function () {
+        if ( !$G( "issave" ).checked ){
+            me.execCommand( "cleardoc" );            
+        }
+        editor.execCommand('insertHtml',currentTmp.originalHtml);
+        // var obj = {
+        //     html: currentTmp.originalHtml
+        // };
+        //me.execCommand( "template", obj );        
+    };
+    
+
+})();
+    </script>
+</body>
+</html>

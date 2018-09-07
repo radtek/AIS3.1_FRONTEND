@@ -1,0 +1,33 @@
+<div flex>
+    <div style="height: 40px;text-align: right;">
+        <select ng-model="param.year" style="width: 60px;">
+            <option ng-value="2016">2016</option>
+            <option ng-value="2017">2017</option>
+            <option ng-value="2018">2018</option>
+            <option ng-value="2019">2019</option>
+            <option ng-value="2020">2020</option>
+            <option ng-value="2021">2021</option>
+            <option ng-value="2022">2022</option>
+        </select>&nbsp;年&nbsp;
+        <select ng-model="param.month" style="width: 60px;">
+            <option value="01">1</option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>&nbsp;月
+        <button class="btn btn-primary" style="height: 32px;margin: 0 15px;" type="button" ng-click="query()">查&nbsp;&nbsp;询</button>
+
+        
+        <button class="btn btn-primary pull-right" type="button" ng-click="export()">导出EXCEL</button>
+    </div>
+    <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions.data" class="ui-grid-729"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+</div>

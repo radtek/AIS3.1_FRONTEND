@@ -1,0 +1,71 @@
+<div flex layout="column" id="pacu">
+    <div flex>
+        <div flex layout layout-wrap='wrap' style='margin: -5px -5px 0 -5px;'>
+            <div flex=20 ng-repeat="item in cardItems" style="padding: 5px;">
+                <div layout style="background-color: #f9f9f9; padding: 5px; border: 1px solid #ddd;">
+                    <strong style="font-size: 20px; margin-right: 15px;">{{item.bedName}}</strong>
+                    <div>
+                        <div style='margin-bottom: 8px; min-height: 21px;' layout>
+                            <span style="display: inline-block; width: 80px;">{{item.name}}</span>
+                            <span>{{item.deptName}}</span>
+                        </div>
+                        <div style='margin-bottom: 8px; min-height: 21px;' layout>
+                            <span style="display: inline-block; width: 80px;">{{item.sex}}</span>
+                            <span style="margin-right: 20px;">{{item.age}}</span>
+                            <span>{{item.hid}}</span>
+                        </div>
+                        <div style='margin-bottom: 8px; min-height: 21px;'>手术日期：{{item.operaDate}}</div>
+                        <div style='margin-bottom: 8px; min-height: 21px;'>麻醉方式：{{item.anaesMethod}}</div>
+                        <div style='margin-bottom: 8px; min-height: 21px;'>麻醉医生：{{item.anesthetistName}}</div>
+                        <div style='margin-bottom: 8px; min-height: 21px;'>巡回护士：{{item.circunurseName1}}</div>
+                    </div>
+                </div>
+                <div layout layout-align='space-between center' style="background-color: #f9f9f9; padding: 5px; border: 1px solid #ddd; margin-top: -1px;">
+                    <strong class="glyphicon glyphicon-list" style="cursor: pointer;" ng-click="setting(item)"></strong>
+                    <div layout layout-align="end center">
+                        <button class="btn btn-primary" ng-click='selectMen(item.bedId)' ng-hide="!!item.name">选择患者</button>
+                        <button ng-show="!!item.name" class="btn btn-primary" ng-click="stratRehealth(item)">开始复苏</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default list">
+        <div class="panel-heading" layout layout-align="start center">
+            <span>复苏列表</span>
+            <div style="margin-left: 40px; margin-right: 40px;">
+                <checkbox style='margin-left: 15px;' ng-model="query.state" ng-true-value="'0'" ng-false-value="''" ng-change='stateChange()'>待复苏</checkbox>
+                <checkbox style='margin-left: 15px;' ng-model="query.state" ng-true-value="'1'" ng-false-value="''" ng-change='stateChange()'>复苏中</checkbox>
+                <checkbox style='margin-left: 15px;' ng-model="query.state" ng-true-value="'2'" ng-false-value="''" ng-change='stateChange()'>复苏完成</checkbox>
+            </div>
+            <div>
+                <span style="margin-right: 10px;">姓名：<input style=" width: 110px;" type="text" name="name" ng-model="query.name" ng-change="stateChange()"></span>
+                <span>住院号：<input style=" width: 110px;" type="text" name="name" ng-model="query.hid" ng-change="stateChange()"></span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ui-grid="gridOptions" ui-grid-auto-resize style="height: 100%;" ng-if="gridOptions.data"></div>
+            <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+        </div>
+    </div>
+    <div flex class="row" ng-if="false">
+        <div class="col-md-3" ng-repeat="item in cardItems">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="clearfix">
+                        <h4 class="pull-left">{{item.bedName}}</h4>
+                        <h4 class="pull-right"><span class="glyphicon glyphicon-list" style="cursor: pointer;" ng-click="setting(item)"></span></h4>
+                    </div>
+                </div>
+                <div class="panel-body bg-success">
+                    <div layout layout-align="end center">
+                        <button class="btn btn-primary" ng-click='selectMen(item.bedId)' ng-hide="!!item.name">选择患者</button>
+                        <button ng-show="!!item.name" class="btn btn-primary" ng-click="stratRehealth(item)">开始复苏</button>
+                       <!--  <button class="btn btn-primary" ng-if="btn.url!=='operEmergency'" ng-repeat="btn in btnsMenu" ng-click='ok(item, btn.url)'>{{btn.name}}</button>
+                        <button class="btn btn-default ml-15" ng-click='cancel(item)' ng-if="item.state === '03'">取消手术</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

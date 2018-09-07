@@ -1,0 +1,75 @@
+<div flex layout id="frame">
+    <aside layout='column' class="menu-wrap not-print" ng-show="user.module == 'ctrlcent'">
+        <div layout layout-align='center center' class="col menu-header">
+            <span class="menu-header-login"></span>
+        </div>
+        <div layout layout-align='center center' class="col login-wrap" ui-sref='modifyPwd'>
+            <div class="login-icon"></div>
+            <div layout="column" class="login-user">
+                <span>{{user.name}}</span>
+                <span>{{user.roleName}}</span>
+            </div>
+        </div>
+        <div flex class="over-flow">
+            <ul class="menu-item" ng-repeat="obj in menu" ng-if="obj.arr.length > 0">
+                <li ng-repeat="item in obj.arr">
+                    <!-- link -->
+                    <a class="nav-link" ng-class="{true: 'active', false: ''}[item.active]" ng-if="item.urlType == 'link'" ui-sref="{{item.url}}" ng-click="toggle(item)">
+                        <span class="title">{{item.name}}</span>
+                    </a>
+                    <!-- toggle -->
+                    <a class="nav-link" ng-if="item.urlType == 'toggle'" ng-click="toggle(item)">
+                        <span class="title">{{item.name}}</span>
+                        <i ng-class="{true: 'glyphicon glyphicon-triangle-bottom', false: 'glyphicon glyphicon-triangle-right'}[item.isOpen]" class="arrow"></i>
+                    </a>
+                    <ol class="sub-menu" ng-if="item.isOpen" ng-repeat="child in item.pages">
+                        <li>
+                            <a ui-sref="{{child.url}}" class="nav-link" ng-class="{true: 'active', false: ''}[child.active]" ng-click="toggle(child)">
+                                <span class="title">{{child.name}}</span>
+                            </a>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <div flex layout="column" class="main">
+        <header layout layout-align="space-between" class="col view-header not-print" ng-if="user.module == 'ctrlcent'">
+            <nav class="nav-crumbs">
+                <span class="icon"><i class="glyphicon glyphicon-home"></i></span>
+                <span class="item" ng-repeat="item in crumbs">
+                    <i class="glyphicon glyphicon-menu-right" ng-if="$index > 0"></i>
+                    <a ui-sref="{{item.url}}" ng-click="checkCrumbs(item);" ng-if="item.url">{{item.name}}</a>
+                    <a ng-if="!item.url">{{item.name}}</a>
+                </span>
+            </nav>
+            <nav class="nav-btn">
+                <!-- <a class="glyphicon glyphicon-th" title="视图模式" ui-sref="cardSchedule" ng-if='crumbs[0].url == "operRoomSchedule" && crumbs[1].url != "cardSchedule"'></a>
+                <a class="glyphicon glyphicon-th-list" title="列表模式" ui-sref="operRoomSchedule" ng-if='crumbs[0].url == "operRoomSchedule" && crumbs[1].url == "cardSchedule"'></a> -->
+                <a class="glyphicon glyphicon-log-out" title="退出" ng-click="logout()"></a>
+            </nav>
+        </header>
+        <header layout layout-align="space-between" class="col view-header bgColor not-print" ng-if="user.module == 'oprm' || user.module == 'pacu' || user.module == 'screen'">
+            <nav layout layout-align='start center' class="nav-crumbs">
+                <div class="login-icon" style="margin-right: 15px;"></div>
+                <div layout="column" class="login-user">
+                    <div layout layout-align="center center" class="menu-header" style="border: 0; height: initial; margin-bottom: 5px;">
+                        <span class="menu-header-login" style="height: 24px;"></span>
+                    </div>
+                    <span style="line-height: normal; font-weight: bold;">{{user.name}} {{user.roleName}}</span>
+                </div>
+            </nav>
+            <h3 ng-if='user.module == "oprm"'>
+                <select flex class="selRoom" name="operRoomId" ng-options="item.operRoomId as item.name for item in operRoomList" ng-model="vm.operRoomId" ng-change='changeRoomId()' ng-if="vm.banSelectRoom"></select>
+                <div ng-if="!vm.banSelectRoom && crumbs[1].url != 'operEmergency'" ng-repeat='item in operRoomList | filter: { operRoomId: vm.operRoomId }:eq'>{{item.name}}</div>
+            </h3>
+            <h3 ng-if='user.module == "pacu"'>复苏室</h3>
+            <h3 ng-if='user.module == "screen"'>大屏幕</h3>
+            <nav class="nav-btn">
+                <a class="glyphicon glyphicon-step-backward" title="返回" ui-sref="{{preUrl}}" ng-click="backCard()" ng-if='crumbs.length > 1'></a>
+                <a class="glyphicon glyphicon-log-out" title="退出" ng-click="logout()"></a>
+            </nav>
+        </header>
+        <section flex layout="column" ui-view class="panel-body view-container"></section>
+    </div>
+</div>

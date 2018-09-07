@@ -1,0 +1,66 @@
+<div id="print-region">
+    <div id="selfPayInstrumentLlzyyy" class="page-print" ng-class="{true: 'end-state'}[processState==='END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>麻醉科自费耗材知情同意书</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a flex>{{vm.regOpt.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{vm.regOpt.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{vm.regOpt.age}}</a></span>&nbsp;
+            <span layout>科别：<a flex>{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{vm.regOpt.bed}}</a></span>&nbsp;
+            <!-- <span layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span> -->
+        </div>
+        <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+             <p style="text-indent: 80px;line-height: 60px">
+                尊敬的患者及家属我是您的麻醉医师：您手术麻醉中需要用到的麻醉耗材
+           <!--      <a style="display: inline-block;width: 150px" ng-mouseover="input=true" >{{vm.selfPayInstrumentAccede.anaesConsumables}}</a> -->
+                <input  style="width: 200px" id="autoinput" type="text" class="noborder3" ng-model="vm.selfPayAccedeLlzyy.anaesConsumables"  ng-value="vm.selfPayAccedeLlzyy.anaesConsumables"  ng-keyup="autoinput()"  />
+              <!--   <textarea ng-if="showTextArea" style="resize: none;" class="textarea-other" ng-model="vm.selfPayAccedeLlzyy.anaesConsumables" ng-value="vm.selfPayAccedeLlzyy.anaesConsumables" rows="2"></textarea> -->
+
+            不属于医保报销范围，需要自费购买。</p>
+        </div>
+        <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+             <p style="text-indent: 80px;line-height: 60px">
+                患者及家属知情同意陈述：医生已详细向我告知，我已经理解使用该耗材的必要性，并同意使用该耗材承担自费费用，签字为据。</p>
+        </div>
+
+
+
+
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end" ng-class="{true: 'md-red'}[!vm.selfPayInstrumentAccede.anaestheitistId && verify]">
+            <div layout>
+                <span>患者及家属签名：</span>
+          <!--       <oi-select class="noborder3 sign signature" ng-model="vm.selfPayInstrumentAccede.anaestheitistId" oi-options="i.userName as i.name for i in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select> -->
+                <div >
+                    <input type="text" class="noborder3 end-state" style="width: 150px;" />
+                </div>
+            </div>
+
+            <div layout class="anaesSign">
+                <span >日期：</span>
+              <!--   <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.selfPayInstrumentAccede.date" ng-value="vm.selfPayInstrumentAccede.date" timepicker="false" class="noborder3 calendar sign hidden-print " format="Y-m-d" id="datatime"  style="width: 120px!important;"></datetime-picker> -->
+                <span ><a style="display: inline-block;width: 150px"></a></span>
+            </div> 
+        </div>
+        <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+             <p style="text-indent: 80px;line-height: 60px">
+                麻醉医师陈述:我已经告知患者及家属有关使用自费耗材的相关问题，并签字为据。</p>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end" ng-class="{true: 'md-red'}[!vm.selfPayInstrumentAccede.anaestheitistId && verify]">
+            <div layout>
+                <span>麻醉医师签名：</span>
+          <!--       <oi-select class="noborder3 sign signature" ng-model="vm.selfPayInstrumentAccede.anaestheitistId" oi-options="i.userName as i.name for i in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select> -->
+                <div >
+                    <input type="text" class="noborder3 end-state" style="width: 150px;" />
+                </div>
+            </div>
+            <div layout class="anaesSign">
+                <span >日期：</span>
+            <!--     <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.selfPayInstrumentAccede.date" ng-value="vm.selfPayInstrumentAccede.date" timepicker="false" class="noborder3 calendar sign hidden-print " format="Y-m-d" id="datatime" style="width: 120px!important;"></datetime-picker> -->
+                <span ><a style="display: inline-block;width: 150px"></a></span>
+            </div> 
+        </div>
+    </div>
+</div>

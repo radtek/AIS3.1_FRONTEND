@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <h4><span>{{tit}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form">
+    <div layout="column">
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;"><span class="md-red">*</span>类型</div>
+            <div layout layout-align="end center" flex="60">
+                <select ng-change="clearItemName(data.type)" flex name="type" ng-model="data.type" class="form-control" ng-disabled="!!data.id" required>
+                    <option value='1'>自费用药</option>
+                    <option value='2'>限字号用药</option>
+                    <option value='3'>诊疗项目、体内置放材料</option>
+                    <option value='4'>贵重药品、卫材</option>
+                </select>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;"><span class="md-red">*</span>时间</div>
+            <div layout layout-align="end center" flex="60">
+                <datetime-picker name="dateTime" dateID="datetime1" ng-model="data.time" timepicker="true" format="Y-m-d H:i" class="form-control" required></datetime-picker>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;"><span class="md-red">*</span>名称</div>
+            <div layout layout-align="end center" flex="60" ng-if="!data.id">
+                <oi-select flex oi-options="item.name for item in getDataList($query)" ng-model="$parent.item" name="item" placeholder="请输入拼音搜索" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownAddRow'}" required>
+                </oi-select>
+            </div>
+            <div layout layout-align="end center" flex="60" ng-if="data.id">
+                <input flex type="text" class="form-control" ng-model="data.name" readonly></input>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;">规格</div>
+            <div layout layout-align="end center" flex="60">
+                <input flex type="text" class="form-control" ng-model="data.spec" readonly></input>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;"><span class="md-red">*</span>单价</div>
+            <div layout layout-align="end center" flex="60">
+                <input flex type="number" class="form-control" ng-model="data.price" min="0" max="99999" required></input>
+            </div>
+        </div>
+        <div layout style="height:50px;">
+            <div layout layout-align="end center" flex="25" style="padding-right:15px;">用药依据</div>
+            <div layout layout-align="end center" flex="60">
+                <input flex type="text" class="form-control" ng-model="data.reason" maxlength="30"></input>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save('I')">保存</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">关闭</button>
+</div>

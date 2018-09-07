@@ -1,0 +1,55 @@
+<div class="modal-header">    
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper">
+    <form name="TakeWay" class="panel panel-default" role="form" novalidate>
+    	<div class="wrap" layout layout-wrap="wrap">
+	    	<div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>代码</label>
+                    <input flex type="text" name="code" class="form-control" ng-model="medTakeWay.code" ng-maxlength="10" ng-blur="_code = true" required>
+                </div>
+                <p ng-if="!medTakeWay.code && (_code || verify == false)" class="help-block text-right">代码不能为空</p>
+                <p ng-if="TakeWay.code.$error.maxlength && _code" class="help-block text-right">长度不能超过10个字符</p>
+            </div>
+	    	<div flex="45" class="input-wrap">
+	    		<div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>名称</label>
+                    <input flex type="text" name="name" class="form-control" ng-model="medTakeWay.name" ng-maxlength="40" ng-blur="_name = true" required>
+                </div>
+                <p ng-if="!medTakeWay.name && (_name || verify == false)" class="help-block text-right">名称不能为空</p>
+                <p ng-if="TakeWay.name.$error.maxlength && _name" class="help-block text-right">长度不能超过10个字符</p>
+	    	</div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>分类</label>
+                    <input flex type="text" name="category" class="form-control" ng-model="medTakeWay.category" ng-maxlength="10" ng-blur="_category = true" required>
+                </div>
+                <p ng-if="!medTakeWay.category && (_category || verify == false)" class="help-block text-right">分类不能为空</p>
+                <p ng-if="TakeWay.category.$error.maxlength && _category" class="help-block text-right">长度不能超过10个字符</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>给药方式</label>
+                    <input flex type="text" name="measureMode" class="form-control" ng-model="medTakeWay.measureMode" ng-maxlength="10" ng-blur="_measureMode = true" required>
+                </div>
+                <p ng-if="!medTakeWay.measureMode && (_measureMode || verify == false)" class="help-block text-right">给药方式不能为空</p>
+                <p ng-if="TakeWay.measureMode.$error.maxlength && _measureMode" class="help-block text-right">长度不能超过10个字符</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>是否持续</label>
+                    <select flex name="durable" class="form-control" ng-model="medTakeWay.durable" ng-blur="_durable = true" required>
+                        <option ng-value="1">是</option>
+                        <option ng-value="0">否</option>
+                    </select>
+                </div>
+                <p ng-if="(medTakeWay.durable == undefined) && (_durable || verify == false)" class="help-block text-right">状态不能为空</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+        	<button class="btn btn-primary" ng-click="btnActive && saveMedway()">保&nbsp;&nbsp;存</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+        </div>
+    </form>
+</div>

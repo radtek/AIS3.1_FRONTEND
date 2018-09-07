@@ -1,0 +1,145 @@
+<div id="print-region">
+    <div class="page-print" id="preVisitLog_llzyyy" ng-class="{true: 'end-state'}[vm.preVisit.processState==='END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3>{{docInfo.beName}}</h3>
+            <h4> 麻醉前评估和麻醉计划</h4>
+        </header>
+        <div class="borline">
+            <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+                <span layout>住院号<a flex>{{vm.regOptItem.hid}}</a></span>&nbsp;
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout>患者姓名<a flex>{{vm.regOptItem.name}}</a></span>&nbsp;
+                <span layout>性别<a flex>{{vm.regOptItem.sex}}</a></span>&nbsp;
+                <span layout>年龄<a flex>{{vm.regOptItem.age}}</a></span>&nbsp;
+                <span layout>住<a flex>{{vm.regOptItem.deptName}}</a>科室</span>&nbsp;
+                <span layout><a flex>{{vm.regOptItem.bed}}</a>床</span>&nbsp;
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>术前诊断：<a flex>{{vm.regOptItem.diagnosisName}}</a></span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>拟施手术：<a flex>{{vm.regOptItem.designedOptName}}</a></span>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                拟施麻醉：
+                <input flex type="text" class="noborder3" ng-model="vm.preVisit.designedAnaes" ng-value="vm.preVisit.designedAnaes" maxlength="50" />
+            </div>
+            <br/>
+            <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+                一、患者全身情况评估
+            </div>
+            <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+                患者的基本情况：血压
+                <input  type="number" class="noborder5" min="0" ng-model="vm.preVisit._bloodPre" ng-value="vm.preVisit._bloodPre" /> /
+                <input  type="number" class="noborder5" min="0" ng-model="vm.preVisit.bloodPre_" ng-value="vm.preVisit.bloodPre_" />mmHg，心率
+                <input  type="number" class="noborder4" min="0" ng-model="vm.preVisit.heartrate" ng-value="vm.preVisit.heartrate" /> 次/min，呼吸
+                <input  type="number" class="noborder4" min="0" ng-model="vm.preVisit.breath" ng-value="vm.preVisit.breath" />次/min
+            </div>
+            <div class="form-group" layout-wrap="wrap" layout-align="space-between end" ng-class="{true: 'md-red'}[!vm.preVisit.organNormal && verify]">
+                器官功能情况：
+                <checkbox ng-model="vm.preVisit.organNormal" ng-true-value="'1'" ng-change="vm.preVisit.organNormal!='1'?vm.preVisit.organAbnormal='':''">正常</checkbox>
+                <input type="text" ng-disabled="vm.preVisit.organNormal!='1'" class="noborder5" min="0" ng-model="vm.preVisit.organAbnormal" ng-value="vm.preVisit.organAbnormal" />
+                <checkbox ng-model="vm.preVisit.organNormal" ng-true-value="'2'" ng-change="vm.preVisit.organNormal!='2'?clear('organNormal'):''">异常</checkbox>
+                <checkbox ng-model="vm.preVisit.organAbnormalGrade" ng-true-value="1" ng-false-value="0" ng-disabled="vm.preVisit.organNormal!=2">轻</checkbox>
+                <checkbox ng-model="vm.preVisit.organAbnormalGrade" ng-true-value="2" ng-false-value="0" ng-disabled="vm.preVisit.organNormal!=2">中</checkbox>
+                <checkbox ng-model="vm.preVisit.organAbnormalGrade" ng-true-value="3" ng-false-value="0" ng-disabled="vm.preVisit.organNormal!=2">重</checkbox>
+            </div>
+            <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+                <span class="span-title">其他情况：</span>
+                <textarea style="resize: none;" class="textarea-other" ng-disabled="vm.preVisit.organNormal!=2" ng-model="vm.preVisit.other1" ng-value="vm.preVisit.other1" rows="2"></textarea>
+            </div>
+            <div class="form-group" layout-wrap="wrap" layout-align="space-between end" ng-class="{true: 'md-red'}[!vm.preVisit.asa && verify]">
+                <span style="float:left;">全身情况分级（ASA分级）</span>
+                <checkbox ng-model="vm.preVisit.asa" ng-true-value="'1'">Ⅰ</checkbox>
+                <checkbox ng-model="vm.preVisit.asa" ng-true-value="'2'">Ⅱ</checkbox>
+                <checkbox ng-model="vm.preVisit.asa" ng-true-value="'3'">Ⅲ</checkbox>
+                <checkbox ng-model="vm.preVisit.asa" ng-true-value="'4'">Ⅳ</checkbox>
+                <checkbox ng-model="vm.preVisit.asa" ng-true-value="'5'">Ⅴ</checkbox>
+                <checkbox ng-model="vm.preVisit.asaE" ng-true-value="'1'" ng-false-value="'0'">E</checkbox>
+            </div>
+            <div class="form-group" layout-wrap="wrap" layout-align="space-between end" ng-class="{true: 'md-red'}[!vm.preVisit.preAnesEvaLevel && verify]">
+                <span style="float:left;">麻醉分类　　　　　　　　</span>
+                <checkbox ng-model="vm.preVisit.preAnesEvaLevel" ng-true-value="'1'">1</checkbox>
+                <checkbox ng-model="vm.preVisit.preAnesEvaLevel" ng-true-value="'2'">2</checkbox>
+                <checkbox ng-model="vm.preVisit.preAnesEvaLevel" ng-true-value="'3'">3</checkbox>
+                <checkbox ng-model="vm.preVisit.preAnesEvaLevel" ng-true-value="'4'">4</checkbox>
+            </div>
+            <br/>
+            <h6 class="midtit">
+                二、麻醉计划
+            </h6>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>麻醉方法：
+                    <oi-select class="hidden-print" flex multiple ng-model="vm.preVisit.anaesMethodList" oi-options="i.anaMedId as i.name for i in vm.anaesMethodList" ng-model="vm.preVisit.realAnaesList" placeholder="请输入拼音搜索" list-placeholder="未找到" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }">
+                    </oi-select>
+                    <span flex  class="visible-print-inline noborder3 ">
+                       {{vm.preVisit.anaesMethod}}
+                    </span>
+
+                </span>
+            </div>
+            <div class="form-group liter-0" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout flex>麻醉监测：
+                <checkbox ng-model="vm.anaesMonitor_[0]" ng-true-value="'1'" ng-false-value="0">无创血压监测</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesMonitor_[1]" ng-true-value="'2'" ng-false-value="0">心电图</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesMonitor_[2]" ng-true-value="'3'" ng-false-value="0">指脉搏氧饱和(SpO2)</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesMonitor_[3]" ng-true-value="'4'" ng-false-value="0">体温</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesMonitor_[4]" ng-true-value="'5'" ng-false-value="0">尿量</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesMonitor_[5]" ng-true-value="'6'" ng-false-value="0">有创血压监测</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesMonitor_[6]" ng-true-value="'7'" ng-false-value="0">中心静脉监测</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesMonitor_[7]" ng-true-value="'8'" ng-false-value="0">血气分析</checkbox>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                麻醉有关的措施：
+                <checkbox ng-model="vm.anaesStep_[0]" ng-true-value="'1'" ng-false-value="0">气管内插管</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesStep_[1]" ng-true-value="'2'" ng-false-value="0">动脉穿刺</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesStep_[2]" ng-true-value="'3'" ng-false-value="0">中心静脉穿刺</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesStep_[3]" ng-true-value="'4'" ng-false-value="0">蛛网膜下腔穿刺（腰穿）</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesStep_[4]" ng-true-value="'5'" ng-false-value="0">控制性降压</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.anaesStep_[5]" ng-true-value="'6'" ng-false-value="0">低温</checkbox>
+            </div>
+            <div class="form-group" layout-wrap="wrap" layout-align="space-between end" ng-class="{true: 'md-red'}[!vm.preVisit.leaveTo && verify]">
+                计划术后去向：
+                <checkbox ng-model="vm.preVisit.leaveTo" ng-true-value="'1'">去病房</checkbox>
+                <checkbox ng-model="vm.preVisit.leaveTo" ng-true-value="'2'">去ICU</checkbox>
+            </div>
+            <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+                <span class="span-title">其他情况：</span>
+                <textarea style="resize: none;" class="textarea-other" ng-model="vm.preVisit.evaluationOther" ng-value="vm.preVisit.evaluationOther" rows="2"></textarea>
+            </div>
+            <!--     <div class="form-group" flex layout layout-wrap="wrap" layout-align="end end">
+               麻醉医生 <oi-select  flex=20 class="noborder3" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" ng-model="vm.regOptItem.anesthetistId" oi-options="i.userName as i.name for i in anesthetistList" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="sig in eSignatureAnesthetist" src="{{sig.path}}" ng-if="sig.hasPath" />
+                </div>
+                </span>&nbsp;
+            </div> -->
+            <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+                <span layout>麻醉医生<input type="text" class="noborder3 end-state"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig]"  ng-model="vm.preVisit.anaestheitistName88888"  readonly /></span>
+                <div class="eSignature">
+                    <input type="text" class="noborder3" />
+                </div>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="end end">
+                <!-- ng-class="{true: 'md-red'}[!vm.preVisit.signDate && verify]" -->
+                <span layout >日期<datetime-picker class='calendar sign signature end-state' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="vm.preVisit.signDate8888888" timepicker="true" format="Y-m-d H:i"></datetime-picker></span>&nbsp;
+                <div class="eSignature">
+                    <input type="text" class="noborder3" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="modal-header"  >
+    <h4><span>编辑</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="fastAddEvent" >
+    <div class="modal-body">
+        <div layout class="input-wrap">
+            <div flex layout layout-align="start center" class="input-group">
+                <label class="tit">名称：</label>
+                <div flex>{{obj.name}}</div>
+            </div>
+        </div>
+        <div layout class="input-wrap" ng-if="obj.showOption != undefined">
+            <div flex=60 layout layout-align="start center" class="input-group">
+                <label class="tit">剂量：</label>
+                <input flex=20 type="number" ng-model="obj.dosage" name="dosage" ng-required='obj.showOption'>
+                <span class="ml-15">{{obj.dosageUnit}}</span>
+            </div>
+            <div flex=40 layout layout-align="start center">
+                <checkbox ng-model="obj.showOption" ng-true-value="'3'">剂量</checkbox>
+            </div>
+        </div>
+        <div layout class="input-wrap">
+            <div flex=60 layout layout-align="start center" class="input-group">
+                <label class="tit">浓度：</label>
+                <input flex=20 type="number" ng-model="obj.thickness" name="thickness" ng-required='obj.showThick'>
+                <select class="ml-15" ng-model="obj.thicknessUnit" ng-required='obj.showThick'>
+                    <option ng-repeat="item in thicknessUnits" value="{{item}}">{{item}}</option>
+                </select>
+            </div>
+            <div flex=40 layout layout-align="start center">
+                <checkbox ng-model="obj.showThick" ng-true-value="'1'">浓度</checkbox>
+            </div>
+        </div>
+        <div layout class="input-wrap" ng-if='(obj.showFlow != undefined && obj.durable!="0" )||obj.showFlowS'>
+            <div flex=60 layout layout-align="start center" class="input-group">
+                <label class="tit">流速：</label>
+                <input flex=20 type="number" ng-model="obj.flow" name="flow" ng-required='obj.showFlow'>
+                <select class="ml-15" ng-model="obj.flowUnit" ng-required='obj.showFlow'>
+                    <option ng-repeat="item in flowUnits" value="{{item}}">{{item}}</option>
+                </select>
+            </div>
+            <div flex=40 layout layout-align="start center">
+                <checkbox ng-model="obj.showFlow" ng-true-value="'1'">流速</checkbox>
+            </div>
+        </div>
+        <div layout class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">时间：</label>
+                <div flex>{{obj.insertTime}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="delete()" ng-if="isEdit">删&nbsp;&nbsp;除</button>
+        <button class="btn btn-primary" ng-disabled="form.$invalid || obj.durable && !(obj.dosage || obj.thickness || obj.flow) || !obj.durable && !(obj.dosage || obj.thickness|| obj.flow)" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

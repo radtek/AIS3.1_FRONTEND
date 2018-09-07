@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4><span>选择应用局点</span><span class="pull-right modal-container_close" ng-click="cancel()">×</span></h4>
+</div>
+<form name="form" novalidate class="form-horizontal" style="min-height: 350px">
+    <div class="modal-body">
+        <span ng-if="resultList.length>0" >
+     <input type="checkbox" name="all" ng-click="allChecked(resultList,all)" ng-model="all"    />全选 &nbsp
+     <input type="checkbox" name="reverse" ng-click="reverseChecked(resultList)" ng-model="reverse"   />反选
+		</span>
+        <div class="form-group">
+            <div class="col-sm-4" ng-repeat="item in resultList">
+                <input type="checkbox" name="{{item.name}}" ng-click="changeChecked(item)" ng-model="item.flag"> {{item.name}}
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-disabled="form.$invalid" ng-click="ok()">确&nbsp;&nbsp;定</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+</div>

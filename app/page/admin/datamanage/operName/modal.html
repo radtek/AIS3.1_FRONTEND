@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h4><span>{{item.title}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" novalidate class="form-horizontal">
+    <div class="modal-body">
+        <div class="patient-in-modal-form-div">
+            <div class="form-group">
+                <label for="beid" class="col-sm-4 control-label"><span class="red">*</span>局点名称：</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="beid" ng-options="item.beid as item.name for item in hospital" ng-model="obj.beid" required ng-disabled="item.opt"></select>
+                    <div class="form-error-info" ng-show="form.beid.$dirty && !form.beid.$valid"> <span>局点不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label"><span class="red">*</span>手术名称：</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="name" ng-model="obj.name" required maxlength="30">
+                    <div class="form-error-info" ng-show="form.name.$dirty && !form.name.$valid"> <span>手术名称不能为空</span> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="enable" class="col-sm-4 control-label">是否可用：</label>
+                <div class="col-sm-5" style="padding-top: 2px;">
+                    <label class="radio-inline">
+                        <input type="radio" name="enable" ng-value="1" ng-model="obj.enable">启用
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="enable" ng-value="0" ng-model="obj.enable">禁用
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="form.$invalid">确&nbsp;&nbsp;定</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+</div>

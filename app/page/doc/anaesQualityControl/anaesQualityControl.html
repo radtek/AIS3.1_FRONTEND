@@ -1,0 +1,181 @@
+<div id="print-region">
+    <div layout="column" class="page-print" id="anaesQualityControl">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docInfo.titlePath">
+                <h3 ng-if='docInfo.beName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.beName}}</h3>
+                <h4 ng-if='docInfo.subName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.subName}}</h4>
+                <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            </div>
+            <h4>麻醉质控文书</h4>
+        </header>
+        <div layout="column" ng-class="{true: 'end-state'}[prePostVisit.processState == 'END' && !saveActive || setting.readonly]">
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span layout>姓名：<a flex>{{vm.regOptItem.name}}</a></span>&nbsp;
+                <span layout>性别：<a flex>{{vm.regOptItem.sex}}</a></span>&nbsp;
+                <span layout>年龄：<a flex>{{vm.regOptItem.age}}</a></span>&nbsp;
+                <span layout>科室：<a flex>{{vm.regOptItem.deptName}}</a></span>&nbsp;
+                <span layout>床号：<a flex>{{vm.regOptItem.bed}}</a></span>&nbsp;
+                <span layout>住院号：<a flex>{{vm.regOptItem.hid}}</a></span>
+            </div>
+            <table>
+                <tr>
+                    <td>ASA分级</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.asa" ng-true-value="1" ng-false-value="0">Ⅰ级</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.asa" ng-true-value="2" ng-false-value="0">Ⅱ级</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.asa" ng-true-value="3" ng-false-value="0">Ⅲ级</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.asa" ng-true-value="4" ng-false-value="0">Ⅳ级</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.asa" ng-true-value="5" ng-false-value="0">Ⅴ级</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.asa" ng-true-value="6" ng-false-value="0">其他</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>手术类型</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.surgeryType" ng-true-value="1">急诊</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.surgeryType" ng-true-value="2">择期</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">麻醉方式</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anesType" ng-true-value="1" ng-false-value="0">椎管内麻醉</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anesType" ng-true-value="2" ng-false-value="0">插管全麻</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anesType" ng-true-value="3" ng-false-value="0">非插管全麻</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anesType" ng-true-value="4" ng-false-value="0">复合麻醉</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anesType" ng-true-value="5" ng-false-value="0">其他麻醉方式</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>是否有椎管内麻醉后严重神经并发症</span>
+                            <checkbox class='form-group' ng-model="vm.anaesQualityControl.spinalAnaesComplication" ng-true-value="1">是</checkbox>(发生时间
+                            <datetime-picker name="complicationTime" dateID="operaDate-times" ng-model="vm.anaesQualityControl.complicationTime" ng-value="vm.anaesQualityControl.complicationTime" timepicker="true" class="noborder3" id="datatime" style="width: 120px;"></datetime-picker>)
+                            <checkbox class='form-group' ng-model="vm.anaesQualityControl.spinalAnaesComplication" ng-true-value="2" ng-click="vm.anaesQualityControl.complicationTime = '';vm.anaesQualityControl.complicationDetailList = []">否</checkbox>
+                        </div>
+                        <div flex layout>
+                            <span>并发症：</span>
+                            <oi-select flex oi-options="i.codeName for i in vm.spinalAnaesComplicationList" oi-select-options="{cleanModel: true, editItem: true, newItem: true, newItemModel: {codeName: $query}}" ng-model="vm.anaesQualityControl.complicationDetailList" style="min-width: 400px; display: table-cell;" multiple></oi-select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>麻醉开始后取消手术</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.surgeryCancle" ng-true-value="1" ng-false-value="0">是</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.surgeryCancle" ng-true-value="2" ng-false-value="0">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>入PACU时长</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.pacuDuration" ng-true-value="1" ng-false-value="0">超过3小时</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.pacuDuration" ng-true-value="2" ng-false-value="0">未超过3小时</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>PACU入室体温</td>
+                    <td>
+                        <input type="number" class="noborder3" ng-model="vm.anaesQualityControl.pacuTemp" style="width: 60px;"></input>℃
+                    </td>
+                </tr>
+                <tr>
+                    <td>非计划转入ICU</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.unplanToPacu" ng-true-value="1" ng-false-value="0">是</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.unplanToPacu" ng-true-value="2" ng-false-value="0">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>非计划二次气管插管</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.unplanSecondIntuba" ng-true-value="1" ng-false-value="0">是</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.unplanSecondIntuba" ng-true-value="2" ng-false-value="0">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">术中输血</td>
+                    <td>
+                        <span>接受400ml及以上输血</span>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.transBlood400" ng-true-value="1" ng-false-value="0">是</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.transBlood400" ng-true-value="2" ng-false-value="0">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>麻醉中接受400ml及以上自体血</span>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.transSelfBlood400" ng-true-value="1" ng-false-value="0">是</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.transSelfBlood400" ng-true-value="2" ng-false-value="0">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>麻醉开始后24小时内死亡</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anaesBeginDeath" ng-true-value="1" ng-false-value="0">是</checkbox>(死亡时间
+                        <datetime-picker name="deathTime" dateID="operaDate-times" ng-model="vm.anaesQualityControl.deathTime" ng-value="vm.anaesQualityControl.deathTime" timepicker="true" class="noborder3" id="datatime" style="width: 120px;"></datetime-picker>)
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anaesBeginDeath" ng-true-value="2" ng-false-value="0" ng-click="vm.anaesQualityControl.deathTime = ''">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>麻醉开始后24小时内心脏骤停</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anaesBeginSCA" ng-true-value="1" ng-false-value="0">是</checkbox>(心脏骤停时间
+                        <datetime-picker name="scaTime" dateID="operaDate-times" ng-model="vm.anaesQualityControl.scaTime" ng-value="vm.anaesQualityControl.scaTime" timepicker="true" class="noborder3" id="datatime" style="width: 120px;"></datetime-picker>)
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anaesBeginSCA" ng-true-value="2" ng-false-value="0" ng-click="vm.anaesQualityControl.scaTime = ''">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>麻醉期间严重过敏反应</td>
+                    <td>
+                        <div>
+                            <checkbox class='form-group' ng-model="vm.anaesQualityControl.anaesAllergic" ng-true-value="1" ng-false-value="0">是</checkbox>(过敏反应发生时间
+                            <datetime-picker name="allergicTime" dateID="operaDate-times" ng-model="vm.anaesQualityControl.allergicTime" ng-value="vm.anaesQualityControl.allergicTime" timepicker="true" class="noborder3" id="datatime" style="width: 120px;"></datetime-picker>)
+                            <checkbox class='form-group' ng-model="vm.anaesQualityControl.anaesAllergic" ng-true-value="2" ng-false-value="0" ng-click="vm.anaesQualityControl.allergicTime = '';vm.anaesQualityControl.allergicDetailList = []">否</checkbox>
+                        </div>
+                        <div flex layout>
+                            <span>过敏反应：</span>
+                            <oi-select oi-options="i.codeName for i in vm.anaesAllergicList" oi-select-options="{cleanModel: true, editItem: true, newItem: true, newItemModel: {codeName: $query}}" ng-model="vm.anaesQualityControl.allergicDetailList" style="width: 87%;" multiple></oi-select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">中心静脉穿刺</td>
+                    <td>
+                        <span>对患者进行中心静脉穿刺治疗</span>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.venipuncTreat" ng-true-value="1" ng-false-value="0">是</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.venipuncTreat" ng-true-value="2" ng-false-value="0">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>是否有中心静脉穿刺严重并发症</span>
+                            <checkbox class='form-group' ng-model="vm.anaesQualityControl.venipuncComplica" ng-true-value="1">是</checkbox>(发生时间
+                            <datetime-picker name="venipuncComplicaTime" dateID="operaDate-times" ng-model="vm.anaesQualityControl.venipuncComplicaTime" ng-value="vm.anaesQualityControl.venipuncComplicaTime" timepicker="true" class="noborder3" id="datatime" style="width: 120px;"></datetime-picker>)
+                            <checkbox class='form-group' ng-model="vm.anaesQualityControl.venipuncComplica" ng-true-value="2" ng-click="vm.anaesQualityControl.venipuncComplicaTime = '';vm.anaesQualityControl.venipuncComplicaDetailList = []">否</checkbox>
+                        </div>
+                        <div flex layout>
+                            <span>并发症：</span>
+                            <oi-select oi-options="i.codeName for i in vm.venipuncComplicaList" oi-select-options="{cleanModel: true, editItem: true, newItem: true, newItemModel: {codeName: $query}}" ng-model="vm.anaesQualityControl.venipuncComplicaDetailList" style="width: 400px; display: table-cell;" multiple></oi-select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>全麻气管插管拔管后声音嘶哑</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.genAnesHoarse" ng-true-value="1" ng-false-value="0">是</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.genAnesHoarse" ng-true-value="2" ng-false-value="0">否</checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>麻醉后新发昏迷</td>
+                    <td>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anesComa" ng-true-value="1" ng-false-value="0">是</checkbox>
+                        <checkbox class='form-group' ng-model="vm.anaesQualityControl.anesComa" ng-true-value="2" ng-false-value="0">否</checkbox>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

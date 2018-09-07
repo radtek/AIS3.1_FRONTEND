@@ -1,0 +1,26 @@
+<div id="schedule"> 
+    <div flex layout layout-align='space-between center' class="search-div">   
+        <div layout>
+            <button class="btn btn-primary up" ng-click="updateDay('sub');">上一天</button>
+            <datetime-picker dateID="date-start-time" maxdate="2100-01-01" ng-model="operDate" ng-change="updateDay('sel');" timepicker="false" format="Y-m-d" class="form-control" style="width: 95px;"></datetime-picker>
+            <button class="btn btn-primary down" ng-click="updateDay('add');">下一天</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" ng-if="!isArch" ng-click="refresh()">查询全部</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" ng-click="cancelList()">取消列表</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" ng-if="permission.indexOf('ADD') >= 0" ng-click="add()">手动录入</button>　
+            <button class="btn btn-primary" ng-if="permission.indexOf('H_SYNC') >= 0" ng-click="hisImport()">HIS导入</button>
+        </div>
+        <div layout class="btn-margin" layout-align='start center'>
+            <span>手术室：</span>
+            <span style="width:95px;"><select class="form-control"  name="operRoomId" ng-options="item.operRoomId as item.name for item in operRoomList" ng-model="dispatch.operRoomId" ng-change="changeOperRoomId()"></select></span>　
+            <span>手术台次：</span>
+            <span style="width:95px;"><select class="form-control"  name="pcs" ng-options="item.codeValue as item.codeName for item in pacList2" ng-model="dispatch.pcs" ></select></span>
+            <button class="btn btn-primary" ng-if="permission.indexOf('UPD') >= 0" ng-click="save();">保存</button>
+            <!-- <button class="btn btn-primary" ng-if="permission.indexOf('APPR') >= 0" ng-click="ratify()">批准手术</button>　 -->
+            <button class="btn btn-primary" ng-if="permission.indexOf('CANC') >= 0" ng-click="cancels()">取消</button>
+            <button class="btn btn-primary" ng-if="permission.indexOf('RECALL') >= 0 && recall" ng-click="activOpers()">撤回</button>
+        </div>
+    </div>
+<div flex>
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection></div>
+</div>
+</div>

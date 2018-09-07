@@ -1,0 +1,71 @@
+<div class="modal-header">    
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper">
+    <form class="panel panel-default" role="form" name="BaseInfoForm" novalidate>
+        <div class="wrap" layout layout-wrap="wrap" style="padding-left: 60px;">
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">药品名称</label>
+                    <input flex ng-model="medicalParams.medicineName" readonly>
+                </div>               
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">厂家名称</label>
+                    <input flex ng-model="medicalParams.firm" readonly>
+                </div>                
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">规格</label>
+                    <input flex ng-model="medicalParams.spec" readonly>
+                </div>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">批号</label>
+                    <input flex type="text" name="batch" class="form-control" ng-model="medicalParams.batch"  readonly>
+                </div>               
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>出库数量</label>
+                    <input flex type="number" min="1" name="outNumber" class="form-control" ng-model="medicalParams.outNumber" ng-blur="_outNumber = true" required>{{medicalParams.minPackageUnit}}
+                </div>
+                <p ng-if="(medicalParams.outNumber == undefined) && (_outNumber || verify == false)" class="help-block text-right">出库数量不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>领用时间</label>
+                    <datetime-picker flex ng-model="medicalParams.outTime" name="outTime" class="form-control" max="2200-01-01" ng-blur="_outTime = true" required="true"></datetime-picker>
+                    <p ng-if="(medicalParams.outTime == undefined) && (_outTime || verify == false)" class="help-block text-right">领用时间不能为空</p>
+                </div>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>领用人</label>
+                    <oi-select flex name="receiveName" oi-options="item.userName as item.name for item in operaList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" ng-model="medicalParams.receiveName" ng-blur="_receiveName = true" required>
+                    </oi-select>
+                    <p ng-if="(medicalParams.receiveName == undefined) && (_receiveName || verify == false)" class="help-block text-right">领用人不能为空</p>
+                </div>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>经办人</label>
+                    <input flex type="text" name="operator" class="form-control" ng-model="medicalParams.operator" disabled>
+                </div>
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">备注</label>
+                    <input flex type="text" name="remark" class="form-control" ng-model="medicalParams.remark" >
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="btnActive && save('1')">保存</button>
+            <button class="btn btn-default" type="button" ng-click="vm.close()">取消</button>
+        </div>
+    </form>
+</div>

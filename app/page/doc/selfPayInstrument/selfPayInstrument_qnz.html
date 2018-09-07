@@ -1,0 +1,75 @@
+<div id="print-region">
+    <div id="selfPayInstrumentQnz" class="page-print" ng-class="{true: 'end-state'}[processState==='END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>手术麻醉使用自费及高价耗材知情同意书</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>患者姓名：<a flex>{{vm.regOpt.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{vm.regOpt.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{vm.regOpt.age}}</a></span>&nbsp;
+            <span layout>科别：<a flex>{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{vm.regOpt.bed}}</a></span>&nbsp;
+            <span layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+        </div>
+        <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+            患者因<a flex>{{vm.regOpt.diagnosisName}}</a>&nbsp;定于<a flex>{{vm.regOpt.operaDate | date: 'yyyy 年 MM 月 dd 日'}}</a>&nbsp;拟施行<a flex>{{vm.regOpt.designedOptName}}</a>&nbsp;手术治疗，根据患者病情及手术需要，术中有可能使用以下（<span class="appendNo"></span>）项医用耗材，根据有关规定，下列材料不属于或部分不属于公费医疗、社会基本医疗保险报销范围，此类材料的费用须由患者个人承担。现将可能使用的耗材向患方详细告知，请在相应栏目签字后视为同意使用：
+            <input id="numInput" type="hidden" class="noborder3" ng-model="vm.selfPayInstrumentAccede.select" ng-value="vm.selfPayInstrumentAccede.select" readonly />
+        </div>
+        <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+            <div layout flex class="border-b" style="line-height: 24px;">
+                <div class="divHeader no-print" style="width: 50px;padding-top: 11px;">操作</div>
+                <div class="divHeader" style="width: 50px;">项目<br>编号</div>
+                <div class="divHeader" style="width: 280px;padding-top: 11px;">项目名称（自费）</div>
+                <div class="divHeader" style="width: 70px;padding-top: 11px;">单价</div>
+                <div class="divHeader no-print" style="width: 50px;padding-top: 11px;">操作</div>
+                <div class="divHeader" style="width: 50px;">项目<br>编号</div>
+                <div class="divHeader" style="width: 280px;padding-top: 11px;">项目名称（自费）</div>
+                <div class="divHeader" style="width: 70px;padding-top: 11px;border-right: 1px solid #000">单价</div>
+            </div>
+            <div layout flex ng-repeat="item in vm.selfPayLeft track by $index" style="line-height: 30px;">
+                <div class="divContent no-print" style="width: 50px;">
+                    <input ng-model="item.isSelect" ng-change="vm.appendNo($index + 1, item);" ng-click="vm.saveItems(item)" type="checkbox" ng-if="item.name" ng-init="vm.initNum($index + 1, item);" ng-value="$index + 1">
+                </div>
+                <div class="divContent" style="width: 50px;">{{$index + 1}}</div>
+                <div class="divContent" style="width: 280px;">{{item.name}}</div>
+                <div class="divContent" style="width: 70px;">{{item.price}}</div>
+                <div class="divContent no-print" style="width: 50px;">
+                    <input ng-model="vm.selfPayRight[$index].isSelect" ng-change="vm.appendNo(vm.selfPayLeft.length + $index + 1, vm.selfPayRight[$index]);" ng-click="vm.saveItems(vm.selfPayRight[$index])" type="checkbox" ng-if="vm.selfPayRight[$index].name" ng-init="vm.initNum(vm.selfPayLeft.length + $index + 1, vm.selfPayRight[$index]);" ng-value="vm.selfPayLeft.length + $index + 1">
+                </div>
+                <div class="divContent" style="width: 50px;">{{vm.selfPayLeft.length + $index + 1}}</div>
+                <div class="divContent" style="width: 280px;">{{vm.selfPayRight[$index].name}}</div>
+                <div class="lastCell" style="width: 70px;">{{vm.selfPayRight[$index].price}}</div>
+            </div>
+            <div layout flex ng-repeat="item in [0, 1, 2, 3, 4]" style="line-height: 30px;">
+                <div class="divContent no-print" style="width: 50px;">&nbsp;</div>
+                <div class="divContent" style="width: 50px;">&nbsp;</div>
+                <div class="divContent" style="width: 280px;">&nbsp;</div>
+                <div class="divContent" style="width: 70px;">&nbsp;</div>
+                <div class="divContent no-print" style="width: 50px;">&nbsp;</div>
+                <div class="divContent" style="width: 50px;">&nbsp;</div>
+                <div class="divContent" style="width: 280px;">&nbsp;</div>
+                <div class="lastCell" style="width: 70px;">&nbsp;</div>
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end" ng-class="{true: 'md-red'}[!vm.selfPayInstrumentAccede.anaestheitistId && verify]">
+            <div layout>
+                <span><em class="not-print">*</em>麻醉科医师签名：</span>
+                <oi-select class="noborder3 sign signature" ng-model="vm.selfPayInstrumentAccede.anaestheitistId" oi-options="i.userName as i.name for i in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+                <div class="eSignature">
+                    <!-- <img ng-repeat="sig in eSignatureAnaestheitist" src="{{sig}}" ng-if="sig.indexOf('http')>=0" /> -->
+                    <input type="text" class="noborder3" style="width: 150px;" />
+                </div>
+            </div>
+            <div layout>
+                <span>患方签名：</span>
+                <input class="sign noborder" readonly>
+            </div>
+            <div layout class="anaesSign">
+                <span class="no-print">日期：</span>
+                <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.selfPayInstrumentAccede.date" ng-value="vm.selfPayInstrumentAccede.date" timepicker="false" class="noborder3 calendar sign no-print" format="Y-m-d" id="datatime" style="width: 90px!important;"></datetime-picker>
+                <span class="is-print">日期：<a flex>{{vm.selfPayInstrumentAccede.date | date: 'yyyy 年 MM 月 dd 日'}}</a></span>
+            </div>
+        </div>
+    </div>
+</div>

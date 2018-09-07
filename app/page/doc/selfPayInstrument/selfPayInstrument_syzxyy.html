@@ -1,0 +1,59 @@
+<div id="print-region">
+    <div id="selfPayInstrumentQnz" class="page-print selfPayInstrument-syzxyy" ng-class="{true: 'end-state'}[processState==='END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center" class="noTop">
+            <h3 ng-if='docInfo.beName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.beName}}</h3>
+            <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h4>麻醉手术医保农合病人自负费用签字同意书</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a >{{vm.regOpt.name}}</a></span>&nbsp;
+            <span layout>住院号：<a >{{vm.regOpt.hid}}</a></span>&nbsp;
+            <span layout>住院科室：<a >{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span layout>日期：<a >{{vm.selfPayInstrumentAccede.date}}</a></span>
+        </div>
+        <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
+            <table class="pay-table">
+                <tr>
+                    <td colspan="6">医 保 病 人 自 负 项 目</td>
+                    <td colspan="2">农合病人自负项目</td>
+                </tr>
+                <tr>
+                    <td>材 料</td>
+                    <td>自 负</td>
+                    <td>签 名</td>
+                    <td>药 品</td>
+                    <td>自 负</td>
+                    <td>签 名</td>
+                    <td>药 品</td>
+                    <td>签 名</td>
+                </tr>
+                <tr ng-repeat="item in vm.selfPayLeft track by $index">
+                    <td style="width: 230px;">{{item.name}}</td>
+                    <td style="width: 70px;">{{item.price}}{{item.name ? '%' : ''}}</td>
+                    <td style="width: 80px;">&nbsp;</td>
+                    <td style="width: 230px;">{{vm.selfPayMid[$index].name}}</td>
+                    <td style="width: 70px;">{{vm.selfPayMid[$index].price}}{{vm.selfPayMid[$index].name ? '%' : ''}}</td>
+                    <td style="width: 80px;">&nbsp;</td>
+                    <td style="width: 230px;">{{vm.selfPayRight[$index].name}}</td>
+                    <td style="width: 70px;">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <div layout layout-align="space-between start">
+                <span><em class="not-print">*</em>麻醉医生：</span>
+                <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig1]" name="anaestheitistId" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="vm.selfPayInstrumentAccede.anaestheitistId"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+            </div>
+            <div layout layout-align="space-between end">
+                <span>责任护士：</span>
+                <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig2]" style="border-bottom: 1px solid #CCC;" ng-model="vm.selfPayInstrumentAccede.nurseId" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="item in eSignatureNurse" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

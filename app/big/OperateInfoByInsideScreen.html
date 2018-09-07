@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>医院 手术情况一览表</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/css.css">
+</head>
+
+<body>
+    <div id="div_big">
+        <div id="divTitle" edit="1">医院 手术情况一览表</div>
+        <table id="tab" border="0" cellspacing="1" cellpadding="0">
+            <thead>
+                <tr id="tr0">
+                </tr>
+            </thead>
+            <tbody id="tbody1">
+            </tbody>
+        </table>
+        <div class="text-center"><span id="page_currentpage"></span><span id="page_count"></span><span id="time"></span></div>
+    </div>
+    <div class="btn-toolbar" id="btn-toolbar" data-role="editor-toolbar" style="display:none;">
+        <div id="fontFamily" class="btn-group" ng-show="showCustomFamilyFont">
+            <div class="dropdown font-dropdown"><a class="btn dropdown-toggle" data-toggle="dropdown" title="字体" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-font"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu fontname-menu" style="max-height: 350px;overflow-y:auto;">
+                    <li class="weiruanyahei"><a dropdown-toggle="" class="btn" data-edit="fontFamily '微软雅黑'">微软雅黑</a></li>
+                    <li class="songti"><a dropdown-toggle="" class="btn" data-edit="fontFamily '宋体'">宋体</a></li>
+                    <li class="fangsong"><a dropdown-toggle="" class="btn" data-edit="fontFamily '仿宋'">仿宋</a></li>
+                    <li class="heiti"><a dropdown-toggle="" class="btn" data-edit="fontFamily '黑体'">黑体</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group">
+            <div class="dropdown"> <a class="btn dropdown-toggle first-child" data-toggle="dropdown" title="文字大小" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-text-size"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu size-menu">
+                    <li><a dropdown-toggle="" data-edit="fontSize 56px" aria-haspopup="true" aria-expanded="false">56px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 52px" aria-haspopup="true" aria-expanded="false">52px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 48px" aria-haspopup="true" aria-expanded="false">48px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 44px" aria-haspopup="true" aria-expanded="false">44px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 40px" aria-haspopup="true" aria-expanded="false">40px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 36px" aria-haspopup="true" aria-expanded="false">36px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 32px" aria-haspopup="true" aria-expanded="false">32px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 28px" aria-haspopup="true" aria-expanded="false">28px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 24px" aria-haspopup="true" aria-expanded="false">24px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 20px" aria-haspopup="true" aria-expanded="false">20px</a></li>
+                    <li><a dropdown-toggle="" data-edit="fontSize 20px" aria-haspopup="true" aria-expanded="false">20px</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group"> <a class="btn" data-edit="fontWeight bold" title="文字加粗"><i class="glyphicon glyphicon-bold"></i></a> </div>
+        <div class="btn-group">
+            <div class="dropdown"><a class="btn dropdown-toggle" data-toggle="dropdown" title="文字颜色" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-text-color color-btn"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu color-menu ng-scope">
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #000000" style="background-color: #000000" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #7e2412" style="background-color: #7e2412" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #ff5400" style="background-color: #ff5400" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #225801" style="background-color: #225801" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #0c529e" style="background-color: #0c529e" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #333333" style="background-color: #333333" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #b61b52" style="background-color: #b61b52" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #f4711f" style="background-color: #f4711f" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #3bbc1e" style="background-color: #3bbc1e" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #23a3d3" style="background-color: #23a3d3" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #888888" style="background-color: #888888" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #d34141" style="background-color: #d34141" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #f7951e" style="background-color: #f7951e" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #29b16a" style="background-color: #29b16a" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #97daf3" style="background-color: #97daf3" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #cccccc" style="background-color: #cccccc" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #ec7c7c" style="background-color: #ec7c7c" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #fdea02" style="background-color: #fdea02" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #79c450" style="background-color: #79c450" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #563679" style="background-color: #563679" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #ffffff" style="background-color: #ffffff" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #ffcccc" style="background-color: #ffcccc" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #d9ef7f" style="background-color: #d9ef7f" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="color #c3f649" style="background-color: #c3f649" aria-haspopup="true" aria-expanded="false"></a></li>
+                    <li><a dropdown-toggle="" class="btn glyphicon glyphicon-remove" data-edit="color transparent" style="background-color: transparent" aria-haspopup="true" aria-expanded="false"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group">
+            <div class="dropdown"><a class="btn dropdown-toggle" data-toggle="dropdown" title="文字背景颜色" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-text-background bgcolor-btn"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu bgcolor-menu ng-scope">
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FFFFF0" style="background-color: #FFFFF0" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FFFAF0" style="background-color: #FFFAF0" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #F5FFFA" style="background-color: #F5FFFA" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #F5F5F5" style="background-color: #F5F5F5" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #E0FFFF" style="background-color: #E0FFFF" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FFFF00" style="background-color: #FFFF00" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #98FB98" style="background-color: #98FB98" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #63B8FF" style="background-color: #63B8FF" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #454545" style="background-color: #454545" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #836FFF" style="background-color: #836FFF" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #DAA520" style="background-color: #DAA520" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FF0000" style="background-color: #FF0000" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FFFFFF" style="background-color: #FFFFFF" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FFEFDB" style="background-color: #FFEFDB" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FFBBFF" style="background-color: #FFBBFF" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FFBBFF" style="background-color: #FFBBFF" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FFE7BA" style="background-color: #FFE7BA" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #FF83FA" style="background-color: #FF83FA" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #66CD00" style="background-color: #66CD00" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #838B8B" style="background-color: #838B8B" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #218868" style="background-color: #218868" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #8B2500" style="background-color: #8B2500" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #98F5FF" style="background-color: #98F5FF" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn" data-edit="backgroundColor #CD5B45" style="background-color: #CD5B45" aria-haspopup="true" aria-expanded="true"></a></li>
+                    <li><a dropdown-toggle="" class="btn glyphicon glyphicon-remove" data-edit="backgroundColor transparent" style="background-color: transparent" aria-haspopup="true" aria-expanded="true"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group"> <a id="playpage" style="display:none;" class="btn" title="翻页"><i class="glyphicon glyphicon-forward"></i></a> <a id="stoppage" style="display:block;" class="btn" title="暂停翻页"><i class="glyphicon glyphicon-pause"></i></a></div>
+        <div class="btn-group">
+            <div class="dropdown"> <a class="btn dropdown-toggle first-child" data-toggle="dropdown" title="每页行数" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-th-list"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu pagetime-menu">
+                    <li><a dropdown-toggle="" data-edit="pagesize 5" aria-haspopup="true" aria-expanded="false">5行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 6" aria-haspopup="true" aria-expanded="false">6行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 7" aria-haspopup="true" aria-expanded="false">7行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 8" aria-haspopup="true" aria-expanded="false">8行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 9" aria-haspopup="true" aria-expanded="false">9行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 10" aria-haspopup="true" aria-expanded="false">10行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 12" aria-haspopup="true" aria-expanded="false">12行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 14" aria-haspopup="true" aria-expanded="false">14行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 16" aria-haspopup="true" aria-expanded="false">16行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 18" aria-haspopup="true" aria-expanded="false">18行</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagesize 20" aria-haspopup="true" aria-expanded="false">20行</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group">
+            <div class="dropdown"> <a class="btn dropdown-toggle first-child" data-toggle="dropdown" title="翻页时间" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-time"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu pagetime-menu">
+                    <li><a dropdown-toggle="" data-edit="pagetime 5" aria-haspopup="true" aria-expanded="false">5秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 8" aria-haspopup="true" aria-expanded="false">8秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 10" aria-haspopup="true" aria-expanded="false">10秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 12" aria-haspopup="true" aria-expanded="false">12秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 15" aria-haspopup="true" aria-expanded="false">15秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 20" aria-haspopup="true" aria-expanded="false">20秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 25" aria-haspopup="true" aria-expanded="false">25秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 30" aria-haspopup="true" aria-expanded="false">30秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 40" aria-haspopup="true" aria-expanded="false">40秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 50" aria-haspopup="true" aria-expanded="false">50秒</a></li>
+                    <li><a dropdown-toggle="" data-edit="pagetime 60" aria-haspopup="true" aria-expanded="false">60秒</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group">
+            <div class="dropdown"> <a class="btn dropdown-toggle first-child" data-toggle="dropdown" title="隐藏列" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-eye-close"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu pagetime-menu" id="hiddenCells">
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group">
+            <div class="dropdown"> <a class="btn dropdown-toggle first-child" data-toggle="dropdown" title="排序" aria-haspopup="true" aria-expanded="false"><i class="glyphicon  glyphicon-sort"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu pagetime-menu" id="sortCells">
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group"> <a class="btn" data-edit="fullscreen 1" title="全屏"><i class="glyphicon glyphicon-fullscreen"></i></a></div>
+    </div>
+    <script language="javascript" src="bootstrap/js/jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script language="javascript" src="bootstrap/js/showroom.js"></script>
+</body>
+
+</html>

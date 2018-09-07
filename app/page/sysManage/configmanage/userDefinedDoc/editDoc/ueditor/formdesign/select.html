@@ -1,0 +1,528 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>下拉菜单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">    
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript">
+function createElement(type, name)
+{     
+    var element = null;     
+    try {        
+        element = document.createElement('<'+type+' name="'+name+'">');     
+    } catch (e) {}   
+    if(element==null) {     
+        element = document.createElement(type);     
+        element.name = name;     
+    } 
+    return element;     
+}
+function fnSelect( combo ) {
+    var iIndex = combo.selectedIndex ;
+    oListText.selectedIndex    = iIndex ;
+    var olistText    = document.getElementById( "orgtext" ) ;
+    olistText.value    = oListText.value ;
+}
+
+function fnAdd() {
+    var olistText    = document.getElementById( "orgtext" ) ;
+    fnAddComboOption( oListText, olistText.value, olistText.value ) ;
+    oListText.selectedIndex = oListText.options.length - 1 ;
+    olistText.value    = '' ;
+    olistText.focus() ;
+}
+
+function fnModify() {
+    var iIndex = oListText.selectedIndex ;
+    if ( iIndex < 0 ) return ;
+    var olistText    = document.getElementById( "orgtext" ) ;
+    oListText.options[ iIndex ].innerHTML    = fnHTMLEncode( olistText.value ) ;
+    oListText.options[ iIndex ].value        = olistText.value ;
+    olistText.value    = '' ;
+    olistText.focus() ;
+}
+
+function fnMove( steps ) {
+    fnChangeOptionPosition( oListText, steps ) ;
+}
+
+function fnDelete() {
+    fnRemoveSelectedOptions( oListText ) ;
+}
+
+function fnSetSelectedValue() {
+    var iIndex = oListText.selectedIndex ;
+    if ( iIndex < 0 ) return ;
+    var olistText = document.getElementById( "orgvalue" ) ;
+    olistText.innerHTML = oListText.options[ iIndex ].value ;
+}
+
+// Moves the selected option by a number of steps (also negative)
+function fnChangeOptionPosition( combo, steps ) {
+    var iActualIndex = combo.selectedIndex ;
+    if ( iActualIndex < 0 ){
+        return ;
+    }
+    var iFinalIndex = iActualIndex + steps ;
+    if ( iFinalIndex < 0 ){
+        iFinalIndex = 0 ;
+    }
+    if ( iFinalIndex > ( combo.options.length - 1 ) ) {
+        iFinalIndex = combo.options.length - 1 ;
+    }
+    if ( iActualIndex == iFinalIndex ) {
+        return ;
+    }
+    var oOption = combo.options[ iActualIndex ] ;
+    if(oOption.value=="") {
+        var sText    = fnHTMLDecode( oOption.value ) ;
+    } else {
+        var sText    = fnHTMLDecode( oOption.innerHTML ) ;
+    }
+    combo.remove( iActualIndex ) ;
+    oOption = fnAddComboOption( combo, sText, sText, null, iFinalIndex ) ;
+    oOption.selected = true ;
+}
+
+// Remove all selected options from a SELECT object
+function fnRemoveSelectedOptions( combo ) {
+    // Save the selected index
+    var iSelectedIndex = combo.selectedIndex ;
+    var oOptions = combo.options ;
+    // Remove all selected options
+    for ( var i = oOptions.length - 1 ; i >= 0 ; i-- ) {
+        if (oOptions[i].selected) combo.remove(i) ;
+    }
+
+    // Reset the selection based on the original selected index
+    if ( combo.options.length > 0 ) {
+        if ( iSelectedIndex >= combo.options.length ) iSelectedIndex = combo.options.length - 1 ;
+        combo.selectedIndex = iSelectedIndex ;
+    }
+}
+
+// Add a new option to a SELECT object (combo or list)
+function fnAddComboOption( combo, optionText, optionValue, documentObject, index ) {
+
+
+    var oOption ;
+    if ( documentObject ) {
+        oOption = documentObject.createElement("option") ;
+    } else {
+        oOption = document.createElement("option") ;
+    }
+    if ( index != null ) {
+        combo.options.add( oOption, index ) ;
+    } else {
+        combo.options.add( oOption ) ;
+    }
+    oOption.innerHTML = optionText.length > 0 ? fnHTMLEncode( optionText ) : '&nbsp;' ;
+    oOption.value     = optionValue ;
+    return oOption ;
+}
+
+function fnHTMLEncode( text ) {
+    if ( !text ) {
+        return '' ;
+    }
+    text = text.replace( /&/g, '&amp;' ) ;
+    text = text.replace( /</g, '&lt;' ) ;
+    text = text.replace( />/g, '&gt;' ) ;
+    return text ;
+}
+
+
+function fnHTMLDecode( text ) {
+    if ( !text ) {
+        return '' ;
+    }
+    text = text.replace( /&gt;/g, '>' ) ;
+    text = text.replace( /&lt;/g, '<' ) ;
+    text = text.replace( /&amp;/g, '&' ) ;
+    return text ;
+}
+
+function fnSetAttribute( element, attName, attValue ) {
+    if ( attValue == null || attValue.length == 0 ){
+        element.removeAttribute( attName, 0 ) ;        
+    } else {
+        element.setAttribute( attName, attValue, 0 ) ;    
+    }
+}
+
+function setorgType(){
+    var orgtype = document.getElementById("orgtype").value;
+    if(orgtype=='select'){
+        document.getElementById("orgDataType").disabled=false;
+        document.getElementById("label_firstnull").style.display='inline-block';
+        document.getElementById("label_haspinyin").style.display='none';
+    }else{ 
+        document.getElementById("orgDataType").value="1";
+        document.getElementById("label_firstnull").style.display='none';
+        document.getElementById("label_haspinyin").style.display='inline-block';
+        document.getElementById("orgDataType").disabled=true;
+        setorgDataType();
+    }
+}
+
+function setorgDataType(){
+    var orgtype = document.getElementById("orgDataType").value;
+    if(orgtype==='0'){
+        document.getElementById("tdSetHtmlOpt1").style.display='block';  
+        document.getElementById("tdSetHtmlOpt2").style.display='block';        
+        document.getElementById("orgdataList").style.display='none';
+        document.getElementById("selectOrgvalue").style.display='none';
+        document.getElementById("orgvalue").style.display='inline-block'; 
+        document.getElementById("txtsql").style.display='none';        
+        document.getElementById("orglist").style.display='block';
+    }else{
+        document.getElementById("tdSetHtmlOpt1").style.display='none';
+        document.getElementById("tdSetHtmlOpt2").style.display='none';
+        document.getElementById("orgdataList").style.display='inline-block'; 
+        document.getElementById("selectOrgvalue").style.display='inline-block';
+        document.getElementById("orgvalue").style.display='none'; 
+        document.getElementById("txtsql").style.display='block';        
+        document.getElementById("orglist").style.display='none'; 
+    }
+}  
+    </script>
+</head>
+<body>
+<div class="content">
+    <table class="table table-bordered table-striped table-hover">
+     <tr>
+        <th><div style="width: 266px;"><span>控件名称</span><span class="label label-important">*</span></div></th>
+        <th><div style="width: 266px;"><span>控件类型</span> </span></th>
+    </tr>
+    <tr>
+        <td><input id="orgname" placeholder="必填项" type="text"/></td>
+        <td><select id="orgtype" onchange="setorgType()">
+                <option value="select">下拉框</option>
+                <option value="oi-select-filter">智能搜索下拉框</option>
+                <option value="oi-select-newitem">智能搜索可输入下拉框</option>
+                <option value="oi-select-multiple">智能搜索下拉多选控件</option>
+                <option value="oi-select-newitemmultiple">智能搜索可输入下拉多选控件</option>
+            </select>    </td>
+    </tr>
+    <tr>
+        <th><span>宽</span></th>
+        <th><span>边框</span> </th>
+    </tr>
+    <tr>
+        <td><input id="orgwidth" type="text" value="150" class="input-small span1"/> px</td>
+        <td><select id="orgborder">
+                <option value="1px solid #333">上下左右边框</option>
+                <option value="bottom">仅下边框</option> 
+                <option value="none">无边框</option>               
+            </select></td>
+    </tr>
+    <tr>
+        <th><span>默认选中项</span></th>
+        <th><span>其他</span> </th>
+    </tr>
+    <tr>
+        <td><span id="orgvalue" class="uneditable-input" style="height:20px;"></span>
+        <select id="selectOrgvalue" style="display: none;">
+                <option value="oiselect">　</option>
+                <option value="diagnosisCode">当前患者术前诊断</option>                
+                <option value="designedOptCode">当前患者拟施手术</option>
+                <option value="designedAnaesMethodCode">当前患者拟施麻醉</option>                
+                <option value="anesthetistId">当前患者麻醉医师</option>
+                <option value="healthNurse">当前患者卫生护士</option>
+                <option value="instrnurseId1">当前患者器械护士1</option>
+                <option value="instrnurseId2">当前患者器械护士2</option>
+                <option value="circunurseId1">当前患者巡回护士1</option>
+                <option value="circunurseId2">当前患者巡回护士2</option>
+                <option value="operatorId">当前患者主刀医生</option> 
+                <option value="perfusiondoctorId">当前患者灌注医生</option> 
+            </select>
+
+        </td>
+        <td>
+        <label class="checkbox inline"><input id="ismast" type="checkbox"/> 必填 </label>
+        <label class="checkbox inline" id="label_firstnull"><input id="firstnull" type="checkbox"/> 第一行为请选择 </label>
+        <label class="checkbox inline" id="label_haspinyin" style="display: none;"><input id="hasPinyin" type="checkbox"/> 拼音搜索 </label>
+        </td>
+    </tr>
+    <tr style="display: none;">
+        <th>
+        <span>关联子菜单名称</span> <a id="showTips" data-content="若关联子菜单，需要子下拉菜单设置的时候在每个选项后加上特殊标记以记录与父菜单关系，形如“子菜单项目|父菜单项目”，则父菜单发生变化，子菜单会随之自动刷新筛选" rel="popover" data-original-title="说明"><i class="icon-info-sign"></i></a> </th>
+        <td><input id="orgChild" type="text" size="20" > </td>
+    </tr>    
+    <tr>
+        <th colspan="2">
+            <span>列表值</span> <span class="label label-important">*</span>
+            <span><select id="orgDataType" style="width: 65px;" onchange="setorgDataType()">
+                <option value="0">静态</option>
+                <option value="1">动态</option>
+            </select> </span>            
+            <span id="orgdataList" style="display: none;font-weight: initial;">
+            请输入查询语句,必须有val(保存值)和txt(展示文本),可选pinyin.参数请带上{}
+            </span>
+        </th>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <select id="orglist" multiple="multiple" class="span14"></select>
+            <textarea id="txtsql" class="span14" style="display: none;height:77px;" placeholder="请输入sql查询语句,查询出的字段必须有val(保存值)和txt(展示文本)字段,请把原字段用as变更为指定字段,可以有pinyin字段,智能搜索固定搜索txt和pinyin值.where中的参数请带上{},参数只能是患者基本信息里的属性."></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td ><div style="width: 266px;"  id="tdSetHtmlOpt1">            
+            <input type="text" placeholder="输入列表值..." style="width: 265px;" class="span2" id="orgtext">
+            </span>
+        </td>
+        <td>
+            <div class="btn-group" style="width: 266px;"  id="tdSetHtmlOpt2">
+            <div class="btn-group">
+                <a title="新增" onclick="fnAdd();" class="btn btn-primary"><i class="icon-white icon-plus"></i></a>
+                <a title="修改" onclick="fnModify();" class="btn btn-default"><i class="icon-edit"></i></a>
+            </div>
+                <button title="上移" onclick="fnMove(-1);" class="btn btn-default"><i class="icon-arrow-up"></i></button>
+                <button title="下移" onclick="fnMove(1);" class="btn btn-default"><i class="icon-arrow-down"></i></button>
+                <button title="设为初始化时选定值" onclick="fnSetSelectedValue();" class="btn btn-default"><i class="icon-ok-circle"></i></button>
+                <button title="删除" onclick="fnDelete();" class="btn btn-default"><i class="icon-ban-circle"></i></button>
+            </div>
+        </td>        
+    </tr>
+    </table>
+</div>
+<script type="text/javascript">
+var oNode = null,oListText='',thePlugins = 'select';
+window.onload = function() {
+    oListText = $G('orglist');    
+    if( UE.plugins[thePlugins].editdom ){
+        oNode = UE.plugins[thePlugins].editdom;
+        var gTitle=oNode.getAttribute('title'),gWidth=oNode.getAttribute('orgwidth'),gorgDataType=oNode.getAttribute('orgDataType'),gtxtsql=oNode.getAttribute('txtsql'),gorgtype = oNode.getAttribute('orgtype'),gAlign=oNode.getAttribute('orgborder'),gismast=oNode.getAttribute('ismast'),gfirstnull = oNode.getAttribute('firstnull'), gselectOrgvalue = oNode.getAttribute('selectOrgvalue'),ghasPinyin = oNode.getAttribute('hasPinyin');
+        gTitle = gTitle==null ? '' : gTitle;
+        $G('orgvalue').innerHTML = oNode.value;
+        $G('orgname').value = gTitle;        
+        $G('orgwidth').value = gWidth;
+        $G('orgDataType').value = gorgDataType;
+        $G('orgborder').value = gAlign;
+        $G('txtsql').value = gtxtsql;
+        $G('orgtype').value = gorgtype;
+        $G('selectOrgvalue').value = gselectOrgvalue;   
+        setorgType();
+        setorgDataType();
+        if (gismast == '1')
+        {
+            $G('ismast').checked = true;
+        }
+        if (gfirstnull == '1')
+        {
+            $G('firstnull').checked = true;
+        }
+        if (ghasPinyin == '1')
+        {
+            $G('hasPinyin').checked = true;
+        }
+        if(orgDataType=='0'){
+            for ( var i = 0 ; i < oNode.options.length ; i++ ) {
+                var sText    = oNode.options[i].value ;
+                fnAddComboOption( oListText, sText, sText ) ;
+            }            
+        }
+    }
+    /*$('#showTips').popover();*/
+}
+dialog.oncancel = function () {
+    if( UE.plugins[thePlugins].editdom ) {
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+dialog.onok = function (){
+    if( $G('orgname').value == '') {
+        alert('控件名称不能为空');
+        return false;
+    }
+    if($G('orgDataType').value=='0' && oListText.options.length == 0 ) {
+        alert('请添加下拉菜单选项！');
+        return false;
+    }
+    if($G('orgDataType').value=='1'){
+        var sqlstr = $G('txtsql').value;
+        if(sqlstr== ''){
+            alert('请输入sql查询语句！');
+            return false;
+        }else{            
+            if(sqlstr.toLowerCase().indexOf('val')==-1){
+                alert('sql查询语句中必须查询val字段，没有val字段请将需要保存的值as val！');
+                return false;
+            }
+            if(sqlstr.toLowerCase().indexOf('txt')==-1){
+                alert('sql查询语句中必须查询txt字段，没有name字段请将需要展示的字段as txt！');
+                return false;
+            }
+            if(sqlstr.length>500){
+                alert('sql查询语句字符长度不能超过500！');
+                return false;
+            }
+            if($G('hasPinyin').checked == true && sqlstr.toLowerCase().indexOf('pinyin')==-1){
+                alert('拼音搜索必须有pinyin字段！');
+                return false;
+            }
+        }        
+    } 
+   
+     var gWidth=$G('orgwidth').value,gAlign=$G('orgborder').value,gorgtype = $G("orgtype").value,gTitle=$G('orgname').value,gorgDataType=$G('orgDataType').value,gtxtsql=$G('txtsql').value,gselectOrgvalue=$G('selectOrgvalue').value,rand="oiselect_"+Math.floor( Math.random() * 65535 ).toString( 32 );
+     
+    if( !oNode ) {
+        try {
+            if(gorgtype==='select') 
+                oNode = createElement('select','leipiNewField');
+            else
+                oNode = createElement('oi-select','leipiNewField');
+            oNode.setAttribute('orgtype',gorgtype);
+            oNode.setAttribute('title',gTitle);
+            oNode.setAttribute('id',rand);
+            oNode.setAttribute('name','leipiNewField'); 
+            oNode.setAttribute('leipiPlugins',thePlugins ); 
+            oNode.setAttribute('orgDataType',gorgDataType);
+            //html += ' style = "display: inline-block;height:26px;min-width:30px;';  
+            oNode.style.display="inline-block";
+            oNode.style.height="26px";
+            oNode.style.minWidth="30px";
+
+            if( gWidth != '' ) {
+                oNode.style.width = gWidth + 'px';
+                oNode.setAttribute('orgwidth',gWidth );
+            }
+            if( gAlign != '' ) {                
+                if(gAlign!='bottom'){
+                    oNode.style.border = gAlign;
+                }else{
+                    oNode.style.border = "none";
+                    oNode.style.borderBottom="1px solid #333";
+                }
+                oNode.setAttribute('orgborder',gAlign );                
+            }
+            if ( $G('ismast').checked ) {
+                oNode.setAttribute('ismast',1);
+            } else {
+                oNode.setAttribute('ismast',0);
+            }
+            if ( $G('hasPinyin').checked ) {
+                oNode.setAttribute('hasPinyin',1);
+            } else {
+                oNode.setAttribute('hasPinyin',0);
+            }
+            if ( $G('firstnull').checked ) {                
+                oNode.setAttribute('firstnull',1);
+                if(gorgtype==='select')
+                fnAddComboOption( oNode, "-请选择-", "" )
+            } else {
+                oNode.setAttribute('firstnull',0);
+            }
+            if(gorgDataType=="0" && gorgtype==='select'){
+                // Add all available options.                
+                for ( var i = 0 ; i < oListText.options.length ; i++ ) {
+                    var sText    = oListText.options[i].value ;
+                    if ( sText.length == 0 ) {
+                        sText = sText ;
+                    }
+                    var oOption = fnAddComboOption( oNode, sText, sText ) ;
+                    if ( sText == $G('orgvalue').innerHTML ) {
+                        fnSetAttribute( oOption, 'selected', 'selected' ) ;
+                        oOption.selected = true ;
+                    }
+                }
+                if($G('orgvalue').innerHTML)
+                    oNode.setAttribute('orgvalue',$G('orgvalue').innerHTML);
+            }else{
+                oNode.setAttribute('txtsql',gtxtsql); 
+                if(gselectOrgvalue){
+                    if(gselectOrgvalue=="oiselect")
+                        gselectOrgvalue="n"+rand;
+                    oNode.setAttribute('gvalue',gselectOrgvalue);
+                    oNode.setAttribute('ng-model',"vm.regOptItem."+gselectOrgvalue);
+                }               
+                if(gorgtype=="select"){
+                    //普通下拉框
+                    var oOption = document.createElement("option");
+                    var repeatstr ='item in pullDownList[\''+gTitle+'\']';
+                    //var repeatstr ='item in pullDownList[\\\''+gTitle+'\\\']';
+                    oOption.setAttribute('ng-repeat',repeatstr);
+                    oOption.setAttribute('value','{{item.val}}');
+                    oOption.innerHTML = "{{item.txt}}";
+                    oNode.options.add( oOption ) ;
+                    //<option ng-repeat=" item in bloodTypeList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                }else{
+                    var oiOptions='i.val as i.txt for i in pullDownList[\''+gTitle+'\'] | limitTo: 100';
+                    oNode.setAttribute('oi-options',oiOptions);
+                    oNode.setAttribute('placeholder',"请输入拼音搜索");
+
+                    var oiSelectAscSortstr = "'oiSelectAscSort:[\\\'txt\\\']'";
+                    if($G('hasPinyin').checked){
+                        oiSelectAscSortstr = "'oiSelectAscSort:[\\\'txt\\\', \\\'pinyin\\\']'";
+                    }
+
+                    if(gorgtype=="oi-select-filter"){
+                    //智能搜索下拉框 
+                        oNode.setAttribute('oi-select-options',"{ listFilter: "+oiSelectAscSortstr+",cleanModel: true }");
+                        oNode.setAttribute('list-placeholder',"未找到");
+                       // oi-select-options="{ listFilter: 'oiSelectAscSort:[\'val\', \'pinYin\']',cleanModel: true }"
+                       //  placeholder="请输入拼音搜索" list-placeholder="未找到"
+
+
+                    }else if(gorgtype=="oi-select-newitem"){
+                        oNode.setAttribute('oi-select-options',"{ listFilter: "+oiSelectAscSortstr+",editItem: true, newItem: true, newItemModel: {txt: $query}}");
+                       // oi-select-options="{listFilter:'oiSelectAscSort:[\'val\', \'pinYin\']', editItem: true, newItem: true, newItemModel: {name: $query}}" 
+                       //智能搜索可输入下拉框 
+                    }else if(gorgtype=="oi-select-multiple"){
+                        oNode.setAttribute('oi-select-options',"{ listFilter: "+oiSelectAscSortstr+",cleanModel: true }");
+                        oNode.setAttribute('list-placeholder',"未找到");
+                        oNode.setAttribute('multiple',"1");
+                       // multiple placeholder="请输入拼音搜索" list-placeholder="未找到"
+                        //智能搜索下拉多选控件
+                    }else if(gorgtype=="oi-select-newitemmultiple"){
+                        //智能搜索可输入下拉多选控件
+                        oNode.setAttribute('oi-select-options',"{ listFilter: "+oiSelectAscSortstr+",editItem: true, newItem: true, newItemModel: {txt: $query}}");
+                        oNode.setAttribute('multiple',"1");
+                        // multiple  oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', editItem: true, newItem: true, newItemModel: {name: $query} }" placeholder="请输入拼音搜索" 
+                    }
+                } 
+            }
+            //firefox要利用span
+            editor.execCommand('insertHtml','{|-<span leipiplugins="select">'+oNode.outerHTML+'&nbsp;&nbsp;</span>-|}');
+            return true ;
+        } catch ( e ) {
+            try {
+                editor.execCommand('error');
+            } catch ( e ) {
+                alert('控件异常，请联系管理员！');
+            }
+            return false;
+        }
+    } else {
+        oNode.setAttribute('title', $G('orgname').value); 
+       
+        if( gWidth != '' ) {
+			oNode.style.width = gWidth + 'px';
+			oNode.setAttribute('orgwidth',gWidth );
+		}
+        // Remove all options.
+        while ( oNode.options.length > 0 ){
+            oNode.remove(0) ;
+        }
+        for ( var i = 0 ; i < $G('orglist').options.length ; i++ ) {
+            var sText    = $G('orglist').options[i].value ;
+            if ( sText.length == 0 ) {
+                sText = sText ;
+            }
+            var oOption = fnAddComboOption( oNode, sText, sText ) ;
+            if ( sText == $G('orgvalue').innerHTML ) {
+                fnSetAttribute( oOption, 'selected', 'selected' ) ;
+                oOption.selected = true ;
+            }
+        }
+        delete UE.plugins[thePlugins].editdom; 
+    }
+};
+</script>
+</body>
+</html>

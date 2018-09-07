@@ -1,0 +1,303 @@
+<div flex ng-show="!check">
+    <div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+        <button class="btn btn-primary" ng-click="editChargePackages()">
+            添加收费包
+        </button>
+        <button class="btn btn-primary" ng-click="refresh()">
+            刷&nbsp;&nbsp;新
+        </button>
+    </div>
+    <div ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize class="ui-grid-729"></div>
+</div>
+<div flex ng-show="check" class="feePackForm">
+    <form name="feePackForm" class="form-horizontal" role="form" novalidate>
+        <div layout>
+            <div flex class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>用户类型</label>
+                    <select flex class="form-control" ng-model="tempUserType" ng-options="item.code as item.name for item in vm.tempUserTypes" ng-disabled="vm.chargeMedTempId" ng-blur="_tempUserType = true" style="max-width: 350px;" required></select>&nbsp;&nbsp;
+                    <span ng-if="!tempUserType" style="color: red;">请选择用户类型</span>
+                </div>
+            </div>
+            <div flex class="input-wrap" ng-if="vm.tempInfo">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>模板名称</label>
+                    <input class="form-control" name="tempName" ng-model="vm.tempInfo.tempName" ng-blur="_tempName = true" style="max-width: 350px;" required></input>
+                </div>
+                <p ng-if="!vm.tempInfo.tempName && (_tempName || verify == false)" class="help-block text-right">模板名称不能为空</p>
+            </div>
+            <div layout class="navbar-btn btn-xs text-right c-el-10" style="height: 32px; margin-top: 0px!important">
+                <button class="btn btn-primary" ng-click="btnActive && vm.save()" ng-if="vm.tempInfo">保&nbsp;&nbsp;存</button>
+                <button class="btn btn-primary" ng-click="btnActive && vm.saveAs()" ng-if="!vm.tempInfo">另存为</button>
+                <button class="btn btn-primary" type="button" ng-click="cancel()">返&nbsp;&nbsp;回</button>
+            </div>
+        </div>
+        <div layout>
+            <div flex class="input-wrap" ng-if="vm.tempInfo">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">模板描述</label>
+                    <input class="form-control" ng-model="vm.tempInfo.remark" maxlength="110">
+                    <!-- <textarea class="form-control" ng-model="vm.tempInfo.remark" columns="1" maxlength="200" rows="2" style="width: 350px; border-radius: 5px;"></textarea> -->
+                </div>
+            </div>
+        </div>
+        <div layout flex layout-wrap='wrap'>
+            <div flex="50" class="panel panel-default">
+                <div class="panel-heading_" layout>
+                    <div layout layout-align="start center" style="margin-right: 20px;">
+                        <label class="lab">药品名称</label>&nbsp;&nbsp;
+                        <oi-select style="width: 310px;" oi-options="item.name for item in getMedicineList($query) | limitTo: 100" ng-model="selectItemYP" placeholder="输入拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                    </div>
+                    <button class="btn btn-primary" ng-disabled="!selectItemYP" ng-click="vm.add(selectItemYP, 'yp')">添&nbsp;&nbsp;加</button>
+                </div>
+                <div class="panel-body scroll" style="height: 250px; overflow: auto;">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tr>
+                            <th>药品名称</th>
+                            <th>规格</th>
+                            <th style="width: 100px">单价</th>
+                            <th style="width: 100px">用量</th>
+                            <th style="width: 120px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.ypList track by $index">
+                            <td>{{item.name}}</td>
+                            <td>{{item.spec}}</td>
+                            <td>{{item.priceMinPackage}}</td>
+                            <td>
+                                <input class="noborder3" ng-model="item.packageTotalAmount" type="number" min="0" transform="number" ng-blur="update(item, 'yp')" style="width: 80px;">
+                            </td>
+                            <td>
+                                <a href="" ng-click="vm.del($index, 'yp', item)">删除</a>
+                                <!-- <span class="icon"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'ypList', item)"></i></span>
+                                <span class="icon"><i class="glyphicon glyphicon-upload" ng-click="vm.sortup($index, 'ypList', item)"></i></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div flex="50" class="panel panel-default" ng-if="tempUserType == 1">
+                <div class="panel-heading_" layout>
+                    <div layout layout-align="start center" style="margin-right: 20px;">
+                        <label class="lab">麻醉费用项目名称</label>&nbsp;&nbsp;
+                        <oi-select style="width: 280px;" oi-options="item.chargeItemName for item in getChargeItemList($query) | limitTo: 100" ng-model="vm.selectItemMZ" placeholder="输入拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                    </div>
+                    <button class="btn btn-primary" ng-disabled="!vm.selectItemMZ" ng-click="vm.add(vm.selectItemMZ, 'mz')">添&nbsp;&nbsp;加</button>
+                </div>
+                <div class="panel-body scroll" style="height: 250px; overflow: auto;">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tr>
+                            <th>项目名称</th>
+                            <th>规格</th>
+                            <th style="width: 100px">单价</th>
+                            <th style="width: 100px">数量</th>
+                            <th style="width: 120px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.mzList track by $index" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            <td>{{item.name}}</td>
+                            <td>{{item.spec}}</td>
+                            <td>{{item.priceMinPackage}}</td>
+                            <td>
+                                <input class="noborder3" ng-model="item.chargeAmount" type="number" min="0" transform="number" ng-blur="update(item, 'mz')" style="width: 80px;" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            </td>
+                            <td>
+                                <a href="" ng-click="vm.del($index, 'mz', item)">删除</a>
+                                <!-- <span class="icon"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'mzList', item)"></i></span>
+                                <span class="icon"><i class="glyphicon glyphicon-upload" ng-click="vm.sortup($index, 'mzList', item)"></i></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div flex="50" class="panel panel-default" ng-if="tempUserType == 2">
+                <div class="panel-heading_" layout>
+                    <div layout layout-align="start center" style="margin-right: 20px;">
+                        <label class="lab">手术项目名称</label>&nbsp;&nbsp;
+                        <oi-select style="width: 280px;" oi-options="item.chargeItemName for item in getChargeItemList($query) | limitTo: 100" ng-model="vm.selectItemSS" placeholder="输入拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                    </div>
+                    <button class="btn btn-primary" ng-disabled="!vm.selectItemSS" ng-click="vm.add(vm.selectItemSS, 'ss')">添&nbsp;&nbsp;加</button>
+                </div>
+                <div class="panel-body scroll" style="height: 250px; overflow: auto;">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tr>
+                            <th>项目名称</th>
+                            <td>规格</td>
+                            <th style="width: 100px">单价</th>
+                            <th style="width: 100px">数量</th>
+                            <th style="width: 120px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.ssList track by $index" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            <td>{{item.name}}</td>
+                            <td>{{item.spec}}</td>
+                            <td>{{item.priceMinPackage}}</td>
+                            <td>
+                                <input class="noborder3" ng-model="item.chargeAmount" type="number" min="0" transform="number" ng-blur="update(item, 'ss')" style="width: 80px;" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            </td>
+                            <td>
+                                <a href="" ng-click="vm.del($index, 'ss', item)">删除</a>
+                                <!-- <span class="icon"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'ssList', item)"></i></span>
+                                <span class="icon"><i class="glyphicon glyphicon-upload" ng-click="vm.sortup($index, 'ssList', item)"></i></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div flex="50" class="panel panel-default" ng-if="tempUserType == 1">
+                <div class="panel-heading_" layout>
+                    <div layout layout-align="start center" style="margin-right: 20px;">
+                        <label class="lab">液体名称</label>&nbsp;&nbsp;
+                        <oi-select style="width: 280px;" oi-options="item.name for item in getMedicineList($query) | limitTo: 100" ng-model="vm.selectItemYT" placeholder="输入拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                    </div>
+                    <button class="btn btn-primary" ng-disabled="!vm.selectItemYT" ng-click="vm.add(vm.selectItemYT, 'yt')">添&nbsp;&nbsp;加</button>
+                </div>
+                <div class="panel-body scroll" style="height: 170px; overflow: auto;">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tr>
+                            <th>液体名称</th>
+                            <th>规格</th>
+                            <th style="width: 100px">单价</th>
+                            <th style="width: 100px">用量</th>
+                            <th style="width: 120px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.ytList track by $index">
+                            <td>{{item.name}}</td>
+                            <td>{{item.spec}}</td>
+                            <td>{{item.priceMinPackage}}</td>
+                            <td>
+                                <input class="noborder3" ng-model="item.packageTotalAmount" type="number" min="0" transform="number" ng-blur="update(item, 'yt')" style="width: 80px;">
+                            </td>
+                            <td>
+                                <a href="" ng-click="vm.del($index, 'yt', item)">删除</a>
+                                <!-- <span class="icon"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'ytList', item)"></i></span>
+                                <span class="icon"><i class="glyphicon glyphicon-upload" ng-click="vm.sortup($index, 'ytList', item)"></i></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-heading_" layout>
+                    <div layout layout-align="start center" style="margin-right: 20px;">
+                        <label class="lab">麻醉操作项目</label>&nbsp;&nbsp;
+                        <oi-select style="width: 280px;" oi-options="item.chargeItemName for item in getChargeItemList($query) | limitTo: 100" ng-model="vm.selectItemMZCZ" placeholder="输入拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                    </div>
+                    <button class="btn btn-primary" ng-disabled="!vm.selectItemMZCZ" ng-click="vm.add(vm.selectItemMZCZ, 'mzcz')">添&nbsp;&nbsp;加</button>
+                </div>
+                <div class="panel-body scroll" style="height: 250px; overflow: auto;">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tr>
+                            <th>麻醉操作名称</th>
+                            <th>规格</th>
+                            <th style="width: 100px">单价</th>
+                            <th style="width: 100px">数量</th>
+                            <th style="width: 120px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.mzczList track by $index" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            <td>{{item.name}}</td>
+                            <td>{{item.spec}}</td>
+                            <td>{{item.priceMinPackage}}</td>
+                            <td>
+                                <input class="noborder3" ng-model="item.chargeAmount" type="number" min="0" transform="number" ng-blur="update(item, 'mzcz')" style="width: 80px;" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            </td>
+                            <td>
+                                <a href="" ng-click="vm.del($index, 'mzcz', item)">删除</a>
+                                <!-- <span class="icon"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'mzczList', item)"></i></span>
+                                <span class="icon"><i class="glyphicon glyphicon-upload" ng-click="vm.sortup($index, 'mzczList', item)"></i></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div flex="50" class="panel panel-default" ng-if="tempUserType == 1">
+                <div class="panel-heading_" layout>
+                    <div layout layout-align="start center" style="margin-right: 20px;">
+                        <label class="lab">耗材项目名称</label>&nbsp;&nbsp;
+                        <oi-select style="width: 280px;" oi-options="item.chargeItemName for item in getChargeItemList($query) | limitTo: 100" ng-model="vm.selectItemCL" placeholder="输入拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                    </div>
+                    <button class="btn btn-primary" ng-disabled="!vm.selectItemCL" ng-click="vm.add(vm.selectItemCL, 'cl')">添&nbsp;&nbsp;加</button>
+                </div>
+                <div class="panel-body scroll" style="height: 250px; overflow: auto;">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tr>
+                            <th>项目名称</th>
+                            <th>规格</th>
+                            <th style="width: 100px">单价</th>
+                            <th style="width: 100px">数量</th>
+                            <th style="width: 120px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.clList track by $index" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            <td>{{item.name}}</td>
+                            <td>{{item.spec}}</td>
+                            <td>{{item.priceMinPackage}}</td>
+                            <td>
+                                <input class="noborder3" ng-model="item.chargeAmount" type="number" min="0" transform="number" ng-blur="update(item, 'cl')" style="width: 80px;" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            </td>
+                            <td>
+                                <a href="" ng-click="vm.del($index, 'cl', item)">删除</a>
+                                <!-- <span class="icon"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'clList', item)"></i></span>
+                                <span class="icon"><i class="glyphicon glyphicon-upload" ng-click="vm.sortup($index, 'clList', item)"></i></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div flex="50" class="panel panel-default" ng-if="tempUserType == 2">
+                <div class="panel-heading_" layout>
+                    <div layout layout-align="start center" style="margin-right: 20px;">
+                        <label class="lab">材料项目名称</label>&nbsp;&nbsp;
+                        <oi-select style="width: 280px;" oi-options="item.chargeItemName for item in getChargeItemList($query) | limitTo: 100" ng-model="vm.selectItemCL" placeholder="输入拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                    </div>
+                    <button class="btn btn-primary" ng-disabled="!vm.selectItemCL" ng-click="vm.add(vm.selectItemCL, 'cl')">添&nbsp;&nbsp;加</button>
+                </div>
+                <div class="panel-body scroll" style="height: 250px; overflow: auto;">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tr>
+                            <th>项目名称</th>
+                            <th>规格</th>
+                            <th style="width: 100px">单价</th>
+                            <th style="width: 100px">数量</th>
+                            <th style="width: 120px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.clList track by $index" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            <td>{{item.name}}</td>
+                            <td>{{item.spec}}</td>
+                            <td>{{item.priceMinPackage}}</td>
+                            <td>
+                                <input class="noborder3" ng-model="item.chargeAmount" type="number" min="0" transform="number" ng-blur="update(item, 'cl')" style="width: 80px;" ng-style="{color: item.enable === 0 ? '#bbb' : ''}">
+                            </td>
+                            <td>
+                                <a href="" ng-click="vm.del($index, 'cl', item)">删除</a>
+                                <!-- <span class="icon"><i class="glyphicon glyphicon-download" ng-click="vm.sortdown($index, 'clList', item)"></i></span>
+                                <span class="icon"><i class="glyphicon glyphicon-upload" ng-click="vm.sortup($index, 'clList', item)"></i></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- <div flex="50" class="panel panel-default" ng-if="tempUserType == 2">
+                <div class="panel-heading_" layout>
+                    <div layout layout-align="start center" style="margin-right: 20px;">
+                        <label class="lab">麻醉费用名称</label>&nbsp;&nbsp;
+                        <oi-select style="width: 280px;" oi-options="item.chargeItemName for item in getChargeItemList($query) | limitTo: 100" ng-model="vm.selectItemMZ" placeholder="输入拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }"></oi-select>
+                    </div>
+                    <button class="btn btn-primary" ng-disabled="!vm.selectItemMZ" ng-click="vm.add(vm.selectItemMZ, 'mz')">添&nbsp;&nbsp;加</button>
+                </div>
+                <div class="panel-body scroll" style="height: 250px; overflow: auto;">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tr>
+                            <th>项目名称</th>
+                            <th style="width: 100px">单价</th>
+                            <th style="width: 100px">数量</th>
+                            <th style="width: 80px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.mzList track by $index">
+                            <td>{{item.name}}</td>
+                            <td>{{item.priceMinPackage}}</td>
+                            <td>
+                                <input class="noborder3" ng-model="item.chargeAmount" type="number" min="0" transform="number" ng-blur="update(item, 'mz')" style="width: 80px;">
+                            </td>
+                            <td><a href="" ng-click="vm.del($index, 'mz', item)">删除</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div> -->
+        </div>
+    </form>
+</div>

@@ -1,0 +1,10 @@
+<div flex>
+	<form role="form" class="navbar-btn btn-xs text-right c-el-10">
+	    <!-- <button class="btn btn-primary" type="button" ng-click="edit();">添&nbsp;&nbsp;加</button> -->
+	    <button class="btn btn-primary" ng-if="item.url!=='editConsultation'" ng-repeat="item in btnsMenu" ui-sref="{{item.url}}">{{item.name}}</button>
+	    <button class="btn btn-primary" type="button" ng-click="getPage(true);">刷&nbsp;&nbsp;新</button>
+	</form>
+
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+</div>

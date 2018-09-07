@@ -1,0 +1,333 @@
+#rehealthRecord {
+	@lineH: 28px;
+	@color: red;
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	}
+	input[type="number"] {
+	    -moz-appearance: textfield;
+	}
+	input[type=checkbox], input[type=radio] {
+	    margin: 0;
+	    position: absolute;
+	    left:0;
+	    top:-1px;
+	}
+
+	aside {
+	    margin-right: 10px;
+	    > button {
+	        margin-bottom: 10px;
+	        padding: 6px 3px;
+	        min-width: auto;
+	    }
+	}
+	main {
+	    overflow: auto;
+	    h3,
+	    h4 {
+	        display: inline-block;
+	        margin-right: auto;
+	        margin-left: auto;
+	    }
+	    a,
+	    input,
+	    select {
+	        height: 22px;
+	        color: black;
+	        text-align: center;
+	        border: none;
+	        outline: none;
+	        border-bottom: 1px solid #333;
+	    }
+        .form-group {
+            margin-bottom: 8px;
+        }
+	}
+
+	.span-rehnode-info {
+	    border-bottom: 1px solid #666666;
+	    display: inline-block;
+	    min-width: 50px;
+	    margin-right: 20px;
+	    text-align: center;
+	    line-height: 12px;
+	}
+
+	.span-rehnode {
+	    text-align: left;
+	}
+	.table {
+		input, select {
+		    border: none;
+		    text-align: center!important;
+		}
+		th, td, pre {
+			padding: 0;
+			text-align: center;
+			vertical-align: middle;
+		}
+		.obser-rec {
+			width:inherit;
+			border: none;
+			outline: none;
+			line-height: 17px;
+			resize: none;
+		}
+		.med-name-flow {
+			width:inherit;
+			min-height: 43px;
+			outline: none;
+			line-height: 17px;
+		}
+		.td9-bz {
+			padding-left: 50px;
+		}
+		.td10-yw {
+			padding-left: 80px;
+		}
+	} 
+
+	.doctitle-icon {
+	    width: 25%;
+	}
+	.ellipsis {
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    -webkit-line-clamp: 1;
+	    -webkit-box-orient: vertical;
+	    white-space: normal;
+	    word-break: break-all;
+	    display: -webkit-box;
+	}
+
+	oi-select {
+		.select-search-list {
+			line-height: 20px;
+		}
+	}
+
+	.form-readonly {
+		pointer-events: none;
+	}
+
+	.sheet-readonly {
+		input, textarea, oi-select, select, .line4, .readonly, .glyphicon {
+			pointer-events: none;
+		}
+	}
+
+	.glyphicon-remove {
+		display: inline-block;
+	}
+
+	.page-footer {
+		display: none;
+	}
+
+	.checkbox-print {
+		display: none;
+	}
+
+	.print {
+		display: none;
+	}
+
+	.scroll-box {
+		height:370px;
+		overflow-y:scroll;
+	}
+
+	@media print {
+		.body {
+			height: inherit;
+			overflow-y:auto;
+		}
+		.doctitle-icon {
+			width: 50%;
+		}
+        .eSignature img {
+            height: 25px!important;
+        }
+		.scroll-box {
+			height: inherit;
+			overflow-y:auto;
+		}
+		.table {
+			th, td {
+				font-size: 22px!important;
+			}
+		}
+		.form-group {
+			margin-bottom: 3px;
+			font-size: 22px!important;
+			.check-box {
+				font-size: 22px!important;
+			}
+		}
+		.preoperative {
+			font-size: 22px;
+			.check-box {
+				font-size: 22px!important;
+			}
+		}
+	}
+}
+@media print {
+    .rehealth-print {
+        input {
+            border: none;
+        }
+
+    	input[type='text'] {
+    		border-bottom: 1px solid #333;
+    	}
+    	
+    	select {
+    		appearance: none;
+    		-moz-appearance: none;
+    		-webkit-appearance: none;
+    	}
+
+        .eSignature img {
+            height: 25px!important;
+        }
+        .signature {
+            display: none !important;
+        }
+
+        .unsignature {
+            display: block !important;
+        }
+    	.span-rehnode-info {
+    		border-bottom: 1px solid #333;
+    	}
+
+    	.header-info {
+    		font-size: 8px;
+    		margin-top: -5px;
+    	}
+    	.bottom {
+    		margin-top: -10px!important;
+    	}
+    	.table {
+    		select, input {
+    		    border: none;
+    		    text-align: center;
+    		}
+
+    		th, td {
+    			padding: 0;
+    			text-align: center;
+    			vertical-align: middle;
+    			font-size: 12px;
+    		}
+
+    		tr {
+    			max-height: 28px!important;
+    		}
+    		.td1 {
+    			width: 37px;
+    		}
+    		.td2 {
+    			width: 145px;
+    		}
+    		.td3 {
+    			width: 87px;
+    		}
+    		.td4 {
+    			width: 38px;
+    		}
+    		.td5 {
+    			width: 60px;
+    		}
+    		.td6 {
+    			width: 77px!important;
+    		}
+    		.td7 {
+    			width: 67px;
+    		}
+    		.td8 {
+    			width:85px;
+    		}
+    		.td9 {
+    			width:125px;
+    		}
+    		.td10 {
+    			width:188px;
+    		}
+			.obser-rec {
+				width:inherit;
+				border: none;
+				outline: none;
+				min-height: 28px;
+				line-height: 13px;
+				resize: none;
+			}
+			.med-name-flow {
+				width:inherit;
+				max-height: 28px;
+				outline: none;
+				line-height: 13px;
+			}
+    	}
+    	.not-print {
+    		display: none!important;
+    	}
+    	.span-rehnode-info {
+    	    border-bottom: 1px solid #666666;
+    	    display: inline-block;
+    	    min-width: 50px;
+    	    margin-right: 20px;
+    	    text-align: center;
+    	    line-height: 12px;
+    	}
+    	.span-rehnode {
+    	    text-align: left;
+    	}
+    	oi-select {
+    		.select-search,.form-control {
+    			border: none;
+    		}
+    		.select-search-list {
+    			line-height: 20px;
+    		}
+    	}
+    	oi-select .select-search-list-item {
+    		font-size: 12px!important;
+    	}
+        oi-select.noborder,
+        oi-select.noborder3 {
+            .select-search:after {
+                border: 0!important;
+            }
+            .close {
+                display: none;
+            }
+        }
+		.doctitle-icon {
+		    width: 25%;
+		}
+    	tfoot {
+    		display: none;
+    	}
+		.scroll-box {
+			height: inherit;
+			overflow-y:auto;
+		}
+		.form-group {
+			margin-bottom: 2px;
+			font-size: 12px!important;
+			.check-box {
+				font-size: 12px!important;
+			}
+		}
+		.preoperative {
+			font-size: 12px;
+			.check-box {
+				font-size: 12px!important;
+			}
+		}
+    }
+}

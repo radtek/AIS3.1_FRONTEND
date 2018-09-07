@@ -1,0 +1,188 @@
+<div layout="column" flex id="contrast">
+    <div class="btn-box text-right" style="margin-bottom: 15px;">
+        <button class="btn btn-primary" ng-click="back()">返&nbsp;&nbsp;回</button>
+    </div>
+    <div layout="column" flex class="tab-con">
+        <table class="table table-striped table-bordered">
+            <tr class="active">
+                <th colspan="{{list.length + 1}}">基本信息</th>
+            </tr>
+            <tr>
+                <td>姓名</td>
+                <td>{{list[0].name}}</td>
+                <td>{{list[1].name}}</td>
+                <td ng-if="list.length === 3">{{list[2].name}}</td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td>{{list[0].sex}}</td>
+                <td>{{list[1].sex}}</td>
+                <td ng-if="list.length === 3">{{list[2].sex}}</td>
+            </tr>
+            <tr>
+                <td>年龄</td>
+                <td>{{list[0].age}}</td>
+                <td>{{list[1].age}}</td>
+                <td ng-if="list.length === 3">{{list[2].age}}</td>
+            </tr>
+            <tr>
+                <td>身高</td>
+                <td>{{list[0].height}}</td>
+                <td>{{list[1].height}}</td>
+                <td ng-if="list.length === 3">{{list[2].height}}</td>
+            </tr>
+            <tr>
+                <td>体重</td>
+                <td>{{list[0].weight}}</td>
+                <td>{{list[1].weight}}</td>
+                <td ng-if="list.length === 3">{{list[2].weight}}</td>
+            </tr>
+            <tr>
+                <td>药物过敏史</td>
+                <td>{{list[0].hypersusceptibility}}</td>
+                <td>{{list[1].hypersusceptibility}}</td>
+                <td ng-if="list.length === 3">{{list[2].hypersusceptibility}}</td>
+            </tr>
+            <!-- <tr>
+                <td>检验检查</td>
+                <td>{{list[0].name}}</td>
+                <td>{{list[1].name}}</td>
+                <td ng-if="list.length === 3">{{list[2].name}}</td>
+            </tr> -->
+            <tr class="active">
+                <th colspan="{{list.length + 1}}">手术信息</th>
+            </tr>
+            <tr>
+                <td>手术开始时间</td>
+                <td>{{list[0].operStartTime}}</td>
+                <td>{{list[1].operStartTime}}</td>
+                <td ng-if="list.length === 3">{{list[2].operStartTime}}</td>
+            </tr>
+            <tr>
+                <td>手术类型</td>
+                <td>{{list[0].emergency}}</td>
+                <td>{{list[1].emergency}}</td>
+                <td ng-if="list.length === 3">{{list[2].emergency}}</td>
+            </tr>
+            <tr>
+                <td>诊断</td>
+                <td>{{list[0].diagnosisName}}</td>
+                <td>{{list[1].diagnosisName}}</td>
+                <td ng-if="list.length === 3">{{list[2].diagnosisName}}</td>
+            </tr>
+            <tr>
+                <td>手术方法</td>
+                <td>{{list[0].operationName}}</td>
+                <td>{{list[0].operationName}}</td>
+                <td ng-if="list.length === 3">{{list[0].operationName}}</td>
+            </tr>
+            <tr>
+                <td>手术体位</td>
+                <td>{{list[0].optBody}}</td>
+                <td>{{list[1].optBody}}</td>
+                <td ng-if="list.length === 3">{{list[2].optBody}}</td>
+            </tr>
+            <tr>
+                <td>手术时长</td>
+                <td>{{list[0].operateTime}}</td>
+                <td>{{list[1].operateTime}}</td>
+                <td ng-if="list.length === 3">{{list[2].operateTime}}</td>
+            </tr>
+            <tr class="active">
+                <th colspan="{{list.length + 1}}">麻醉信息</th>
+            </tr>
+            <tr>
+                <td>麻醉方法</td>
+                <td>{{list[0].anaesMethod}}</td>
+                <td>{{list[1].anaesMethod}}</td>
+                <td ng-if="list.length === 3">{{list[2].anaesMethod}}</td>
+            </tr>
+            <tr>
+                <td>麻醉事件</td>
+                <td>{{list[0].anaesEvent}}</td>
+                <td>{{list[1].anaesEvent}}</td>
+                <td ng-if="list.length === 3">{{list[2].anaesEvent}}</td>
+            </tr>
+            <tr>
+                <td>麻醉时长</td>
+                <td>{{list[0].anaesTime}}</td>
+                <td>{{list[1].anaesTime}}</td>
+                <td ng-if="list.length === 3">{{list[2].anaesTime}}</td>
+            </tr>
+            <tr>
+                <td>麻醉小结</td>
+                <td>{{list[0].anaesSummary}}</td>
+                <td>{{list[1].anaesSummary}}</td>
+                <td ng-if="list.length === 3">{{list[2].anaesSummary}}</td>
+            </tr>
+            <tr class="active">
+                <th colspan="{{list.length + 1}}">体征信息</th>
+            </tr>
+            <tr>
+                <td colspan="{{list.length + 1}}" style="height: 300px;">
+                    <div e-chart class="echarts" style="min-height: 300px" e-config="eConfig" e-option="eOption"></div>
+                </td>
+            </tr>
+            <tr class="active">
+                <th colspan="{{list.length + 1}}">镇痛信息</th>
+            </tr>
+            <tr>
+                <td>镇痛方法</td>
+                <td>{{list[0].analgesicMethod}}</td>
+                <td>{{list[1].analgesicMethod}}</td>
+                <td ng-if="list.length === 3">{{list[2].analgesicMethod}}</td>
+            </tr>
+            <tr class="active">
+                <th colspan="{{list.length + 1}}">药品信息</th>
+            </tr>
+            <tr>
+                <td>术中用药</td>
+                <td>{{list[0].medicLs}}</td>
+                <td>{{list[1].medicLs}}</td>
+                <td ng-if="list.length === 3">{{list[2].medicLs}}</td>
+            </tr>
+            <tr class="active">
+                <td height="19" colspan="{{list.length + 1}}">出入量信息</td>
+            </tr>
+            <tr>
+                <td>入量</td>
+                <td>{{list[0].ioevent}}</td>
+                <td>{{list[1].ioevent}}</td>
+                <td ng-if="list.length === 3">{{list[2].ioevent}}</td>
+            </tr>
+            <tr>
+                <td>出量</td>
+                <td>{{list[0].egressevent}}</td>
+                <td>{{list[1].egressevent}}</td>
+                <td ng-if="list.length === 3">{{list[2].egressevent}}</td>
+            </tr>
+            <tr class="active">
+                <th colspan="{{list.length + 1}}">评分信息</th>
+            </tr>
+            <tr>
+                <td>ASA分级</td>
+                <td>{{list[0].asa}}</td>
+                <td>{{list[1].asa}}</td>
+                <td ng-if="list.length === 3">{{list[2].asa}}</td>
+            </tr>
+            <!-- <tr>
+                <td>APACHE Ⅱ评分 </td>
+                <td>{{list[0].name}}</td>
+                <td>{{list[1].name}}</td>
+                <td ng-if="list.length === 3">{{list[2].name}}</td>
+            </tr>
+            <tr>
+                <td>TISS评分</td>
+                <td>{{list[0].name}}</td>
+                <td>{{list[1].name}}</td>
+                <td ng-if="list.length === 3">{{list[2].name}}</td>
+            </tr>
+            <tr>
+                <td>PARS评分</td>
+                <td>{{list[0].name}}</td>
+                <td>{{list[1].name}}</td>
+                <td ng-if="list.length === 3">{{list[2].name}}</td>
+            </tr> -->
+        </table>
+    </div>
+</div>

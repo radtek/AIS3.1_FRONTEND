@@ -1,0 +1,256 @@
+<div id="print-region">
+    <div class="page-print" id="postVisitLogQnz" ng-class="{true: 'end-state'}[postFollowRecord.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>麻醉后访视记录单</h4>
+        </header>
+        <div class="form-group" layout layout-align="space-between">
+            <span >姓名：<a flex>{{rs.regOpt.name}}</a>&nbsp;</span>
+            <span >性别：<a flex>{{rs.regOpt.sex}}</a>&nbsp;</span>
+            <span >年龄：<a flex>{{rs.regOpt.age}}</a>&nbsp;</span>
+            <span >科别：<a flex>{{rs.regOpt.deptName}}</a>&nbsp;</span>
+            <!-- <span layout flex>病区：<a flex>{{rs.regOpt.regionName}}</a></span>&nbsp; -->
+            <span >床号：<a flex>{{rs.regOpt.bed}}</a>&nbsp;</span>
+            <span >住院号：<a flex>{{rs.regOpt.hid}}</a></span>
+        </div>
+        <div class="form-group" layout>
+            <span flex=30 layout>手术日期：<a flex>{{rs.regOpt.operaDate}}</a></span>
+            <span flex layout>手术名称：<a flex>{{rs.optRealOperStr}}</a></span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span>
+                <span>血压：</span>
+                <input type="number" transform="number" min="0" max="300" maxlength="10" class="noborder3" ng-model="postFollowRecord.bloodPressureL" ng-value="postFollowRecord.bloodPressureL">&nbsp;/&nbsp;
+                <input type="number" transform="number" min="0" max="300" maxlength="10" class="noborder3" ng-model="postFollowRecord.bloodPressureR" ng-value="postFollowRecord.bloodPressureR">mmHg
+            </span>
+            <span>
+                <span>呼吸</span>
+                <input type="number" transform="number" min="0" max="300" class="noborder3" ng-model="postFollowRecord.breath" ng-value="postFollowRecord.breath">次/分
+            </span>
+            <span>
+                <span>SPO2%</span>
+                <input type="number" transform="number" min="0" max="300" class="noborder3" ng-model="postFollowRecord.spo2" ng-value="postFollowRecord.spo2">%
+            </span>
+            <span>
+                <span>脉搏：</span>
+                <input type="number" transform="number" min="0" max="300" class="noborder3" ng-model="postFollowRecord.pulse" ng-value="postFollowRecord.pulse">次/分
+            </span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <div layout>
+                <span>二次气管插管：</span>
+                <checkbox ng-model="postFollowRecord.secondIntubat" ng-true-value="1" ng-false-value="">无</checkbox>
+                <checkbox ng-model="postFollowRecord.secondIntubat" ng-true-value="2" ng-false-value="">有</checkbox>
+                <span style="margin-left: 10px;">插管时间：</span>
+                <datetime-picker  name="intubatTime" ng-class="{true: 'end-state'}[postFollowRecord.secondIntubat != 2]" dateID="intubatTime-times" ng-model="postFollowRecord.intubatTime" format="Y-m-d H:i" class="calendar sign" id="datatimes"></datetime-picker>
+            </div>
+            <div layout>
+                <span>死亡</span>：
+                <checkbox ng-model="postFollowRecord.isDeath" ng-true-value="1">否</checkbox>
+                <checkbox ng-model="postFollowRecord.isDeath" ng-true-value="2">是</checkbox>
+                <span style="margin-left: 10px;">死亡时间</span>
+                <datetime-picker  name="deathTime" ng-class="{true: 'end-state'}[postFollowRecord.isDeath != 2]" dateID="deathTime-times" ng-model="postFollowRecord.deathTime" format="Y-m-d H:i" class="calendar sign" id="datatimes"></datetime-picker>
+            </div>
+        </div>
+        <!-- 全麻术后观察记录 -->
+        <div class="form-group text-center subhead">全麻术后观察记录</div>
+        <div class="form-group ui-table">
+            <ul layout>
+                <li layout style="width: 15%;">观察时间</li>
+                <li layout flex>术中<br>知晓</li>
+                <li layout flex>恶心<br>呕吐</li>
+                <li layout flex>咽喉痛</li>
+                <li layout flex>声音<br>嘶哑</li>
+                <li layout flex>老年认<br>知功能</li>
+                <li layout style="width: 21%;">意识</li>
+                <!-- <li layout flex>气管<br>导管</li> -->
+                <li layout style="width: 12%;">随访人</li>
+                <li layout style="width: 6%;" class="no-print"></li>
+            </ul>
+            <ul layout ng-repeat="i in postFollowGeneralInfo">
+                <li style="width: 15%">
+                    <datetime-picker flex layout-wrap="wrap" name="observeTime" dateID="observeTime-times" ng-model="i.observeTime" ng-value="i.observeTime" format="Y-m-d H:i" id="datatime" ng-change="changeVistor(i)"></datetime-picker>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.intraAware" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.intraAware" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.nausea" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.nausea" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.soreThroat" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.soreThroat" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.hoarse" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.hoarse" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.cognitObstacle" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.cognitObstacle" ng-true-value="2">有</checkbox>
+                </li>
+                <li ng-class="{ true: 'end-state' }[!i.observeTime]" style="width: 21%;">
+                    <checkbox ng-model="i.consciousness" ng-true-value="1">清醒</checkbox>
+                    <checkbox ng-model="i.consciousness" ng-true-value="2">嗜睡</checkbox>
+                    <checkbox ng-model="i.consciousness" ng-true-value="3">谵妄</checkbox>
+                    <checkbox ng-model="i.consciousness" ng-true-value="5">昏迷</checkbox>
+                    <checkbox ng-model="i.consciousness" ng-true-value="4">麻醉状态</checkbox>
+                </li>
+          <!--       <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.vomit" ng-true-value="1">未拔</checkbox>
+                    <checkbox ng-model="i.vomit" ng-true-value="2">拔</checkbox>
+                </li> -->
+                <li layout ng-class="{ true: 'end-state' }[!i.observeTime]" style="width: 12%;">
+                    <oi-select flex class="noborder" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="i.vistorId"></oi-select>
+                </li>
+                <li layout class="no-print" ng-class="{ true: 'end-state' }[!i.observeTime]" style="width: 6%;">
+                    <a style="border: 0; background-color: #d6e1ea; padding: 2px;" ng-click="clearItem(0, i)">清空</a>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group" layout>情况记录：
+            <input flex type="text" class="noborder3" maxlength="72" ng-model="postFollowRecord.generalExceptCase" ng-value="postFollowRecord.generalExceptCase">
+            &nbsp;&nbsp;<input type="text" class="noborder3" maxlength="10" ng-model="postFollowRecord.line1">
+        </div>
+        <!-- 椎管内/神经阻滞麻醉术后观察记录 -->
+        <div class="form-group text-center subhead">椎管内/神经阻滞麻醉术后观察记录</div>
+        <div class="form-group ui-table">
+            <ul layout>
+                <li layout style="width: 15%;">观察时间</li>
+                <li layout flex>腰痛</li>
+                <li layout flex>恶心<br>呕吐</li>
+                <li layout style="width: 8%;">局部感<br>觉异常</li>
+                <li layout style="width: 10%;">运动<br>异常</li>
+                <li layout flex>重度<br>头痛</li>
+                <li layout flex>老年认<br>知功能</li>
+                <li layout style="width: 18%;">意识</li>
+                <!-- <li layout flex>气管<br>导管</li> -->
+                <li layout style="width: 12%;">随访人</li>
+                <li layout style="width: 6%;" class="no-print"></li>
+            </ul>
+            <ul layout ng-repeat="i in postFollowSpinalInfo">
+                <li style="width: 15%;">
+                    <datetime-picker flex name="observeTime" dateID="InfoobserveTime-times" ng-model="i.observeTime" ng-change="changeVistor(i)" ng-value="i.observeTime" format="Y-m-d H:i" id="datatime"></datetime-picker>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.lumbago" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.lumbago" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.nausea" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.nausea" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout="column" style="width: 8%;" ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.limbsFeelImp" ng-true-value="1" ng-click="ck('limbsFeelImp', i)">无</checkbox>
+                    <checkbox ng-model="i.leftLimbsFeelImp" ng-true-value="1" ng-click="ck('leftLimbsFeelImp', i)">麻木</checkbox>
+                    <checkbox ng-model="i.rightLimbsFeelImp" ng-true-value="1" ng-click="ck('leftLimbsFeelImp', i)">异感</checkbox>
+                </li>
+                <li layout="column" style="width: 10%;" ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.limbsMoveImp" ng-true-value="1" ng-click="ck('limbsMoveImp', i)">无</checkbox>
+                    <checkbox ng-model="i.leftMoveFeelImp" ng-true-value="1" ng-click="ck('leftMoveFeelImp', i)">肌无力</checkbox>
+                    <checkbox ng-model="i.rightMoveFeelImp" ng-true-value="1" ng-click="ck('leftMoveFeelImp', i)">瘫痪</checkbox>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.cognitObstacle" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.cognitObstacle" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.severeHeadache" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.severeHeadache" ng-true-value="2">有</checkbox>
+                </li>
+                <li ng-class="{ true: 'end-state' }[!i.observeTime]" style="width: 18%;">
+                    <checkbox ng-model="i.consciousness" ng-true-value="1">清醒</checkbox>
+                    <checkbox ng-model="i.consciousness" ng-true-value="2">嗜睡</checkbox>
+                    <checkbox ng-model="i.consciousness" ng-true-value="3">谵妄</checkbox>
+                    <checkbox ng-model="i.consciousness" ng-true-value="5">昏迷</checkbox>
+                    <checkbox ng-model="i.consciousness" ng-true-value="4">麻醉状态</checkbox>
+                </li>
+             <!--    <li layout="column" flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.vomit" ng-true-value="1">未拔</checkbox>
+                    <checkbox ng-model="i.vomit" ng-true-value="2">拔</checkbox>
+                </li> -->
+                <li layout ng-class="{ true: 'end-state' }[!i.observeTime]" style="width: 12%;">
+                    <oi-select flex class="noborder" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true }" ng-model="i.vistorId"></oi-select>
+                </li>
+                <li layout ng-class="{ true: 'end-state' }[!i.observeTime]" class="no-print" style="width: 6%;">
+                    <a style="border: 0; background-color: #d6e1ea; padding: 2px;" ng-click="clearItem(1, i)">清空</a>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group" layout>
+            情况记录：
+            <input flex type="text" class="noborder3" maxlength="72" ng-model="postFollowRecord.spinalExceptCase" ng-value="postFollowRecord.spinalExceptCase">
+            &nbsp;&nbsp;<input type="text" class="noborder3" maxlength="10" ng-model="postFollowRecord.line2">
+        </div>
+        <!-- 麻醉术后镇痛观察记录 -->
+        <div class="form-group text-center subhead">麻醉术后镇痛观察记录</div>
+        <div class="form-group">镇痛方案：{{analType}}</div>
+        <div class="form-group ui-table">
+            <ul layout>
+                <li layout style="width: 15%;">观察时间</li>
+                <li layout="column" style="width: 16%">
+                    <ul style="border-bottom: 1px solid #333; width: 100%">
+                        <li>痛觉评分</li>
+                    </ul>
+                    <ul layout style="width: 100%;">
+                        <li flex class="text-center" style="border-right: 1px solid #333;">安静时</li>
+                        <li flex class="text-center">活动时</li>
+                    </ul>
+                </li>
+                <li layout flex>恶心</li>
+                <li layout flex>呕吐</li>
+                <li layout flex>瘙痒</li>
+                <li layout style="width: 12%;">随访人</li>
+                <li layout style="width: 6%;" class="no-print"></li>
+            </ul>
+            <ul layout ng-repeat="i in postFollowAnalgesicInfo" style="height: 30px;">
+                <li layout style="width: 15%;">
+                    <datetime-picker flex name="observeTime" dateID="sicInfoobserveTime-times" ng-model="i.observeTime" ng-change="changeVistor(i)" ng-value="i.observeTime" format="Y-m-d H:i" id="datatime"></datetime-picker>
+                </li>
+                <li layout style="width: 8%;" ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <select ng-model="i.quietScore" ng-options="item.key as item.val for item in lv"></select>
+                </li>
+                <li layout style="width: 8%;" ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <select ng-model="i.activScore" ng-options="item.key as item.val for item in lv"></select>
+                </li>
+                <li layout flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.nausea" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.nausea" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.vomit" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.vomit" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout flex ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <checkbox ng-model="i.ltch" ng-true-value="1">无</checkbox>
+                    <checkbox ng-model="i.ltch" ng-true-value="2">有</checkbox>
+                </li>
+                <li layout style="width: 12%;" ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <oi-select flex class="noborder" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="i.vistorId"></oi-select>
+                </li>
+                <li layout style="width: 6%;" class="no-print" ng-class="{ true: 'end-state' }[!i.observeTime]">
+                    <a style="border: 0; background-color: #d6e1ea; padding: 2px;" ng-click="clearItem(2, i)">清空</a>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group except-case" layout>
+            情况记录：
+            <input flex type="text" class="noborder3" maxlength="72" ng-model="postFollowRecord.analgesicExceptCase" ng-value="postFollowRecord.analgesicExceptCase">
+        </div>
+        <div class="form-group" layout layout-align="end center" ng-class="{true: 'md-red'}[!postFollowRecord.anesthetistId && verify]">
+            <span><em class="not-print">*</em>麻醉医生签名：</span>
+            <oi-select class="calendar sign noborder3" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="postFollowRecord.anesthetistId"></oi-select>
+            <div class="eSignature">
+                <!-- <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" /> -->
+                <input type="text" class="noborder3" style="width: 150px;" />
+            </div>
+        </div>
+        <!-- 备注 -->
+        <div class="form-group">
+            <p>注：麻醉术后观察记录要求在术后24小时内完成，若发现有麻醉相关并发症，应及时通知经治医师共同处理，并继续观察至病情好转为止。记录时请在观察项目下打勾即可。</p>
+            <p>镇痛评分：向患者充分介绍VAS的相关知识，记录相应时点的VAS值。评分标准：0分&nbsp;无痛;10分&nbsp;强烈疼痛;1~3分&nbsp;轻度疼痛;4~6分&nbsp;中度疼痛;7~10分&nbsp;重度疼痛。</p>
+        </div>
+    </div>
+</div>

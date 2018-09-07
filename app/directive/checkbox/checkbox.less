@@ -1,0 +1,64 @@
+/**
+ * 复选框
+ */
+.check-box {
+    display: inline-block;
+    /*align-items: center;*/
+    margin-bottom: 0;
+    font-weight: normal;
+    font-size: inherit;
+    min-height: 18px;
+    margin-right: 5px;
+    /*text-indent: initial;*/
+    .check {
+        display: none
+    }
+    .checkInput {
+        position: relative;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        border-radius: 100%;
+        display: inherit;
+        height: 12px;
+        width: 12px;
+        text-align: left;
+        /*vertical-align: middle;*/
+    }
+    .check:checked + .checkInput:after {
+        width: 10px;
+        height: 5px;
+        border-radius: 100%;
+        position: absolute;
+        top: 1px;
+        border: 2px solid #000;
+        opacity: 0.7;
+        content: '';
+        margin-left:-30px;
+        margin-left: 0px !important;
+        border-top: none;
+        border-right: none;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    .checkInput,
+    .check:checked + .checkInput:after {
+        border-radius: 0
+    }
+}
+
+checkbox.red {
+    .checkInput {
+        border: 1px solid red;
+    }
+}
+
+/* .check-box label:hover::after {
+    opacity: 0.5;
+}
+
+.check-box input[type=checkbox]:checked + label:after {
+    opacity: 1;
+} */

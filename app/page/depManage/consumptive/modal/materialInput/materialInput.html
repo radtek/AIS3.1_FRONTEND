@@ -1,0 +1,109 @@
+<div class="modal-header">    
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper">
+    <form class="panel panel-default" role="form" name="BaseInfoForm" novalidate>
+        <div class="wrap" layout layout-wrap="wrap" style="padding-left: 60px;">
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>收费项目名称</label>
+                    <oi-select flex oi-options="i.name for i in vm.chargeItemList | limitTo: 100" ng-model="medicalParams.chargeItem" name="chargeItem" ng-blur="_chargeItem = true" required></oi-select>
+                </div>
+                <p ng-if="!medicalParams.chargeItem && (_chargeItem || verify == false)" class="help-block text-right">收费项目名称不能为空</p>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">规格</label>
+                    <input flex type="text" name="spec" class="form-control" ng-model="medicalParams.chargeItem.spec" disabled>
+                </div>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">最小单位</label>
+                    <input flex type="text" name="minPackageUnit" class="form-control" ng-model="medicalParams.chargeItem.unit" disabled>
+                </div>
+            </div>
+
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>业务流水号</label>
+                    <input flex type="text" name="businessSerialNumber" class="form-control" ng-model="medicalParams.businessSerialNumber" ng-blur="_businessSerialNumber = true" required>
+                </div>
+                <p ng-if="!medicalParams.businessSerialNumber && (_businessSerialNumber || verify == false)" class="help-block text-right">业务流水号不能为空</p>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>发票号</label>
+                    <input flex type="text" name="invoiceNumber" class="form-control" ng-model="medicalParams.invoiceNumber" ng-blur="_invoiceNumber = true" required>
+                </div>
+                <p ng-if="!medicalParams.invoiceNumber && (_invoiceNumber || verify == false)" class="help-block text-right">发票号不能为空</p>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>厂商</label>
+                    <input flex type="text" name="firm" class="form-control" ng-model="medicalParams.firm" ng-blur="_firm = true" required>
+                </div>
+                <p ng-if="!medicalParams.firm && (_firm || verify == false)" class="help-block text-right">厂商不能为空</p>
+            </div>
+
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>批次</label>
+                    <input flex type="text" name="batch" class="form-control" ng-model="medicalParams.batch" ng-blur="_batch = true" required>
+                </div>
+                <p ng-if="!medicalParams.batch && (_batch || verify == false)" class="help-block text-right">批次不能为空</p>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>入库方式</label>
+                    <select flex class="form-control" ng-model="medicalParams.inOutWay" ng-blur="_inOutWay = true" required>
+                        <option value="">--请选择--</option>
+                        <option value="1">批量入库</option>
+                        <option value="2">结余退还</option>
+                    </select>
+                </div>
+                <p ng-if="!medicalParams.inOutWay && (_inOutWay || verify == false)" class="help-block text-right">入库方式不能为空</p>
+            </div>
+            <div flex="30" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>入库价格</label>
+                    <input flex type="number" min="0" name="priceStock" class="form-control" ng-model="medicalParams.priceStock" ng-blur="_priceStock = true" required>
+                </div>
+                <p ng-if="(medicalParams.priceStock == undefined) && (_priceStock || verify == false)" class="help-block text-right">入库价格不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>入库数量</label>
+                    <input flex type="number" min="0" name="inOutAmount" class="form-control" ng-model="medicalParams.inOutAmount" ng-blur="_inOutAmount = true" required>
+                </div>
+                <p ng-if="(medicalParams.inOutAmount == undefined) && (_inOutAmount || verify == false)" class="help-block text-right">入库数量不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>入库金额</label>
+                    <input flex type="number" min="0" name="inOutMoney" class="form-control" ng-model="medicalParams.inOutMoney" ng-blur="_inOutMoney = true" required>
+                </div>
+                <p ng-if="(medicalParams.inOutMoney == undefined) && (_inOutMoney || verify == false)" class="help-block text-right">入库金额不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>生产日期</label>
+                    <datetime-picker flex name="productionDate" dateID="opera-date" maxdate="2100-01-01" ng-model="medicalParams.productionDate" timepicker="false" format="Y-m-d" class="form-control" ng-blur="_productionDate = true" ng-disabled="vm.state==='edit'" required></datetime-picker>
+                </div>
+                <p ng-if="!medicalParams.productionDate && (_productionDate || verify == false)" class="help-block text-right">生产日期不能为空</p>
+            </div>
+            <div flex="45" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>失效日期</label>
+                    <datetime-picker flex name="expiryDate" dateID="opera-date" maxdate="2100-01-01" ng-model="medicalParams.expiryDate" timepicker="false" format="Y-m-d" class="form-control" ng-blur="_expiryDate = true" ng-disabled="vm.state==='edit'" required></datetime-picker>
+                </div>
+                <p ng-if="!medicalParams.expiryDate && (_expiryDate || verify == false)" class="help-block text-right">失效日期不能为空</p>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="btnActive && save('I')">保存</button>
+            <button class="btn btn-default" type="button" ng-click="vm.close()">取消</button>
+        </div>
+    </form>
+</div>

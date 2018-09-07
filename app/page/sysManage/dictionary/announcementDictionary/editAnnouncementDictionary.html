@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" role="form" novalidate>
+    <div class="modal-body">
+        <div flex="90" class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit"><em>*</em>标题：</label>
+                <input flex type="text" name="title" class="form-control" ng-model="announcement.title" ng-maxlength="10" ng-blur="_title = true" required>
+                <br>
+            </div>
+            <p ng-if="!announcement.title && (_title || verify == false)" class="help-block text-right">标题不能为空</p>
+        </div>
+        <div flex="90">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">公告内容：</label>
+                <textarea class="form-control autosizeme" maxlength="100" placeholder="请输入公告内容（最多100个字符）" ng-model="announcement.content" rows="4"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="btnActive && save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

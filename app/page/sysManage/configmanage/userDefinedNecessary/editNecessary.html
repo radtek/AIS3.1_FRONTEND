@@ -1,0 +1,91 @@
+<div class="modal-header">    
+    <h4><span>{{lable}}</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<div flex layout="column" id="oper docNecessary-div">
+    <form name="operation" class="panel-default" role="form" novalidate>
+    	<div class="wrap" layout layout-wrap="wrap">
+            <div flex="90" class="input-wrap" style="padding-top:20px; ">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">　<em>*</em>文书名称：</label>
+                    <input flex type="text" name="name" class="form-control" ng-model="doc.name" ng-maxlength="100" ng-minlength='1' ng-blur="_name = true" required>
+                </div>
+                <p ng-if="!doc.name && (_name || verify == false)" class="help-block text-right">文书名称不能为空</p>
+                <p ng-if="doc.name.$error.minlength && _name" class="help-block text-right">长度不能少于1个字符</p>
+                <p ng-if="doc.name.$error.maxlength && _name" class="help-block text-right">长度不能超过100个字符</p>
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">　<em>*</em>文书对应的表名：</label>
+                    <input flex type="text" name="table" class="form-control" ng-model="doc.table" ng-maxlength="100" ng-minlength='1' ng-blur="_table = true" required>                    
+                </div> 
+                <p ng-if="!doc.table && (_table || verify == false)" class="help-block text-right">表名不能为空</p>
+                <p ng-if="doc.table.$error.minlength && _table" class="help-block text-right">长度不能少于1个字符</p>
+                <p ng-if="doc.table.$error.maxlength && _table" class="help-block text-right">长度不能超过100个字符</p>              
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">前端依赖的别名：</label>
+                    <input flex type="text" name="aliasName" class="form-control" ng-model="doc.aliasName"  >
+                </div>                                
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">术中是否必须完成：</label>
+                    <select flex name="enable" class="form-control" ng-model="doc.isEnterOperFinish" >
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>                   
+                </div>               
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">是否必须完成：</label>
+                    <select flex name="enable" class="form-control" ng-model="doc.isNeed" >
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>                   
+                </div>               
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">是否术中展示：</label>
+                    <select flex name="enable" class="form-control" ng-model="doc.isOperShow" >
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>                   
+                </div>               
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">文书类型：</label>
+                    <select flex name="enable" class="form-control" ng-model="doc.operationState" >
+                        <option value="03">术前</option>
+                        <option value="04">术中</option>
+                        <option value="05">复苏</option>
+                        <option value="06">术后</option>
+                    </select>                   
+                </div>               
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">是否可用：</label>
+                    <select flex name="enable" class="form-control" ng-model="doc.enable" >
+                        <option value="1">可用</option>
+                        <option value="0">不可用</option>
+                    </select>                   
+                </div>               
+            </div>
+            <div flex="90" class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit" style="width: 180px;">文书必填项：</label>
+                    <textarea flex  name="required" class="form-control" style="height: 60px;" ng-model="doc.required" ng-maxlength="500"  ng-blur="_required = true" placeholder="请填写必填项的ng-model=“”的引号里的值，多个用,分隔。" ></textarea>                    
+                </div>
+                <p ng-if="doc.required.$error.maxlength && _required" class="help-block text-right">长度不能超过500个字符</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+        	<button class="btn btn-primary" ng-click="btnActive && saveOperationRoom()">保&nbsp;&nbsp;存</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+        </div>
+    </form>
+</div>

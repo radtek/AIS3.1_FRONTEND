@@ -1,0 +1,60 @@
+<div class="modal-header">    
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form name="AllPackDialogForm" class="form-horizontal" novalidate>
+    <div class="modal-body">
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">类型</label>
+                <select style="width: 300px;" class="form-control" ng-model="costType">
+                    <option ng-value=""></option>
+                    <option ng-value="1">液体/药品</option>
+                    <option ng-value="2">收费项目</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">将包中所有</label>
+                <oi-select ng-if="costType == 1" style="width: 300px;" oi-options="item.name for item in searchList($query) | limitTo: 100" ng-model="medicineItem" placeholder="输入汉字或拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                <oi-select ng-if="costType == 2" style="width: 300px;" oi-options="item.chargeItemName for item in searchList($query) | limitTo: 100" ng-model="chargeItem" placeholder="输入汉字或拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">单价</label>
+                {{costType == 1 ? item.priceMinPackage : item.price}}
+                <div ng-if="costType == 1">
+                    <label class="tit">规格</label>
+                    {{item.spec}}
+                </div>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">替换为</label>
+                <oi-select ng-if="costType == 1" style="width: 300px;" oi-options="item.name for item in searchRepList($query) | limitTo: 100" ng-model="item.name" placeholder="输入汉字或拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+                <oi-select ng-if="costType == 2" style="width: 300px;" oi-options="item.chargeItemName for item in searchRepList($query) | limitTo: 100" ng-model="item.chargeItemName" placeholder="输入汉字或拼音首字母进行搜索" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']', dropdownFilter: 'dropdownMedRow' }"></oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">单价</label>
+                {{costType == 1 ? item.priceMinPackage : item.price}}
+                <div ng-if="costType == 1">
+                    <label class="tit">规格</label>
+                    {{item.spec}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="AllPackDialogForm.$invalid" type="button" ng-click="vm.replace()">替&nbsp;&nbsp;换</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>
+<style type="text/css">
+.modal-mg {
+    width: 600px;
+}
+</style>

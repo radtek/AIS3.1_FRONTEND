@@ -1,0 +1,261 @@
+<div id="print-region">
+    <div class="page-print" ng-class="{true: 'end-state'}[transferConnectRecord.processState === 'END' || setting.readonly]">
+        <div layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>手术病人转运交接单</h4>
+        </div>
+        <div layout layout-align="space-between end" style="margin-bottom: 10px;">
+            姓名：<a>{{regOptItem.name}}</a>&nbsp; 性别：
+            <a>{{regOptItem.sex}}</a>&nbsp; 年龄：
+            <a>{{regOptItem.age}}</a>&nbsp; 科室：
+            <a flex>{{regOptItem.deptName}}</a>&nbsp; 床号：
+            <a flex>{{regOptItem.bed}}</a>&nbsp; 住院号：
+            <a flex>{{regOptItem.hid}}</a>
+        </div>
+        <div layout layout-align="space-between end" style="margin-bottom: 10px;">
+            术前诊断：<a flex>{{regOptItem.diagnosisName}}</a> 拟施术式：
+            <a flex>{{regOptItem.designedOptName}}</a>
+        </div>
+        <div>
+            <div layout>
+                <h4>术前交接内容</h4>
+            </div>
+            <div style="padding: 8px;border:1px solid #333;height:200px;">
+                <p>
+                    意识状态：　清醒
+                    <checkbox ng-model="transferConnectRecord.consciousCondition" ng-true-value="1" ng-false-value="0"></checkbox>
+                    嗜睡
+                    <checkbox ng-model="transferConnectRecord.consciousCondition" ng-true-value="2" ng-false-value="0"></checkbox>
+                    模糊
+                    <checkbox ng-model="transferConnectRecord.consciousCondition" ng-true-value="3" ng-false-value="0"></checkbox>
+                    昏迷
+                    <checkbox ng-model="transferConnectRecord.consciousCondition" ng-true-value="4" ng-false-value="0"></checkbox>
+                    镇静
+                    <checkbox ng-model="transferConnectRecord.consciousCondition" ng-true-value="5" ng-false-value="0"></checkbox>
+                </p>
+                <p>
+                    皮肤情况：　完整
+                    <checkbox ng-model="transferConnectRecord.skinCase" ng-true-value="1" ng-false-value="0"> </checkbox>
+                    压疮
+                    <checkbox ng-model="transferConnectRecord.skinCase" ng-true-value="2" ng-false-value="0"></checkbox>
+                    具体情况
+                    <input class="noborder3" style="width:146px;outline:none" ng-model="transferConnectRecord.definiteCase" ng-value="transferConnectRecord.definiteCase" maxlength="18"> 影像片
+                    <checkbox ng-model="transferConnectRecord.iconPiece" ng-click="transferConnectRecord.iconPieceAmount = ''" ng-true-value="1" ng-false-value="0"></checkbox>
+                    <input class="noborder3" type="number" style="width:50px;outline:none" ng-model="transferConnectRecord.iconPieceAmount" ng-value="transferConnectRecord.iconPieceAmount" ng-disabled="transferConnectRecord.iconPiece != 1" maxlength="6" min="0">张
+                </p>
+                <p>
+                    胃　　管：　无
+                    <checkbox ng-model="transferConnectRecord.stomachTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                    <checkbox ng-model="transferConnectRecord.stomachTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                    输&nbsp;液： 无
+                    <checkbox ng-model="transferConnectRecord.transfusion" ng-true-value="2" ng-false-value="" ng-click="transferConnectRecord.transfusionAmount=''"></checkbox>
+                    有
+                    <checkbox ng-model="transferConnectRecord.transfusion" ng-true-value="1" ng-false-value=""></checkbox>
+                    <input class="noborder3" style="width:50px;outline:none" ng-model="transferConnectRecord.transfusionAmount" ng-value="transferConnectRecord.transfusionAmount" ng-disabled="transferConnectRecord.transfusion!=1" type="number" min="0"></input>条 尿管： 无
+                    <checkbox ng-model="transferConnectRecord.urineTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                    <checkbox ng-model="transferConnectRecord.urineTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                </p>
+                <p>
+                    气管插管：　无
+                    <checkbox ng-model="transferConnectRecord.tracheaTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                    <checkbox ng-model="transferConnectRecord.tracheaTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                    引流管： 无
+                    <checkbox ng-model="transferConnectRecord.drainageTube" ng-true-value="2" ng-click="transferConnectRecord.drainageTubeAmount=''"></checkbox>
+                    有
+                    <checkbox ng-model="transferConnectRecord.drainageTube" ng-true-value="1"></checkbox>
+                    <input class="noborder3" style="width:50px;outline:none" ng-model="transferConnectRecord.drainageTubeAmount" ng-value="transferConnectRecord.drainageTubeAmount" ng-disabled="transferConnectRecord.drainageTube!=1" type="number" min="0"></input>条
+                </p>
+                <p>
+                    病　　历：　无
+                    <checkbox ng-model="transferConnectRecord.medicalRecord" ng-true-value="1" ng-false-value="0"></checkbox>有
+                    <checkbox ng-model="transferConnectRecord.medicalRecord" ng-true-value="2" ng-false-value="0"></checkbox>
+                    术中带药： 无
+                    <checkbox ng-model="transferConnectRecord.operingMedical" ng-true-value="1" ng-false-value="0" ng-click="transferConnectRecord.drug=''"></checkbox>
+                    有
+                    <checkbox ng-model="transferConnectRecord.operingMedical" ng-true-value="2" ng-false-value="0"></checkbox>
+                    药品
+                    <input class="noborder3" style="width:185px;outline:none" ng-model="transferConnectRecord.drug" ng-value="transferConnectRecord.drug" ng-disabled="transferConnectRecord.operingMedical!='2'" maxlength="23"></input>
+                </p>
+                <p layout flex>
+                    入手术室时间：
+                    <datetime-picker style="border-bottom: 1px solid #333;" name="preVisitTime" id="datatime" dateID="signTimes" ng-model="transferConnectRecord.inRoomTime" timepicker="true" format="Y-m-d H:i"></datetime-picker>
+                    <span>其它：</span>
+                    <input class="noborder3" style="width:185px;outline:none" ng-model="transferConnectRecord.other" ng-value="transferConnectRecord.other" maxlength="23"></input>
+                </p>
+            </div>
+            <div layout style="padding-top: 10px;">
+                <span layout>交接护士签字：</span>
+                <oi-select class="noborder3 sign"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig_1]"  name="joinNurse1" oi-options="item.userName as item.name for item in preVisitorItem" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="transferConnectRecord.joinNurse1"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="item in eSignatureAnesthetist_1" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+                &nbsp;/&nbsp;
+                <oi-select class="noborder3 sign"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig_2]"  name="joinNurse2" oi-options="item.userName as item.name for item in preVisitorItem" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="transferConnectRecord.joinNurse2"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="item in eSignatureAnesthetist_2" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+                <span style="margin-left: 20px;">交接时间：</span>
+                <datetime-picker style="border-bottom: 1px solid #333;" name="joinTime1" id="datatime" dateID="signTimes1" ng-model="transferConnectRecord.joinTime" timepicker="true" format="Y-m-d H:i"></datetime-picker>
+            </div>
+            </p>
+            <p style="padding-top:23px  ">
+                <h4>病人去向：PACU<checkbox ng-model="transferConnectType1.direction" ng-true-value="1" ng-false-value="0"></checkbox>
+          　病房<checkbox ng-model="transferConnectType1.direction" ng-true-value="2" ng-false-value="0"></checkbox>
+          　ICU<checkbox ng-model="transferConnectType1.direction" ng-true-value="3" ng-false-value="0"></checkbox>
+        </h4>
+            </p>
+            <p>
+                <div style="padding: 8px;border:1px solid #333;height:200px">
+                    <p>
+                        意识状态：　清醒
+                        <checkbox ng-model="transferConnectType1.consciousCondition" ng-true-value="1" ng-false-value="0"></checkbox>
+                        嗜睡
+                        <checkbox ng-model="transferConnectType1.consciousCondition" ng-true-value="2" ng-false-value="0"></checkbox>
+                        模糊
+                        <checkbox ng-model="transferConnectType1.consciousCondition" ng-true-value="3" ng-false-value="0"></checkbox>
+                        昏迷
+                        <checkbox ng-model="transferConnectType1.consciousCondition" ng-true-value="5" ng-false-value="0"></checkbox>
+                        镇静
+                        <checkbox ng-model="transferConnectType1.consciousCondition" ng-true-value="6" ng-false-value="0"></checkbox>
+                    </p>
+                    <p>
+                        皮肤情况：　完整
+                        <checkbox ng-model="transferConnectType1.skinCase" ng-true-value="1" ng-false-value="0"></checkbox>
+                        压疮
+                        <checkbox ng-model="transferConnectType1.skinCase" ng-true-value="2" ng-false-value="0"></checkbox>
+                        具体情况
+                        <input class="noborder3" style="width:146px;outline:none" maxlength="18" ng-model="transferConnectType1.definiteCase" ng-value="transferConnectType1.definiteCase">
+                    </p>
+                    <p>
+                        胃　　管：　无
+                        <checkbox ng-model="transferConnectType1.stomachTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType1.stomachTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                        输 &nbsp;&nbsp;　液：无
+                        <checkbox ng-model="transferConnectType1.transfusion" ng-true-value="2" ng-click="transferConnectType1.transfusionAmount=''"></checkbox>有
+                        <checkbox ng-model="transferConnectType1.transfusion" ng-true-value="1"></checkbox>
+                        <input class="noborder3" style="width:50px;outline:none;" ng-model="transferConnectType1.transfusionAmount" ng-value="transferConnectType1.transfusionAmount" ng-disabled="transferConnectType1.transfusion!=1" maxlength="6" type="number" min="0"></input>条　 尿管： 无
+                        <checkbox ng-model="transferConnectType1.urineTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType1.urineTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                    </p>
+                    <p>
+                        气管插管：　无
+                        <checkbox ng-model="transferConnectType1.tracheaTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType1.tracheaTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                        引&nbsp;流&nbsp; 管：无
+                        <checkbox ng-model="transferConnectType1.drainageTube" ng-true-value="2" ng-click="transferConnectType1.drainageTubeAmount=''"></checkbox><span>有</span>
+                        <checkbox ng-model="transferConnectType1.drainageTube" ng-true-value="1"></checkbox>
+                        <input class="noborder3" style="width:50px;outline:none" ng-model="transferConnectType1.drainageTubeAmount" ng-value="transferConnectType1.drainageTubeAmount" ng-disabled="transferConnectType1.drainageTube!=1" maxlength="6" type="number" min="0"></input>条 镇痛泵：无
+                        <checkbox ng-model="transferConnectType1.analgesicPump" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType1.analgesicPump" ng-true-value="2" ng-false-value="0"></checkbox>
+                    </p>
+                    <p>
+                        病　　历：　无
+                        <checkbox ng-model="transferConnectType1.medicalRecord" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType1.medicalRecord" ng-true-value="2" ng-false-value="0"></checkbox>术中带药使用情况：已用
+                        <checkbox ng-model="transferConnectType1.operingMedicalUse" ng-true-value="1" ng-false-value="0"></checkbox>未用
+                        <checkbox ng-model="transferConnectType1.operingMedicalUse" ng-true-value="2" ng-false-value="0"></checkbox>
+                    </p>
+                    <p>
+                        手术护理记录单
+                        <input class="noborder3" style="width:50px;outline:none;" ng-model="transferConnectType1.operOptNurse" ng-value="transferConnectType1.operOptNurse" type="number" min="0">张
+                        <span style="padding-left: 88px">其它：</span>
+                        <input class="noborder3" style="width:140px;outline:none;" ng-model="transferConnectType1.other" ng-value="transferConnectType1.other" maxlength="17">
+                    </p>
+                </div>
+                <div layout style="padding-top: 10px;">
+                    <span layout>交接护士签字：</span>
+                    <oi-select class="noborder3 sign"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig_3]"  name="joinNurse1" oi-options="item.userName as item.name for item in preVisitorItem" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="transferConnectType1.joinNurse1"></oi-select>
+                    <div class="eSignature">
+                        <img ng-repeat="item in eSignatureAnesthetist_3" src="{{item.path}}" ng-if="item.hasPath" />
+                    </div>
+                    &nbsp;/&nbsp;
+                    <oi-select class="noborder3 sign"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig_4]"  name="joinNurse2" oi-options="item.userName as item.name for item in preVisitorItem" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="transferConnectType1.joinNurse2"></oi-select>
+                    <div class="eSignature">
+                        <img ng-repeat="item in eSignatureAnesthetist_4" src="{{item.path}}" ng-if="item.hasPath" />
+                    </div>
+                    <span style="margin-left: 20px;">交接时间：</span>
+                    <datetime-picker style="border-bottom: 1px solid #333;" name="joinTime2" id="datatime" dateID="signTimes2" ng-model="transferConnectType1.joinTime" timepicker="true" format="Y-m-d H:i"></datetime-picker>
+                </div>
+            </p>
+            <p style="padding-top:23px;">
+                <h4>PACU转出病人去向：病房<checkbox ng-model="transferConnectType2.direction" ng-true-value="2" ng-false-value="0"></checkbox>
+          　ICU<checkbox ng-model="transferConnectType2.direction" ng-true-value="3" ng-false-value="0"></checkbox>
+          　其它<checkbox ng-model="transferConnectType2.direction" ng-true-value="4" ng-false-value="0"></checkbox>
+        </h4>
+            </p>
+            <p>
+                <div style="padding: 8px;border:1px solid #333;height:200px">
+                    <p>
+                        意识状态：　清醒
+                        <checkbox ng-model="transferConnectType2.consciousCondition" ng-true-value="1" ng-false-value="0"></checkbox>
+                        嗜睡
+                        <checkbox ng-model="transferConnectType2.consciousCondition" ng-true-value="2" ng-false-value="0"></checkbox>
+                        模糊
+                        <checkbox ng-model="transferConnectType2.consciousCondition" ng-true-value="3" ng-false-value="0"></checkbox>
+                        昏迷
+                        <checkbox ng-model="transferConnectType2.consciousCondition" ng-true-value="4" ng-false-value="0"></checkbox>
+                        镇静
+                        <checkbox ng-model="transferConnectType2.consciousCondition" ng-true-value="5" ng-false-value="0"></checkbox>
+                    </p>
+                    <p>
+                        皮肤情况：　完整
+                        <checkbox ng-model="transferConnectType2.skinCase" ng-true-value="1" ng-false-value="0"></checkbox>
+                        压疮
+                        <checkbox ng-model="transferConnectType2.skinCase" ng-true-value="2" ng-false-value="0"></checkbox>
+                        具体情况
+                        <input class="noborder3" style="width:146px;outline:none" maxlength="18" ng-model="transferConnectType2.definiteCase" ng-value="transferConnectType2.definiteCase">
+                    </p>
+                    <p>
+                        胃　　管：　无
+                        <checkbox ng-model="transferConnectType2.stomachTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType2.stomachTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                        输 &nbsp;&nbsp;　液：无
+                        <checkbox ng-model="transferConnectType2.transfusion" ng-true-value="2" ng-click="transferConnectType2.transfusionAmount=''"></checkbox>
+                        有
+                        <checkbox ng-model="transferConnectType2.transfusion" ng-true-value="1"></checkbox>
+                        <input class="noborder3" style="width:50px;outline:none" ng-model="transferConnectType2.transfusionAmount" ng-value="transferConnectType2.transfusionAmount" ng-disabled="transferConnectType2.transfusion!=1" maxlength="6" type="number" min="0"></input>条　 尿管： 无
+                        <checkbox ng-model="transferConnectType2.urineTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType2.urineTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                    </p>
+                    <p>
+                        气管插管：　无
+                        <checkbox ng-model="transferConnectType2.tracheaTube" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType2.tracheaTube" ng-true-value="2" ng-false-value="0"></checkbox>
+                        引&nbsp;流&nbsp; 管：无
+                        <checkbox ng-model="transferConnectType2.drainageTube" ng-true-value="2" ng-click="transferConnectType2.drainageTubeAmount=''"></checkbox>有
+                        <checkbox ng-model="transferConnectType2.drainageTube" ng-true-value="1"></checkbox>
+                        <input class="noborder3" type="number" min="0" style="width:50px;outline: none;" ng-model="transferConnectType2.drainageTubeAmount" ng-value="transferConnectType2.drainageTubeAmount" ng-disabled="transferConnectType2.drainageTube!=1"></input>条 镇痛泵：无
+                        <checkbox ng-model="transferConnectType2.analgesicPump" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType2.analgesicPump" ng-true-value="2" ng-false-value="0"></checkbox>
+                    </p>
+                    <p>
+                        病　　历：　无
+                        <checkbox ng-model="transferConnectType2.medicalRecord" ng-true-value="1" ng-false-value="0"></checkbox>有
+                        <checkbox ng-model="transferConnectType2.medicalRecord" ng-true-value="2" ng-false-value="0"></checkbox>
+                    </p>
+                    <p>
+                        手术护理记录单
+                        <input class="noborder3" style="width:50px;outline:none" ng-model="transferConnectType2.operOptNurse" ng-value="transferConnectType2.operOptNurse" type="number" min="0">张
+                        <span style="padding-left: 88px;outline:none;">其它：</span>
+                        <input class="noborder3" style="width:140px;outline:none" ng-model="transferConnectType2.other" ng-value="transferConnectType2.other" maxlength="17"></input>
+                    </p>
+                </div>
+                <div layout style="padding-top: 10px;">
+                    <span>交接护士签字：</span>
+                    <oi-select class="noborder3 sign"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig_5]"  name="joinNurse1" oi-options="item.userName as item.name for item in preVisitorItem" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="transferConnectType2.joinNurse1"></oi-select>
+                    <div class="eSignature">
+                        <img ng-repeat="item in eSignatureAnesthetist_5" src="{{item.path}}" ng-if="item.hasPath" />
+                    </div>
+                    &nbsp;/&nbsp;
+                    <div class="eSignature">
+                        <img ng-repeat="item in eSignatureAnesthetist_6" src="{{item.path}}" ng-if="item.hasPath" />
+                    </div>
+                    <oi-select class="noborder3 sign"  ng-class="{true: 'signature', false: 'unsignature'}[hasSig_6]"  name="joinNurse2" oi-options="item.userName as item.name for item in preVisitorItem" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="transferConnectType2.joinNurse2"></oi-select>
+                    <span style="margin-left: 20px;">交接时间：</span>
+                    <datetime-picker style="border-bottom: 1px solid #333;" name="joinTime3" id="datatime" dateID="signTimes3" ng-model="transferConnectType2.joinTime" timepicker="true" format="Y-m-d H:i"></datetime-picker>
+                </div>
+            </p>
+            <p>注：交接病人时，请在相应项目处打“√”</p>
+        </div>
+    </div>
+</div>

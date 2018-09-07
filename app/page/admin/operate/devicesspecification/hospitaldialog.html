@@ -1,0 +1,84 @@
+<div class="modal-header">    
+    <h4><span>{{vm.title}}</span><span class="pull-right modal-container_close" ng-click="vm.close()">✖</span></h4>
+</div>
+<form class="form-horizontal shiftIn-baseInfo" name="form"  novalidate>
+    <div class="modal-body">
+        <div class="patient-in-modal-form-div">
+            <div class="form-group">
+                <label for="beid" class="col-sm-4 control-label"><span class="red">*</span>设备型号:</label>
+                <div class="col-sm-5">
+                    <input type="text" ng-readOnly="item != undefined" class="form-control" name="deviceModel" ng-model="vm.bus.deviceModel" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bloodType" class="col-sm-4 control-label"><span class="red">*</span>设备类型:</label>
+                <div class="col-sm-5">
+                    <select name="deviceType" style="width: 220px;height: 30px" class="form-control"   ng-options="item.value as item.label for item in deviceTypeList" ng-model="vm.bus.deviceType" required ></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bloodType" class="col-sm-4 control-label"><span class="red">*</span>端口:</label>
+                <div class="col-sm-5">
+                    <input type="text"  class="form-control" name="code" ng-model="vm.bus.netPort" required >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bloodType" class="col-sm-4 control-label">
+                    <span class="red">*</span>
+                设备厂商:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="subname" ng-model="vm.bus.deviceFactory" required >
+                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-sm-4 control-label"><span class="red">*</span>设备协议名称:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="address" ng-model="vm.bus.protocol" required >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tel" class="col-sm-4 control-label">串口开始位:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="tel" ng-model="vm.bus.startBit" >                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-4 control-label">串口停止位:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="description" ng-model="vm.bus.stopBit" >                   
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="enable" class="col-sm-4 control-label">串口数据位:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="description" ng-model="vm.bus.dataBit" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-4 control-label">串口奇偶校验:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="description" ng-model="vm.bus.parityBit" >                   
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-4 control-label">传输速度:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="description" ng-model="vm.bus.baudRate" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-4 control-label">
+                    <span class="red">*</span>
+                接口类型:</label>
+                <div class="col-sm-5">
+                      <select name="interfaceType" class="form-control"  style="width: 220px;height: 30px"  ng-options="item.value as item.label for item in interfaceTypeList" ng-model="vm.bus.interfaceType" required ></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary"  type="button"  ng-disabled="form.$invalid" ng-click="vm.save()">保存</button>
+        <button class="btn btn-default" type="button" ng-click="vm.close()">取消</button>
+    </div>
+</form>

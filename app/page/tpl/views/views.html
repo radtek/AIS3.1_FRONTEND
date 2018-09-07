@@ -1,0 +1,8 @@
+<div flex layout="column" id="tabs">
+	<!-- tab标签栏 -->
+    <digi-tabs tabs="tabsMenu" tab-index="tabIndex"></digi-tabs>
+    <!-- 用户操作权限 -->
+    <section flex layout ui-view='btns'></section>
+    <!-- 视图 -->
+    <section flex layout="column" ui-view='views' class="view-container"></section>
+</div>

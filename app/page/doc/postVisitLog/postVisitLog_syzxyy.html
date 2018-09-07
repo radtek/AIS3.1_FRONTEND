@@ -1,0 +1,223 @@
+<div id="print-region">
+    <div class="page-print" id="postVisitLogSyzxyy" ng-class="{true: 'end-state'}[postFollowRecord.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if='docInfo.beName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.beName}}</h3>
+            <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h4>术后访视记录单</h4>
+        </header>
+        <div class="form-group" layout layout-align="space-between">
+            <span flex=25>姓名：{{rs.regOpt.name}}&nbsp;</span>
+            <span flex=25>性别：{{rs.regOpt.sex}}&nbsp;</span>
+            <span flex=25>年龄：{{rs.regOpt.age}}&nbsp;</span>
+            <span flex=25>科别：{{rs.regOpt.deptName}}&nbsp;</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>患者生命体征：</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>R：<input type="text" class="noborder5" ng-model="postFollowRecord.breath" ng-value="postFollowRecord.breath" maxlength="20" />次/分</span>
+            <span flex layout>P：<input type="text" class="noborder5" ng-model="postFollowRecord.pulse" ng-value="postFollowRecord.pulse" maxlength="20" />次/分</span>
+            <span flex layout>BP：<input type="text" class="noborder5" ng-model="postFollowRecord.bloodPressure" ng-value="postFollowRecord.bloodPressure" maxlength="20" />mmg</span>
+            <span flex layout>体温：<input type="text" class="noborder5" ng-model="postFollowRecord.temp" ng-value="postFollowRecord.bloodPre" maxlength="20" />℃</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>实施手术：{{rs.optRealOperStr}}</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>实施麻醉：{{rs.realAnaesMethodStr}}</span>
+        </div>
+        <div class="form-group" layout>
+            <span flex layout>麻醉医师：{{rs.anesthetistName}}</span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span flex=50 class="indent">手术开始时间  {{rs.operStartTime}}</span>
+            <span flex=50>手术结束时间  {{rs.operEndTime}}</span>
+        </div>
+        <div class="form-group" layout layout-align="space-between" style="padding-left: 55px;padding-right: 55px">
+            <span flex=20>气管导管拔出</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.tracheaTubeOut" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.tracheaTubeOut" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+            <span flex=20>下肢肌力恢复</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.muscleRecovery" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.muscleRecovery" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="space-between" style="padding-left: 55px;padding-right: 55px">
+            <span flex=20>术中知晓</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.intraoperAware" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.intraoperAware" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+            <span flex=20>感觉异常</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.feelingAbnormal" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.feelingAbnormal" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="space-between" style="padding-left: 55px;padding-right: 55px">
+            <span flex=20>意识清醒</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.awareness" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.awareness" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+            <span flex=20>  脊麻后头痛</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.spinalAnaesHeadache" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.spinalAnaesHeadache" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="space-between" style="padding-left: 55px;padding-right: 55px">
+            <span flex=20>声音沙哑</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.hoarseness" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.hoarseness" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+            <span flex=20> 穿刺点压痛</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.punctureTenderness" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.punctureTenderness" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="space-between" style="padding-left: 55px;padding-right: 55px">
+            <span flex=20>咽喉痛</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.throatSore" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.throatSore" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+            <span flex=20>尿潴留</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.uroschesis" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.uroschesis" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="space-between" style="padding-left: 55px;padding-right: 55px">
+            <span flex=20>循环稳定</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.cyclingStability" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.cyclingStability" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+            <span flex=20>尿管保留</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.urineTubeRetain" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.urineTubeRetain" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="space-between" style="padding-left: 55px;padding-right: 55px">
+            <span flex=20>认知障碍</span>
+            <div>
+                <checkbox ng-model="postFollowRecord.cognitiveDisorders" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.cognitiveDisorders" ng-true-value="2" ng-false-value="">否</checkbox>
+            </div>
+            <span flex=20>&nbsp</span>
+            <div>
+                <checkbox  ng-true-value="1" ng-false-value="" style="visibility: hidden"  >是</checkbox>
+                <checkbox  ng-true-value="2" ng-false-value=""  style="visibility: hidden" >否</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span>术后疼痛情况</span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span class="indent">使用镇痛泵 
+                <checkbox ng-model="postFollowRecord.analgesicPump" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.analgesicPump" ng-true-value="2" ng-false-value="">否</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span class="indent">术后VAS评分</span>
+        </div>
+        <div class="form-group" layout-align="space-between">
+            <span class="indent">静息时疼痛评分（分）</span>
+            <div class="indent">
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="'0'" ng-false-value="">0</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="1" ng-false-value="">1</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="2" ng-false-value="">2</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="3" ng-false-value="">3</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="4" ng-false-value="">4</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="5" ng-false-value="">5</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="6" ng-false-value="">6</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="7" ng-false-value="">7</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="8" ng-false-value="">8</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="9" ng-false-value="">9</checkbox>
+                <checkbox ng-model="postFollowRecord.vasResting" ng-true-value="10" ng-false-value="">10</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout-align="space-between">
+            <span class="indent">活动时疼痛评分（分）</span>
+            <div class="indent">
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="'0'" ng-false-value="">0</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="1" ng-false-value="">1</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="2" ng-false-value="">2</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="3" ng-false-value="">3</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="4" ng-false-value="">4</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="5" ng-false-value="">5</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="6" ng-false-value="">6</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="7" ng-false-value="">7</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="8" ng-false-value="">8</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="9" ng-false-value="">9</checkbox>
+                <checkbox ng-model="postFollowRecord.vasActivity" ng-true-value="10" ng-false-value="">10</checkbox>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span class="indent">呼吸抑制
+                <checkbox ng-model="postFollowRecord.breatheInhibi" ng-true-value="1" ng-false-value="">是</checkbox>
+                <checkbox ng-model="postFollowRecord.breatheInhibi" ng-true-value="2" ng-false-value="">否</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span class="indent">镇静评分（Ramsay）
+                <checkbox ng-model="postFollowRecord.ramsay" ng-true-value="1" ng-false-value="">1</checkbox>
+                <checkbox ng-model="postFollowRecord.ramsay" ng-true-value="2" ng-false-value="">2</checkbox>
+                <checkbox ng-model="postFollowRecord.ramsay" ng-true-value="3" ng-false-value="">3</checkbox>
+                <checkbox ng-model="postFollowRecord.ramsay" ng-true-value="4" ng-false-value="">4</checkbox>
+                <checkbox ng-model="postFollowRecord.ramsay" ng-true-value="5" ng-false-value="">5</checkbox>
+                <checkbox ng-model="postFollowRecord.ramsay" ng-true-value="6" ng-false-value="">6</checkbox>
+                <checkbox ng-model="postFollowRecord.ramsay" ng-true-value="7" ng-false-value="">7</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span class="indent">呕吐评分
+                <checkbox ng-model="postFollowRecord.vomitScore" ng-true-value="'0'" ng-false-value="">0</checkbox>
+                <checkbox ng-model="postFollowRecord.vomitScore" ng-true-value="1" ng-false-value="">1</checkbox>
+                <checkbox ng-model="postFollowRecord.vomitScore" ng-true-value="2" ng-false-value="">2</checkbox>
+                <checkbox ng-model="postFollowRecord.vomitScore" ng-true-value="3" ng-false-value="">3</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span class="indent">恶心评分
+                <checkbox ng-model="postFollowRecord.nauseaScore" ng-true-value="'0'" ng-false-value="">0</checkbox>
+                <checkbox ng-model="postFollowRecord.nauseaScore" ng-true-value="1" ng-false-value="">1</checkbox>
+                <checkbox ng-model="postFollowRecord.nauseaScore" ng-true-value="2" ng-false-value="">2</checkbox>
+                <checkbox ng-model="postFollowRecord.nauseaScore" ng-true-value="3" ng-false-value="">3</checkbox>
+                </span>
+        </div>
+        <div class="form-group" layout layout-align="space-between">
+            <span class="indent">瘙痒评分
+                <checkbox ng-model="postFollowRecord.itchScore" ng-true-value="'0'" ng-false-value="">0</checkbox>
+                <checkbox ng-model="postFollowRecord.itchScore" ng-true-value="1" ng-false-value="">1</checkbox>
+                <checkbox ng-model="postFollowRecord.itchScore" ng-true-value="2" ng-false-value="">2</checkbox>
+                </span>
+        </div>
+        <div class="form-group">
+            <span>备注:</span>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <textarea class="no-triangle" cols="120" rows="4" ng-model="postFollowRecord.remark" maxlength="220">{{postFollowRecord.remark}}</textarea>
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <div layout flex=50 class="pd-left">随访人：
+                <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetistId" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="postFollowRecord.anesthetistId"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+            </div>
+            <div layout layout-align="space-between end">
+                <span>日期：</span>
+                <datetime-picker name="operaDate" dateID="operaDate-times" ng-model="postFollowRecord.docDate" ng-value="postFollowRecord.docDate" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime" style="width: 90px!important;"></datetime-picker>
+            </div>
+        </div>
+    </div>
+</div>

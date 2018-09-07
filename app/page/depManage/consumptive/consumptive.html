@@ -1,0 +1,9 @@
+<div id="consumptive" layout="column" flex>
+	<form role="form" layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+		<!-- <button ng-if="permission.indexOf('M_DETAIL') >= 0" class="btn btn-primary pull-right" type="button" ng-click="materialDetail();">出库详情</button> -->
+		<!-- <button ng-if="permission.indexOf('M_OUT') >= 0" class="btn btn-primary pull-right" type="button" ng-click="materialOutput();">出库</button> -->
+	    <button ng-if="permission.indexOf('M_IN') >= 0" class="btn btn-primary" type="button" ng-click="addInput();">添加入库</button>
+	</form>
+	<section flex layout ui-view class="view-container"></section>
+</div>
+

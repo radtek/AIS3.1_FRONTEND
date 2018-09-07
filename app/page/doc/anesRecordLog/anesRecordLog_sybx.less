@@ -1,0 +1,891 @@
+#anesRecord_sybx {
+    @lineH: 28px;
+    @color: red;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    .modal-content {
+        label {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+    }
+    .modal-lg {
+        width: 1247px !important;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    select {
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+    input[type=checkbox],
+    input[type=radio] {
+        margin: 0;
+    }
+    .btn-primary {
+        font-size: 12px!important;
+    }
+    .red,
+    *.red {
+        color: @color!important;
+    }
+    .diagWid {
+        min-width: 60px;
+    }
+    table {
+        width: 100%;
+        th,
+        td {
+            border: 1px solid @color;
+            padding: 0;
+        }
+    }
+    >aside {
+        margin-right: 10px;
+        >button {
+            margin-bottom: 10px;
+            padding: 6px 3px;
+            min-width: auto;
+        }
+    }
+    main {
+        overflow: auto;
+        page-break-after: always;
+        page-break-inside: avoid;
+        h3,
+        h4 {
+            display: inline-block;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        a,
+        input,
+        select {
+            height: 22px;
+            color: black;
+            text-align: center;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid @color;
+        }
+        td[ng-click],
+        div[ng-click],
+        span[ng-click] {
+            cursor: pointer;
+        }
+        .nowrap {
+            white-space: nowrap;
+        }
+        article {
+            border: 1px solid @color;
+            .lineH {
+                height: @lineH;
+                line-height: @lineH;
+            }
+            .blockDis {
+                background: #efefef;
+                padding: 1px 5px;
+                margin-right: 4px;
+            }
+            .head {
+                padding: 5px;
+                border: 1px solid @color;
+                select {
+                    padding: 0 25%;
+                }
+                .bSpecial {
+                    padding: 2px;
+                    border: 1px solid @color;
+                    border-radius: 5px;
+                    margin: 2px;
+                    margin-left: 10px;
+                    textarea {
+                        border: none;
+                        outline: none;
+                        resize: none;
+                    }
+                }
+                .oiSelect {
+                    oi-select {
+                        height: 24px;
+                    }
+                    oi-select .select-search {
+                        border: none;
+                        border-bottom: 1px solid @color;
+                    }
+                    oi-select.focused .select-search {
+                        border-color: none;
+                        box-shadow: none;
+                    }
+                    oi-select .select-search-list {
+                        padding: 0 4px;
+                        line-height: 24px;
+                    }
+                    oi-select .select-search-list-item {
+                        margin: 0px 4px 0px 0;
+                    }
+                    oi-select .select-search-list-item_input input {
+                        text-align: left;
+                        border: none;
+                    }
+                    oi-select .select-dropdown {
+                        max-height: none;
+                    }
+                }
+                .anaesthetic {
+                    a {
+                        line-height: 22px;
+                    }
+                }
+            }
+            .body {
+                table {
+                    tr {
+                        height: @lineH;
+                    }
+                    td {
+                        width: @lineH;
+                    }
+                }
+                .left {
+                    width: 240px;
+                    .pullLR {
+                        position: relative;
+                        div {
+                            position: absolute;
+                            line-height: inherit;
+                            width: 500px;
+                            top: 0;
+                        }
+                    }
+                    table tr:nth-last-child(2) {
+                        td div {
+                            height: @lineH;
+                        }
+                    }
+                    .mon {
+                        td:first-child {
+                            border-right: 0;
+                            >div {
+                                padding: 0 10px 0 2px;
+                                height: @lineH;
+                                img {
+                                    height: @lineH - 10;
+                                }
+                            }
+                            >div.otherImg {
+                                height: 10 * @lineH + 2;
+                                div {
+                                    height: @lineH;
+                                }
+                            }
+                            >div.clickSpan {
+                                span[ng-click] {
+                                    background-color: #e3e3e3;
+                                }
+                                a {
+                                    width: 40px;
+                                }
+                            }
+                        }
+                        td:nth-child(2) {
+                            border-left: 0;
+                            border-right: 0;
+                        }
+                        td:last-child {
+                            border-left: 0;
+                            width: 66px;
+                        }
+                    }
+                }
+                .middle {
+                    table {
+                        tr:first-child div {
+                            width: 100%;
+                        }
+                        td.echart1 {
+                            >div {
+                                height: 20 * @lineH + 1;
+                                width: 100%;
+                            }
+                        }
+                        td.echart2 {
+                            height: 31 * @lineH + 1;
+                            width: 100%;
+                            position: relative;
+                            .title {
+                                top: 2px;
+                                right: 2px;
+                                position: absolute;
+                                background-color: #ccc;
+                                padding: 2px;
+                                border-radius: 2px;
+                                z-index: 1;
+                            }
+                            .headView {
+                                width: 100%;
+                                background-color: #fff;
+                                margin-bottom: 0;
+                                position: absolute;
+                                top: 0;
+                                height: @lineH;
+                                line-height: @lineH;
+                                text-align: center;
+                                span {
+                                    margin: 0 5px;
+                                    width: 80px;
+                                }
+                            }
+                            .dataView {
+                                width: 100%;
+                                background-color: #fff;
+                                height: 30 * @lineH;
+                                position: absolute;
+                                top: @lineH;
+                                overflow: auto;
+                                div {
+                                    height: @lineH;
+                                    line-height: @lineH;
+                                    text-align: center;
+                                    span {
+                                        margin: 0 5px;
+                                        width: 80px;
+                                    }
+                                }
+                                input {
+                                    border: none;
+                                    width: 80px;
+                                    border-bottom: 1px solid #ccc;
+                                }
+                            }
+                            .buttomView {
+                                width: 12%;
+                                bottom: 0;
+                                height: @lineH;
+                                position: absolute;
+                                margin-left: 88%;
+                                background-color: #fff;
+                                input {
+                                    height: @lineH;
+                                    border: none;
+                                    text-align: left;
+                                    padding-left: 10px;
+                                }
+                                span {
+                                    line-height: @lineH;
+                                    background-color: #ccc;
+                                    padding: 0 4px;
+                                    border-radius: 2px;
+                                    margin: 0 10px;
+                                }
+                            }
+                        }
+                        tr.numInput td input,
+                        tr.numInput td select {
+                            width: 100%;
+                            height: @lineH - 1;
+                            border: none;
+                            text-align: left;
+                        }
+                    }
+                }
+                .right {
+                    width: 200px;
+                    table tr ul {
+                        height: 100%;
+                    }
+                    table tr:first-child {
+                        height: 2 * @lineH;
+                    }
+                    table tr:nth-child(2) td {
+                        height: 44 * @lineH + 3;
+                    }
+                    table tr:nth-child(4) td {
+                        height: 8 * @lineH;
+                    }
+                    table tr:nth-child(6) td {
+                        height: 4 * @lineH;
+                    }
+                    span {
+                        word-break: break-all;
+                    }
+                }
+            }
+            .buttom {
+                table {
+                    tr:first-child {
+                        td:first-child {
+                            width: @lineH;
+                            height: 9 * @lineH;
+                        }
+                        td:nth-child(2) {
+                            width: 211px;
+                            height: 3 * @lineH;
+                            padding-left: 20px;
+                        }
+                        td:last-child {
+                            width: auto;
+                            .backList {
+                                height: 9 * @lineH;
+                                display: flex;
+                                flex: auto;
+                                flex-direction: column;
+                                flex-wrap: wrap;
+                                >div {
+                                    height: @lineH;
+                                    padding: 0 2px;
+                                    flex: auto;
+                                    .title {
+                                        font-weight: bold;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    tr:nth-child(n+1) {
+                        td:first-child {
+                            height: inherit;
+                            padding: 0 5px;
+                            >div {
+                                height: @lineH;
+                                line-height: @lineH;
+                                oi-select {
+                                    height: 26px;
+                                }
+                                oi-select .select-search {
+                                    border: none;
+                                    border-bottom: 1px solid @color;
+                                }
+                                oi-select.focused .select-search {
+                                    border-color: none;
+                                    box-shadow: none;
+                                }
+                                oi-select .select-search-list {
+                                    padding: 0 4px;
+                                }
+                                oi-select .select-search-list-item_input input {
+                                    text-align: left;
+                                    border: none;
+                                }
+                                select {
+                                    height: 25px;
+                                }
+                                checkbox {
+                                    margin: 0 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+                select {
+                    padding-left: 20px;
+                }
+                input[type=checkbox],
+                input[type=radio] {
+                    margin-top: 3px;
+                }
+                .analgesicMed {
+                    line-height: 22px;
+                    text-align: left;
+                }
+            }
+        }
+        article.tour {
+            input,
+            select,
+            textarea,
+            oi-select,
+            [ng-click]:not(.toPage) {
+                pointer-events: none;
+            }
+        }
+        .paging {
+            a {
+                border: none;
+            }
+            >span {
+                pointer-events: auto;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .done {
+                pointer-events: none;
+                cursor: not-allowed;
+            }
+        }
+        footer {
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            .cor-515 {
+                color: rgb(50, 163, 57);
+            }
+            .cor-422 {
+                color: rgb(40, 216, 247);
+            }
+            .cor-242 {
+                color: rgb(215, 46, 28)
+            }
+            .cor-512 {
+                color: rgb(50, 117, 224);
+            }
+            .cor-224 {
+                color: rgb(255, 240, 4);
+            }
+            >div {
+                border: 1px solid #fff;
+                border-radius: 4px;
+                overflow: hidden;
+                width: 100px;
+                text-align: center;
+                >div {
+                    padding: 0;
+                    line-height: 26px;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 1080px) {
+        .navbar-btn.btn-xs {
+            display: none;
+        }
+        aside {
+            margin-right: 10px;
+            margin-top: 23px;
+        }
+        .body {
+            .syqk {
+                line-height: 1;
+            }
+            .head>div {
+                div:nth-child(5) {
+                    min-width: 125px;
+                }
+                div:nth-child(6) {
+                    max-width: 32px;
+                }
+            }
+            table {
+                tr {
+                    height: 22px!important;
+                }
+            }
+            .left {
+                table tr:nth-last-child(2) {
+                    td div {
+                        height: 22px!important;
+                    }
+                }
+                /*.rsSpan {
+                    margin-top: 120px;
+                }*/
+            }
+            .middle {
+                table {
+                    td.echart1 {
+                        >div {
+                            height: 439px!important;
+                            canvas {
+                                height: 439px!important
+                            }
+                        }
+                    }
+                    td.echart2 {
+                        height: 31 * 22 + 1px!important;
+                        .dataView {
+                            height: 30 * 22 - 20px!important;
+                            div {
+                                height: 22px!important;
+                                line-height: 22px!important;
+                            }
+                        }
+                    }
+                    tr.numInput td input,
+                    tr.numInput td select {
+                        height: 21px!important;
+                    }
+                }
+            }
+            .right {
+                table tr:nth-child(2) td {
+                    height: 919px!important;
+                    ul {
+                        max-height: 905px!important;
+                        overflow: hidden;
+                    }
+                }
+                table tr:nth-child(4) td {
+                    height: 8 * 22!important;
+                }
+                table tr:nth-child(6) td {
+                    height: 4 * 22!important;
+                }
+            }
+        }
+    }
+}
+
+#anesRecord_sybx.page-print {
+    font-size: 12px;
+    @lineH: 14px;
+    main {
+        a,
+        input,
+        select {
+            height: @lineH;
+        }
+        .paging {
+            height: @lineH;
+            span {
+                height: @lineH;
+            }
+        }
+        header {
+            h3 {
+                margin-top: -4px;
+                margin-bottom: 1px;
+            }
+            h4 {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+        article {
+            .lineH {
+                height: @lineH;
+                line-height: @lineH;
+            }
+            .blockDis {
+                padding: 0;
+                margin-right: 2px;
+            }
+            .head {
+                padding: 1px;
+                .bSpecial {
+                    margin-left: 5px;
+                }
+            }
+            .body {
+                table {
+                    tr {
+                        height: @lineH;
+                    }
+                    td {
+                        width: @lineH;
+                        line-height: @lineH - 1;
+                    }
+                }
+                .left {
+                    width: 155px;
+                    table tr:nth-last-child(2) {
+                        td div {
+                            height: @lineH;
+                        }
+                    }
+                    .mon {
+                        span {
+                            display: inline-block;
+                            height: inherit;
+                        }
+                        td:first-child {
+                            >div {
+                                height: @lineH;
+                                img {
+                                    height: @lineH - 6;
+                                }
+                            }
+                            >div.otherImg {
+                                height: 10 * @lineH;
+                                div {
+                                    height: @lineH;
+                                }
+                            }
+                            >div.clickSpan {
+                                a {
+                                    text-align: left;
+                                    width: 30px;
+                                    >span {
+                                        margin-left: -5px;
+                                    }
+                                }
+                            }
+                        }
+                        td:nth-child(2) {
+                            >div {
+                                height: 13.5px;
+                            }
+                        }
+                        td:nth-child(3) {
+                            >div {
+                                height: 13.5px;
+                            }
+                        }
+                    }
+                }
+                .middle {
+                    table {
+                        td.echart1 {
+                            >div {
+                                height: 20 * @lineH;
+                            }
+                        }
+                        td.echart2 {
+                            height: 30 * @lineH;
+                        }
+                        tr.numInput td input,
+                        tr.numInput td select {
+                            height: @lineH - 4;
+                        }
+                    }
+                }
+                .right {
+                    width: 110px;
+                    max-height: 500px;
+                    table tr:first-child {
+                        height: 2 * @lineH;
+                    }
+                    table tr:nth-child(2) td {
+                        height: 43 * @lineH + 1;
+                    }
+                    table tr:nth-child(3) td {
+                        height: 2 * @lineH;
+                    }
+                    table tr:nth-child(4) td {
+                        height: 7 * @lineH!important;
+                    }
+                    table tr:nth-child(6) td {
+                        height: 3 * @lineH;
+                    }
+                    span {
+                        word-break: break-all;
+                    }
+                }
+            }
+            .buttom {
+                table {
+                    .check-box {
+                        font-size: 12px;
+                        .checkInput {
+                            width: 10px;
+                            height: 10px;
+                        }
+                        .checkInput:after {
+                            top: 3px;
+                        }
+                    }
+                    tr:first-child {
+                        td:first-child {
+                            width: @lineH - 2;
+                            height: 6 * @lineH;
+                        }
+                        td:nth-child(2) {
+                            width: 153 - @lineH;
+                            height: 3 * @lineH;
+                            padding-left: 2px;
+                        }
+                        td:last-child {
+                            .backList {
+                                height: 6 * @lineH;
+                                >div {
+                                    height: @lineH;
+                                }
+                            }
+                        }
+                    }
+                    tr:nth-child(n+1) {
+                        td:first-child {
+                            padding: 0;
+                            >div {
+                                height: @lineH;
+                                line-height: @lineH;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 1080px) {
+        .navbar-btn.btn-xs {
+            display: none;
+        }
+        aside {
+            margin-right: 10px;
+            margin-top: 23px;
+        }
+        .body {
+            .syqk {
+                line-height: 1;
+            }
+            table {
+                tr {
+                    height: 22px!important;
+                }
+            }
+            .left {
+                width: 115px!important;
+                table tr:nth-last-child(2) {
+                    td div {
+                        height: 22px!important;
+                    }
+                }
+                .rsSpan {
+                    margin-top: 120px;
+                }
+            }
+            .middle {
+                table {
+                    td.echart1 {
+                        >div {
+                            height: 280px!important;
+                            canvas {
+                                height: 280px!important
+                            }
+                        }
+                    }
+                    td.echart2 {
+                        height: 31 * 14px!important;
+                        .dataView {
+                            height: 30 * 14 - 20px!important;
+                            div {
+                                height: 14px!important;
+                                line-height: 14px!important;
+                            }
+                        }
+                    }
+                    tr.numInput td input,
+                    tr.numInput td select {
+                        height: 21px!important;
+                    }
+                }
+            }
+            .right {
+                min-width: 150px!important;
+                table tr:nth-child(2) td {
+                    height: 919px!important;
+                }
+                table tr:nth-child(3) td {
+                    height: 2 * @lineH;
+                }
+                table tr:nth-child(4) td {
+                    height: 7 * 22!important;
+                }
+                table tr:nth-child(5) td {
+                    height: 2 * @lineH!important;
+                }
+                table tr:nth-child(6) td {
+                    height: 3 * 22!important;
+                }
+            }
+        }
+        .bottom {
+            tr:first-child {
+                td:first-child {
+                    height: 5 * @lineH - 2!important;
+                }
+                td:nth-child(2) {
+                    height: 3 * @lineH;
+                    padding-left: 2px;
+                }
+                td:last-child {
+                    .backList {
+                        height: 5 * @lineH!important;
+                        >div {
+                            height: @lineH - 2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#modelAnaesthetic,
+#inputInfo,
+#outIoevent,
+#remarkInfo,
+#modelHzTime,
+#saveAsTemp,
+#fastAddEvent {
+    tr {
+        cursor: pointer;
+    }
+    input[type=checkbox] {
+        margin: 0;
+        height: 30px;
+    }
+    select {
+        height: 26px;
+    }
+    datetime-picker {
+        height: 26px;
+        border: 1px solid #aaa;
+    }
+}
+
+#monitorConfig {
+    table {
+        margin: 0px;
+    }
+}
+
+#modelIntrMong {
+    input[type=checkbox] {
+        margin: 0;
+    }
+    select {
+        height: 26px;
+        width: 80%;
+    }
+    label {
+        height: 26px;
+        line-height: 26px;
+        margin: 0;
+    }
+    tr td:last-child div {
+        height: 26px;
+        line-height: 26px;
+    }
+}
+
+#modelERespire,
+#rescueEvent {
+    input[type=radio] {
+        margin: 0px;
+    }
+    label {
+        margin: 10px auto;
+    }
+}
+
+#inspectionEvent {
+    tr {
+        cursor: pointer;
+    }
+    .allCheckItem {
+        height: 580px;
+        overflow: auto;
+    }
+}
+
+#modelHzTime {
+    label {
+        width: 220px;
+    }
+}
+
+#loadTemp {
+    [ng-model=lv] {
+        height: 26px;
+        width: 174px;
+    }
+    [ui-grid] {
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,43 @@
+<div class="modal-header">    
+    <h4><span>呼吸事件</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="modelERespire">
+    <div class="modal-body">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th width="50%">事件名称</th>
+                    <th>时间</th>
+                    <th width="10%" class="text-center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in ersList">
+                    <td ng-click="editInfo(item)">{{item.type == '1' ? '自主呼吸' : ''}}{{item.type == '2' ? '辅助呼吸' : ''}}{{item.type == '3' ? '控制呼吸' : ''}}</td>
+                    <td ng-click="editInfo(item)">{{item.startTime | date: 'yyyy/MM/dd HH:mm:ss'}}</td>
+                    <td class="text-center"><span class="glyphicon glyphicon-trash" ng-click="delete(item)"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div flex="50" class="err-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit" style="margin-left: 0; margin-right: 30px;"><em>*</em>事件名称</label>
+                <div layout="column">
+                    <label layout layout-align="center center"><input type="radio" name="type" ng-model="type" ng-value="1">&nbsp;&nbsp;自主呼吸</label>
+                    <label layout layout-align="center center"><input type="radio" name="type" ng-model="type" ng-value="2">&nbsp;&nbsp;辅助呼吸</label>
+                    <label layout layout-align="center center"><input type="radio" name="type" ng-model="type" ng-value="3">&nbsp;&nbsp;控制呼吸</label>
+                </div>
+            </div>
+        </div>
+        <div flex="50" class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit"><em>*</em>发生时间</label>
+                <datetime-picker flex ng-model="time" name="time" ng-change="checkTime();" ng-keyup="checkTime();" required></datetime-picker>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

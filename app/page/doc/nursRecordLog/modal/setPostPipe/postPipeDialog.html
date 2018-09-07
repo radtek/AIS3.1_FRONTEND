@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h4>
+    	<span>引流管</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body err-wrap">
+        <div flex class="form-group" layout layout-align="start center">
+            <checkbox class="chk126" md-no-ink ng-true-value="'导尿管'" ng-model="postPipes[0]">导尿管</checkbox>
+            <checkbox class="chk126" md-no-ink ng-true-value="'胃管'" ng-model="postPipes[1]">胃管</checkbox>
+            <checkbox class="chk110" md-no-ink ng-true-value="'鼻肠管'" ng-model="postPipes[2]">鼻肠管</checkbox>
+            <checkbox class="chk110" md-no-ink ng-true-value="'鼻胆管'" ng-model="postPipes[3]">鼻胆管</checkbox>
+            <checkbox md-no-ink ng-true-value="'伤口引流管'" ng-model="postPipes[4]">伤口引流管</checkbox>
+        </div>
+        <div flex class="form-group" layout layout-align="start center">
+            <checkbox class="chk126" md-no-ink ng-true-value="'腹腔引流管'" ng-model="postPipes[5]">腹腔引流管</checkbox>
+            <checkbox class="chk126" md-no-ink ng-true-value="'腹膜后引流管'" ng-model="postPipes[6]">腹膜后引流管</checkbox>
+            <checkbox class="chk110" md-no-ink ng-true-value="'盆腔引流管'" ng-model="postPipes[7]">盆腔引流管</checkbox>
+            <checkbox class="chk110" md-no-ink ng-true-value="'T管引流管'" ng-model="postPipes[8]">T管引流管</checkbox>
+            <checkbox md-no-ink ng-true-value="'肝周引流管'" ng-model="postPipes[9]">肝周引流管</checkbox>
+        </div>
+        <div flex class="form-group" layout layout-align="start center">
+            <checkbox class="chk126" md-no-ink ng-true-value="'文氏孔引流管'" ng-model="postPipes[10]">文氏孔引流管</checkbox>
+            <checkbox class="chk126" md-no-ink ng-true-value="'肾造瘘管'" ng-model="postPipes[11]">肾造瘘管</checkbox>
+            <checkbox class="chk110" md-no-ink ng-true-value="'膀胱造瘘管'" ng-model="postPipes[12]">膀胱造瘘管</checkbox>
+            <checkbox class="chk110" md-no-ink ng-true-value="'胃造瘘管'" ng-model="postPipes[13]">胃造瘘管</checkbox>
+            <checkbox md-no-ink ng-true-value="'腹膜透析管'" ng-model="postPipes[14]">腹膜透析管</checkbox>
+        </div>
+        <div flex class="form-group" layout layout-align="start center">
+            <checkbox class="chk126" md-no-ink ng-true-value="'VSD引流管'" ng-model="postPipes[15]">VSD引流管</checkbox>
+            <checkbox class="chk126" md-no-ink ng-true-value="'脑室引流管'" ng-model="postPipes[16]">脑室引流管</checkbox>
+            <checkbox class="chk110" md-no-ink ng-true-value="'胸腔引流管'" ng-model="postPipes[18]" ng-if="beCode === 'qnzzyyy'">胸腔引流管</checkbox>
+            <checkbox class="chk110" md-no-ink ng-true-value="'脾窝引流管'" ng-model="postPipes[19]" ng-if="beCode === 'qnzzyyy'">脾窝引流管</checkbox>
+            <checkbox class="chk60" md-no-ink ng-true-value="1"  ng-false-value="0" ng-model="otherPostPipes" ng-click="setOtherPipe()" ng-if="beCode !== 'qnzzyyy'">其他</checkbox>
+            <input type="text" class="form-control chk126" name="otherText" ng-model="postPipes[17]" ng-if="beCode !== 'qnzzyyy'">
+        </div>
+        <div flex class="form-group" layout layout-align="start center" ng-if="beCode === 'qnzzyyy'">
+            <checkbox class="chk60" md-no-ink ng-true-value="1"  ng-false-value="0" ng-model="otherPostPipes" ng-click="setOtherPipe()" ng-if="beCode === 'qnzzyyy'">其他</checkbox>
+            <input type="text" class="form-control chk126" name="otherText" ng-model="postPipes[17]" ng-if="beCode === 'qnzzyyy'">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="save()" ng-disabled="form.$invalid">保存</button>
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+</form>

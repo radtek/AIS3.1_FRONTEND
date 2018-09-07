@@ -1,0 +1,35 @@
+<div class="modal-header">    
+    <h4><span>修改医护人员</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="selectDN">
+	<div class="modal-body">
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">麻醉医生</label>
+                <oi-select flex multiple oi-options="item.name for item in anesDocOption | limitTo: 100" ng-model="anesDocList" placeholder="请输入拼音搜索" list-placeholder="未找到" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }"   ></oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">手术医生</label>
+                <oi-select flex multiple oi-options="item.name for item in operatDocOption | limitTo: 100" ng-model="operatDocList" placeholder="请输入拼音搜索" list-placeholder="未找到" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }"  ></oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">巡回护士</label>
+                <oi-select flex multiple oi-options="item.name for item in nurseOption | limitTo: 100" ng-model="nurseList" placeholder="请输入拼音搜索" list-placeholder="未找到" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }"  ></oi-select>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div layout layout-align="start center" class="input-group">
+                <label class="tit">器械护士</label>
+                <oi-select flex multiple oi-options="item.name for item in nurseOption | limitTo: 100" ng-model="instruNurseList" placeholder="请输入拼音搜索" list-placeholder="未找到" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }"  ></oi-select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="cancel()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

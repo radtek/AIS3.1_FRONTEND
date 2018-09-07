@@ -1,0 +1,141 @@
+/* 红、白处方 */
+.recipe {
+    width: 210mm;
+    min-height: 138mm;
+    font-size: 14px!important;
+    margin: 0 auto;
+
+    .title {
+        span, h3 {
+            padding-right: 25px;
+        }
+    }
+    .pos-relative {
+        position: relative;
+    }
+
+    .border {
+        border: 1px solid #555;
+    }
+
+    .inPadd>* {
+        min-width: 550px;
+    }
+    .inPadd {
+        .line1 {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 8px;
+    }
+
+    .left-table {
+        tr td {
+            width: 75px;
+            text-align: center;
+            border: 1px solid #000;
+        }
+        tr:nth-child(2) {
+            height: 41px;
+        }
+    }
+    table {
+        margin-bottom: 0;
+        border: 1px solid #555!important;
+    }
+    td {
+        border: 1px solid #555!important;
+    }
+
+    .other {
+        position: absolute;
+        td {
+            padding: 0 6px!important;
+            height: 22px;
+        }
+    }
+
+    .detail {
+        position: relative;
+        .ps {
+            font-size: 23px;
+            font-family: monospace;
+            left: 8px;
+            top: 0;
+        }
+        table {
+            margin-left: 30px;
+            border: none!important;
+            td {
+                border: none!important;
+            }
+        }
+        img {
+            width: 200px;
+            height: 100px;
+        }
+    }
+}
+
+/* 白处方 */
+
+.recipe.wRecipe {
+    .other {
+        bottom: -1px;
+        right: 27px;
+    }
+    .regOpt-detail {
+        border-top: 0;
+        min-height: 346px;
+    }
+    .cost {
+        width: 120px;
+        border-left: 1px solid #555;
+        >ul {
+            border-bottom: 1px solid #555;
+        }
+        >ul:nth-last-child(1) {
+            border-bottom: 0;
+        }
+    }
+}
+
+/* 红处方 */
+
+.recipe.rRecipe {
+    .other {
+        top: 0;
+        left: 0;
+    }
+    .left {
+        width: 185px;
+        padding-top: 56px;
+        margin-right: 15px;
+        .regOpt-info td {
+            padding-left: 4px!important;
+            padding-right: 4px!important;
+        }
+    }
+    .regOpt-detail {
+        min-height: 290px;
+    }
+    @media print {
+        .form-group {
+            margin-bottom: 2px !important;
+        }
+    }
+}
+
+.A5-print {
+    @media print {
+        width: 210mm;
+        max-height: 148mm;
+
+        header {
+            margin-top: 10px;
+        }
+    }
+}

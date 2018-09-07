@@ -1,0 +1,195 @@
+<div id="print-region">
+    <div id="riskAsseLog" class="page-print" ng-class="{true:'end-state'}[vm.optRiskEva.processState == 'END' || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3>{{docInfo.beName}}手术风险评估表</h3>
+        </header>
+        <div class="form-group" layout layout-align="space-between end">
+            <span layout>日期：<a flex>{{vm.regOpt.operaDate}}</a></span>
+            <span layout>科别：<a flex>{{vm.regOpt.deptName}}</a></span>
+            <span layout>姓名：<a flex>{{vm.regOpt.name}}</a></span>
+            <span layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+        </div>
+        <!-- <div class="docBody"> -->
+        <div class="form-group" layout layout-align="space-between end">
+            <span layout flex>实施手术名称：<a flex>{{vm.regOpt.designedOptName}}</a></span>
+        </div>
+        <table class="riskTab" width="100%" border="1">
+            <tr>
+                <td colspan="2" align="center">1、手术切口清洁程度</td>
+                <td colspan="2" align="center">2、麻醉分级（ASA分级） </td>
+                <td colspan="2" align="center">3、手术持续时间</td>
+            </tr>
+            <tr>
+                <td width="33%">I类手术切口（清洁手术）</td>
+                <td width="7%">
+                    <checkbox ng-model="vm.optRiskEva.incisionCleanliness" ng-true-value="'1'">0</checkbox>
+                </td>
+                <td width="29%" rowspan="2">PI：正常的患者；除局部病变外，无系统性疾病</td>
+                <td width="7%" rowspan="2">
+                    <checkbox ng-model="vm.optRiskEva.asa" ng-true-value="'1'">0</checkbox>
+                </td>
+                <td width="16%" rowspan="5" valign="top">TI：手术在3小时内完成</td>
+                <td width="7%" rowspan="5" valign="top">
+                    <checkbox ng-model="vm.optRiskEva.durationSurgery" ng-true-value="'1'" ng-false-value="'0'">0</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="2">手术术野无污染；手术切口周边无炎症；患者没有进行气管、食道和/或尿道插管；患者没有意识障碍。 </td>
+            </tr>
+            <tr>
+                <td>P2：患者有轻微的临床症状；有轻度或中度系统性疾病</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.asa" ng-true-value="'2'">0</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>Ⅱ类手术切口（相对清洁手术）</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.incisionCleanliness" ng-true-value="'2'">0</checkbox>
+                </td>
+                <td rowspan="2">P3：有严重系统性疾病，日常活动受限，但未丧失工作能力</td>
+                <td rowspan="2">
+                    <checkbox ng-model="vm.optRiskEva.asa" ng-true-value="'3'">1</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="2">上、下呼吸道，上下消化道，泌尿生殖道或经以上器官的手术；
+                    <br/>患者进行气道、食道和/或尿道插管；患者病情稳定；
+                    <br/>行胆囊、阴道、阑尾、耳鼻手术患者。</td>
+            </tr>
+            <tr>
+                <td>P4：有严重系统性疾病，已丧失工作能力，威胁生命安全</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.asa" ng-true-value="'4'">1</checkbox>
+                </td>
+                <td rowspan="5" valign="top">T2：完成手术，超过3小时</td>
+                <td rowspan="5" valign="top">
+                    <checkbox ng-model="vm.optRiskEva.durationSurgery" ng-true-value="'2'" ng-false-value="'0'">1</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>Ⅲ类手术切口（清洁 污染手术）</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.incisionCleanliness" ng-true-value="'3'">1</checkbox>
+                </td>
+                <td rowspan="2">P5：病情危重，生命难以维持的濒死病人</td>
+                <td rowspan="2">
+                    <checkbox ng-model="vm.optRiskEva.asa" ng-true-value="'5'">1</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="2">开放、新鲜且不干净的伤口；
+                    <br/>前次手术后感染的切口；
+                    <br/>手术中需采取消毒措施的切口。</td>
+            </tr>
+            <tr>
+                <td>P6：脑死亡的患者</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.asa" ng-true-value="'6'">1</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>Ⅳ类手术切口（污染手术）</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.incisionCleanliness" ng-true-value="'4'">1</checkbox>
+                </td>
+                <td colspan="2">4、手术类别</td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="2">严重的外伤，手术切口有炎症、组织坏死，或有内脏引流管。</td>
+                <td>1.浅层组织手术</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.surgeryCategory" ng-true-value="'1'"></checkbox>
+                </td>
+                <td rowspan="4" valign="top">急诊手术</td>
+                <td rowspan="4" valign="top">
+                    <checkbox ng-model="vm.optRiskEva.emergency" ng-true-value="1" ng-false-value="0"></checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>2.深部组织手术</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.surgeryCategory" ng-true-value="'2'"></checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="2">随访：切口愈合与感染情况
+                    <br/>切口甲级愈合
+                    <checkbox ng-model="vm.optRiskEva.healingInfections" ng-true-value="'1'"></checkbox>
+                    <br/>切口感染—— 浅层感染
+                    <checkbox ng-model="vm.optRiskEva.healingInfections" ng-true-value="'2'"></checkbox>
+                    <br/> 　 　　　　　深层感染
+                    <checkbox ng-model="vm.optRiskEva.healingInfections" ng-true-value="'3'"></checkbox>
+                    <br/>
+                </td>
+                <td>3.器官手术</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.surgeryCategory" ng-true-value="'3'"></checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>4.腔隙手术</td>
+                <td>
+                    <checkbox ng-model="vm.optRiskEva.surgeryCategory" ng-true-value="'4'"></checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div ng-class="{true: 'md-red'}[!vm.optRiskEva.doctorName && verify]">
+                        手术医生签名：
+                        <br/>
+                        <oi-select class="noborder3" ng-model="vm.optRiskEva.doctorName" oi-options="i.operatorId as i.name for i in operatorList" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+                        <br/>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div ng-class="{true: 'md-red'}[!vm.optRiskEva.anesthesName && verify]">
+                        麻醉医师签名：
+                        <br/>
+                        <oi-select class="noborder3" ng-class="{true: 'signature', false: 'unsignature'}[hasSig_1]" ng-model="vm.optRiskEva.anesthesName" oi-options="i.userName as i.name for i in anaesthetistList" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+                        <br/>
+                        <div class="eSignature">
+                            <img ng-repeat="item in eSignatureAnesthetist_1" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                        <div>
+                </td>
+                <td colspan="2">
+                    <div ng-class="{true: 'md-red'}[!vm.optRiskEva.tourNurseName && verify]">
+                        巡回护士签名：
+                        <br/>
+                        <oi-select class="noborder3" ng-class="{true: 'signature', false: 'unsignature'}[hasSig_2]" ng-model="vm.optRiskEva.tourNurseName" oi-options="i.userName as i.name for i in nurseList" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']',cleanModel: true }"></oi-select>
+                        <br/>
+                        <div class="eSignature">
+                            <img ng-repeat="item in eSignatureAnesthetist_2" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <p>手术风险评估：手术切口清洁程度（{{vm.incisionCleanlinessScore}} 分）+麻醉ASA分级（{{vm.asaScore}}分）+手术持续时间（{{vm.durationSurgeryScore}} 分）= {{vm.optRiskEva.nnis}} 分，</p>
+                    <p> NNIS分级：0 -
+                        <checkbox readonly ng-model="vm.optRiskEva.riskEvaluation" ng-true-value="1"></checkbox> 1 -
+                        <checkbox readonly ng-model="vm.optRiskEva.riskEvaluation" ng-true-value="2"></checkbox> 2 -
+                        <checkbox readonly ng-model="vm.optRiskEva.riskEvaluation" ng-true-value="3"></checkbox> 3 -
+                        <checkbox readonly ng-model="vm.optRiskEva.riskEvaluation" ng-true-value="4"></checkbox>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between start">
+            <div layout>
+                注：
+            </div>
+            <div layout flex>
+                1、手术医生负责填写患者的基本信息。准备皮肤切开前手术医生、麻醉师及手术护士要对手术风险评估表进行填写，术者负责填写手术切口清洁程度一栏及手术风险评估一栏，麻醉师负责填写麻醉分级一栏，手术护士负责填写手术持续时间一栏。
+            </div>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between start">
+            <div layout>&nbsp;&nbsp;</div>
+            <div layout flex>
+                2、此表应当使用蓝墨水或碳素墨水填写，填写者在与评价项目相应的框内数值上或“□”打钩“✔”后，分值相加即可完成。
+            </div>
+        </div>
+        </div>
+        </div>

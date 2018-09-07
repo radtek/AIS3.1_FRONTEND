@@ -1,0 +1,140 @@
+<div layout flex id="cata-mgt">
+    <!-- 菜单树 -->
+    <div class="menu-tree scroll">
+        <div class="form-inline form-group">
+            <label for="exampleInputName2">局点：</label>
+            <select class="form-control" style="width:190px;" ng-options="item as item.name for item in hospital" ng-model="selHospModel"></select>
+            <label for="exampleInputName2">模块：</label>
+            <select class="form-control" style="width:105px;" ng-model="selModel">
+                <option value="CTRLCENT">控制中心</option>
+                <option value="OPRM">术中</option>
+                <option value="PACU">复苏室</option>
+                <option value="LRGSCRN">大屏</option>
+            </select>
+        </div>
+        <div>{{selectedNodeStr}}</div>
+        <div>
+            <z-tree id="tree" class="ztree" z-config="zConfig" z-option="zOption"></z-tree>
+        </div>
+    </div>
+    <!-- 编辑 -->
+    <div class="panel panel-primary edit-tree" flex>
+        <div class="panel-heading">编辑目录</div>
+        <div class="panel-body" layout="column" layout-padding>
+            <div layout flex-lg class="form-ctrl">
+                <label class="control-label">医院：</label>
+                <div>{{selHospModel.name}}</div>
+                <label class="control-label">模块：</label>
+                <div>{{selModelStr}}</div>
+            </div>
+            <div layout flex-lg class="form-ctrl">
+                <label class="control-label">父目录：</label>
+                <div flex="40">
+                    <select class="form-control" ng-options="item.id as item.name for item in parentItem" ng-model="zSelected.parentId" ng-disabled="true"></select>
+                </div>
+            </div>
+            <div layout flex-lg class="form-ctrl">
+                <label class="control-label">目录名称：</label>
+                <div flex="40">
+                    <input type="text" class="form-control" ng-model="zSelected.name" maxlength="50">
+                </div>
+            </div>
+            <div layout flex-lg class="form-ctrl">
+                <label class="control-label">路由地址：</label>
+                <div flex="40">
+                    <input type="text" class="form-control" ng-model="zSelected.url" maxlength="50">
+                </div>
+            </div>
+            <div layout flex-lg class="form-ctrl cata">
+                <label class="control-label">是否左侧导航：</label>
+                <div layout flex>
+                    <div>
+                        <label class="radio">
+                            <input type="radio" name="isLeftMenu" ng-value="1" ng-model="zSelected.isLeftMenu">是
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio">
+                            <input type="radio" name="isLeftMenu" ng-value="0" ng-model="zSelected.isLeftMenu">否
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div layout flex-lg class="form-ctrl">
+                <label class="control-label">分块：</label>
+                <div flex="40">
+                    <select class="form-control" ng-model="zSelected.target">
+                        <option value="begining">首页</option>
+                        <option value="features">手术模块</option>
+                        <option value="management">管理模块</option>
+                    </select>
+                </div>
+            </div>
+            <div layout flex-lg class="form-ctrl">
+                <label class="control-label">排序：</label>
+                <div flex="40">
+                    <select class="form-control" ng-options="item for item in nodeIndex" ng-model="zSelected.sort"></select>
+                </div>
+            </div>
+            <div layout flex-lg layout-align="start center" class="form-ctrl cata">
+                <label class="control-label">是否可用：</label>
+                <div layout flex>
+                    <div>
+                        <label class="radio">
+                            <input type="radio" name="enable" ng-value="1" ng-model="zSelected.enable">启用
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio">
+                            <input type="radio" name="enable" ng-value="0" ng-model="zSelected.enable">禁用
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div layout flex-lg layout-align="start center" class="form-ctrl cata">
+                <label class="control-label">目录：</label>
+                <div layout flex>
+                    <div>
+                        <label class="radio">
+                            <input type="radio" name="type" ng-value="1" ng-model="zSelected.type">页面
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio">
+                            <input type="radio" name="type" ng-value="3" ng-model="zSelected.type">文书
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio">
+                            <input type="radio" name="type" ng-value="0" ng-model="zSelected.type">仅用作目录
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div layout flex-lg layout-align="start center" class="form-ctrl cata" ng-if="zSelected.type">
+                <label class="control-label">权限：</label>
+                <div layout flex layout-wrap="wrap">
+                    <div ng-repeat="item in authority" flex=25 class="input-wrap check">
+                        <checkbox ng-model="item.active" ng-true-value="1">{{item.codeName + '(' + item.codeValue + ')'}}</checkbox>
+                        <!-- <label class="checkbox1">
+                            <input type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="item.active">{{item.codeName + '(' + item.codeValue + ')'}}
+                        </label> -->
+                    </div>
+                </div>
+            </div>
+            <div layout flex-lg layout-align="start center" class="form-ctrl cata" ng-show="zSelected.type">
+                <label class="control-label">关联文书：</label>
+                <div flex="40">
+                    <select class="form-control" ng-model="zSelected.docTableId">
+                        <option value="">--无关联--</option>
+                        <option ng-repeat="item in docTableList" value="{{item.docId}}">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div layout flex-lg flex-offset="15">
+                <button type="button" class="btn btn-primary" ng-click="btnSubmit()" style="margin-right: 15px;">提&nbsp;&nbsp;交</button>
+                <button type="button" class="btn btn-primary" ng-click="btnCancel()">取&nbsp;&nbsp;消</button>
+            </div>
+        </div>
+    </div>
+</div>

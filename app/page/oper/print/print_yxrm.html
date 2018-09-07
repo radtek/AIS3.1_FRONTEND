@@ -1,0 +1,17 @@
+<!-- 加载中 -->
+<div class="print-progress">
+    <progressbar></progressbar>
+</div>
+<div id="doc-all">
+    <!-- 文书 -->
+    <visit-est-log-yxrm ng-if="doc_pre_visit"></visit-est-log-yxrm>
+    <info-cons-yxrm ng-if="doc_accede"></info-cons-yxrm>
+    <oper-room-nur-yxrm ng-if="doc_nurse_interview_record"></oper-room-nur-yxrm>
+    <post-look-back-yxrm ng-if="doc_post_oper_regard"></post-look-back-yxrm> 
+    <anes-record-log-print-yxrm ng-if="doc_anaes_record"></anes-record-log-print-yxrm> 
+    <anesthesia-summary-yxrm ng-if="doc_anaes_summary"></anesthesia-summary-yxrm>
+    <nurs-record-log-yxrm ng-if="doc_opt_care_record"></nurs-record-log-yxrm>
+    <check-record-log-yxrm ng-if="doc_opt_nurse"></check-record-log-yxrm>
+    <post-visit-log-yxrm ng-if="doc_post_follow_record"></post-visit-log-yxrm>
+    <ease-pain-agree ng-if="doc_analgesic_informed_consent"></ease-pain-agree>
+</div>

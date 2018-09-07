@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h4>
+    	<span>体内植入物</span>
+        <span class="pull-right modal-container_close" ng-click="cancel()">✖</span>
+    </h4>
+</div>
+<form name="form" novalidate>
+    <div class="modal-body err-wrap">
+        <div flex class="form-group" layout layout-align="start center">
+            <checkbox style="min-width:94px;" md-no-ink ng-true-value="'DJ管'" ng-model="plants[0]">DJ管</checkbox>
+            <checkbox style="min-width:94px;" md-no-ink ng-true-value="'人工晶体'" ng-model="plants[1]">人工晶体</checkbox>
+            <checkbox style="min-width:78px;" md-no-ink ng-true-value="'螺钉'" ng-model="plants[2]">螺钉</checkbox>
+            <checkbox style="min-width:110px;" md-no-ink ng-true-value="'钢板'" ng-model="plants[3]">钢板</checkbox>
+            <checkbox style="min-width:94px;" md-no-ink ng-true-value="'克氏针'" ng-model="plants[4]">克氏针</checkbox>
+        </div>
+        <div flex class="form-group" layout layout-align="start center">
+            <checkbox style="min-width:94px;" md-no-ink ng-true-value="'人工骨'" ng-model="plants[5]">人工骨</checkbox>
+            <checkbox style="min-width:94px;" md-no-ink ng-true-value="'钛网'" ng-model="plants[6]">钛网</checkbox>
+            <checkbox style="min-width:78px;" md-no-ink ng-true-value="'接骨片'" ng-model="plants[7]">接骨片</checkbox>
+            <checkbox style="min-width:110px;" md-no-ink ng-true-value="'人工硬脑膜'" ng-model="plants[8]">人工硬脑膜</checkbox>
+            <checkbox style="min-width:94px;" md-no-ink ng-true-value="'人工血管'" ng-model="plants[9]">人工血管</checkbox>
+        </div>
+        <div flex class="form-group" layout layout-align="start center">
+            <checkbox style="min-width:94px;" md-no-ink ng-true-value="'动脉瘤夹'" ng-model="plants[10]">动脉瘤夹</checkbox>
+            <checkbox style="min-width:94px;" md-no-ink ng-true-value="'补片'" ng-model="plants[11]">补片</checkbox>
+            <checkbox style="min-width:78px;" md-no-ink ng-true-value="'支架'" ng-model="plants[12]">支架</checkbox>
+            <checkbox style="min-width:110px;" md-no-ink ng-true-value="'假体'" ng-model="plants[13]">假体</checkbox>
+            <checkbox md-no-ink ng-true-value="'钉棒'" ng-model="plants[14]">钉棒</checkbox>
+        </div>
+        <div flex class="form-group" layout layout-align="start center">
+            <checkbox md-no-ink ng-true-value="'硅油'" ng-model="plants[15]">硅油</checkbox>
+        </div>
+        <div flex class="form-group" layout layout-align="start center">
+            <span>其他：</span><input flex type="text" class="noborder3" ng-model="other" ng-value="other">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="save()" ng-disabled="form.$invalid">保存</button>
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+</form>

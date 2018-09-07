@@ -1,0 +1,61 @@
+<div class="navbar-btn btn-xs text-right c-el-10">
+    <button class="btn btn-primary" ng-click="refresh()">刷&nbsp;&nbsp;新</button>
+</div>
+<div id="inOper" class="row">
+    <div class="col-md-3" ng-repeat="item in dataList">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="clearfix">
+                    <h4 class="pull-left">{{item.operRoomName}}</h4>
+                    <h4 class="pull-right md-red" ng-if='item.emergency == 1'>急诊</h4>
+                </div>
+            </div>
+            <div class="panel-body bg-success">
+                <ul>
+                    <li class="form-group">患者信息</li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">姓名：</label>
+                        <span flex>{{item.name}}</span>
+                    </li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">住院号：</label>
+                        <span flex>{{item.hid}}</span>
+                    </li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">年龄：</label>
+                        <span flex>{{item.age}}</span>
+                    </li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">身高(CM)：</label>
+                        <span flex>{{item.height}}</span>
+                    </li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">体重(KG)：</label>
+                        <span flex>{{item.weight}}</span>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="form-group">手术信息</li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">拟施手术：</label>
+                        <span flex class="ellipsis-more" title="{{item.designedOptName}}">{{item.designedOptName}}</span>
+                    </li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">手术等级：</label>
+                        <span flex>{{item.optLevel}}</span>
+                    </li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">手术医生：</label>
+                        <span flex>{{item.operatorName}}</span>
+                    </li>
+                    <li layout layout-align="start center" class="form-group input-group">
+                        <label class="tit">麻醉医生：</label>
+                        <span flex>{{item.anaesDocName}}</span>
+                    </li>
+                </ul>
+                <button class="btn btn-primary pull-right" ng-repeat='btn in btnsMenu' ng-click='to(item, btn.url)'>{{btn.name}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="noData" ng-if="dataList.length <= 0">暂无数据</div>
+</div>

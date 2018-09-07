@@ -1,0 +1,546 @@
+.pacuRecord {
+    @red: red;
+    @black: black;
+    @linH: 24px;
+    aside {
+        width: 76px;
+        margin-right: 10px;
+        overflow: auto;
+        button {
+            width: inherit;
+            height: 60px;
+            padding: 0px;
+        }
+        button.btn.btn-primary {
+            background-color: #2068b1;
+        }
+        button:not(:first-child) {
+            margin-top: 10px;
+        }
+        .btn,
+        .btn:active {
+            min-width: 76px;
+        }
+    }
+    .btn-left {
+        position: absolute;
+        height: 82.5%;
+        overflow: auto;
+    }
+    .btn-left-oper {
+        position: absolute;
+        height: 87.5%;
+        overflow: auto;
+    }
+    .main-left {
+        padding-left: 86px;
+    }
+    main {
+        color: @red;
+        overflow: auto;
+        header {
+            h3,
+            h4 {
+                letter-spacing: 5px;
+            }
+            .img-title {
+                height: 90px;
+            }
+            .img-title1 {
+                height: 60px;
+                margin-left: -50px;
+            }
+        }
+        article {
+            border: 2px solid @red;
+            .head {
+                border-bottom: 1px solid @red;
+                /*手术体位*/
+                .optBody {
+                    width: 460px;
+                }
+                /*特殊情况*/
+                .exCase {
+                    margin-top: 1px;
+                    border: 1px solid @red;
+                    border-radius: 3px;
+                }
+                textarea {
+                    resize: none;
+                    border-color: @red;
+                    border-radius: 2px;
+                }
+            }
+            .body {
+                min-height: 300px;
+                /*用li标签布局实现带边框单元格*/
+                li {
+                    border-top: 1px solid @red;
+                    min-height: @linH;
+                }
+                li:nth-child(1) {
+                    border-top: none;
+                }
+                /* 子集从左至右排列 */
+                .h-group>* {
+                    border: none;
+                    border-left: 1px solid @red;
+                }
+                .h-group>*:nth-child(1) {
+                    border-left: none;
+                }
+                /*监测区域控件样式调整*/
+                .inputs>* {
+                    width: 100%;
+                    height: inherit;
+                    border: none;
+                }
+                /*用药名称过长，就浮动显示*/
+                .medName {
+                    position: relative;
+                    >* {
+                        pointer-events: none;
+                        position: absolute;
+                        min-height: @linH!important;
+                        line-height: @linH!important;
+                        min-width: 400px!important;
+                    }
+                }
+                /*所有事件icon样式*/
+                .ev-icon {
+                    min-width: 105px;
+                    >div {
+                        min-height: @linH;
+                    }
+                    i {
+                        height: 18px;
+                        line-height: 1;
+                    }
+                    i.active {
+                        background-color: #ccc;
+                    }
+                    img {
+                        height: 18px;
+                    }
+                    datetime-picker {
+                        width: 41px;
+                    }
+                }
+                /* 出室去向
+                 * sp 就是span或者其它标签来显示的样式
+                 */
+                .sp-leaveTo {
+                    width: 105px;
+                    >* {
+                        background-color: #ccc;
+                        color: #fff!important;
+                        height: auto!important;
+                        padding: 2px!important;
+                        width: 51px;
+                        margin-bottom: 2px;
+                        text-align: center;
+                    }
+                    >*.active {
+                        background-color: @red;
+                    }
+                }
+                .even-borTop:nth-child(even) {
+                    border-top: none;
+                }
+
+                /*术中监测视图*/
+                .mon-point {
+                    position: relative;
+                    .btnViewSwitch {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        background-color: #ccc;
+                        color: #fff!important;
+                        height: auto;
+                        padding: 2px 4px;
+                    }
+                    .dataView {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: #fff;
+                    }
+                    .v-body {
+                        overflow: auto;
+                        input {
+                            width: 70px;
+                            height: 30px;
+                            line-height: 30px;
+                            border-bottom: 1px solid #eee;
+                        }
+                    }
+                    .v-head span,
+                    .v-body span {
+                        width: 100px;
+                        height: 30px;
+                        line-height: 30px;
+                    }
+                    .v-foot span {
+                        background-color: #ccc;
+                        color: #fff!important;
+                        height: auto;
+                        padding: 2px 4px;
+                    }
+                }
+                /*在.body区域的IO总量*/
+                .IOAmout {
+                    min-height: @linH * 3 + 1;
+                }
+                .remark {
+                    height: @linH * 25 + 1;
+                    overflow: auto;
+                }
+            }
+            .foot {
+                border-top: 1px solid @red;
+                /*备注*/
+                .remark {
+                    height: 232px;
+                }
+                /*手术人员*/
+                .operPers {
+                    border-left: 1px solid @red;
+                }
+                .operPers ul {
+                    width: 100%;
+                    border-top: 1px solid @red;
+                }
+                .operPers ul:nth-child(1) {
+                    border-top: none;
+                }
+            }
+        }
+        footer {
+            margin-top: 30px;
+            background-color: @black;
+            ul {
+                width: 100px;
+                height: 54px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #fff;
+                border-radius: 3px;
+                text-align: center;
+                color: #fff;
+            }
+            li {
+                line-height: 27px;
+            }
+            li:nth-child(1) {
+                border-top: none;
+            }
+            .cor-515 {
+                color: rgb(50, 163, 57);
+            }
+            .cor-422 {
+                color: rgb(40, 216, 247);
+            }
+            .cor-242 {
+                color: rgb(215, 46, 28)
+            }
+            .cor-512 {
+                color: rgb(50, 117, 224);
+            }
+            .cor-224 {
+                color: rgb(255, 240, 4);
+            }
+            @-webkit-keyframes setcolor {
+                from {
+                    background-color: @black;
+                    border-color: @black;
+                }
+                to {
+                    color: #ff0000;
+                    border-color: #ff0000;
+                }
+            }
+            @-webkit-keyframes setcolor-white {
+                from {
+                    color-color: @black;
+                    border-color: @black;
+                }
+                to {
+                    color: #eeee00;
+                    border-color: #ff0000;
+                }
+            }
+            .alarm {
+                animation: setcolor 0.5s infinite alternate;
+                -webkit-animation: setcolor 0.5s infinite alternate;
+                /* Safari 和 Chrome */
+            }
+            .alarm-white {
+                animation: setcolor-white 0.5s infinite alternate;
+                -webkit-animation: setcolor-white 0.5s infinite alternate;
+                /* Safari 和 Chrome */
+            }
+        }
+        /*左侧区域宽度*/
+        .left {
+            width: 270px;
+        }
+        /*右侧区域宽度*/
+        .right {
+            min-width: 200px;
+            .scroll::-webkit-scrollbar {
+                width: 5px;
+            }
+        }
+        /*底部带边框*/
+        .unline {
+            border-bottom: 1px solid @red!important;
+        }
+        /*控制每组的间距*/
+        .form-group {
+            margin-bottom: 4px;
+        }
+        /*盒子的内间距*/
+        .box {
+            padding: 2px;
+        }
+        .box-top {
+            border-top: 1px solid @red;
+        }
+        .box-right {
+            border-right: 1px solid @red;
+        }
+        .box-left {
+            border-left: 1px solid @red;
+        }
+        /*垂直在旁边的内容*/
+        .v-aside {
+            width: 26px;
+            text-align: center;
+            line-height: 1;
+        }
+        .v-aside-1 {
+            width: 25px;
+            text-align: center;
+            line-height: 1;
+        }
+        .v-aside-tit {
+            width: 244px
+        }
+        [ng-click],
+        [ng-blur] {
+            cursor: pointer;
+        }
+        span:not(.close):not(.checkInput) {
+            color: @black;
+            display: inline-block;
+            height: 18px;
+            line-height: 18px;
+            min-width: 30px;
+            padding: 0 2px;
+            word-break: break-all;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        input[type='text'],
+        input[type='number'] {
+            border: none;
+            outline: none;
+            min-width: 38px;
+            padding: 0 2px;
+        }
+        input[type='radio'] {
+            margin: 2px 2px 0;
+        }
+        label {
+            margin: 0;
+            font-weight: inherit;
+        }
+        textarea {
+            color: @black;
+            padding: 0 2px;
+            border: none;
+            outline: none;
+            resize: none;
+        }
+        select {
+            padding: 0 2px;
+            height: 18px;
+            line-height: 18px;
+            min-width: 30px;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            border-bottom: 1px solid @red;
+            color: @black;
+            option {
+                height: inherit;
+                line-height: inherit;
+            }
+        }
+        oi-select {
+            height: auto;
+            min-height: 21px;
+            .select-search {
+                border: none;
+                border-bottom: 1px solid @red;
+                box-shadow: none;
+            }
+            .select-search-list {
+                padding: 0;
+            }
+            .select-search-list-item_selection {
+                margin: 0 2px;
+                padding: 0 2px;
+                min-width: 70px;
+            }
+        }
+        datetime-picker{
+             border-bottom: 1px solid @red;
+             width:220px;
+        }
+    }
+    @media print {
+        * {
+            color: @red!important;
+        }
+        span:not(.close):not(.checkInput) {
+            color: @black!important;
+        }
+    }
+}
+
+.pacuRecord.print {
+    @red: red;
+    @black: black;
+    @linH: 15px;
+    page-break-after: always;
+    page-break-inside: avoid;
+    font-family: 'Microsoft YaHei';
+    margin: 0;
+    padding: 0;
+    border: 0;
+    main {
+        width: 210mm;
+        overflow: hidden;
+        * {
+            font-size: 12px;
+        }
+        h3 {
+            font-size: 15px;
+        }
+        h4 {
+            font-size: 14px;
+        }
+        .img-title1 {
+            height: 40px;
+            margin-left: -50px;
+        }
+        header.compact h3,
+        header.compact h4,
+        header.compact h5 {
+            margin-top: 0;
+            margin-bottom: 4px
+        }
+        padding-left: 0px;
+        article {
+            .head {
+                /*手术体位*/
+                .optBody {
+                    width: 270px;
+                }
+            }
+            .body {
+                li {
+                    border-top: 1px solid @red;
+                    min-height: @linH;
+                }
+                li:nth-child(1) {
+                    border-top: none;
+                }
+                .h-group>* {
+                    border: none;
+                    border-left: 1px solid @red;
+                }
+                .h-group>*:nth-child(1) {
+                    border-left: none;
+                }
+                .inputs>* {
+                    height: @linH - 1;
+                }
+                /*用药名称过长，就浮动显示*/
+                .medName {
+                    >* {
+                        min-height: @linH!important;
+                        line-height: @linH!important;
+                    }
+                }
+                /*所有事件icon样式*/
+                .ev-icon {
+                    >div {
+                        min-height: @linH;
+                    }
+                    img {
+                        height: 13px;
+                    }
+                }
+                /* 出室去向
+                 * sp 就是span或者其它标签来显示的样式
+                 */
+                .sp-leaveTo {
+                    >* {
+                        background-color: transparent;
+                        color: @red!important;
+                    }
+                    >*:not(.active) {
+                        text-decoration: line-through;
+                    }
+                }
+                /*在.body区域的IO总量*/
+                .IOAmout {
+                    min-height: @linH * 3 + 1;
+                }
+                .remark {
+                    height: @linH * 25 + 1;
+                }
+            }
+            .foot {
+                /*备注*/
+                .remark {
+                    height: 110px;
+                }
+            }
+        }
+        /*左侧区域宽度*/
+        .left,
+        .right {
+            width: 160px;
+        }
+        /*控制每组的间距*/
+        .form-group {
+            margin-bottom: 0;
+        }
+        /*垂直在旁边的内容*/
+        .v-aside {
+            width: 18px;
+        }
+        .v-aside-1 {
+            width: 17px;
+        }
+        .v-aside-tit {
+            width: 142px;
+            height: @linH - 5;
+        }
+        .v-aside-2 {
+            max-height: 15px;
+        }
+        .ml-5 {
+            margin-left: 5px;
+        }
+    }
+}

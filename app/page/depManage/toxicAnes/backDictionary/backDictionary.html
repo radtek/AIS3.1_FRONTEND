@@ -1,0 +1,20 @@
+<div flex style=" margin-top: 15px;">
+	<div layout layout-wrap="wrap" >	    
+		<div flex="5" class="text-center" style="margin: 5px 10px 0 10px;">从</div>
+        <datetime-picker  flex="10"  dateID="date-start-time" ng-model="startTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>    	
+        <div  flex="5"  class="text-center" style="margin: 5px 10px 0 10px;">到</div>
+        <datetime-picker  flex="10"  dateID="date-end-time" ng-model="endTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>       
+        　<button class="btn btn-primary pull-right" type="button" ng-click="query()">查&nbsp;&nbsp;询</button>
+    </div>
+    <div flex style="height: 40px;">
+	<span><b style="line-height: 40px;">普通退药</b></span><button ng-if="permission.indexOf('ADD') >= 0" class="btn btn-primary pull-right" type="button" ng-click="export(1);">导出EXCEL</button>	 
+	</div>
+    <div ui-grid="gridOptions" style="height: 450px;" ui-grid-auto-resize  ui-grid-exporter  ui-grid-pagination ng-if="gridOptions"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+    <br/>
+	<div flex style="height: 40px;">
+    <span><b style="line-height: 40px;">手术退药</b></span> <button ng-if="permission.indexOf('ADD') >= 0" class="btn btn-primary pull-right" type="button" ng-click="export(2);">导出EXCEL</button>
+    </div>
+    <div ui-grid="gridOptions2" style="height: 450px;"  ui-grid-auto-resize ui-grid-pagination  ui-grid-exporter ng-if="gridOptions2"></div>
+    <div class="noData" ng-if="!gridOptions2">暂无数据</div>
+</div>

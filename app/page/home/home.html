@@ -1,0 +1,112 @@
+<div flex layout="column" id="home">
+    <div flex layout>
+        <div flex layout="column" class="panel panel-default duraStat">
+            <div class="panel-heading">手术时长统计</div>
+            <div flex layout class="panel-body">
+                <div e-chart class="echarts" e-config="eConfig" e-option="duraStat"></div>
+            </div>
+        </div>
+        <div flex layout="column" class="panel panel-default tcsStat ml-15" ng-if="beid!=='107'">
+            <div class="panel-heading">手术台次统计</div>
+            <div flex layout class="panel-body">
+                <div e-chart class="echarts" e-config="eConfig2" e-option="tcsStat"></div>
+            </div>
+        </div>
+        <div flex layout="column" class="panel panel-default todo">
+            <div class="panel-heading">待办事项</div>
+            <div flex layout layout-padding>
+                <div flex layout="column">
+                    <p>待补文书（单位：人）</p>
+                    <ul flex layout>
+                        <li class="rect color-1" ng-click="showModal('待补文书')"></li>
+                        <li>
+                            <span>总计</span>
+                            <span>{{doc.total}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div flex layout="column">
+                    <p>今日手术（单位：人）</p>
+                    <ul flex layout>
+                        <li class="rect color-2" ng-click="showModal('今日手术')"></li>
+                        <li>
+                            <span>总计</span>
+                            <span>{{todayOpt.total}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div flex layout layout-padding>
+                <div flex layout="column">
+                    <p>我的手术（单位：人）</p>
+                    <ul flex layout>
+                        <li class="rect color-3" ng-click="showModal('我的手术')"></li>
+                        <li>
+                            <span>总计</span>
+                            <span>{{myOpt.total}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div flex layout="column">
+                    <p>待排班病人（单位：人）</p>
+                    <ul flex layout>
+                        <li class="rect color-4" ng-click="showModal('待排班病人')"></li>
+                        <li>
+                            <span>总计</span>
+                            <span>{{pat.total}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div flex layout>
+        <div flex layout="column" class="panel panel-default no-margin" ng-class="{'notice': beid!=='107'}">
+            <div class="panel-heading">信息公告
+                <div ng-if="permission.indexOf('ADD') >= 0" ng-click="editAnnouncement()" class="pull-right notice-add">+ 发布公告</div>
+            </div>
+            <div class="panel-body notice-wrap" layout flex>
+                <ul flex>
+                    <scroll-up data="notice"></scroll-up>
+                </ul>
+            </div>
+        </div>
+        <div flex=60 layout="column" class="panel panel-default no-margin" ng-if="beid!=='107'">
+            <div class="panel-heading">收费包变更通知
+                <div ng-click="autoReplace($event, _active)" class="pull-right glyphicon glyphicon-search"></div>
+            </div>
+            <div flex layout class="panel-body changPack">
+                <ul flex layout='column'>
+                    <li><strong>药品/液体</strong></li>
+                    <li flex>
+                        <table class="table table-hover">
+                            <tr>
+                                <td>状态&nbsp;/&nbsp;名称&nbsp;/&nbsp;规格&nbsp;/&nbsp;单价</td>
+                                <td style="width: 87px;">操作</td>
+                            </tr>
+                            <tr ng-repeat="item in medicineList">
+                                <td class="ellipsis" title="{{item.name}}&nbsp;/&nbsp;{{item.spec}}&nbsp;({{item.priceMinPackage}})">【{{item.enable ? '无效' : '有效'}}】{{item.name}}(<strong>{{item.priceMinPackage}}</strong>)</td>
+                                <td><a ng-click="del($event, 1, item)">删除</a>&nbsp;|&nbsp;<a ng-click="replace($event, 1, item)">替换</a></td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+                <ul flex layout='column'>
+                    <li><strong>收费项目</strong></li>
+                    <li flex>
+                        <table class="table table-hover">
+                            <tr>
+                                <td>状态&nbsp;/&nbsp;名称&nbsp;/&nbsp;单价</td>
+                                <td style="width: 87px;">操作</td>
+                            </tr>
+                            <tr ng-repeat="item in chargeItemList">
+                                <td class="ellipsis" title="{{item.chargeItemName}}({{item.basicUnitPrice}})">【{{item.enable ? '无效' : '有效'}}】{{item.chargeItemName}}(<strong>{{item.basicUnitPrice}}</strong>)</td>
+                                <td><a ng-click="del($event, 2, item)">删除</a>&nbsp;|&nbsp;<a ng-click="replace($event, 2, item)">替换</a></td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

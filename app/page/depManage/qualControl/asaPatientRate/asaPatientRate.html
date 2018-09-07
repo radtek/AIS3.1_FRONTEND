@@ -1,0 +1,52 @@
+<div flex>
+	<div layout flex style="height: 305px;margin-bottom:10px;border:1px solid #ccc">
+	    <div layout="column" flex="40">
+	        <!-- <div class="pie" style="animation-delay: -20s;">　</div> -->
+	        <!-- <canvas id="pie" class="chart chart-pie chart-xs" chart-data="{{[20, 80]}}" chart-labels="{{['2x', '8x']}}"></canvas> -->
+	        <div e-chart class="echarts" e-config="eConfig" e-option="eOption"></div>
+	    </div>
+	    <div layout="column" flex="60">
+	        <div style="margin-top:40px;padding-left: 85px;"><i class="glyphicon glyphicon-asterisk"></i> 说明：各ASA分级麻醉患者比例是指该ASA分级麻醉患者数占同期各ASA分级麻醉患者总数的比例。
+	        </div>
+	        <div  style="margin-top:20px;">
+	        <div layout flex>
+	            <div layout="column" layout-align="center end" flex="25">
+	                <span style="padding-top:2px;white-space:nowrap;">ASA分级麻醉患者比例 &nbsp;&nbsp;=</span>
+	            </div>
+	            <div layout="column" layout-align="center center"  flex="35">
+		            <div layout="column">
+		                <div  style="white-space:nowrap;">
+		                    ASA分级麻醉患者数
+		                </div>
+		                <div>
+		                    <hr style="height:1px;background-color:#777;">
+		                </div>
+		                <div  style="white-space:nowrap;">
+		                    同期各ASA分级麻醉患者总数
+		                </div>
+	                </div>
+	            </div>
+	            <div layout="column" layout-align="center start" flex="10">
+	                <span style="white-space:nowrap;"> &nbsp;&nbsp;x 100% </span>
+	            </div>
+	        </div>
+	        </div>
+	        <div style="margin:20px 0;padding-left: 85px;">
+	            <div layout="column" flex >
+	                I级={{ASALevel.rate['1级']}}%&nbsp;&nbsp;&nbsp;&nbsp; II级={{ASALevel.rate['2级']}}%&nbsp;&nbsp;&nbsp;&nbsp; III级={{ASALevel.rate['3级']}}%&nbsp;&nbsp;&nbsp;&nbsp; IV级={{ASALevel.rate['4级']}}%&nbsp;&nbsp;&nbsp;&nbsp; V级={{ASALevel.rate['5级']}}%&nbsp;&nbsp;&nbsp;&nbsp; 其他={{ASALevel.rate['其他']?ASALevel.rate['其他']:0}}%
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiASALevel');">导&nbsp;&nbsp;出</button>
+	</div>
+	<div ui-grid="gridOptionsASALevel" ui-grid-exporter ui-grid-auto-resize ui-grid-pagination ng-if="gridOptionsASALevel" class="ui-grid-400"></div>
+	<div class="noData" ng-if="!gridOptionsASALevel">暂无数据</div>
+	<div class="text-right" style="padding:10px 0;">
+	    <button class="btn btn-primary" type="button" ng-click="export('gridApiASALevelOper');">导&nbsp;&nbsp;出</button>
+	</div>
+	<div ui-grid="gridOptionsASALevelOper" ui-grid-exporter ui-grid-auto-resize ui-grid-pagination ng-if="gridOptionsASALevelOper" class="ui-grid-400"></div>
+	<div class="noData" ng-if="!gridOptionsASALevelOper">暂无数据</div>
+   
+</div>

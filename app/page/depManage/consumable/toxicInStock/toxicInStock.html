@@ -1,0 +1,7 @@
+<div flex>
+	<form role="form" layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">		
+	    <button ng-if="permission.indexOf('ADD') >= 0" class="btn btn-primary" type="button" ng-click="addInput();">添加入库</button>
+	</form>	
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions.data" class="ui-grid-729"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+</div>

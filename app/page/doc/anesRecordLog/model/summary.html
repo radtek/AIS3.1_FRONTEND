@@ -1,0 +1,337 @@
+<div class="modal-header">
+    <h4><span>麻醉总结</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="anesthesiaSummary">
+    <div class="modal-body page-print" style="box-shadow: none;">
+        <div class="form-group" layout>
+            <div flex="55" class="group">
+                <div>
+                    <checkbox class="tit" ng-model="anaesSummaryAppendixGen.genAnesthesia" ng-true-value="1" ng-false-value=''>全身麻醉</checkbox>
+                </div>
+                <div class="group group-margin" ng-class="{false: 'end-state'}[anaesSummaryAppendixGen.genAnesthesia]">
+                    <div>
+                        <span>诱导方法：</span>
+                        <checkbox ng-model="anaesSummaryAppendixGen.fastInduction" ng-true-value="2" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">快诱导</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.fastInduction" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">慢诱导</checkbox>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixGen.intubation" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">气管插管</checkbox>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixGen.endotracheal" ng-true-value="2" ng-disabled="!anaesSummaryAppendixGen.intubation">气管内</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.endotracheal" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.intubation">支气管内</checkbox>（
+                        <checkbox ng-model="anaesSummaryAppendixGen.leftChamber" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.endotracheal">左</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.leftChamber" ng-true-value="2" ng-disabled="!anaesSummaryAppendixGen.endotracheal">右</checkbox>）
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixGen.doubleCavity" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.intubation">双腔管</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.blockDevice" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.intubation">阻塞器</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.fiberLocal" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.intubation">纤支镜定位</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.pyrosulfite" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.intubation">经口</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.transnasal" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.intubation">经鼻</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.transtracheal" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.intubation">经气管造口</checkbox>
+                    </div>
+                    <div>
+                        <span>型号：</span>
+                        <select ng-model="anaesSummaryAppendixGen.model1" class="noborder3" ng-options="item.codeValue as item.codeName for item in data.anesthesiaModelList" ng-disabled="!anaesSummaryAppendixGen.intubation"></select>，深度：
+                        <input type="number" max="1000" transform="number" class="noborder3" ng-model="anaesSummaryAppendixGen.depth" ng-value="anaesSummaryAppendixGen.depth" ng-disabled="!anaesSummaryAppendixGen.intubation">cm，第
+                        <input type="number" max='99' transform='number' class="noborder3" style="width: 40px;" ng-model='anaesSummaryAppendixGen.succCount' ng-disabled="!anaesSummaryAppendixGen.intubation">次插管成功
+                    </div>
+                    <div>
+                        <span>套囊：</span>
+                        <checkbox ng-model="anaesSummaryAppendixGen.cuff" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">有</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.cuff" ng-true-value="2" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">无</checkbox>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixGen.look" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">直视</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.blind" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">盲探</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.retrograde" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">逆行</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.fiberGuide" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">纤支镜引导</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.glidescope" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">可视喉镜</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.opticalCable" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">光索</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.intubationSuite" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">气管插管套件</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.reinPipe" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">加强管</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.shapedTube" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">异型管</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.oropharynxChannel" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">口咽通道</checkbox>
+                    </div>
+                    <div layout>
+                        <checkbox ng-model="anaesSummaryAppendixGen.other" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia" ng-click="anaesSummaryAppendixGen.otherContent = ''">其它</checkbox>
+                        <div layout flex>
+                            <input flex type="text" class="noborder3" maxlength="26" ng-model="anaesSummaryAppendixGen.otherContent" ng-value="anaesSummaryAppendixGen.otherContent" ng-disabled="!anaesSummaryAppendixGen.other" maxlength="30"></input>
+                        </div>
+                    </div>
+                    <div layout>
+                        <checkbox ng-model="anaesSummaryAppendixGen.laryMask" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">喉罩</checkbox>
+                        <div layout>
+                            型号：
+                            <select ng-model="anaesSummaryAppendixGen.model2" class="noborder3" ng-options="item.codeValue as item.codeName for item in data.laryngealMaskList" ng-disabled="!anaesSummaryAppendixGen.laryMask"></select>
+                        </div>
+                        <checkbox ng-model="anaesSummaryAppendixGen.diffIntub" ng-true-value="1" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia">插管困难</checkbox>
+                    </div>
+                    <div layout>
+                        <span>声门暴露分级Grade：</span>
+                        <checkbox ng-model="anaesSummaryAppendixGen.glottisExpClass" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia" ng-true-value="1">Ⅰ</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.glottisExpClass" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia" ng-true-value="2">Ⅱ</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.glottisExpClass" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia" ng-true-value="3">Ⅲ</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.glottisExpClass" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia" ng-true-value="4">Ⅳ</checkbox>
+                    </div>
+                    <div layout>
+                        <span>维持方法：</span>
+                        <checkbox ng-model="anaesSummaryAppendixGen.keepMethod" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia" ng-true-value="'1'">全凭静脉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.keepMethod" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia" ng-true-value="'2'">吸入</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.keepMethod" ng-disabled="!anaesSummaryAppendixGen.genAnesthesia" ng-true-value="'3'">静吸复合</checkbox>
+                    </div>
+                </div>
+                <div>
+                    <checkbox class="tit" ng-model="anaesSummaryAppendixGen.baseAnes" ng-true-value="1" ng-false-value=''>基础或强化麻醉</checkbox>
+                </div>
+                <div>
+                    <checkbox class="tit" ng-model="anaesSummaryAppendixGen.anesCare" ng-true-value="1" ng-false-value=''>麻醉监护</checkbox>
+                </div>
+                <div class="tit">监测项目：</div>
+                <div class="group-margin">
+                    <checkbox ng-model="anaesSummaryAppendixGen.monitProject7" ng-true-value="1">7项以内</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.monitProject7" ng-true-value="2">8-13项</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.monitProject7" ng-true-value="3">14项以上</checkbox>
+                </div>
+                <div class="group-margin">
+                    <checkbox ng-model="anaesSummaryAppendixGen.ecgSt" ng-true-value="1" ng-false-value=''>ECG&nbsp;ST段分析&nbsp;SpO2&nbsp;NBP&nbsp;RP</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.vtMv" ng-true-value="1" ng-false-value=''>VT&nbsp;MV&nbsp;Paw</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.petCo2" ng-true-value="1" ng-false-value=''>PETCO2</checkbox>
+                </div>
+                <div class="group-margin">
+                    <checkbox ng-model="anaesSummaryAppendixGen.aGas" ng-true-value="1" ng-false-value=''>A-gas</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.fio2" ng-true-value="1" ng-false-value=''>FI02</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.ibp" ng-true-value="1" ng-false-value=''>IBP</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.cvp" ng-true-value="1" ng-false-value=''>CVP</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.t" ng-true-value="1" ng-false-value=''>T</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.tof" ng-true-value="1" ng-false-value=''>肌松(TOF)</checkbox>
+                </div>
+                <div class="group-margin">
+                    <checkbox ng-model="anaesSummaryAppendixGen.anesDeep" ng-true-value="1" ng-false-value=''>麻醉深度</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.cardOutput" ng-true-value="1" ng-false-value=''>心排量</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.tee" ng-true-value="1" ng-false-value=''>TEE</checkbox>
+                </div>
+                <div class="group-margin">
+                    <checkbox ng-model="anaesSummaryAppendixGen.bloodSugar" ng-true-value="1" ng-false-value=''>血糖</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.blood" ng-true-value="1" ng-false-value=''>血气</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.bloodElect" ng-true-value="1" ng-false-value=''>血电解质</checkbox>
+                    <checkbox ng-model="anaesSummaryAppendixGen.hemoglobin" ng-true-value="1" ng-false-value=''>血红蛋白</checkbox>
+                </div>
+                <div class="tit">特殊管理：</div>
+                <div class="group-margin">
+                    <checkbox ng-model="anaesSummaryAppendixGen.controlerHyp" ng-true-value="1" ng-false-value=''>控制性降压</checkbox>
+                </div>
+                <div>
+                    <div class="required-inline" ng-class="{true: 'md-red'}[!anaesSummaryAppendixGen.anesEffect && verify]">
+                        <label>麻醉效果：</label>
+                        <checkbox ng-model="anaesSummaryAppendixGen.anesEffect" ng-true-value="1" ng-false-value=''>Ⅰ</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.anesEffect" ng-true-value="2" ng-false-value=''>Ⅱ</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.anesEffect" ng-true-value="3" ng-false-value=''>Ⅲ</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixGen.anesEffect" ng-true-value="4" ng-false-value=''>Ⅳ</checkbox>
+                    </div>
+                </div>
+            </div>
+            <div flex="45" class="group">
+                <div>
+                    <checkbox class="tit" ng-model="anaesSummaryAppendixCanal.spinalAnes" ng-true-value="1" ng-false-value=''>椎管内麻醉</checkbox>
+                </div>
+                <div class="group group-margin" ng-class="{false: 'end-state'}[anaesSummaryAppendixCanal.spinalAnes]">
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.waistAnes" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes">腰麻</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.epiduralAnes" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes">硬膜外麻醉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.cseUnionAnes" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes">腰硬联合麻醉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.sacralAnes" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes">骶麻</checkbox>
+                    </div>
+                    <div>
+                        <span>穿刺点1：</span>
+                        <select class="noborder3" style="width: 67px;" flex ng-model="anaesSummaryAppendixCanal.puncPoint1" ng-options="item.codeValue as item.codeName for item in data.puncturePointList" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes"></select>
+                        <span>置管</span>
+                        <input type="number" style="width: 46px;" transform="number" max="1000" class="noborder3" flex="15" ng-model="anaesSummaryAppendixCanal.catheterPoint1" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes" ng-value="anaesSummaryAppendixCanal.catheterPoint1"> cm&nbsp;针斜面
+                        <select class="noborder3" flex ng-model="anaesSummaryAppendixCanal.direction1" ng-options="item.codeValue as item.codeName for item in data.needleBevelList" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes"></select>&nbsp;负压试验
+                        <select class="noborder3" flex ng-model="anaesSummaryAppendixCanal.negativePressure1" ng-options="item.codeValue as item.codeName for item in data.negativePressList" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes"></select>
+                    </div>
+                    <div>
+                        <span>穿刺点2：</span>
+                        <select class="noborder3" style="width: 67px;" flex ng-model="anaesSummaryAppendixCanal.puncPoint2" ng-options="item.codeValue as item.codeName for item in data.puncturePointList" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes"></select>
+                        <span>置管</span>
+                        <input type="number" style="width: 46px;" transform="number" max="1000" flex="15" class="noborder3" ng-model="anaesSummaryAppendixCanal.catheterPoint2" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes" ng-value="anaesSummaryAppendixCanal.catheterPoint2"> cm&nbsp;针斜面
+                        <select class="noborder3" flex ng-model="anaesSummaryAppendixCanal.direction2" ng-options="item.codeValue as item.codeName for item in data.needleBevelList" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes"></select>&nbsp;负压试验
+                        <select class="noborder3" flex ng-model="anaesSummaryAppendixCanal.negativePressure2" ng-options="item.codeValue as item.codeName for item in data.negativePressList" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes"></select>
+                    </div>
+                    <div layout>
+                        <span>麻醉平面：</span>
+                        <input flex type="text" class="noborder3" maxlength="20" ng-model="anaesSummaryAppendixCanal.anesFlat" ng-value="anaesSummaryAppendixCanal.anesFlat" ng-disabled="!anaesSummaryAppendixCanal.spinalAnes" maxlength="30">
+                    </div>
+                </div>
+                <div>
+                    <checkbox class="tit" ng-model="anaesSummaryAppendixCanal.nerveBlock" ng-true-value="1" ng-false-value=''>神经阻滞</checkbox>
+                    <checkbox class="tit" ng-model="anaesSummaryAppendixCanal.ultrasound" ng-true-value="1" ng-false-value=''>超声定位</checkbox>
+                    <checkbox class="tit" ng-model="anaesSummaryAppendixCanal.nerveStimulator" ng-true-value="1" ng-false-value=''>神经刺激器</checkbox>
+                </div>
+                <div class="group group-margin" ng-class="{false: 'end-state'}[nun]">
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.cervicalPlexusBlock" ng-true-value="1" ng-disabled="!nun">颈丛神经阻滞</checkbox>
+                    </div>
+                    <div layout class="group-margin terse">
+                        <span>浅丛</span>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.shallowCong" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.cervicalPlexusBlock">左</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.shallowCong" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.cervicalPlexusBlock">右</checkbox>&nbsp;
+                        <span>深丛</span>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.deepPlexus" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.cervicalPlexusBlock">左</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.deepPlexus" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.cervicalPlexusBlock">右</checkbox>&nbsp;
+                        <span>C</span>
+                        <div layout flex>
+                            <input flex type="text" class="noborder3" maxlength="7" ng-model="anaesSummaryAppendixCanal.c" ng-disabled="!anaesSummaryAppendixCanal.cervicalPlexusBlock" maxlength="30" style="width:10px" ng-value="anaesSummaryAppendixCanal.c"></input>
+                        </div>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.brachialPlexusBlock" ng-true-value="1" ng-disabled="!nun">臂丛神经阻滞：</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.brachialValue" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.brachialPlexusBlock">左</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.brachialValue" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.brachialPlexusBlock">右</checkbox>
+                    </div>
+                    <div class="group-margin">
+                        <checkbox ng-model="anaesSummaryAppendixCanal.interscaleneLaw" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.brachialPlexusBlock">肌间沟法</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.interscaleneLaw" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.brachialPlexusBlock">腋路法</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.interscaleneLaw" ng-true-value="3" ng-disabled="!anaesSummaryAppendixCanal.brachialPlexusBlock">锁骨上法</checkbox>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.waistPlexusBlock" ng-true-value="1" ng-disabled="!nun">腰丛神经阻滞</checkbox>：
+                        <checkbox ng-model="anaesSummaryAppendixCanal.waistPlexusValue" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.waistPlexusBlock">左</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.waistPlexusValue" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.waistPlexusBlock">右</checkbox>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.sciaticNerveBlock" ng-true-value="1" ng-disabled="!nun">坐骨神经阻滞</checkbox>：
+                        <checkbox ng-model="anaesSummaryAppendixCanal.sciaticNerveValue" ng-true-value="1000" ng-disabled="!anaesSummaryAppendixCanal.sciaticNerveBlock">左</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.sciaticNerveValue" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.sciaticNerveBlock">右</checkbox>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.femoralNerveBlock" ng-true-value='1' ng-disabled="!nun">股神经阻滞</checkbox>：
+                        <checkbox ng-model="anaesSummaryAppendixCanal.femoralNerveValue" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.femoralNerveBlock">左</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.femoralNerveValue" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.femoralNerveBlock">右</checkbox>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.cutaneousNerveBlock" ng-true-value='1' ng-disabled="!nun">股外侧皮神经阻滞</checkbox>：
+                        <checkbox ng-model="anaesSummaryAppendixCanal.cutaneousNerveValue" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.cutaneousNerveBlock">左</checkbox>/
+                        <checkbox ng-model="anaesSummaryAppendixCanal.cutaneousNerveValue" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.cutaneousNerveBlock">右</checkbox>
+                    </div>
+                    <div layout>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.other1" ng-true-value="1" ng-click="anaesSummaryAppendixCanal.other1Value=''" ng-disabled="!nun">其它</checkbox>
+                        <div flex layout>
+                            <input flex type="text" class="noborder3" maxlength="20" ng-model="anaesSummaryAppendixCanal.other1Value" ng-disabled="!anaesSummaryAppendixCanal.other1" maxlength="30" ng-value="anaesSummaryAppendixCanal.other1Value"></input>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <checkbox class="tit" ng-model="anaesSummaryAppendixCanal.invasiveProcedure" ng-true-value="1" ng-false-value=''>有创操作：</checkbox>
+                </div>
+                <div class="group group-margin" ng-class="{false: 'end-state'}[anaesSummaryAppendixCanal.invasiveProcedure]">
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.arteryCathete" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.invasiveProcedure">动脉穿刺置管</checkbox>
+                    </div>
+                    <div class="group-margin">
+                        <checkbox ng-model="anaesSummaryAppendixCanal.radialArtery" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.arteryCathete">桡动脉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.femoralArtery" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.arteryCathete">股动脉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.footArtery" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.arteryCathete">足背动脉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.footArteryValue" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.arteryCathete">左</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.footArteryValue" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.arteryCathete">右</checkbox>
+                    </div>
+                    <div>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.deepVeinCathete" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.invasiveProcedure">深静脉穿刺置管</checkbox>
+                    </div>
+                    <div class="group-margin">
+                        <checkbox ng-model="anaesSummaryAppendixCanal.jugularVein" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">颈内静脉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.subclavianVein" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">锁骨下静脉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.femoralVein" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">股静脉</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.femoralVeinValue" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">左</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.femoralVeinValue" ng-true-value="2" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">右</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.ultrasound1" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">超声定位</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.singleChamber" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">单腔</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.dualChamber" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">双腔</checkbox>
+                        <checkbox ng-model="anaesSummaryAppendixCanal.threeChamber" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">三腔</checkbox>
+                    </div>
+                </div>
+                <div layout>
+                    <checkbox ng-model="anaesSummaryAppendixCanal.sgCatheter" ng-true-value="1" ng-click="anaesSummaryAppendixCanal.other2=''">其它</checkbox>
+                    <div flex layout ng-class="{false: 'end-state'}[anaesSummaryAppendixCanal.sgCatheter]">
+                        <input flex type="text" class="noborder3" maxlength="21" ng-model="anaesSummaryAppendixCanal.other2" ng-disabled="!anaesSummaryAppendixCanal.sgCatheter" maxlength="30" ng-value="anaesSummaryAppendixCanal.other2"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <div>
+                <label>更改麻醉方法</label>
+                <checkbox ng-model="anaesSummaryAppendixGen.changeAnesMethod" ng-true-value="1" ng-click="anaesSummaryAppendixGen.changeReason=''">是</checkbox>
+                <checkbox ng-model="anaesSummaryAppendixGen.changeAnesMethod" ng-true-value="2" ng-click="anaesSummaryAppendixGen.changeReason=''">否</checkbox>
+            </div>
+            <div layout flex class="mar-left-50" style="padding-left: 45px;">
+                <label>更改原因</label>
+                <div flex layout ng-class="{true: 'end-state'}[!anaesSummaryAppendixGen.changeAnesMethod]">
+                    <input flex type="text" class="noborder3" maxlength="37" ng-model="anaesSummaryAppendixGen.changeReason" maxlength="50" ng-value="anaesSummaryAppendixCanal.changeReason">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <div>
+                <label>特殊情况</label>
+                <checkbox ng-model="anaesSummary.expCase" ng-true-value="1" ng-click="anaesSummary.specialNote=''">是</checkbox>
+                <checkbox ng-model="anaesSummary.expCase" ng-true-value="2" ng-click="anaesSummary.specialNote=''">否</checkbox>
+            </div>
+            <div layout flex class="mar-left-50" style="padding-left: 45px;">
+                <label>说明</label>
+                <div flex layout ng-class="{true: 'end-state'}[anaesSummary.expCase != 1]">
+                    <input flex type="text" class="noborder3" maxlength="37" ng-model="anaesSummary.specialNote" maxlength="50" ng-value="anaesSummary.specialNote">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <label>离室</label>
+        </div>
+        <div class="form-group" layout layout-align="space-between center">
+            <div>
+                <span>肌力恢复：</span>
+                <checkbox ng-model="anaesSummary.muscleRecovery" ng-true-value="1" ng-false-value=''>好</checkbox>
+                <checkbox ng-model="anaesSummary.muscleRecovery" ng-true-value="2" ng-false-value=''>差</checkbox>
+            </div>
+            <div>
+                <span>咳嗽吞咽反射：</span>
+                <checkbox ng-model="anaesSummary.coughReflex" ng-true-value="1" ng-false-value=''>有</checkbox>
+                <checkbox ng-model="anaesSummary.coughReflex" ng-true-value="2" ng-false-value=''>无</checkbox>
+            </div>
+            <div>
+                <span>定向恢复：</span>
+                <checkbox ng-model="anaesSummary.directlRec" ng-true-value="1" ng-false-value=''>是</checkbox>
+                <checkbox ng-model="anaesSummary.directlRec" ng-true-value="2" ng-false-value=''>否</checkbox>
+            </div>
+            <div>
+                <label ng-class='{true: "md-red"}[!anaesSummary.consciou && verify]'>意识：</label>
+                <select class="noborder3" style="width: 80px;" ng-model="anaesSummary.consciou" ng-options="item.key as item.name for item in consciou"></select>
+            </div>
+        </div>
+        <div class="form-group" layout>
+            <span>麻醉平面：</span>
+            <input flex type="text" class="noborder3" maxlength="18" ng-model="anaesSummary.anesPlane" maxlength="30" ng-value="anaesSummary.anesPlane">
+            <span>备注：</span>
+            <input flex type="text" class="noborder3" maxlength="18" ng-model="anaesSummary.remarks" maxlength="30" ng-value="anaesSummary.remarks">
+        </div>
+        <div class="form-group" layout>
+            <div>
+                <span>人工气道/硬膜外导管拔除：</span>
+                <checkbox ng-model="anaesSummary.artifiAirwayRemoval" ng-true-value="1" ng-false-value=''>是</checkbox>
+                <checkbox ng-model="anaesSummary.artifiAirwayRemoval" ng-true-value="2" ng-false-value=''>否</checkbox>
+            </div>
+            <span flex></span>
+            <div>
+                <span>病人自控镇痛泵：</span>
+                <checkbox ng-model="anaesSummary.controAnal" ng-click="anaesSummary.controAnalPlace = ''" ng-true-value="1">有</checkbox>
+                <checkbox ng-model="anaesSummary.controAnal" ng-click="anaesSummary.controAnalPlace = ''" ng-true-value="2">无</checkbox>
+                <select class="noborder3" style="width: 80px;" ng-model="anaesSummary.controAnalPlace" ng-options="item.codeValue as item.codeName for item in data.analgesiaPumpList" ng-disabled="anaesSummary.controAnal != 1"></select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

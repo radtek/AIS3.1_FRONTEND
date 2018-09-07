@@ -1,0 +1,390 @@
+<div id="print-region">
+    <div class="page-print transfusionCheck">
+        <header layout="column" layout-align="center center" class="noTop">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>临床输血核对、护理记录单</h4>
+        </header>
+        <div layout layout-wrap="wrap" layout-align="space-between end" class="form-group">
+            <span layout>姓名<a flex>{{::regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别<a flex>{{::regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄<a flex>{{::regOptItem.age}}</a></span>&nbsp;
+            <span layout>科室<a flex>{{::regOptItem.deptName}}</a></span>&nbsp;
+            <span layout>床号<a flex>{{::regOptItem.bed}}</a></span>&nbsp;
+            <span layout>住院号<a flex>{{::regOptItem.hid}}</a></span>
+        </div>
+        <table class="form-group">
+            <tr>
+                <td colspan="4" class="text-center">输血日期：</td>
+                <td></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="9" class="vertical">输<br>血<br>前<br>评<br>估</td>
+                <td colspan="2" rowspan="3" style="width: 10%;" class="text-center">输血目的</td>
+                <td style="width: 21%;">一般治疗用</td>
+                <td></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>麻醉手术用</td>
+                <td></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>急诊抢救用</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="3" class="text-center">（输血前）患者检查</td>
+                <td>ABO血型</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Rh(D血型)</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>输血前体温</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="3" class="text-center">输注途径</td>
+                <td>头皮针</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>留置针</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>静脉导管</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-center">输血知情同意书</td>
+                <td>已签署</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="14" class="vertical">输<br>血<br>前<br>治<br>疗<br>室<br>核<br>对</td>
+                <td rowspan="8" class="vertical">血<br>袋<br>及<br>输<br>血<br>器<br>核<br>对</td>
+                <td colspan="2">物理外观和包装</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">血液颜色和有效期</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr style="height: 80px;">
+                <td colspan="2">血袋条形码（填写）</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">ABO血型（填写）</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">Rh（D）填写</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">血液种类</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">血量</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">输血器是否完好且在有效期内</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="4" class="vertical">配<br>血<br>单</td>
+                <td colspan="2">与患者核对相符</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">血型与血袋相符</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">编码与血袋相符</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">交叉配血相合</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">核对者签名</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">复核者相符</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <div layout style="display: none;">
+            <div layout><span>注：</span></div>
+            <div layout><span>血液种类：①去白细胞悬浮红细胞；②洗涤红细胞；③病毒灭活冰冻血浆；④病毒灭活新鲜冰冻血浆；⑤冷沉淀；⑥血小板；⑦其他请详细填写</span></div>
+        </div>
+    </div>
+    <div class="page-print transfusionCheck">
+        <table class="form-group">
+            <tr>
+                <td rowspan="3" class="vertical1"><span>床旁核对</span></td>
+                <td class="vertical1-1">核对和确认患者</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>核对者签名</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>复核者签名</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="8" class="vertical1"><span>输血过程观察</span></td>
+                <td>输血开始时间（分）</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>前15min患者反应</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>输血中1小时患者反应</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>输血中2小时患者反应</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>输血中3小时患者反应</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>输血结束时间（分）</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>输血结束4小时患者反应</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+                <td class="text-center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>有无输血不良反应</td>
+                <td class="text-center">无&nbsp;&nbsp;有</td>
+                <td class="text-center">无&nbsp;&nbsp;有</td>
+                <td class="text-center">无&nbsp;&nbsp;有</td>
+                <td class="text-center">无&nbsp;&nbsp;有</td>
+                <td class="text-center">无&nbsp;&nbsp;有</td>
+            </tr>
+            <tr>
+                <td colspan="2">有输血不良反应,记录反应类型和处置结果,反馈记录</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>其他记录</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr style="height: 70px;display: none;">
+                <td colspan="7">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="7"><b>输血护理记录事项：</b></td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">1、输血过程中严格执行“查”、“对”制度。</td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">2、血液制品取回后反应在30min内输注，2h内输完，最长不超过4h； 不能及时输注，应尽快送回输血科暂存，不得自行保存。
+                </td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">3、选择理想的血管或静脉导管，用生理盐水注射建立静脉通路。</td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">4、血液中不得加入任何药品。按医嘱确需要用药者，从其他静脉通路输入。</td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">5、输血时应先慢后快，前15min密切观察患者的反应，输血中每小时观察一次患者反应。</td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">6、血小板、冷沉淀取回后应立即输注，轻轻振荡混匀后 ，以患者能耐受的速度尽快输注（60-100滴/分钟）。几种血制品同时取回时优先输注血小板和冷沉淀，输用血小板时，应更换输血器。大量输血时，不同的血液制品可建立多条静脉通路输注 。</td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">7、密切观察输血过程中的不良反应，是否有皮肤过敏反应、寒战、发热、呕吐、胸闷、呼吸急促、腰酸、腰痛和其他不适。</td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">8、严重输血不良反应的处理：
+                    <br> 停止输血→无菌封存血液制品→用静脉注射生理盐水维持静脉通路→立即报告医生和输血科→查究原因并对症处理→采集样本进行必要检查。
+                </td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">9、输血完毕，用生理盐水注射液冲管。</td>
+            </tr>
+            <tr class="line">
+                <td colspan="7">10、输血后及时将血袋及输血不良反应回报单送返输血科。</td>
+            </tr>
+            <tr class="line" style="display: none;">
+                <td colspan="7">11、如已核对和确认患者，则打“√”</td>
+            </tr>
+        </table>
+        <div class="no-print but-commit hidden">
+            <button class="md-raised md-primary" ng-click="print()">打&nbsp;&nbsp;印</button>
+        </div>
+    </div>
+</div>

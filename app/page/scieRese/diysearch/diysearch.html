@@ -1,0 +1,25 @@
+<div class="navbar-btn btn-xs text-right c-el-10" id="diysearch">
+    <div layout class="col-md-10" ng-if="permission.indexOf('Q_LIST') >= 0">
+        <div layout class="col-md-3">
+            <label>数据表：</label>
+            <select class="form-control" name="table_name" ng-change="changeTable()" ng-options="item.table_name  for item in dataTables track by item.table_name" ng-model="vm.bundle"></select>
+        </div>
+        <div layout class="col-md-9">
+            <label>数据列：</label>
+            <oi-select style="height: auto;min-width: 200px;" oi-options="item.value for item in dataColumns track by item.id" ng-model="vm.bundle2" multiple-placeholder="add" multiple oi-select-options="{ closeList: false }" placeholder="Select"></oi-select>
+        </div>
+    </div>
+    <button class="btn btn-primary" ng-if="permission.indexOf('APPR') >= 0" ng-click="ratify()">批准手术</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('ADD') >= 0" ng-click="add()">手动录入</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('H_SYNC') >= 0" ng-click="hisImport()">HIS导入</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('FILE') >= 0 && !isArch" ng-click="placeOnFile(true)">归&nbsp;&nbsp;档</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('RETREAT') >= 0 && isArch" ng-click="placeOnFile(false)">退&nbsp;&nbsp;档</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('ARCH') >= 0 && !isArch" ng-click="archived(true)">已归档病历</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('ARCH') >= 0 && isArch" ng-click="archived(false)">返&nbsp;&nbsp;回</button>
+    <button class="btn btn-primary" ng-if="permission.indexOf('Q_LIST') >= 0" ng-click="search()">查&nbsp;&nbsp;询</button>
+    <button class=" btn btn-primary " ng-click="export()">导出excel</button>
+</div>
+<div flex style="box-sizing: border-box;">
+    <div ui-grid="gridoperaRoom" class="ui-grid-729" ui-grid-resize-columns ui-grid-exporter ui-grid-pagination ui-grid-auto-resize></div>
+    <div class="noData" ng-if="!gridoperaRoom">暂无数据</div>
+</div>

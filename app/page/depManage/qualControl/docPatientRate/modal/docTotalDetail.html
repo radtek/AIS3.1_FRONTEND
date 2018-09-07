@@ -1,0 +1,48 @@
+<div class="modal-header">    
+    <h4><span>医师总数列表</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="docTotalDetail">
+	<div class="modal-body">
+        <div ui-grid="gridOptions" style="height: 300px;" ui-grid-auto-resize ui-grid-pagination></div>
+        <div style="border-bottom: 1px solid #d7d7d7; padding-top: 15px;"></div>
+        <div layout>
+            <div flex class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit"><em>*</em>日期</label>
+                    <select flex class="form-control" ng-model="vm.param.year" required>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>年
+                    <select flex class="form-control" ng-model="vm.param.month" required>
+                        <option value="01">1</option>
+                        <option value="02">2</option>
+                        <option value="03">3</option>
+                        <option value="04">4</option>
+                        <option value="05">5</option>
+                        <option value="06">6</option>
+                        <option value="07">7</option>
+                        <option value="08">8</option>
+                        <option value="09">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>月
+                </div>
+                <p ng-if="form.vm.param.recordMonth.$error.required && _recordMonth" class="help-block text-right">不能为空</p>
+            </div>
+            <div flex class="input-wrap">
+                <div layout layout-align="center center" class="input-group">
+                    <label class="tit"><em>*</em>医师总数</label>
+                    <input type="number" class="noborder3" ng-model="vm.param.amount" ng-blur="_amount = true" required></input>
+                    <input type="hidden" class="noborder3" ng-model="vm.param.beid"></input>
+                </div>
+                <p ng-if="form.vm.param.amount.$error.required && _amount" class="help-block text-right">不能为空</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save();">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

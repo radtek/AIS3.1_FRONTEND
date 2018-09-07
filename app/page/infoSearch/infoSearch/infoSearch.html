@@ -1,0 +1,31 @@
+<!-- <div flex layout="column" id="operList">
+    <div class="navbar-btn btn-xs text-right c-el-10">
+        <button type="submit" class="btn btn-primary" ng-click="refresh()">刷&nbsp;&nbsp;新</button>
+    </div>
+    <div flex>
+        <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination ng-if="gridOptions"></div>
+        <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+    </div>
+</div>
+ -->
+ <div id="operList" flex>
+	<form role="form">
+        <div layout class="form-group col-md-5">
+        <label class="radio-inline">
+            日期范围
+        </label>
+        <div>
+        	<datetime-picker flex dateID="date-start-time" ng-model="queryObj.startTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>
+    	</div>
+        <div style="margin: 5px 10px 0 10px;"><span>到</span></div>
+        <div>
+        	<datetime-picker flex dateID="date-end-time" ng-model="queryObj.endTime" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>
+        </div>
+        </div>
+        <div layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+            <button class="btn btn-primary" type="button" ng-click="refresh();">查&nbsp;&nbsp;询</button>
+            <button class="btn btn-primary" type="button" ng-click="exporter();">导&nbsp;&nbsp;出</button>
+        </div>
+	</form>
+	<div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-exporter ui-grid-pagination ng-if="gridOptions"></div>
+</div>

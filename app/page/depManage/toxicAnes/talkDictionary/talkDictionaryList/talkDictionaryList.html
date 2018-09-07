@@ -1,0 +1,10 @@
+<div flex>     
+    <form role="form" layout layout-align="end center" class="navbar-btn btn-xs text-right c-el-10">
+        <label>退药人：</label>
+        <oi-select flex=10 name="retreatName" oi-options="item.userName as item.name for item in getAllUser | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']'}" ng-model="retreatName">
+        </oi-select>
+        <button class="btn btn-primary" type="button" ng-click="piliang();">批量退药</button>
+    </form>
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-selection ui-grid-pagination ng-if="gridOptions"></div>
+    <div class="noData" ng-if="!gridOptions.data">暂无数据</div>
+</div>

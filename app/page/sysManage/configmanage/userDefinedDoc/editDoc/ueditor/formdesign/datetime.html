@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>文本框</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>   
+</head>
+<body>
+<div class="content">
+    <table class="table table-bordered table-striped table-hover">
+     <tr>
+        <th><span>控件名称</span><span class="label label-important">*</span></th>
+        <th><span>控件类型</span> </th>
+    </tr>
+    <tr>
+        <td><input type="text" id="orgname" placeholder="必填项"></td>
+        <td><select id="orgtype">
+                <option value="datetime">日期时间</option>
+                <option value="date">日期</option>
+                <option value="time">时间</option>
+            </select>   
+        </td>
+    </tr>
+    <tr>
+        <th><span>默认值</span> </th>
+        <th><span>数据格式</span> </th>
+    </tr>
+    <tr>
+        <td>
+           <select id="orgvalue">                
+                <option value="datetime">当前日期时间</option>
+                <option value="date">当前日期</option> 
+                <option value="time">当前时间</option> 
+                <option value="operaDate">当前患者手术日期</option>
+            </select>  
+        </td>
+        <td>
+           <select id="format">                
+                <option value="Y-m-d H:i">yyyy-MM-DD HH:mm</option>
+                <option value="Y-m-d">yyyy-MM-DD</option> 
+                <option value="H:i">HH:mm</option>
+            </select>  
+        </td>
+    </tr>
+    <tr>
+        <th><span>宽</span> </th>
+        <th><span>边框</span> </th>
+    </tr>
+    <tr>
+        <td>
+            <input id="orgwidth" type="text" value="150" class="input-small span1" placeholder="auto"/>
+        </td>
+        <td><select id="orgborder">
+                <option value="1px solid #333">上下左右边框</option>
+                <option value="bottom">仅下边框</option> 
+                <option value="none">无边框</option>               
+            </select>
+            
+        </td>
+    </tr>
+    <tr>
+        <th><span>最大日期&最小日期</span> </th>
+        <th><span>是否必填</span></th>
+    </tr>
+    <tr>
+        <td>
+            <input id="max" type="text" value="" class="input-small span2" placeholder="最大日期默认为当天"/>&
+            <input id="min" type="text" value="" class="input-small span2" placeholder="最小日期默认100年前"/>
+        </td>
+        <td>
+            <label class="checkbox inline"><input id="ismast" type="checkbox"/> 必填 </label>
+        </td>
+    </tr>
+
+    </table>
+</div>
+<script type="text/javascript">
+var oNode = null,thePlugins = 'datetime';
+window.onload = function() {
+    if( UE.plugins[thePlugins].editdom ){
+        oNode = UE.plugins[thePlugins].editdom;
+		var gValue = '';
+		if(oNode.getAttribute('title'))
+			gValue = oNode.getAttribute('value');
+		var gTitle=oNode.getAttribute('title'),gismast=oNode.getAttribute('ismast'),gAlign=oNode.getAttribute('orgborder'),gWidth=oNode.getAttribute('orgwidth'),gType=oNode.getAttribute('orgtype'),gmax=oNode.getAttribute('maxdate'),gmin=oNode.getAttribute('mindate'),format=oNode.getAttribute('format');
+		gValue = gValue==null ? '' : gValue;
+        gTitle = gTitle==null ? '' : gTitle;
+		$G('orgvalue').value = gValue;
+        $G('orgname').value = gTitle;
+        if (gismast == '1')
+        {
+            $G('ismast').checked = true;
+        }        
+        $G('orgwidth').value = gWidth;        
+        $G('orgborder').value = gAlign;
+        $G('orgtype').value = gType;
+        $G('min').value = gmin;
+        $G('max').value = gmax;
+        $G('format').value = format;
+    }
+}
+dialog.oncancel = function () {
+    if( UE.plugins[thePlugins].editdom ) {
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+dialog.onok = function (){
+    //debugger;
+    if($G('orgname').value==''){
+        alert('请输入控件名称');
+        return false;
+    }
+    if($G('orgname').value.length>12){
+        alert('控件名称不能超过12个字');
+        return false;
+    }
+    
+    var gValue=$G('orgvalue').value,gTitle=$G('orgname').value,gAlign=$G('orgborder').value,gWidth=$G('orgwidth').value,gType=$G('orgtype').value,gmax=$G('max').value,gmin=$G('min').value,gformat=$G('format').value;
+    
+    if( !oNode ) {
+        try {
+            //<datetime-picker name="createTime" dateID="createTime-times" timepicker="true" class="noborder3 calendar sign" format="Y-m-d" id="datatime"  style="width: 120px;" required  ng-change="update($event, bloodTransRecord.createTime)"  maxdate="2100-01-01" ></datetime-picker>
+            var html = '<datetime-picker  ';
+            //var html2= '<input class="showinuediter" ';
+            html += ' title = "' + gTitle + '"';            
+            html += ' name = "leipiNewField"';
+            html += ' leipiPlugins = "'+thePlugins+'"';                 
+            html += ' dateID = "createTimetimes' +  +new Date().getMilliseconds()+ '"';
+            html += ' id = "datetime1_' +  +new Date().getMilliseconds()+ '"';
+            //html2 += ' id = "datatime2_' +  +new Date().getMilliseconds()+ '"';
+            if ( $G('ismast').checked ) {
+                html += ' ismast = "1"';
+            } else {
+                html += ' ismast = "0"';
+            } 
+
+            if(gValue){
+                html += ' value = "' + gValue + '"';
+                html += ' ng-model = "vm.regOptItem.' + gValue + '"';
+                html += ' ng-value = "vm.regOptItem.' + gValue + '"';               
+            }
+            if(gType=="datetime"){
+                html += ' timepicker="true" datepicker="true" ';
+                //html2 += ' type="datetime-local" '
+            }else if(gType=="date"){
+                html += ' timepicker="false" datepicker="true" ';
+                //html2 += ' type="date" '
+            }else if(gType=="time"){
+                html += ' timepicker="true" datepicker="false" '; 
+                //html2 += ' type="time" '               
+            }
+            html += ' orgtype = "' + gType + '"';            
+            if(gformat){
+                html += ' format = "' + gformat + '"';
+            }
+            if(gmin){
+               html += ' mindate = "' + gmin + '"'; 
+            }
+            if(gmax){
+               html += ' maxdate = "' + gmax + '"'; 
+            }
+            if( gWidth != '' ) {
+                html += ' orgwidth = "' + gWidth + '"';
+            } else {
+                html += ' orgwidth = ""';
+            }              
+
+            html += ' style = "display: inline-block;height:26px;min-width:30px;';                 
+            if( gWidth != '' ) {
+                html += 'width:' + gWidth + 'px;';               
+            }
+
+            if( gAlign != '' ) {
+                if(gAlign=='bottom'){
+                    html +='border:none;border-bottom:1px solid #333;';                    
+                }else{                   
+                    html +='border:'+gAlign;                    
+                }  
+                html += '" orgborder = "' + gAlign + '" >';               
+            }else{
+                html += '">';   
+            }  
+                    
+            html +=  '</datetime-picker>';
+            editor.execCommand('insertHtml',html);
+          
+        } catch (e) {
+            try {
+                editor.execCommand('error');
+            } catch ( e ) {
+                alert('控件异常，请联系管理员！');
+            }
+            return false;
+        }
+    } else {
+        
+        oNode.setAttribute('title', gTitle);
+        if(gValue){
+            oNode.setAttribute('value',gValue);
+            oNode.setAttribute('ng-model','vm.regOptItem.' + gValue);
+            oNode.setAttribute('ng-value','vm.regOptItem.' + gValue);                      
+        }
+        if(!!gmax)
+        oNode.setAttribute('maxdate',gmax);
+        if(!!gmin)
+        oNode.setAttribute('mindate',gmin);
+
+        if( $G('ismast').checked ) {
+            oNode.setAttribute('ismast', 1);
+        } else {
+            oNode.setAttribute('ismast', 0);
+        }
+         
+        if( gAlign != '' ) {
+            //oNode.style.border = gAlign;
+            if(gAlign!='bottom'){
+                    oNode.style.border = gAlign;
+                }
+                else{
+                    oNode.style.border = "none";
+                    oNode.style.borderBottom="1px solid #333";
+                }
+            oNode.setAttribute('orgborder',gAlign );
+        }else{
+            oNode.style.border = '';
+            oNode.style.borderBottom = '';
+            oNode.setAttribute('orgborder', '');
+        }
+        if( gWidth != '' ) {
+            oNode.style.width = gWidth+ 'px';
+            oNode.setAttribute('orgwidth',gWidth );
+        }else{
+            oNode.style.width = '';
+            oNode.setAttribute('orgwidth', '');
+        }        
+        if(!!gformat){
+            oNode.setAttribute('format', gformat);
+        }
+        if( gType != '' ) {
+            if(gType=="datetime"){
+                    oNode.setAttribute('timepicker','true');
+                    oNode.setAttribute('datepicker','true');
+                }else if(gType=="date"){
+                    oNode.setAttribute('timepicker','false');
+                    oNode.setAttribute('datepicker','true');
+                }else if(gType=="time"){
+                    oNode.setAttribute('timepicker','true');
+                    oNode.setAttribute('datepicker','false');
+                }
+            oNode.setAttribute('orgtype',gType);
+        }else{
+            oNode.setAttribute('orgtype', '');            
+        }
+        delete UE.plugins[thePlugins].editdom;
+    }
+};
+</script>
+</body>
+</html>

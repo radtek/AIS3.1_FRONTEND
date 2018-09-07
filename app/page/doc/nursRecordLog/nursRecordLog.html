@@ -1,0 +1,261 @@
+<div id="print-region">
+    <div class="page-print" ng-class="{true:'end-state'}[vm.optCareRecord.processState == 'END' || setting.readonly]" id="nursRecordLog">
+        <header layout="column" layout-align="center center">
+            <div ng-if="!docUrl">
+                <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+                <h4 ng-if="docInfo.subName">{{docInfo.subName}}</h4>
+            </div>
+            <img ng-if="docUrl" src="/app/img/{{docUrl}}" class="doctitle-icon">
+            <h4>手术护理记录</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a flex>{{vm.regOpt.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{vm.regOpt.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{vm.regOpt.age}}</a></span>&nbsp;
+            <span layout>科室：<a flex>{{vm.regOpt.deptName}}</a></span>&nbsp;
+            <span layout>病床：<a flex>{{vm.regOpt.bed}}</a></span>&nbsp;
+            <span layout>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>手术日期：<a flex>{{vm.regOpt.operaDate | date: 'yyyy&nbsp;-&nbsp;MM&nbsp;-&nbsp;dd&nbsp;'}}</a></span>
+            <span layout>手术间：<a flex>{{vm.regOpt.operRoomName}}</a></span>
+            <span layout>
+                药物过敏：
+                <checkbox ng-model="vm.optCareRecord.allergic" ng-true-value="0" ng-false-value="1">否</checkbox>
+                <checkbox ng-model="vm.optCareRecord.allergic" ng-true-value="1" ng-false-value="0">是</checkbox>
+            </span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>手术名称：</span>
+            <oi-select flex class="noborder3" ng-model="vm.optCareRecord.operationNameList" oi-options="i.name for i in operationList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'name\',\'pinYin\']'}" multiple></oi-select>
+        </div>
+        <div layout class="tab-warp">
+            <div layout layout-align="center center" class="tit-h text-center">
+                <span>护理情况</span>
+            </div>
+            <div flex>
+                <div layout class="noborder">
+                    <div flex layout="column" class="list-warp">
+                        <div layout style="height: 100px;padding-left: 5px;">
+                            <div class="digi-doc-title">术前：</div>
+                            <div flex layout="column">
+                                <div layout class="digi-doc-row">
+                                    <div layout class="required" ng-class="{true: 'md-red'}[!vm.optCareRecord.inOperRoomTime && verify]" style="padding: 0;">
+                                        <span class="md-red no-print prop-name">*</span>
+                                        <span class="prop-name">入室时间</span>
+                                        <datetime-picker ng-value="vm.optCareRecord.inOperRoomTime" style="width:131px;" dateID="date-in-time" ng-model="vm.optCareRecord.inOperRoomTime" timepicker="false" class="form-control prop-val" required>
+                                        </datetime-picker>
+                                    </div>
+                                    <span>神志
+                                    <select ng-model="vm.optCareRecord.senses">
+                                        <option ng-repeat="item in vm.sensesList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                                    </select>
+                                </span>
+                                    <span>
+                                    静脉输液
+                                    <checkbox ng-model="vm.optCareRecord.venousInfusion1" ng-true-value="1" ng-false-value="0">有</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.venousInfusion1" ng-true-value="0" ng-false-value="1">无</checkbox>
+                                </span>
+                                    <span>
+                                    深静脉穿刺
+                                    <checkbox ng-model="vm.optCareRecord.venipuncture" ng-true-value="0" ng-false-value="1">无</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.venipuncture" ng-true-value="1" ng-false-value="0">有</checkbox>
+                                </span>
+                                </div>
+                                <div layout class="digi-doc-row">
+                                    <span>
+                                    管道
+                                    <select style="border:none;border-bottom:1px solid #333;" name="" id="" ng-model="vm.optCareRecord.pipeline">
+                                        <option ng-repeat="item in vm.pipelineList" value="{{item.codeValue}}">{{item.codeName}}</option>
+                                    </select>
+                                </span>
+                                    <span>
+                                    皮肤情况
+                                    <checkbox ng-model="vm.optCareRecord.skin1.a.checked" ng-true-value="'1'" ng-false-value="'0'">正常</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.skin1.a.checked" ng-true-value="'0'" ng-false-value="'1'">破损</checkbox>：
+                                    <input style="width: 160px;" maxlength="28" ng-disabled="vm.optCareRecord.skin1.a.checked!=='0'" ng-model="vm.optCareRecord.skin1.a.content" ng-value="vm.optCareRecord.skin1.a.content">
+                                </span>
+                                </div>
+                                <div layout class="digi-doc-row">
+                                    <span>
+                                    X线片
+                                    <checkbox ng-model="vm.optCareRecord.xray" ng-true-value="1" ng-false-value="0">有</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.xray" ng-true-value="0" ng-false-value="1">无</checkbox>
+                                </span>
+                                    <span>
+                                    CT片
+                                    <checkbox ng-model="vm.optCareRecord.ct" ng-true-value="1" ng-false-value="0">有</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.ct" ng-true-value="0" ng-false-value="1">无</checkbox>
+                                </span>
+                                    <span>
+                                    MRI
+                                    <checkbox ng-model="vm.optCareRecord.mri" ng-true-value="1" ng-false-value="0">有</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.mri" ng-true-value="0" ng-false-value="1">无</checkbox>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div layout style="height: 270px;padding-left: 5px;">
+                            <div class="digi-doc-title">术中：</div>
+                            <div flex layout="column">
+                                <div layout>
+                                    <span class="prop-name">手术体位：</span>
+                                    <oi-select class="noborder3" style="width: 50%;" ng-model="vm.optCareRecord.optbodys" oi-options="i.codeValue as i.codeName for i in optBodyList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'pinYin\']' }" multiple></oi-select>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    高频电刀
+                                    <checkbox ng-model="vm.optCareRecord.elecKnife" ng-true-value="1" ng-false-value="0">有</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.elecKnife" ng-true-value="0" ng-false-value="1">无</checkbox>
+                                </span>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    负极板位置
+                                    <checkbox ng-model="vm.optCareRecord.negativePosition.a.checked" ng-true-value="'1'" ng-false-value="'0'">大腿（左/右）</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.negativePosition.b.checked" ng-true-value="'1'" ng-false-value="'0'">小腿（左/右）</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.negativePosition.c.checked" ng-true-value="'1'" ng-false-value="'0'">背部（左/右）</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.negativePosition.d.checked" ng-true-value="'1'" ng-false-value="'0'">臀部（左/右）</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.negativePosition.e.checked" ng-true-value="'1'" ng-false-value="'0'">其它</checkbox>
+                                    <input type="text" class="text-input" maxlength="25" style="width: 99px;" ng-model="vm.optCareRecord.negativePosition.e.content" ng-value="vm.optCareRecord.negativePosition.e.content"  ng-disabled="vm.optCareRecord.negativePosition.e.checked==='0' || !vm.optCareRecord.negativePosition.e.checked">
+                                </span>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    止血带
+                                    <checkbox ng-model="vm.optCareRecord.tourniquet.a.checked" ng-true-value="'0'" ng-false-value="'1'">无</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.tourniquet.a.checked" ng-true-value="'1'" ng-false-value="'0'">有(部位、压力)</checkbox>：
+                                    <input type="text" style="width: 160px;" maxlength="28" ng-disabled="!vm.optCareRecord.tourniquet.a.checked || vm.optCareRecord.tourniquet.a.checked==='0'" ng-model="vm.optCareRecord.tourniquet.a.content" ng-value="vm.optCareRecord.tourniquet.a.content" >
+                                </span>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    体位支持用物
+                                    <checkbox ng-model="vm.optCareRecord.supportMaterial.a.checked" ng-true-value="'1'" ng-false-value="'0'">沙袋</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.supportMaterial.b.checked" ng-true-value="'1'" ng-false-value="'0'">枕头</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.supportMaterial.c.checked" ng-true-value="'1'" ng-false-value="'0'">手托</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.supportMaterial.d.checked" ng-true-value="'1'" ng-false-value="'0'">手圈</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.supportMaterial.e.checked" ng-true-value="'1'" ng-false-value="'0'">头架</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.supportMaterial.f.checked" ng-true-value="'1'" ng-false-value="'0'">背部扶托</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.supportMaterial.g.checked" ng-true-value="'1'" ng-false-value="'0'">模型垫</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.supportMaterial.h.checked" ng-true-value="'1'" ng-false-value="'0'">其它</checkbox>
+                                    <input type="text" style="width: 160px;" maxlength="25" ng-disabled="!vm.optCareRecord.supportMaterial.h.checked || vm.optCareRecord.supportMaterial.h.checked==='0'" ng-model="vm.optCareRecord.supportMaterial.h.content" ng-value="vm.optCareRecord.supportMaterial.h.content" >
+                                </span>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    标本：
+                                    <checkbox ng-model="vm.optCareRecord.specimen" ng-true-value="0" ng-false-value="1">无</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.specimen" ng-true-value="1" ng-false-value="0">有</checkbox>
+                                    送检：
+                                    <checkbox ng-model="vm.optCareRecord.inspection[1]" ng-true-value="'2'" ng-false-value="'0'">普通</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.inspection[0]" ng-true-value="'1'" ng-false-value="'0'">快速</checkbox>
+                                    标本名称：
+                                    <input type="text" style="width: 160px;" maxlength="24" ng-model="vm.optCareRecord.specimenName" ng-disabled="!vm.optCareRecord.specimen || vm.optCareRecord.specimen===0" ng-value="vm.optCareRecord.specimenName" >
+                                </span>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    体内植入物
+                                    <checkbox ng-model="vm.optCareRecord.implants.a.checked" ng-true-value="'0'" ng-false-value="'1'">无</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.implants.a.checked" ng-true-value="'1'" ng-false-value="'0'">有</checkbox>：
+                                    <input type="text" style="width: 160px;" maxlength="28" ng-disabled="!vm.optCareRecord.implants.a.checked || vm.optCareRecord.implants.a.checked==='0'" ng-model="vm.optCareRecord.implants.a.content" ng-value="vm.optCareRecord.implants.a.content" >
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div layout style="height: 255px;padding-left: 5px;">
+                            <div class="digi-doc-title">术毕：</div>
+                            <div layout="column">
+                                <div layout>
+                                    <div layout class="required" ng-class="{true: 'md-red'}[!vm.optCareRecord.outOperRoomTime && verify]"><span class="md-red no-print prop-name">*</span>
+                                        <span class="prop-name">离室时间：</span>
+                                        <datetime-picker class="calendar sign" style="border-bottom: 1px solid;" dateID="date-out-time" ng-model="vm.optCareRecord.outOperRoomTime" timepicker="false" class="form-control prop-val" required>
+                                        </datetime-picker>
+                                    </div>
+                                    <div layout class="required" ng-class="{true: 'md-red'}[!vm.optCareRecord.leaveTo && verify]">
+                                        <span class="prop-name">
+                                        <span class="md-red no-print">*</span>送至：
+                                        <checkbox ng-repeat="item in leaveToList" ng-model="vm.optCareRecord.leaveTo" ng-true-value="item.codeValue" ng-false-value="'0'">{{item.codeName}}</checkbox>
+                                        <input type="text" class="text-input" maxlength="42" ng-disabled="vm.optCareRecord.leaveTo != 4" ng-model="vm.optCareRecord.leaveToOther" ng-value="vm.optCareRecord.leaveToOther">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    静脉输液
+                                    <checkbox ng-model="vm.optCareRecord.venousInfusion2.a.checked" ng-true-value="'0'" ng-false-value="'1'">无</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.venousInfusion2.a.checked" ng-true-value="'1'" ng-false-value="'0'">有</checkbox>：
+                                    <input type="text" style="width: 160px;" maxlength="28" ng-disabled="!vm.optCareRecord.venousInfusion2.a.checked || vm.optCareRecord.venousInfusion2.a.checked==='0'" ng-model="vm.optCareRecord.venousInfusion2.a.content" ng-value="vm.optCareRecord.venousInfusion2.a.content" >
+                                </span>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    引流管
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.a.checked" ng-true-value="'1'" ng-false-value="'0'">胃管</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.b.checked" ng-true-value="'1'" ng-false-value="'0'">导尿管</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.c.checked" ng-true-value="'1'" ng-false-value="'0'">腹腔引流管</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.d.checked" ng-true-value="'1'" ng-false-value="'0'">胆道引流管</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.e.checked" ng-true-value="'1'" ng-false-value="'0'">胸膜腔引流管</checkbox>
+                                </span>
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    <span>　　　</span>
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.f.checked" ng-true-value="'1'" ng-false-value="'0'">脑室引流管</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.g.checked" ng-true-value="'1'" ng-false-value="'0'">膀胱造萎</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.h.checked" ng-true-value="'1'" ng-false-value="'0'">肠造萎</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.drainageTube.i.checked" ng-true-value="'1'" ng-false-value="'0'">其它</checkbox>
+                                    <input type="text" style="width: 160px;" maxlength="25" ng-model="vm.optCareRecord.drainageTube.i.content" ng-disabled="!vm.optCareRecord.drainageTube.i.checked || vm.optCareRecord.drainageTube.i.checked==='0'" ng-value="vm.optCareRecord.drainageTube.i.content">
+                                    </span>
+                                </div>
+                                <div layout>
+                                    <span>皮肤情况：</span>
+                                    <checkbox ng-model="vm.optCareRecord.skin2.a.checked" ng-true-value="'1'" ng-false-value="'0'">同前</checkbox>
+                                    <checkbox ng-model="vm.optCareRecord.skin2.a.checked" ng-true-value="'0'" ng-false-value="'1'">改变</checkbox>：
+                                    <input type="text" style="width: 160px;" maxlength="30" ng-model="vm.optCareRecord.skin2.a.content" ng-disabled="vm.optCareRecord.skin2.a.checked!=='0'" ng-value="vm.optCareRecord.skin2.a.content">
+                                </div>
+                                <div class="digi-doc-row" layout>
+                                    <span class="prop-name">
+                                    备注：
+                                    <input type="text" class="text-input" style="width: 650px;" maxlength="30" ng-model="vm.optCareRecord.remark" ng-value="vm.optCareRecord.remark" >
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div layout style="height: 150px;padding-left: 5px;">
+                            <div layout="column">
+                                <div layout flex layout-align="start center" style="padding-right: 26px;">
+                                    <div layout flex>
+                                        <span style="min-width:120px;">洗手护士：</span>
+                                        <oi-select class="noborder3" ng-model="vm.optCareRecord.instrnurseList" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{ listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" multiple></oi-select>
+                                    </div>
+                                </div>
+                                <div layout flex layout-align="start center" style="padding-right: 26px;">
+                                    <div layout flex class="digi-doc-row">
+                                        <span style="min-width:120px;">交班巡回护士：</span>
+                                        <oi-select class="noborder3" ng-model="vm.optCareRecord.shiftChangedNurseList" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" multiple></oi-select>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div layout flex layout-align="start center" style="padding-right: 26px;">
+                                    <div layout flex class="digi-doc-row">
+                                        <span style="min-width:120px;">接班巡回护士：</span>
+                                        <oi-select class="noborder3" ng-model="vm.optCareRecord.shiftChangeNurseList" oi-options="i.userName as i.name for i in nurseList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'username\', \'name\', \'pinYin\']'}" multiple></oi-select>
+                                    </div>
+                                </div>
+                                <div layout flex layout-align="start center" style="padding-right: 26px;">
+                                    <div layout>
+                                        <span style="min-width:120px;">交班时间：</span>
+                                        <datetime-picker dateID="date-shift-time" style="border-bottom: 1px solid;" ng-model="vm.optCareRecord.shiftTime" timepicker="false" required>
+                                        </datetime-picker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

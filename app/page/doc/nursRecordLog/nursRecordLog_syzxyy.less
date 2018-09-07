@@ -1,0 +1,102 @@
+#nursRecordLogSyzxyy {
+    input {
+        border-style: none none solid;
+        border-bottom-width: thin;
+        border-bottom-color: #000;
+        background-color: transparent!important;
+        outline: none;
+    }
+
+    oi-select input {
+	    border-bottom: none;
+	}
+
+	datetime-picker input {
+		border: none !important;
+		width: 100% !important;
+	    height: 100% !important;
+	    outline: none !important;
+	}
+
+	.noborder2 {
+		width: 220px;
+	}
+
+    .border-bottom {
+        border-bottom: 1px solid;
+    }
+	.tit-h span {
+        display: inline-block;
+        width: 20px;
+    }
+	.digi-doc-row {
+		margin-bottom: 5px;
+		span.prop-val {
+			text-decoration: underline;
+		}
+
+		span.prop-name {
+			line-height: 30px;
+		}
+
+		select {
+			height:25px;
+			border: none;
+			border-bottom: 1px solid #000;
+		}
+
+		.form-control {
+			height: 25px;
+			padding: 2px 5px 0px 0px;
+			border: none;
+			border-bottom: 1px solid #000;
+		}
+	}
+
+    .no-dialog {
+        pointer-events: none;
+    }
+
+	.tab-warp {
+	    border: 1px solid #000;
+	    .tit-h {
+	        width: 30px;
+	        border-right: 1px solid #000;
+	    }
+	    .tit-h span {
+	        display: inline-block;
+	        width: 20px;
+	    }
+	}
+
+	.checkbox {
+		margin-top: 0px;
+	}
+	.print-next-syzxyy {
+		display: none;
+	}
+    @media print {
+        .no-print {
+            display: none;
+        }
+        .form-group {
+        	margin-bottom: 15px !important;
+        	font-size: 15px;
+        }
+        .sign {
+        	width: 160px !important;
+        }
+        .sign-line {
+        	padding-top: 15px !important;
+        }
+        span {
+        	font-size: 15px;
+        }
+        .print-card-syzxyy {
+			display: block;
+		}
+    }
+}
+.print-card-syzxyy {
+	display: none;
+}

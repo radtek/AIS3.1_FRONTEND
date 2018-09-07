@@ -1,0 +1,460 @@
+<div id="print-region">
+    <div class="page-print" id="preVisitLog_sybx" ng-class="{true: 'end-state'}[preVisitItem.processState == 'END' || setting.readonly]">
+        <header layout="column" layout-align="center center" class="noTop">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>麻醉前访视记录单</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a flex>{{regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{regOptItem.age}}</a></span>&nbsp;
+            <span layout>科室：<a flex>{{regOptItem.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{regOptItem.bed}}</a></span>&nbsp;
+            <span layout>住院号：<a flex>{{regOptItem.hid}}</a></span>
+        </div>
+        <div class="form-group" layout layout-align="space-between end">
+            <span layout flex="70">拟行手术：<a flex>{{regOptItem.designedOptName}}</a></span>&nbsp;
+            <span layout flex>预定手术日期：<a flex>{{regOptItem.operaDate}}</a></span>
+        </div>
+        <table class="form-group">
+            <tr>
+                <td rowspan="12" class="text-center" style="width: 38px;"><b style="display: inline-block; width: 16px;">麻醉相关的疾病</b></td>
+                <td style="width: 95px;">术前一般状态的风险评估：</td>
+                <td>
+                    <div layout style="flex-wrap: wrap;">
+                        <div layout ng-class="{true: 'md-red'}[!preVisitItem.nyha && verify]" style="flex-wrap：nowrap;margin-right:10px">
+                            心功能分级:
+                            <checkbox ng-model="preVisitItem.nyha" ng-true-value="1">Ⅰ</checkbox>
+                            <checkbox ng-model="preVisitItem.nyha" ng-true-value="2">Ⅱ</checkbox>
+                            <checkbox ng-model="preVisitItem.nyha" ng-true-value="3">Ⅲ</checkbox>
+                            <checkbox ng-model="preVisitItem.nyha" ng-true-value="4">Ⅳ</checkbox>
+                        </div>
+                        <div layout style="flex-wrap：nowrap;margin-right:10px">
+                            过敏史:
+                            <checkbox ng-model="preVisitItem.allergic" ng-true-value="1" ng-false-value="0" ng-click="preVisitItem.allergic?preVisitItem.briefHisMap.c:preVisitItem.briefHisMap={};">无</checkbox>
+                            <checkbox ng-init="preVisitItem.briefHisMap.a='0'" ng-model="preVisitItem.briefHisMap.a" ng-true-value="2" ng-false-value="0">青霉素</checkbox>
+                            <checkbox ng-init="preVisitItem.briefHisMap.b='0'" ng-model="preVisitItem.briefHisMap.b" ng-true-value="3" ng-false-value="0" ng-click="preVisitItem.briefHisMap.b!=3?'':preVisitItem.allergicCond=''">其他</checkbox>
+                            <input flex type="text" class="noborder3" maxlength="30" ng-model="preVisitItem.allergicCond" ng-disabled="preVisitItem.briefHisMap.b!=3" />
+                        </div>
+                        <div layout ng-class="{true: 'md-red'}[!preVisitItem.mallampatis && verify]" style="flex-wrap：nowrap;margin-right:10px">
+                            困难插管(Mallampati分级):
+                            <checkbox ng-model="preVisitItem.mallampatis" ng-true-value="1" ng-false-value="0">Ⅰ</checkbox>
+                            <checkbox ng-model="preVisitItem.mallampatis" ng-true-value="2" ng-false-value="0">Ⅱ</checkbox>
+                            <checkbox ng-model="preVisitItem.mallampatis" ng-true-value="3" ng-false-value="0">Ⅲ</checkbox>
+                            <checkbox ng-model="preVisitItem.mallampatis" ng-true-value="4" ng-false-value="0">Ⅳ</checkbox>
+                        </div>
+                        <div layout style="flex-wrap：nowrap;margin-right:10px">
+                            青光眼:
+                            <checkbox ng-model="preVisitItem.glaucoma" ng-true-value="1" ng-false-value="0">无</checkbox>
+                            <checkbox ng-model="preVisitItem.glaucoma" ng-true-value="2" ng-false-value="0">有</checkbox>
+                        </div>
+                        <div layout style="flex-wrap：nowrap;margin-right:10px">
+                            烟酒药物滥用史:
+                            <checkbox ng-model="preVisitItem.drugAddiction" ng-change="preVisitItem.drugAddiction == 1?preVisitItem.drugAbuseCondMap={}:''" ng-true-value="1" ng-false-value="0">无</checkbox>
+                            <checkbox ng-model="preVisitItem.drugAbuseCondMap.a" ng-true-value="2" ng-false-value="0">吸烟</checkbox>
+                            <checkbox ng-model="preVisitItem.drugAbuseCondMap.b" ng-true-value="3" ng-false-value="0">酗酒</checkbox>
+                            <checkbox ng-model="preVisitItem.drugAbuseCondMap.c" ng-true-value="4" ng-false-value="0">药物滥用史</checkbox>
+                        </div>
+                        <div layout style="flex-wrap：nowrap;margin-right:10px" ng-class="{true: 'md-red'}[!preVisitItem.asa && verify]">
+                            ASA分级:
+                            <checkbox ng-model="preVisitItem.asa" ng-true-value="1">Ⅰ</checkbox>
+                            <checkbox ng-model="preVisitItem.asa" ng-true-value="2">Ⅱ</checkbox>
+                            <checkbox ng-model="preVisitItem.asa" ng-true-value="3">Ⅲ</checkbox>
+                            <checkbox ng-model="preVisitItem.asa" ng-true-value="4">Ⅳ</checkbox>
+                            <checkbox ng-model="preVisitItem.asa" ng-true-value="4">Ⅴ</checkbox>
+                        </div>
+                        <div layout style="flex-wrap：nowrap;margin-right:10px">
+                            手术麻醉史:
+                            <checkbox ng-false-value="0" ng-model="preVisitItem.anaes" ng-change="preVisitItem.anaes == 1?preVisitItem.anaesCondMap={}:''" ng-true-value="1">无</checkbox>
+                            <checkbox ng-false-value="0" ng-model="preVisitItem.anaesCondMap.a" ng-true-value="2">全麻</checkbox>
+                            <checkbox ng-false-value="0" ng-model="preVisitItem.anaesCondMap.b" ng-true-value="3">硬膜外</checkbox>
+                            <checkbox ng-false-value="0" ng-model="preVisitItem.anaesCondMap.c" ng-true-value="4">腰麻</checkbox>
+                            <checkbox ng-false-value="0" ng-model="preVisitItem.anaesCondMap.d" ng-true-value="5">神经阻滞</checkbox>
+                        </div>
+                        <div layout style="flex-wrap：nowrap;margin-right:10px">
+                            目前用药:
+                            <checkbox ng-model="preVisitItem.specialTreatment" ng-true-value="1" ng-change="checkFn('specialTreatment')">无</checkbox>
+                            <checkbox ng-model="preVisitItem.specialTreatmentCondMap.a" ng-true-value="2" ng-false-value="0">降压药</checkbox>
+                            <checkbox ng-model="preVisitItem.specialTreatmentCondMap.b" ng-true-value="3" ng-false-value="0">利尿药</checkbox>
+                            <checkbox ng-model="preVisitItem.specialTreatmentCondMap.c" ng-true-value="4" ng-false-value="0">抗凝药</checkbox>
+                            <checkbox ng-model="preVisitItem.specialTreatmentCondMap.d" ng-true-value="5" ng-false-value="0">降糖药</checkbox>
+                            <checkbox ng-model="preVisitItem.specialTreatmentCondMap.e" ng-true-value="6" ng-false-value="0">激素</checkbox>
+                            <checkbox ng-model="preVisitItem.specialTreatmentCondMap.f" ng-true-value="7" ng-false-value="0" ng-change="preVisitItem.specialTreatmentCondMap.f==7?'':preVisitItem.specialTreatmentOther=''">其他</checkbox>
+                            <input flex type="text" class="noborder3" maxlength="30" ng-model="preVisitItem.specialTreatmentOther" ng-disabled="preVisitItem.specialTreatmentCondMap.f!=7" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2">心血管系统：</td>
+                <td>
+                    <checkbox ng-model="preVisitItem.heartBoolHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('heartBoolHave')">无</checkbox>
+                    <checkbox ng-model="preVisitItem.heartBoolCondMap.a" ng-true-value="1" ng-false-value="2">瓣膜病</checkbox>
+                    <checkbox ng-model="preVisitItem.heartBoolCondMap.b" ng-true-value="1" ng-false-value="2">先心病</checkbox>
+                    <checkbox ng-model="preVisitItem.heartBoolCondMap.d" ng-true-value="1" ng-false-value="2">冠心病/心绞痛/心肌梗塞</checkbox>
+                    <checkbox ng-model="preVisitItem.heartBoolCondMap.e" ng-true-value="1" ng-false-value="2">心率失常</checkbox>
+                    <checkbox ng-model="preVisitItem.heartBoolCondMap.z" ng-true-value="1" ng-false-value="2">气促/心衰</checkbox>
+                    <checkbox ng-model="preVisitItem.heartBoolCondMap.f" ng-true-value="1" ng-false-value="2">休克/晕厥</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.heartBoolCondMap.g" ng-true-value="1" ng-false-value="2">血管疾病</checkbox>
+                        <checkbox ng-model="preVisitItem.heartBoolCondMap.h" ng-true-value="1" ng-false-value="2">起搏器</checkbox>
+                        <checkbox ng-model="preVisitItem.heartBoolCondMap.i" ng-true-value="1" ng-false-value="2">深静脉血栓</checkbox>
+                        (
+                        <checkbox ng-model="preVisitItem.heartBoolCondMap.j" ng-disabled="!preVisitItem.heartBoolCondMap.i" ng-true-value="1" ng-false-value="2">过滤器　部位</checkbox>
+                        <input type="number" class="noborder3" min="0" ng-model="preVisitItem.heartBoolRegion" ng-disabled="!preVisitItem.heartBoolCondMap.i" style="width:75px" max="99"></input>周) 其它
+                        <input flex type="text" class="noborder3" maxlength="22" style="width:160px;padding-top: 5px;" ng-model="preVisitItem.heartBoolOther" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>呼吸系统：</td>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.lungbreathHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('lungbreathHave')">无</checkbox>
+                        <checkbox ng-model="preVisitItem.lungbreathCondMap.a" ng-true-value="1" ng-false-value="2">哮喘</checkbox>
+                        <checkbox ng-model="preVisitItem.lungbreathCondMap.b" ng-true-value="1" ng-false-value="2">肺气肿</checkbox>
+                        <checkbox ng-model="preVisitItem.lungbreathCondMap.c" ng-true-value="1" ng-false-value="2">慢性肺病</checkbox>
+                        <checkbox ng-model="preVisitItem.lungbreathCondMap.d" ng-true-value="1" ng-false-value="2">肺炎与近二周内感冒</checkbox>
+                        <checkbox ng-model="preVisitItem.lungbreathCondMap.h" ng-true-value="1" ng-false-value="2">其它</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="30" ng-model="preVisitItem.lungbreathOther" ng-disabled="!preVisitItem.lungbreathCondMap.h" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2">神经系统：</td>
+                <td>
+                    <checkbox ng-model="preVisitItem.brainNerveHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('brainNerveHave')">无</checkbox>
+                    <checkbox ng-model="preVisitItem.brainNerveMap.a" ng-true-value="1" ng-false-value="2">精神疾病</checkbox>
+                    <checkbox ng-model="preVisitItem.brainNerveMap.b" ng-true-value="1" ng-false-value="2">癫痫</checkbox>
+                    <checkbox ng-model="preVisitItem.brainNerveMap.g" ng-true-value="1" ng-false-value="2">中风</checkbox>
+                    (
+                    <checkbox ng-model="preVisitItem.brainNerveMap.c" ng-true-value="1" ng-disabled="!preVisitItem.brainNerveMap.g">脑梗塞</checkbox>
+                    <checkbox ng-model="preVisitItem.brainNerveMap.c" ng-true-value="2" ng-disabled="!preVisitItem.brainNerveMap.g">脑出血</checkbox>)
+                    <checkbox ng-model="preVisitItem.brainNerveMap.e" ng-true-value="1" ng-false-value="2">晕厥</checkbox>（ 原因
+                    <checkbox ng-model="preVisitItem.brainNerveMap.f" ng-true-value="1" ng-disabled="!preVisitItem.brainNerveMap.e">明</checkbox>
+                    <checkbox ng-model="preVisitItem.brainNerveMap.f" ng-true-value="2" ng-disabled="!preVisitItem.brainNerveMap.e">不明</checkbox>
+                    ）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.brainNerveMap.l" ng-true-value="1" ng-false-value="2">帕金森综合症</checkbox>
+                        <checkbox ng-model="preVisitItem.brainNerveMap.m" ng-true-value="1" ng-false-value="2">脑萎缩</checkbox>
+                        <checkbox ng-model="preVisitItem.brainNerveMap.n" ng-true-value="1" ng-false-value="2">其他</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="50" ng-model="preVisitItem.brainNerveOther" ng-disabled="!preVisitItem.brainNerveMap.n" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>脊柱与四肢：</td>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.spineLimbHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('spineLimbHave')">无</checkbox>
+                        <checkbox ng-model="preVisitItem.spineLimbMap.a" ng-true-value="1" ng-false-value="2">截瘫</checkbox>(节段
+                        <input type="text" style="width: 40px; min-width: inherit;" class="noborder3 text-center" maxlength="4" ng-model="preVisitItem.paraplegia" ng-disabled="preVisitItem.spineLimbMap.a!=1"></input>)
+                        <checkbox ng-model="preVisitItem.spineLimbMap.c" ng-true-value="1" ng-false-value="2">颈背腰疾病</checkbox>
+                        <checkbox ng-model="preVisitItem.spineLimbMap.d" ng-true-value="1" ng-false-value="2">脊柱畸形</checkbox>
+                        肢体感觉运动障碍
+                        <checkbox ng-model="preVisitItem.limbDyskinesia" ng-true-value="'1'" ng-false-value="0"> 有</checkbox>
+                        <checkbox ng-model="preVisitItem.limbDyskinesia" ng-true-value="'2'" ng-false-value="0"> 无</checkbox>
+                        <checkbox ng-model="preVisitItem.spineLimbMap.f" ng-true-value="1" ng-false-value="2">其它</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="11" ng-model="preVisitItem.spineLimbOther" ng-disabled="preVisitItem.spineLimbMap.f!=1" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>血液系统：</td>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.bloodHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('bloodHave')">无</checkbox>
+                        <checkbox ng-model="preVisitItem.bloodMap.a" ng-true-value="1" ng-false-value="2">凝血障碍</checkbox>
+                        <checkbox ng-model="preVisitItem.bloodMap.b" ng-true-value="1" ng-false-value="2">贫血</checkbox>
+                        <checkbox ng-model="preVisitItem.bloodMap.c" ng-true-value="1" ng-false-value="2">白血病</checkbox>
+                        <checkbox ng-model="preVisitItem.bloodMap.h" ng-true-value="1" ng-false-value="2">其它</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="50" ng-model="preVisitItem.bloodOther" ng-disabled="preVisitItem.bloodMap.h!=1" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>肾脏疾病：</td>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.kidneyHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('kidneyHave')">无</checkbox>
+                        <checkbox ng-model="preVisitItem.kidney" ng-true-value="1" ng-false-value="2">肾功能障碍</checkbox>
+                        (
+                        <checkbox ng-disabled="!preVisitItem.kidney==1" ng-model="preVisitItem.kidneyCond" ng-true-value="1" ng-false-value="0">透析</checkbox>
+                        <checkbox ng-disabled="!preVisitItem.kidney==1" ng-model="preVisitItem.kidneyCond" ng-true-value="2" ng-false-value="0">未透析</checkbox>)&nbsp;
+                        <checkbox ng-model="preVisitItem.spineLimbMap.e" ng-true-value="1" ng-false-value="2">其它</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="48" ng-model="preVisitItem.kidneyOther" ng-disabled="preVisitItem.spineLimbMap.e!=1" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>消化系统：</td>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.digestionHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('digestionHave')">无</checkbox>
+                        <checkbox ng-model="preVisitItem.digestionMap.a" ng-true-value="1" ng-false-value="2">肝功能障碍</checkbox>
+                        <checkbox ng-model="preVisitItem.digestionMap.b" ng-true-value="1" ng-false-value="2">消化道出血</checkbox>
+                        <checkbox ng-model="preVisitItem.digestionMap.c" ng-true-value="1" ng-false-value="2">消化道梗阻</checkbox>
+                        <checkbox ng-model="preVisitItem.digestionMap.d" ng-true-value="1" ng-false-value="2">胃食管返流</checkbox>
+                        <checkbox ng-model="preVisitItem.digestionMap.e" ng-true-value="1" ng-false-value="2">肝硬化</checkbox>
+                        <checkbox ng-model="preVisitItem.digestionMap.f" ng-true-value="1" ng-false-value="2">其它</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="18" ng-model="preVisitItem.digestionOther" ng-disabled="preVisitItem.digestionMap.f!=1" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>内分泌系统：</td>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.endocrineHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('endocrineHave')">无</checkbox>
+                        <checkbox ng-model="preVisitItem.endocrineMap.a" ng-true-value="1" ng-false-value="2">糖尿病</checkbox>
+                        <checkbox ng-model="preVisitItem.endocrineMap.b" ng-true-value="1" ng-false-value="2">甲状腺病</checkbox>
+                        (
+                        <checkbox ng-model="preVisitItem.endocrineMap.c" ng-disabled="!preVisitItem.endocrineMap.b" ng-true-value="1" ng-false-value="2">甲亢</checkbox>
+                        <checkbox ng-model="preVisitItem.endocrineMap.e" ng-disabled="!preVisitItem.endocrineMap.b" ng-true-value="1" ng-false-value="2">甲减</checkbox>)&nbsp;
+                        <checkbox ng-model="preVisitItem.endocrineMap.g" ng-true-value="1" ng-false-value="2">库兴综合症</checkbox>
+                        <checkbox ng-model="preVisitItem.endocrineMap.f" ng-true-value="1" ng-false-value="2">其它</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="29" ng-model="preVisitItem.endocrineOther" ng-disabled="preVisitItem.endocrineMap.f!=1" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>传染病：</td>
+                <td>
+                    <div layout>
+                        <checkbox ng-model="preVisitItem.infectiousHave" ng-true-value="1" ng-false-value="0" ng-change="checkFn('infectiousHave')">无</checkbox>
+                        <checkbox ng-model="preVisitItem.infectiousMap.a" ng-true-value="1" ng-false-value="2">乙肝</checkbox>
+                        <checkbox ng-model="preVisitItem.infectiousMap.b" ng-true-value="1" ng-false-value="2">丙肝</checkbox>
+                        <checkbox ng-model="preVisitItem.infectiousMap.c" ng-true-value="1" ng-false-value="2">AIDS</checkbox>
+                        <checkbox ng-model="preVisitItem.infectiousMap.d" ng-true-value="1" ng-false-value="2">结核</checkbox>
+                        <checkbox ng-model="preVisitItem.infectiousMap.e" ng-true-value="1" ng-false-value="2">梅毒</checkbox>
+                        <checkbox ng-model="preVisitItem.infectiousMap.g" ng-true-value="1" ng-false-value="2">其它</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="46" ng-model="preVisitItem.infectiousOther" ng-disabled="preVisitItem.infectiousMap.g!=1" />
+                    </div>
+                </td>
+            </tr>
+            <!--    <tr>
+                <td>不良嗜好：</td>
+                <td>
+                    <div layout>
+                        嗜酒：
+                        <checkbox ng-model="preVisitItem.alcoholism" ng-true-value="'1'">无</checkbox>
+                        <checkbox ng-model="preVisitItem.alcoholism" ng-true-value="'2'">有</checkbox>
+                        吸烟：
+                        <checkbox ng-model="preVisitItem.smoking" ng-true-value="'1'">无</checkbox>
+                        <checkbox ng-model="preVisitItem.smoking" ng-true-value="'2'">有</checkbox>
+                        药物滥用史：
+                        <checkbox ng-model="preVisitItem.drugAddictionCond" ng-true-value="'1'">无</checkbox>
+                        <checkbox ng-model="preVisitItem.drugAddictionCond" ng-true-value="'2'">有</checkbox>
+                        <input flex type="text" class="noborder3" maxlength="30" ng-model="preVisitItem.drugAddiction" ng-disabled="preVisitItem.drugAddictionCond != 2" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>特殊用药：</td>
+                <td>
+                    <checkbox ng-model="preVisitItem.specialTreatment" ng-true-value="'1'">无</checkbox>
+                    <checkbox ng-model="preVisitItem.specialTreatment" ng-true-value="'2'">有</checkbox>
+                    说明：
+                    <checkbox ng-model="preVisitItem.specialTreatmentCondMap.a" ng-disabled='preVisitItem.specialTreatment != 2' ng-true-value="1" ng-false-value="2">降压药</checkbox>
+                    <checkbox ng-model="preVisitItem.specialTreatmentCondMap.b" ng-disabled='preVisitItem.specialTreatment != 2' ng-true-value="1" ng-false-value="2">降糖药</checkbox>
+                    <checkbox ng-model="preVisitItem.specialTreatmentCondMap.c" ng-disabled='preVisitItem.specialTreatment != 2' ng-true-value="1" ng-false-value="2">抗凝药</checkbox>
+                    <checkbox ng-model="preVisitItem.specialTreatmentCondMap.d" ng-disabled='preVisitItem.specialTreatment != 2' ng-true-value="1" ng-false-value="2">利尿药</checkbox>
+                    <checkbox ng-model="preVisitItem.specialTreatmentCondMap.e" ng-disabled='preVisitItem.specialTreatment != 2' ng-true-value="1" ng-false-value="2">激素</checkbox>
+                </td>
+            </tr> -->
+            <tr>
+                <td rowspan="4" class="text-center"><b>与麻醉相关的体格检查</b></td>
+                <td colspan="2">
+                    血压、心率、体温、呼吸异常
+                    <checkbox ng-model="preVisitItem.vitalSignsAbnormal" ng-true-value="'1'" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="preVisitItem.vitalSignsAbnormal" ng-true-value="'2'" ng-false-value="0">有</checkbox>
+                    意识
+                    <checkbox ng-model="preVisitItem.awareness" ng-true-value="'1'" ng-false-value="0">清醒</checkbox>
+                    <checkbox ng-model="preVisitItem.awareness" ng-true-value="'2'" ng-false-value="0">嗜睡</checkbox>
+                    <checkbox ng-model="preVisitItem.awareness" ng-true-value="'3'" ng-false-value="0">模糊</checkbox>
+                    <checkbox ng-model="preVisitItem.awareness" ng-true-value="'4'" ng-false-value="0">昏睡</checkbox>
+                    <checkbox ng-model="preVisitItem.awareness" ng-true-value="'5'" ng-false-value="0">昏迷</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    甲骸间距及张口度小&nbsp;(
+                    <checkbox ng-model="preVisitItem.bonesPitch" ng-true-value="'1'" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="preVisitItem.bonesPitch" ng-true-value="'2'" ng-false-value="0">有</checkbox>) 气管偏移&nbsp;(
+                    <checkbox ng-model="preVisitItem.tracheaOffset" ng-true-value="'1'" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="preVisitItem.tracheaOffset" ng-true-value="'2'" ng-false-value="0">有</checkbox>) 头颈活动受限&nbsp;(
+                    <checkbox ng-model="preVisitItem.neckRestricted" ng-true-value="'1'" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="preVisitItem.neckRestricted" ng-true-value="'2'" ng-false-value="0">有</checkbox>) 胸廓异常：
+                    <checkbox ng-model="preVisitItem.cardiothoracicAbnormal" ng-true-value="'1'" ng-false-value="0">无</checkbox>
+                    <checkbox ng-model="preVisitItem.cardiothoracicAbnormal" ng-true-value="'2'" ng-false-value="0">有</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div layout>
+                        <span>牙齿异常：（松动&nbsp;</span>
+                        <checkbox ng-model="preVisitItem.toothAbnormal" ng-true-value="'1'" ng-false-value="0">无</checkbox>
+                        <checkbox ng-model="preVisitItem.toothAbnormal" ng-true-value="'2'" ng-false-value="0">有</checkbox>
+                        <span>假牙&nbsp;</span>
+                        <checkbox ng-model="preVisitItem.toothAbnormalMap.a" ng-true-value="1" ng-false-value="0">无 </checkbox>
+                        <checkbox ng-model="preVisitItem.toothAbnormalMap.a" ng-true-value="2" ng-false-value="0">有 </checkbox>
+                        <span>）其它</span>
+                        <input flex type="text" class="noborder3" maxlength="18" ng-model="preVisitItem.toothAbnormalOther" />
+                        <span>&nbsp;&nbsp;肢体感觉与运动异常&nbsp;</span>
+                        <checkbox ng-model="preVisitItem.motionAbnormal" ng-true-value="'1'" ng-false-value="0">无</checkbox>
+                        <checkbox ng-model="preVisitItem.motionAbnormal" ng-true-value="'2'" ng-false-value="0">有</checkbox>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div layout>
+                        <span>说明及其它：</span>
+                        <input flex type="text" class="noborder3" maxlength="80" ng-model="preVisitItem.physicalOther" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="3" class="text-center"><b>与麻醉相关的辅助检查</b></td>
+                <td colspan="2">
+                    化验检查异常：
+                    <checkbox ng-model="preVisitItem.assayAbnormal" ng-true-value="'1'">无</checkbox>
+                    <checkbox ng-model="preVisitItem.assayAbnormal" ng-true-value="'2'">有</checkbox>
+                    (
+                    <checkbox ng-model="preVisitItem.assayAbnormalMap.a" ng-true-value="1" ng-false-value="2" ng-disabled="preVisitItem.assayAbnormal!='2'">血红蛋白</checkbox>
+                    <checkbox ng-model="preVisitItem.assayAbnormalMap.g" ng-true-value="1" ng-false-value="2" ng-disabled="preVisitItem.assayAbnormal!='2'">白细胞</checkbox>
+                    <checkbox ng-model="preVisitItem.assayAbnormalMap.c" ng-true-value="1" ng-false-value="2" ng-disabled="preVisitItem.assayAbnormal!='2'">血小板</checkbox>
+                    <checkbox ng-model="preVisitItem.assayAbnormalMap.b" ng-true-value="1" ng-false-value="2" ng-disabled="preVisitItem.assayAbnormal!='2'">凝血功能</checkbox>
+                    <checkbox ng-model="preVisitItem.assayAbnormalMap.d" ng-true-value="1" ng-false-value="2" ng-disabled="preVisitItem.assayAbnormal!='2'">血糖</checkbox>
+                    <checkbox ng-model="preVisitItem.assayAbnormalMap.e" ng-true-value="1" ng-false-value="2" ng-disabled="preVisitItem.assayAbnormal!='2'">血电解质</checkbox>
+                    <checkbox ng-model="preVisitItem.assayAbnormalMap.h" ng-true-value="1" ng-false-value="2" ng-disabled="preVisitItem.assayAbnormal!='2'">肝肾功能</checkbox>
+                    <checkbox ng-model="preVisitItem.assayAbnormalMap.f" ng-true-value="1" ng-false-value="2" ng-disabled="preVisitItem.assayAbnormal!='2'">肺功能</checkbox>)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span style="margin-right: 5px;">影像学检查异常</span>
+                    <checkbox ng-model="preVisitItem.videographyAbnormal" ng-true-value="'1'" ng-false-value="0"> 无</checkbox>
+                    <checkbox ng-model="preVisitItem.videographyAbnormal" ng-true-value="'2'" ng-false-value="0"> 有</checkbox>
+                    <span style="margin-right: 5px;">心电图异常</span>
+                    <checkbox ng-model="preVisitItem.ecgabnormal" ng-true-value="'1'" ng-false-value="0"> 无</checkbox>
+                    <checkbox ng-model="preVisitItem.ecgabnormal" ng-true-value="'2'" ng-false-value="0"> 有</checkbox>
+                    <span style="margin-right: 5px;">心彩超及左心功能异常</span>
+                    <checkbox ng-model="preVisitItem.ucgAbnormal" ng-true-value="'1'" ng-false-value="0"> 无</checkbox>
+                    <checkbox ng-model="preVisitItem.ucgAbnormal" ng-true-value="'2'" ng-false-value="0"> 有</checkbox>
+                    EF（
+                    <input flex type="number" transform="number" min="0" max="100" class="noborder3" ng-model="preVisitItem.ef" ng-value="preVisitItem.ef" style="width: 30px" />%）
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div layout>
+                        说明及其它：
+                        <input flex type="text" class="noborder3" maxlength="84" ng-model="preVisitItem.auxiliaryOther" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="8" class="text-center"><b style="display: inline-block; width: 16px;">麻醉前评估及麻醉计划</b></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div layout>
+                        <div>拟行麻醉：</div>
+                        <a flex>{{regOptItem.designedAnaesMethodName}}</a> 术后镇痛：
+                        <checkbox ng-model="preVisitItem.analgesic" ng-true-value="1">无</checkbox>
+                        <checkbox ng-model="preVisitItem.analgesic" ng-true-value="2">有</checkbox>
+                        (
+                        <checkbox ng-model="preVisitItem.analgesicMap.c" ng-disabled="preVisitItem.analgesic!='2'" ng-true-value="1" ng-false-value="2">静脉</checkbox>
+                        <checkbox ng-model="preVisitItem.analgesicMap.d" ng-disabled="preVisitItem.analgesic!='2'" ng-true-value="1" ng-false-value="2">椎管</checkbox>
+                        <checkbox ng-model="preVisitItem.analgesicMap.e" ng-disabled="preVisitItem.analgesic!='2'" ng-true-value="1" ng-false-value="2">神经阻滞</checkbox>
+                        <checkbox ng-model="preVisitItem.analgesicMap.f" ng-disabled="preVisitItem.analgesic!='2'" ng-true-value="1" ng-false-value="2">局部</checkbox>)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    特殊处理：
+                    <checkbox ng-model="preVisitItem.specialHandleMap.a" ng-true-value="1" ng-false-value="2">控制性降压</checkbox>
+                    <checkbox ng-model="preVisitItem.specialHandleMap.b" ng-true-value="1" ng-false-value="2">自体血回收</checkbox>
+                    <checkbox ng-model="preVisitItem.specialHandleMap.c" ng-true-value="1" ng-false-value="2">血液稀释</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    术中监测：
+                    <checkbox ng-model="preVisitItem.monitorMap.a" ng-true-value="1" ng-false-value="0"> ECG　ST段分析　SP02　NBP　RR</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.b" ng-true-value="2" ng-false-value="0"> VT　MV　Paw</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.c" ng-true-value="3" ng-false-value="0"> I:E</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.d" ng-true-value="4" ng-false-value="0"> IBP</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.e" ng-true-value="5" ng-false-value="0"> CVP</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.f" ng-true-value="6" ng-false-value="0"> PAPW</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.g" ng-true-value="7" ng-false-value="0"> PETC02</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.h" ng-true-value="8" ng-false-value="0"> A-gas</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.i" ng-true-value="9" ng-false-value="0"> FI02</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.j" ng-true-value="10" ng-false-value="0"> T</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.k" ng-true-value="11" ng-false-value="0"> HRV</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.l" ng-true-value="12" ng-false-value="0"> 肌松(TOF)</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.m" ng-true-value="13" ng-false-value="0"> 麻醉深度</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.n" ng-true-value="14" ng-false-value="0"> 血糖</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.o" ng-true-value="15" ng-false-value="0"> 血气</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.p" ng-true-value="16" ng-false-value="0"> 血电解质</checkbox>
+                    <checkbox ng-model="preVisitItem.monitorMap.q" ng-true-value="17" ng-false-value="0"> 血红蛋白</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>可能出现的问题：异物阻塞、舌后坠、喉痉挛、喉水肿、支气管痉挛、呕吐返流误吸、心律失常、急性心肌梗死、血气胸及张力性气胸、肺栓塞、恶性高热、脑血管意外、药物变态反应、局麻药中毒、全脊麻、硬膜外血肿、神经损伤、血肿、动静脉损伤、心脏穿孔、插管困难；</div>
+                    <div layout>
+                        <span>其他：</span>
+                        <input flex type="text" class="noborder3" maxlength="84" ng-model="preVisitItem.otherProblem" ng-value="preVisitItem.otherProblem" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>处理措施：保持呼吸道通畅,保证氧供充分,避免缺氧及CO2蓄积；控制麻醉深度适宜；保持体液及水电解质平衡；维持血流动力学稳定:严密及加强各项监测措施；紧急情况下施行心肺脑复苏等各项急救措施；积极预防和治疗原发病及并发症；</div>
+                    <div layout>
+                        <span>其他措施：</span>
+                        <input flex type="text" class="noborder3" maxlength="84" ng-model="preVisitItem.otherMeasures" ng-value="preVisitItem.otherMeasures" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" ng-class="{true: 'md-red11111111'}[!preVisitItem.leaveTo && verify]">
+                    术后去向：
+                    <checkbox ng-model="preVisitItem.leaveTo" ng-true-value="'1'" ng-false-value="0"> 病房</checkbox>
+                    <checkbox ng-model="preVisitItem.leaveTo" ng-true-value="'2'" ng-false-value="0"> ICU</checkbox>
+                    <checkbox ng-model="preVisitItem.leaveTo" ng-true-value="'3'" ng-false-value="0"> PACU</checkbox>
+                    <checkbox ng-model="preVisitItem.leaveTo" ng-true-value="'4'" ng-false-value="0"> 死亡</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div layout>其它：
+                        <input flex type="text" class="noborder3" maxlength="90" ng-model="preVisitItem.evaluationOther" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group" layout layout-align='space-between center'>
+            <div layout flex>医生签名：
+                <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="preVisitItem.anaestheitistId"></oi-select>
+                <div class="eSignature">
+                    <img ng-repeat="item in eSignatureAnesthetist" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
+            </div>
+            <div layout flex layout-align='end center'>日期：
+                <datetime-picker class='calendar sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="preVisitItem.signDate" timepicker="false" format="Y-m-d"></datetime-picker>
+            </div>
+        </div>
+    </div>
+</div>

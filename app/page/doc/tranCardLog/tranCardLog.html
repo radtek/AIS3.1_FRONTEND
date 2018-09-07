@@ -1,0 +1,728 @@
+<div id="print-region">
+    <div id="tranCardLogNhfe" class="page-print" style="width: 1350px;" ng-class="{true:'end-state'}[processState == 'END' || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h2>{{docInfo.beName}}转科患者交接卡</h2>
+        </header>
+        <div class="form-group" layout layout-align="space-between end">
+            <span>入院科室：<a>{{vm.regOpt.deptName}}</a></span>
+            <span>床号：<a>{{vm.regOpt.bed}}</a></span>
+            <span>姓名：<a>{{vm.regOpt.name}}</a></span>
+            <span>性别：<a>{{vm.regOpt.sex}}</a></span>
+            <span>年龄：<a>{{vm.regOpt.age}}</a></span>
+            <span>住院号：<a>{{vm.regOpt.hid}}</a></span>
+            <span>诊断：<a>　　　　　　　</a></span>
+            <span>出院科室：<a>　　　　　　　</a></span>
+        </div>
+    <div layout class="tab-warp tranCard-no-b">
+        <div layout="column" layout-align="center center" class="side-left border-r text-center">
+            <span flex>交接<br>内容</span>
+            <span flex>病人<br>情况</span>
+        </div>
+        <div layout="column" flex>
+            <div layout class="border-b tranCard-h40">
+                <div layout layout-align="center center" class="border-r tranCard-lHead-w145 slash-bj" style="position:relative;">
+                    <img src="/app/img/table-title.png" alt="">
+                    <div style="position:absolute;left:10px;bottom:5px;">
+                        项目
+                    </div>
+                    <div style="position:absolute;right:10px;top:5px;">
+                        时间
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>年</div>
+                        <div layout layout-align="end center" flex>月</div>
+                        <div layout layout-align="end center" flex>日</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>时</div>
+                        <div layout layout-align="center center" flex>分</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>年</div>
+                        <div layout layout-align="end center" flex>月</div>
+                        <div layout layout-align="end center" flex>日</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>时</div>
+                        <div layout layout-align="center center" flex>分</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>年</div>
+                        <div layout layout-align="end center" flex>月</div>
+                        <div layout layout-align="end center" flex>日</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>时</div>
+                        <div layout layout-align="center center" flex>分</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>年</div>
+                        <div layout layout-align="end center" flex>月</div>
+                        <div layout layout-align="end center" flex>日</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>时</div>
+                        <div layout layout-align="center center" flex>分</div>
+                    </div>
+                </div>
+                <div layout="column" flex>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>年</div>
+                        <div layout layout-align="end center" flex>月</div>
+                        <div layout layout-align="end center" flex>日</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="end center" flex>时</div>
+                        <div layout layout-align="center center" flex>分</div>
+                    </div>
+                </div>
+            </div>
+            <div layout class="border-b tranCard-h20">
+                <div layout layout-align="start center" class="border-r tranCard-lHead-w145">
+                    生命体征情况交接
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                </div>
+                <div layout layout-align="center center" flex>
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                </div>
+            </div>
+            <div layout class="border-b tranCard-h20">
+                <div layout layout-align="start center" class="border-r tranCard-lHead-w145">
+                    皮肤
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>完整</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>破损</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>完整</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>破损</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>完整</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>破损</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>完整</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>破损</checkbox>
+                </div>
+                <div layout layout-align="center center" flex>
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>完整</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>破损</checkbox>
+                </div>
+            </div>
+            <div layout class="border-b tranCard-h80">
+                <!-- <div layout class="tranCard-lHead-w145"> -->
+                    <div layout layout-align="center center" style="width:45px;" class="border-r">
+                        输液
+                    </div>
+                    <div layout="column" class="border-r" style="width:100px;">
+                        <div layout layout-align="start center" flex="50" class="border-b">输液类型</div>
+                        <div layout layout-align="start center" flex class="border-b">穿刺部位</div>
+                        <div layout layout-align="start center" flex>通畅情况</div>
+                    </div>
+                <!-- </div> -->
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>留置针</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>PICC</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CVC</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>正常</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>异常</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>留置针</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>PICC</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CVC</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>正常</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>异常</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>留置针</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>PICC</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CVC</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>正常</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>异常</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>留置针</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>PICC</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CVC</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>正常</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>异常</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>留置针</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>PICC</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CVC</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>正常</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>异常</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>是</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>否</checkbox>
+                    </div>
+                </div>
+            </div>
+            <div layout class="border-b tranCard-h40">
+                <div layout layout-align="start center" class="border-r tranCard-lHead-w145">
+                    管道名称
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>输氧管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>胃管</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>尿管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>输氧管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>胃管</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>尿管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>输氧管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>胃管</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>尿管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>输氧管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>胃管</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>尿管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>输氧管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>胃管</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>尿管</checkbox>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>其他</checkbox>
+                    </div>
+                </div>
+            </div>
+            <div layout class="border-b tranCard-h20">
+                <div layout layout-align="start center" class="border-r tranCard-lHead-w145">
+                    手腕带
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-r">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                </div>
+                <div layout layout-align="center center" flex>
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                    <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                </div>
+            </div>
+            <div layout class="tranCard-h60">
+                <!-- <div layout class="tranCard-lHead-w145"> -->
+                    <div layout layout-align="center center" style="width:45px;" class="border-r">
+                        手术<br>病人
+                    </div>
+                    <div layout="column" style="width:100px;" class="border-r">
+                        <div layout layout-align="start center" flex class="border-b">手术部位标识</div>
+                        <div layout layout-align="start center" flex class="border-b">手术名称交接</div>
+                        <div layout layout-align="start center" flex>麻醉方式交接</div>
+                    </div>
+                <!-- </div> -->
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                </div>
+                <div layout="column" flex>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b" style="border-bottom: none;">
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>有</checkbox>
+                        <checkbox flex ng-true-value="0" ng-false-value="1" disabled>无</checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout class="tab-warp tranCard-no-b">
+        <div layout="column" layout-align="center center" class="side-left border-r text-center">
+            <span flex>物品</span>
+        </div>
+        <div layout="column" flex>
+            <div layout class="tranCard-h60">
+                <div layout="column" class="border-r tranCard-lHead-w145">
+                    <div layout layout-align="start center" flex class="border-b">药物</div>
+                    <div layout layout-align="start center" class="tranCard-h19">血液</div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>名称：</div>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>名称：</div>
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>名称：</div>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>名称：</div>
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>名称：</div>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>名称：</div>
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>名称：</div>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>名称：</div>
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                </div>
+                <div layout="column" flex>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>名称：</div>
+                    </div>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>名称：</div>
+                        <div layout layout-align="start center" flex>数量：</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout class="tab-warp tranCard-no-b">
+        <div layout="column" layout-align="center center" class="side-left border-r text-center">
+            <span flex>病人<br>物品</span>
+        </div>
+        <div layout flex class="tranCard-h100">
+            <div layout="column" class="border-r tranCard-lHead-w145">
+                <div layout layout-align="start center" flex class="border-b">病历</div>
+                <div layout layout-align="start center" flex class="border-b">病服</div>
+                <div layout layout-align="start center" flex class="border-b">影像资料</div>
+                <div layout layout-align="start center" flex class="border-b">假牙</div>
+                <div layout layout-align="start center" flex>其他</div>
+            </div>
+            <div layout="column" flex class="border-r">
+                <div layout flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>病历</checkbox>
+                </div>
+                <div layout layout-align="start center" flex class="border-b" style="min-width: 217px;">
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>衣</checkbox>
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>裤</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>被子</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>枕头</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <div layout layout-align="start center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CT/MRI</checkbox>
+                    </div>
+                    
+                    <div layout layout-align="center center" flex><span class="span-underline">　　</span>张</div>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>假牙</checkbox>
+                </div>
+                <div layout layout-align="center center" flex>
+                </div>
+            </div>
+            <div layout="column" flex class="border-r">
+                <div layout flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>病历</checkbox>
+                </div>
+                <div layout layout-align="start center" flex class="border-b" style="min-width: 217px;">
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>衣</checkbox>
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>裤</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>被子</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>枕头</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <div layout layout-align="start center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CT/MRI</checkbox>
+                    </div>
+                    
+                    <div layout layout-align="center center" flex><span class="span-underline">　　</span>张</div>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>假牙</checkbox>
+                </div>
+                <div layout layout-align="center center" flex>
+                </div>
+            </div>
+            <div layout="column" flex class="border-r">
+                <div layout flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>病历</checkbox>
+                </div>
+                <div layout layout-align="start center" flex class="border-b" style="min-width: 217px;">
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>衣</checkbox>
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>裤</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>被子</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>枕头</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <div layout layout-align="start center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CT/MRI</checkbox>
+                    </div>
+                    
+                    <div layout layout-align="center center" flex><span class="span-underline">　　</span>张</div>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>假牙</checkbox>
+                </div>
+                <div layout layout-align="center center" flex>
+                </div>
+            </div>
+            <div layout="column" flex class="border-r">
+                <div layout flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>病历</checkbox>
+                </div>
+                <div layout layout-align="start center" flex class="border-b" style="min-width: 217px;">
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>衣</checkbox>
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>裤</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>被子</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>枕头</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <div layout layout-align="start center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CT/MRI</checkbox>
+                    </div>
+                    
+                    <div layout layout-align="center center" flex><span class="span-underline">　　</span>张</div>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>假牙</checkbox>
+                </div>
+                <div layout layout-align="center center" flex>
+                </div>
+            </div>
+            <div layout="column" flex>
+                <div layout flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>病历</checkbox>
+                </div>
+                <div layout layout-align="start center" flex class="border-b" style="min-width: 217px;">
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>衣</checkbox>
+                    <checkbox style="max-width: 40px;" flex ng-true-value="1" ng-false-value="0" disabled>裤</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>被子</checkbox>
+                    <checkbox style="max-width: 55px;" flex ng-true-value="1" ng-false-value="0" disabled>枕头</checkbox>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <div layout layout-align="start center" flex>
+                        <checkbox flex ng-true-value="1" ng-false-value="0" disabled>CT/MRI</checkbox>
+                    </div>
+                    
+                    <div layout layout-align="center center" flex><span class="span-underline">　　</span>张</div>
+                </div>
+                <div layout layout-align="center center" flex class="border-b">
+                    <checkbox flex ng-true-value="1" ng-false-value="0" disabled>假牙</checkbox>
+                </div>
+                <div layout layout-align="center center" flex>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div layout class="tab-warp tranCard-no-b">
+        <div layout="column" layout-align="center center" class="side-left border-r text-center">
+            <span flex></span>
+        </div>
+        <div layout flex class="tranCard-h20">
+            <div layout="column" class="border-r tranCard-lHead-w145">
+                <div layout layout-align="start center" flex>是否特殊感染</div>
+            </div>
+            <div layout="column" flex class="border-r">
+            </div>
+            <div layout="column" flex class="border-r">
+            </div>
+            <div layout="column" flex class="border-r">
+            </div>
+            <div layout="column" flex class="border-r">
+            </div>
+            <div layout="column" flex>
+            </div>
+        </div>
+    </div>
+
+    <div layout class="tab-warp tranCard-no-b">
+        <div layout="column" layout-align="center center" class="side-left border-r text-center">
+            <span flex>其他</span>
+        </div>
+        <div layout flex class="tranCard-h20">
+            <div layout="column" class="border-r tranCard-lHead-w145">
+            </div>
+            <div layout="column" flex class="border-r">
+            </div>
+            <div layout="column" flex class="border-r">
+            </div>
+            <div layout="column" flex class="border-r">
+            </div>
+            <div layout="column" flex class="border-r">
+            </div>
+            <div layout="column" flex>
+            </div>
+        </div>
+    </div>
+
+    <div layout class="tab-warp tranCard-no-b">
+        <div layout="column" layout-align="center center" class="side-left border-r text-center">
+            <span flex>签名</span>
+        </div>
+        <div layout="column" flex>
+            <div layout class="tranCard-h40">
+                <div layout="column" class="border-r tranCard-lHead-w145">
+                    <div layout layout-align="start center" flex class="border-b">交班者</div>
+                    <div layout layout-align="start center" flex>接班者</div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                </div>
+                <div layout="column" flex class="border-r">
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                </div>
+                <div layout="column" flex>
+                    <div layout layout-align="center center" flex class="border-b">
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                    <div layout layout-align="center center" flex>
+                        <div layout layout-align="start center" flex>科室：</div>
+                        <div layout layout-align="start center" flex>签名：</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div layout class="tab-warp tranCard-no-b">
+        备注：本交接单适用于所有科室，交接双方确认并记录签名。此交接卡由患者出院所在科室保存。
+    </div>
+
+    <div layout layout-align="end center" class="tab-warp">
+        <div layout flex="15">
+            <div flex>年</div>
+            <div flex>月</div>
+            <div flex>日</div>
+        <div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+<div id="print-region">
+    <div class="page-print" ng-class="{true: 'end-state'}[vm.record.processState == 'END' && !vm.saveActive || vm.setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="vm.docInfo.beName">{{vm.docInfo.beName}}</h3>
+            <h4>急诊手术患者术前评估、术后访视单</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex=20>姓名：<a flex>{{vm.regOpt.name}}</a></span>
+            <span layout flex=20>性别：<a flex>{{vm.regOpt.sex}}</a></span>
+            <span layout flex=20>年龄：<a flex>{{vm.regOpt.age}}</a></span>
+            <span layout flex=25>职业：<input class="noborder3"></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex=20>住院号：<a flex>{{vm.regOpt.hid}}</a></span>
+            <span layout flex=20>病室：<a flex>{{vm.regOpt.regionName}}</a></span>
+            <span layout flex=20>床号：<a flex>{{vm.regOpt.bed}}</a></span>
+            <span layout flex=25>手术日期：<a flex>{{vm.regOpt.operaDate}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>诊断：<a flex>{{vm.regOpt.diagnosisName}}</a></span>
+            <span layout flex class="ml-15">手术名称：<a flex>{{vm.regOpt.designedOptName}}</a></span>
+        </div>
+    	<div class="form-group" style="font-weight: bold;">手术告知：</div>
+    	<div class="form-group panel-body" style="border: 1px solid #000">
+    		<p>为了您能更好地配合医护人员顺利地完成手术，请您仔细阅读访视单。如有不明之处或有什么要求，请您告诉探望您的手术室护士。在要求合理及条件允许的情况下，我们将全力满足您的要求，配合您手术的护士为：<input class="noborder3" style="height: 20px;"></p>
+    		<p>1.&nbsp;术前一天洗澡更衣，注意保暖，术前8小时禁食，4-6小时禁水。（或遵从病房医生的医嘱）</p>
+    		<p>2.&nbsp;术日晨洗脸刷牙，但不能饮水，将假牙、手表、发卡取下，身上不要带贵重及金属物品。</p>
+    		<p>3.&nbsp;手术日请不要化装、涂口红，以免影响病情观察。</p>
+    		<p>4.&nbsp;术日晨请排空大、小便，身着病号服，卧床等候，手术室将派专人在术前1小时左右到您床旁接您。</p>
+    		<p>5.&nbsp;如您发热或月经来潮请告诉我们。</p>
+    		<p>6.&nbsp;因手术床较窄，您在床上时不要随意翻身，以免坠床。</p>
+    		<p>7.&nbsp;手术室护士为您直接进行的操作有：静脉输液、摆置床醉体位、摆放手术体位等。</p>
+    		<p>8.&nbsp;手术间各种手术仪器、监护器会发出声响，请不要紧张。</p>
+    		<p>9.&nbsp;在麻醉过程中，如出现头晕、心慌、恶心、口周麻木，请告诉医生、护士。</p>
+    		<p>10.&nbsp;导尿一般在麻醉后进行，您不会有明显不适，请您放心。</p>
+    	</div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex=30>访视护士：<a flex></a></span>
+            <span layout flex=30>病人签名：<a flex></a></span>
+            <span layout>日期：<datetime-picker name="operaDate" dateID="operaDate-times" ng-model="vm.anaesMedicineAccede.date" ng-value="vm.anaesMedicineAccede.date" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime"></datetime-picker></span>
+        </div>
+    </div>
+    <div class="page-print" ng-class="{true: 'end-state'}[vm.record.processState == 'END' && !vm.saveActive || vm.setting.readonly]">
+        <!-- page2 -->
+        <div class="form-group" style="font-weight: bold;">术前评估</div>
+        <div class="form-group panel-body" style="border: 1px solid #000">
+            <div class="form-group">1、意识状态：
+                <checkbox ng-class="{true: 'ml-10'}[$index > 0]" ng-model="vm.record.conscious" ng-true-value="$index + 1" ng-false-value="0" ng-repeat="i in vm.awarenessList">{{i.codeName}}</checkbox>
+            </div>
+            <div class="form-group" layout>2、患者过敏史：
+                <checkbox ng-model="vm.record.anaphylaxis" ng-true-value="1" ng-false-value="0" ng-click="vm.record.anaphylaxisOther=''">无</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.anaphylaxis" ng-true-value="2" ng-false-value="0">有</checkbox>
+                <input flex class="noborder3" style="height: 20px;" ng-model="vm.record.anaphylaxisOther" ng-disabled="vm.record.anaphylaxis!=2">
+            </div>
+            <div class="form-group" layout>3、患者手术史：
+                <checkbox ng-model="vm.record.surgeryHis" ng-true-value="1" ng-false-value="0" ng-click="vm.record.surgeryHisOther=''">无</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.surgeryHis" ng-true-value="2" ng-false-value="0">有</checkbox>
+                <input flex class="noborder3" style="height: 20px;" ng-model="vm.record.surgeryHisOther" ng-disabled="vm.record.surgeryHis!=2">
+            </div>
+            <div class="form-group" layout>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;体内植入物：
+                <checkbox ng-model="vm.record.implants" ng-true-value="1" ng-false-value="0" ng-click="vm.record.implantsOther=''">无</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.implants" ng-true-value="2" ng-false-value="0">有</checkbox>
+                <input flex class="noborder3" style="height: 20px;" ng-model="vm.record.implantsOther" ng-disabled="vm.record.implants!=2">
+                &nbsp;&nbsp;心脏起博器：
+                <checkbox ng-model="vm.record.pacemaker" ng-true-value="1" ng-false-value="0">无</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.pacemaker" ng-true-value="2" ng-false-value="0">有</checkbox>
+            </div>
+            <div class="form-group" layout>4、传染病或感状况：乙肝：
+                <checkbox ng-model="vm.record.hepatitis" ng-true-value="1" ng-false-value="0" ng-click="vm.record.infectionOther=''">阴性</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.hepatitis" ng-true-value="2" ng-false-value="0">阳性</checkbox>
+                <input flex class="noborder3 ml-10" style="height: 20px;" ng-model="vm.record.infectionOther" ng-disabled="vm.record.hepatitis!=2">
+            </div>
+            <div class="form-group" layout>5、皮肤：
+                <checkbox ng-model="vm.record.skin" ng-true-value="1" ng-false-value="0" ng-click="vm.record.position='';vm.record.nature='';">正常</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.skin" ng-true-value="2" ng-false-value="0">破损</checkbox>&nbsp;&nbsp;部位：
+                <input flex class="noborder3" style="height: 20px;" ng-model="vm.record.position" ng-disabled="vm.record.skin!=2">&nbsp;&nbsp;性质：
+                <input flex class="noborder3" style="height: 20px;" ng-model="vm.record.nature" ng-disabled="vm.record.skin!=2">
+            </div>
+            <div class="form-group" layout>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其它：
+                <checkbox ng-model="vm.record.skinOther[0]" ng-true-value="1" ng-false-value="0">潮红</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.skinOther[1]" ng-true-value="2" ng-false-value="0">苍白</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.skinOther[2]" ng-true-value="3" ng-false-value="0">湿冷</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.skinOther[3]" ng-true-value="4" ng-false-value="0">发绀</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.skinOther[4]" ng-true-value="5" ng-false-value="0">黄染</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.skinOther[5]" ng-true-value="6" ng-false-value="0">水肿</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.skinOther[6]" ng-true-value="7" ng-false-value="0">皮疹</checkbox>
+            </div>
+            <div class="form-group" layout>6、营养状况：
+                <checkbox ng-model="vm.record.nutritionState" ng-true-value="1" ng-false-value="0">良好</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.nutritionState" ng-true-value="2" ng-false-value="0">中等</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.nutritionState" ng-true-value="3" ng-false-value="0">不良</checkbox>
+            </div>
+            <div class="form-group" layout>7、活动状况：
+                <checkbox ng-model="vm.record.activityState" ng-true-value="1" ng-false-value="0">自主</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.activityState" ng-true-value="2" ng-false-value="0">自如</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.activityState" ng-true-value="3" ng-false-value="0">被动</checkbox>
+            </div>
+            <div class="form-group" layout>8、肢体感觉：
+                <checkbox ng-model="vm.record.limbsFeel" ng-true-value="1" ng-false-value="0" ng-click="vm.record.limbsPosition='';vm.record.limbsNature=''">正常</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.limbsFeel" ng-true-value="2" ng-false-value="0">异常</checkbox>&nbsp;&nbsp;部位：
+                <input flex class="noborder3" style="height: 20px;" ng-model="vm.record.limbsPosition" ng-disabled="vm.record.limbsFeel!=2">&nbsp;&nbsp;性质：
+                <checkbox class='ml-10' ng-model="vm.record.limbsNature" ng-true-value="1" ng-false-value="0" ng-disabled="vm.record.limbsFeel!=2">麻木</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.limbsNature" ng-true-value="2" ng-false-value="0" ng-disabled="vm.record.limbsFeel!=2">疼痛</checkbox>
+            </div>
+            <div class="form-group" layout>9、心理状况：
+                <checkbox ng-model="vm.record.psychologyState" ng-true-value="1" ng-false-value="0">恐惧</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.psychologyState" ng-true-value="2" ng-false-value="0">焦虑</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.psychologyState" ng-true-value="3" ng-false-value="0">紧张</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.psychologyState" ng-true-value="4" ng-false-value="0">平静</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.psychologyState" ng-true-value="5" ng-false-value="0">淡漠</checkbox>
+            </div>
+            <div layout>10、其它：
+                <checkbox ng-model="vm.record.preVisitOther[0]" ng-true-value="1" ng-false-value="0">月经来潮</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.preVisitOther[1]" ng-true-value="2" ng-false-value="0">发热</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.preVisitOther[2]" ng-true-value="3" ng-false-value="0">咳嗽</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.preVisitOther[3]" ng-true-value="4" ng-false-value="0">义齿</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.preVisitOther[4]" ng-true-value="5" ng-false-value="0">松动牙</checkbox>
+            </div>
+        </div>
+        <div class="form-group" style="font-weight: bold;">术后评估</div>
+        <div class="form-group panel-body" style="border: 1px solid #000">
+            <div class="form-group" layout>术后恢复状况：
+                <checkbox ng-model="vm.record.recoveryState" ng-true-value="1" ng-false-value="0">好</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.recoveryState" ng-true-value="2" ng-false-value="0">良好</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.recoveryState" ng-true-value="3" ng-false-value="0">一般</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.recoveryState" ng-true-value="4" ng-false-value="0">差</checkbox>
+            </div>
+            <div class="form-group" layout>心理状况：
+                <checkbox ng-model="vm.record.postPsychologyState" ng-true-value="1" ng-false-value="0">好</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.postPsychologyState" ng-true-value="2" ng-false-value="0">良好</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.postPsychologyState" ng-true-value="3" ng-false-value="0">一般</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.postPsychologyState" ng-true-value="4" ng-false-value="0">差</checkbox>
+            </div>
+            <div class="form-group" layout>伤口疼痛：
+                <checkbox ng-model="vm.record.wound" ng-true-value="1" ng-false-value="0">有</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.wound" ng-true-value="2" ng-false-value="0">无</checkbox>
+            </div>
+            <div class="form-group" layout>伤口情况：
+                <checkbox ng-model="vm.record.woundSituation" ng-true-value="1" ng-false-value="0">渗液</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.woundSituation" ng-true-value="2" ng-false-value="0">渗血</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.woundSituation" ng-true-value="3" ng-false-value="0">干燥</checkbox>
+            </div>
+            <div class="form-group" layout>并发症：
+                <checkbox ng-model="vm.record.complicationContent" ng-true-value="1" ng-false-value="0">有</checkbox>
+                <checkbox class='ml-10' ng-model="vm.record.complicationContent" ng-true-value="2" ng-false-value="0">无</checkbox>
+            </div>
+            <div layout>对手术室工作意见：
+                <textarea flex style="min-height: 80px;" ng-model="vm.record.workOpinion">{{vm.record.workOpinion}}</textarea>
+            </div>
+        </div>
+        <div layout>备注：
+            <textarea flex class="noborder" style="min-height: 80px; outline: none;" ng-model="vm.record.consciousOther">{{vm.record.consciousOther}}</textarea>
+        </div>
+    </div>
+</div>

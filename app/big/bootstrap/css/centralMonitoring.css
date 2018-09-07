@@ -1,0 +1,22 @@
+.cent-mon{background-color: #03182d;color:#ffffff;}
+.cm-top{font-size: 30px;line-height: 60px;font-family: '微软雅黑';background-color: #16334f; }
+.hosname{ padding-left: 20px;}
+.right-span{    position: absolute;    right: 5px;}
+.pcard-div{text-align: center;font-size: 28px;}
+.pcard-div>div{background-color: #16334f;margin :10px 15px 0 0px;display: inline-block;width: 295px;}
+.pcard-div>div td{text-align: center;}
+.div-foot{border-top: 1px solid #ccc;}
+.div-top>div{display: inline-block;padding: 5px 0;}
+.div-foot>div{display: inline-block;width: 30%;padding: 5px 0;}
+.bedname{width: 30%;display: inline-block;}
+.nibpart{width: 63%; display: inline-block;}
+.bedname,.div-foot>.pb, .div-foot>.hr{border-right: 1px solid #ccc;}
+.nibp{border-bottom: 1px solid #ccc;}
+.docs{ background-color: #1270d1; color:#ffffff; text-align: left;padding-left: 10px;}
+.pname{font-size: 22px;line-height: 43px; display: inline-block;white-space:nowrap; } 
+.yellow{color:#ffc107;}
+.green{color:#4caf50;display: inline-block;min-width: 20px;}
+.blue{color:#1270d1;min-width: 70px;display: inline-block;}  
+.red{color:red !important;}
+.longstr{font-size: 22px;    position: relative;
+    bottom: 2px;}

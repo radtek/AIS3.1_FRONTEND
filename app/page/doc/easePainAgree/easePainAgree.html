@@ -1,0 +1,74 @@
+<div id="print-region">
+    <div class="page-print" id="easePainAgree" ng-class="{true: 'end-state'}[docAnalgesicInformedConsent.processState==='END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3>{{docInfo.beName}}<br/>术后（术前）镇痛知情同意书</h3>
+        </header>
+
+<table width="100%" border="1">
+  <tr style="height: 40px;">
+    <td style="width:8%">姓名</td>
+    <td colspan="2" style="white-space:nowrap;">{{vm.regOptItem.name}}</td>
+    <td style="width:8%">性别</td>
+    <td style="width:10%">{{vm.regOptItem.sex}}</td>
+    <td style="width:8%">年龄</td>
+    <td style="width:10%">{{vm.regOptItem.age}}<span ng-if="vm.regOptItem.age" >岁</span>{{vm.regOptItem.ageMon}}<span ng-if="vm.regOptItem.ageMon">月</span>{{vm.regOptItem.ageDay}} <span ng-if="vm.regOptItem.ageDay">天</span></td>
+    <td style="width:8%">床号</td>
+    <td style="width:10%">{{vm.regOptItem.bed}}</td>
+    <td style="width:8%">住院号</td>
+    <td colspan="2" style="white-space:nowrap;">{{vm.regOptItem.hid}}</td>
+    </tr>
+  <tr style="height: 40px;">
+    <td colspan="2">术前诊断</td>
+    <td colspan="4" >{{vm.regOptItem.diagnosisName}}</td>
+    <td>手术方式</td>
+    <td colspan="5" >{{vm.regOptItem.designedOptName}}</td>
+    </tr>
+  <tr style="height: 40px;">
+    <td colspan="2" style="white-space:nowrap;">术后镇痛方式</td>
+    <td colspan="4" style="white-space:nowrap;">患者静脉自控镇痛PCIA</td>
+    <td style="padding-left:20px;"><checkbox ng-model="docAnalgesicInformedConsent.pcia" ng-true-value="1" ng-false-value=""></checkbox></td>
+    <td colspan="4" style="white-space:nowrap;">患者硬膜外自控镇痛PCEA</td>
+    <td style="width:10%;padding-left:20px;"><checkbox ng-model="docAnalgesicInformedConsent.pcea" ng-true-value="2" ng-false-value=""></checkbox></td>
+  </tr>
+  <tr style="height: 40px;">
+    <td colspan="2">镇痛泵类型</td>
+    <td colspan="5" style="white-space:nowrap;">自动镇痛泵 单价<input onkeyup="this.value=this.value.replace(/[^\d|.]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d|.]/g,'')" class="border40" ng-model="docAnalgesicInformedConsent.pumpPrice" >元(药费、镇痛麻醉费除外)</td>
+    <td colspan="5" style="white-space:nowrap;">电子自控镇痛泵 单价<input onkeyup="this.value=this.value.replace(/[^\d|.]/g,'')" ng-model="docAnalgesicInformedConsent.electronicPumpPrice" onafterpaste="this.value=this.value.replace(/[^\d|.]/g,'')"  class="border40" >元(药费、镇痛麻醉费除外)</td>
+    </tr>
+  <tr>
+    <td colspan="12"><pre>
+    术后疼痛治疗能够使病人减轻疼痛，提高围手术期生活治疗，有利于病人咳嗽，排痰，促进伤口愈合。从而维持机
+体生理功能稳定，促进早日康复。同时，接受术后镇痛的病人可能发生以下并发症：
+1.术后呼吸抑制
+2.恶心、呕吐
+3.皮肤瘙痒
+4.尿潴留
+5.其他
+</pre>
+     </td>
+    </tr>
+  <tr>
+    <td colspan="12" style="padding-bottom: 20px;"><pre>
+    医师陈述：我已告知患者将要施行的镇痛方式、术后镇痛过程中可能发生的并发症和风险，告知是自愿选择和自愿
+项目，并解答了患者关于术后镇痛的相关问题。
+</pre>
+  <span style="padding-left:30px;">麻醉医生签名：</span><span><oi-select style="display: inline-block;" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="signName" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="docAnalgesicInformedConsent.signName"></oi-select></span>
+            <span class="eSignature" > 
+            <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+            </span>    
+                    <span style="padding-left: 150px; ">    日期：<span><datetime-picker class='calendar sign noborder3' name="signTimes" id="datatime" dateID="signTimes-times" style="display: inline-block;" ng-model="docAnalgesicInformedConsent.signTimestr" timepicker="false" format="Y-m-d"></datetime-picker></span>
+                    </span>
+    </td>
+    </tr>
+  <tr>
+    <td colspan="12"><pre>
+    以上情况已告知患者/家属，患者/家属对以上情况表示理解，同意使用<span class="border40" style="width: 280px;"></span>
+镇痛泵进行术后镇痛。
+    患者/家属签名：               患者委托人签名：               与患者关系：
+</pre>
+    
+    </td>
+    </tr>
+</table>   
+ </div>      
+</div>

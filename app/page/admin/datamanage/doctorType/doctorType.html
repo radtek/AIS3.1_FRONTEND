@@ -1,0 +1,7 @@
+<div layout='column' flex id="doctorType">
+	<div class="text-right form-group">
+		<button type="submit" class="btn btn-default" ng-click="btnImport()" ng-if='!hideImport'>数据导入</button>
+		<button type="submit" class="btn btn-default" ng-click="btnAdd()">添&nbsp;&nbsp;加</button>
+	</div>
+	<div ui-grid="gridOptions" style="min-height: 700px;" ui-grid-auto-resize ui-grid-pagination></div>
+</div>

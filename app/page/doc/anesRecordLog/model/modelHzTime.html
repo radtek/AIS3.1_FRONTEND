@@ -1,0 +1,25 @@
+<div class="modal-header">    
+    <h4><span>显示间隔</span><span class="pull-right modal-container_close" ng-click="cancel()">✖</span></h4>
+</div>
+<form name="form" class="form-horizontal" novalidate id="modelHzTime">
+    <div class="modal-body">
+        <div layout="column">
+            <div flex class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">抢救状态标识点间隔时间(秒)</label>
+                    <select flex class="form-control" ng-model='freq.save' ng-options='item for item in saveTimeSpan'></select>
+                </div>
+            </div>
+            <div flex class="input-wrap">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">麻醉记录单标识点间隔时间(秒)</label>
+                    <select flex class="form-control" ng-model='freq.normal' ng-options='item for item in normalTimeSpan'></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="form.$invalid" type="button" ng-click="save()">保&nbsp;&nbsp;存</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">取&nbsp;&nbsp;消</button>
+    </div>
+</form>

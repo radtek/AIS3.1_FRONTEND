@@ -1,0 +1,69 @@
+<div id="print-region">
+    <div class="page-print" ng-class="{true:'end-state'}[accedeItem.processState == 'END' || setting.readonly]">
+        <div layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>麻醉知情同意书</h4>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a flex>{{regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{regOptItem.age}}</a></span>&nbsp;
+            <span layout>病房：<a flex>{{regOptItem.regionName}}</a></span>&nbsp;
+            <span layout>病室：<a flex>{{regOptItem.deptName}}</a></span>&nbsp;
+            <span layout>病案号：<a flex>{{regOptItem.hid}}</a></span>
+        </div>
+        <p layout>手术前诊断与合并疾病：<a flex>{{regOptItem.diagnosisName}}</a></p>
+        <p layout>拟定术式<a flex>{{regOptItem.designedOptName}}</a></p>
+        <p layout>拟定麻醉方法：<a flex>{{regOptItem.designedAnaesMethodName}}</a></p>
+        <p layout>麻醉的目的：减轻患者的痛苦；监测、调控患者各器官、系统的功能，保障患者的安全；为手术提供有利的条件。</p>
+        <p class="indent">麻醉一般是安全的，但麻醉和手术一样也存在一定的风险性，由于个体的差异，也有可能发生一些并发症和麻醉意外。现将麻醉可能发生的并发症、意外及其他相关的情况告知如下，包括但不限于：</p>
+        <p>1、麻醉医生将根据患者的病情和手术方式综合考虑，选择相对安全的麻醉方法和制定相应的麻醉方案。</p>
+        <p>2、麻醉中常规使用各种、各类麻醉药物后，患者可能出现中毒、过敏、高敏、特异质反应、神经毒性反应，引起皮疹、抽搐、支气管痉挛、血压下降、心律失常、恶性高热、精神异常等，严重者 可导致休克、呼吸心跳骤停。</p>
+        <p>3、麻醉中及麻醉后，特别是急症饱腹患者，可能发生恶心、呕吐、反流，造成误吸，引起吸入性肺炎，甚至呼吸衰竭、窒息。</p>
+        <p>4、在基础麻醉和椎管内麻醉时，可能发生呼吸抑制、血压下降、麻醉平面过高。</p>
+        <p>5、椎管内麻醉行穿刺、置管、注射麻醉药物后，可能发生腰背痛、头痛、感染、尿潴留、导管折断、神经损伤，硬脊膜外血肿等并发症。</p>
+        <p>6、椎管内麻醉及神经阻滞麻醉可能发生全脊髓麻醉，可能损伤血管、神经引起一次性或永久性肢体感觉运动障碍。</p>
+        <p>7、气管插管过程中可能损伤口唇、牙齿、口腔粘膜、声带、气管、造成出血、牙齿脱落、粘膜血肿、喉头水肿、声音嘶哑、支气管痉挛等副损伤、可能发生气管插管失败或拔管后窒息。</p>
+        <p>8、全身麻醉后可能发生呼吸恢复延迟和苏醒延迟。</p>
+        <p>9、麻醉操作和有创监测可能引起副损伤，如血肿、血（气）胸、肢体感觉运动障碍、感染等。</p>
+        <p>10、麻醉过程中可能发生各种心律失常、神经反射性血流动力学改变、心血管意外、脑血管意外等。</p>
+        <p>11、麻醉可能加重已有的合并症，导致组织器官功能障碍或衰竭。</p>
+        <p>12、手术中失血过多，过快可引起失血性休克。</p>
+        <p>13、麻醉中输血输液可能发生输（血） 液反应、致热源反应、过敏反应、血源性传染病等。</p>
+        <p>14、急诊、婴幼儿、儿童、老年人、合并其他系统疾病的，相关的麻醉意外、麻醉合并症发生的危险性将增加。</p>
+        <p>15、各种麻醉方法均不能保证全部成功。有时需改变麻醉方法或终止麻醉。</p>
+        <p>16、麻醉中也可能发生其他意想不到的情况。</p>
+        <p>17、为了提高麻醉的安全性，麻醉医生有权根据病情变化决定治疗和抢救措施，以免延误时机。</p>
+        <p>18、为了获得满意的麻醉效果，麻醉医生将根据病情和手术方式选择使用药品和物品，其费用只能按相关规定的比例部分报销或不能报销。</p>
+        <p>19、患者有权咨询与麻醉相关的事宜，权衡利弊后同意麻醉或拒绝麻醉。</p>
+        <p>20、术后镇痛可能发生恶心、呕吐、静脉炎、呼吸抑制等并发症。术后镇痛的费用不能报销。</p>
+        <p layout>
+            21、特殊情况交待：
+            <input flex type="text" class="noborder3" ng-model="accedeItem.specialCase" ng-value="accedeItem.specialCase" maxlength="50">
+        </p>
+        <p class="indent">以上不良情况难以预料是否发生、何时发生、若发生，大部分只是给患者带来轻微的损伤，不会遗留后遗症，只有少部分可导致病人残疾可导致病人残疾甚至死亡；当然，当发生以上不良情况时医院会尽力救治，把损伤降到最低。</p>
+    </div>
+    <div class="page-print" ng-class="{true:'end-state'}[accedeItem.processState == 'END' || setting.readonly]">
+        <hr>
+        <p>其他需说明的情况：</p>
+        <div class="form-group">
+            <textarea style="height: 120px; width: 100%; outline: none; resize: none;" ng-model="accedeItem.otherCase" ng-value="accedeItem.otherCase" maxlength="499">{{accedeItem.otherCase}}</textarea>
+        </div>
+        <hr>
+        <p>患者/委托代理人/法定代理人意见：</p>
+        <p class="indent">有关麻醉的方法和过程、麻醉的目的和必要性、麻醉可能发生的并发症及医疗意外，麻醉医生已向我详细阐明并告知，我完全理解，经慎重考虑，权衡利弊，我决定同意进行此项麻醉。</p>
+        <p class="indent">我明白在麻醉过程中，在不可预见的情况下，有时可能需要变更麻醉方法和方案或附加其他操作，我特授权麻醉医生在遇有紧急情况时，为保障我的生命安全实施必要的救治措施，并保证承担全部所需费用。</p>
+        <p class="indent">我知道在麻醉开始之前，我可以随时拒绝麻醉，以取消本同意书的决定。</p>
+        <p class="indent">现签名以示负责和生效。</p>
+        <p>患者/委托代理人/法定代理人签名：</p>
+        <p layout flex-offset=50>日期：　　　年　　月　　日　　时　　分</p>
+        <hr>
+        <p>见证人意见：</p>
+        <p class="indent">本人见证了患方自愿签署本文书。</p>
+        <p layout flex-offset=50>见证人签名：</p>
+        <p layout flex-offset=50>日期：　　　年　　月　　日　　时　　分</p>
+        <hr>
+        <p layout flex-offset=50>麻醉医生签名：</p>
+        <p layout flex-offset=50>日期：　　　年　　月　　日　　时　　分</p>
+    </div>
+</div>

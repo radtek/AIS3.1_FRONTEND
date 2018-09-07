@@ -1,0 +1,82 @@
+<div id="print-region">
+    <div class="page-print" id="postLookBack_nhfe" ng-class="{true: 'end-state'}[vm.bean.processState==='END' && !saveActive  || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3>{{docInfo.beName}}手术室护理工作访视记录</h3>
+            <h4>术后回视</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a flex>{{vm.regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{vm.regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{vm.regOptItem.age}}</a></span>&nbsp;
+            <span layout>科室：<a flex>{{vm.regOptItem.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a flex>{{vm.regOptItem.bed}}</a></span>&nbsp;
+            <span layout>住院号：<a flex>{{vm.regOptItem.hid}}</a></span>&nbsp;
+            <a flex>{{vm.regOptItem.operaDate | date: 'yyyy - MM - dd'}}</a>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout flex>拟施手术：<a flex>{{vm.regOptItem.designedOptName}}</a></span>
+        </div>
+        <div class="form-group" layout="column" layout-wrap="wrap" layout-align="start conter">
+            <p>尊敬的患者及家属：</p>            
+        </div>
+        <div class="form-group2" layout="column" layout-wrap="wrap" layout-align="start conter">           
+            <p class="indent">您好，感谢您在手术期间给予我们护理工作的大力支持和配合，请您对我们的工作做出评价：</p>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start conter">
+            访视护士解释工作是否到位：
+            <checkbox ng-model="vm.bean.explain" ng-true-value="1" ng-false-value="0">是</checkbox>
+            <checkbox ng-model="vm.bean.explain" ng-true-value="2" ng-false-value="0">一般</checkbox>
+            <checkbox ng-model="vm.bean.explain" ng-true-value="3" ng-false-value="0">有待改进</checkbox>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start conter">
+            术前的特殊手术体位指导是否有用：
+            <checkbox ng-model="vm.bean.preOperOptbody" ng-true-value="1" ng-false-value="0">有</checkbox>
+            <checkbox ng-model="vm.bean.preOperOptbody" ng-true-value="2" ng-false-value="0">没有</checkbox>
+            <checkbox ng-model="vm.bean.preOperOptbody" ng-true-value="3" ng-false-value="0">有待改进</checkbox>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start conter">
+            患者遮盖及保暖措施：
+            <checkbox ng-model="vm.bean.coverWarm" ng-true-value="1" ng-false-value="0">好</checkbox>
+            <checkbox ng-model="vm.bean.coverWarm" ng-true-value="2" ng-false-value="0">较好</checkbox>
+            <checkbox ng-model="vm.bean.coverWarm" ng-true-value="3" ng-false-value="0">一般</checkbox>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start conter">
+            术中手术体位摆放是否舒适：
+            <checkbox ng-model="vm.bean.operingOptbodyComfort" ng-true-value="1" ng-false-value="0">舒适</checkbox>
+            <checkbox ng-model="vm.bean.operingOptbodyComfort" ng-true-value="2" ng-false-value="0">较好</checkbox>
+            <checkbox ng-model="vm.bean.operingOptbodyComfort" ng-true-value="3" ng-false-value="0">一般</checkbox>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start conter">
+            术后伤口恢复情况：
+            <checkbox ng-model="vm.bean.postOperRestore" ng-true-value="1" ng-false-value="0">无渗出</checkbox>
+            <checkbox ng-model="vm.bean.postOperRestore" ng-true-value="2" ng-false-value="0">淡黄色渗出</checkbox>
+            <checkbox ng-model="vm.bean.postOperRestore" ng-true-value="3" ng-false-value="0">其它</checkbox>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start conter">
+            通过访视对您有哪些帮助：
+            <checkbox ng-model="vm.bean.byInterviewHelp" ng-true-value="1" ng-false-value="0">心理支持</checkbox>
+            <checkbox ng-model="vm.bean.byInterviewHelp" ng-true-value="2" ng-false-value="0">家属支持</checkbox>
+            <checkbox ng-model="vm.bean.byInterviewHelp" ng-true-value="3" ng-false-value="0">术后康复</checkbox>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="start conter">
+            对手术室护士工作的满意度：
+            <checkbox ng-model="vm.bean.satisfacation" ng-true-value="1" ng-false-value="0">满意</checkbox>
+            <checkbox ng-model="vm.bean.satisfacation" ng-true-value="2" ng-false-value="0">基本满意</checkbox>
+            <checkbox ng-model="vm.bean.satisfacation" ng-true-value="3" ng-false-value="0">不满意</checkbox>
+        </div>
+        <div class="form-group1" layout="column" layout-wrap="wrap" layout-align="start conter">
+            为了更好地改进手术室的护理工作质量，请您提供宝贵的意见和建议：            
+        </div>
+        <div class="form-group1" layout="column" layout-wrap="wrap" layout-align="start conter">            
+            <input type="text" class="noborder3" maxlength="50" ng-model="vm.bean.sugest" ng-value="vm.bean.sugest">
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="start conter">
+            谢谢您的理解和支持，祝您早日康复！
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="start conter">
+            访视者签名：<a>　　　　　　</a>
+            患者或家属签名：<a>　　　　　　</a>
+            访视时间：<a>　　　</a>年<a>　　　</a>月<a>　　　</a>日
+        </div>
+    </div>
+</div>

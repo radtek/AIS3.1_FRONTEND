@@ -1,0 +1,22 @@
+<!-- 加载中 -->
+<div class="print-progress">
+    <progressbar></progressbar>
+</div>
+<div id="doc-all">
+    <!-- 文书 -->
+    <pre-visit-log-syzxyy ng-if="doc_pre_visit"></pre-visit-log-syzxyy>
+    <info-cons-syzxyy ng-if="doc_accede"></info-cons-syzxyy>
+    <anaes-method-change-syzxyy ng-if="doc_anaes_method_change_record"></anaes-method-change-syzxyy>
+    <nurs-record-log-syzxyy ng-if="doc_opt_care_record"></nurs-record-log-syzxyy>
+    <check-record-log-syzxyy ng-if="doc_opt_nurse"></check-record-log-syzxyy>
+    <!-- <post-visit-log ng-if="doc_post_follow_record"></post-visit-log> -->
+    <post-visit-log-syzxyy-second ng-if="doc_anaes_postop"></post-visit-log-syzxyy-second>
+    <labor-analgesia ng-if="doc_labor_analgesia_accede"></labor-analgesia>
+    <post-visit-log-syzxyy ng-if="doc_post_follow_record"></post-visit-log-syzxyy>
+    <anesthesia-summary-syzxyy ng-if="doc_anaes_summary"></anesthesia-summary-syzxyy>
+    <anes-record-log-print ng-if="doc_anaes_record"></anes-record-log-print>
+    <post-any-visit-log-syzxyy ng-if="doc_post_follow_record"></post-any-visit-log-syzxyy>
+    <recycle-auto-blood-syzxyy ng-if="doc_anaes_medicine_accede"></recycle-auto-blood-syzxyy>
+    <self-pay-instrument-syzxyy ng-if="doc_self_pay_instrument_accede"></self-pay-instrument-syzxyy>
+    <safety-verif-log-syzxyy ng-if="doc_safe_check"></safety-verif-log-syzxyy>
+</div>
