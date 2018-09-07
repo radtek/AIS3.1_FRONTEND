@@ -65,7 +65,7 @@ function anesEvent($scope, IHttp, $uibModalInstance, $q, $timeout, items, $filte
             outRoomTime = 0,
             inputTime = new Date($filter('date')(new Date($scope.param.occurTime_), 'yyyy-MM-dd HH:mm')).getTime(),
             startOper = false,
-            zgD = false;  //置管    
+            zgD = false;  //置管   
         if(!$scope.param.code && ($scope.loginUser.beCode === 'yxyy' || $scope.loginUser.beCode === 'sybx')){
                 toastr.warning("请选择事件名称");
                 $scope.saved = true;

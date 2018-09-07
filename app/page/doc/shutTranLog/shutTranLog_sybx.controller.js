@@ -42,36 +42,21 @@ function ShutTranLogCtrl($rootScope, $scope, IHttp, $window, $q, $timeout, $filt
         $scope.singUserItem = rs.data.userItem;
     });
 
-    function save(processState, type) {
+   
+     function save(processState, type) {
         $scope.verify = processState == 'END';
-        let content = '';
-        // if (processState === 'END') {
-        //     toastr.warning('请输入必填项信息');
-        //     return;
-        // }
-        if ($scope.transferConnectRecord.processState === 'END' && processState === 'END') {
-            $scope.$emit('doc-print');
-            return;
-        }
-        if (processState === 'END' && type !== 'print') {
-            content = '提交的文书将归档，并且不可编辑，是否继续提交？';
-            confirm.show(content).then(function(data) {
-                submit(processState, type);
-            });
-        } else if (processState === 'END' && type === 'print') {
-            if ($scope.transferConnectRecord.processState === 'END') {
+        if (processState == 'END') {
+            if (type && $scope.transferConnectRecord.processState == 'END')
                 $scope.$emit('doc-print');
-            } else {
-                content = '打印的文书将归档，且不可编辑，是否继续打印？';
-                confirm.show(content).then(function(data) {
-                    submit(processState, type);
-                });
-            }
-        } else {
-            submit(processState);
-        }
+            else if (type)
+                confirm.show('打印的文书将归档，且不可编辑。是否继续打印？').then(function(data) { submit(processState); });
+            else if ($scope.transferConnectRecord.processState)
+                submit(processState, type);
+            else
+                confirm.show('提交的文书将归档，并且不可编辑。是否继续提交？').then(function(data) { submit(processState); });
+        } else
+            submit(processState, type)
     }
-
     function submit(processState, state) {
         $rootScope.btnActive = false;
         var patShuttleTransfer1 = angular.copy($scope.transferConnectRecord);
@@ -110,17 +95,26 @@ function ShutTranLogCtrl($rootScope, $scope, IHttp, $window, $q, $timeout, $filt
         });
     }
 
-    $scope.$on('save', () => {
-        save('NO_END');
+    $scope.$watch('processState', function(n) {
+        if (n == undefined)
+            return;
+        $scope.$emit('processState', n);
+    }, true);
+    $scope.$on('save', function() {
+        if ($scope.saveActive && $scope.processState == 'END')
+            save('END');
+        else
+            save('NO_END');
+
     });
 
-    $scope.$on('print', () => {
+    $scope.$on('submit', function() {
+        save('END');
+    });
+
+    $scope.$on('print', function() {
         save('END', 'print');
     });
-
-    $scope.$on('submit', () => {
-        save('END');
-    })
      $timeout(function() {
         $scope.$watch('transferConnectRecord.joinNurse1', function(n, o) {//1
             $scope.hasSig_1 = false;

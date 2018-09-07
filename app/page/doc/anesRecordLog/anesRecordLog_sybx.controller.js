@@ -22,6 +22,7 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
         summary, // 麻醉总结
         oldValue;
         
+    let pageName = $rootScope.$state.current.name;
     vm.docInfo = auth.loginUser();
     vm.docUrl = auth.loginUser().titlePath;
     vm.setting = angular.copy($rootScope.$state.current.data);
@@ -39,9 +40,16 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
     $scope.disabledOutBtn = false;
     $scope.lineH = 28;
 
+    console.log(pageName);
     if (document.body.clientWidth < 1250) {
         $scope.lineH = 22;
         $('.echarts').width(543);
+    }else {
+        if (pageName === 'anesRecordPage_sybx') {
+            $('.echarts').width(document.body.clientWidth - ($("#aside").width() + $("#timeTd").width() + $("#summaryTd").width() + 50));
+        }else {
+            $('.echarts').width(document.body.clientWidth - ($("#aside").width() + $("#timeTd").width() + $("#summaryTd").width() + 50) - 210);
+        }
     }
     vm.view = { // 同步界面的数据
         pageCur: 0, // 当前页数
@@ -708,11 +716,11 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
             $uibModal.open({
                 animation: true,
                 backdrop: 'static',
-                template: require('./model/hbgzb/anesEvent.html'),
+                template: require('./model/anesEvent.html'),
                 controller: require('./model/anesEvent.controller.js'),
                 resolve: {
                     items: {
-                        list: angular.copy(vm.startOper.anaeseventList), // 考虑到删除和添加事件时无法同步界面，手动回显数据
+                        list: angular.copy($scope.startOper.anaeseventList), // 考虑到删除和添加事件时无法同步界面，手动回显数据
                         docId: docId,
                         regOptId: regOptId,
                         state: rs.data.resultRegOpt.state,

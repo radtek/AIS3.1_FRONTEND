@@ -1,8 +1,8 @@
-anesRecordLogPrint.$inject = ['$rootScope', 'IHttp', 'anesRecordInter', 'eCharts', 'anesRecordServe', 'select', 'auth', '$timeout', '$window'];
+anesRecordLogPrint.$inject = ['$rootScope','$scope', 'IHttp', 'anesRecordInter', 'eCharts', 'anesRecordServe', 'select', 'auth', '$timeout', '$window'];
 
 module.exports = anesRecordLogPrint;
 
-function anesRecordLogPrint($rootScope, IHttp, anesRecordInter, eCharts, anesRecordServe, select, auth, $timeout, $window) {
+function anesRecordLogPrint($rootScope,$scope, IHttp, anesRecordInter, eCharts, anesRecordServe, select, auth, $timeout, $window) {
     $('html').width(0).height('initial').css('min-width', '0px');
     $('body').width(0).height('initial').css('min-width', '0px');
 
@@ -15,7 +15,7 @@ function anesRecordLogPrint($rootScope, IHttp, anesRecordInter, eCharts, anesRec
         eChartCol = 8,
         historyData = [],
         analgesicMedEvtName = '';
-
+console.log(select.getRouteConfigByRouteUrl($scope.routeUrl))
     // 获取文书的标题
     vm.docInfo = auth.loginUser();
     vm.docUrl = auth.loginUser().titlePath;

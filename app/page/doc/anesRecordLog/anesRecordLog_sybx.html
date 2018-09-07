@@ -1,5 +1,5 @@
 <div flex layout id="anesRecord_sybx">
-    <aside layout="column" ng-show="vm.pageState != 1 || !setting.readonly">
+    <aside id="aside" layout="column" ng-show="vm.pageState != 1 || !setting.readonly">
         <button type="button" class="btn btn-primary" ng-click="vm.onPrint()">
             <span class="glyphicon glyphicon-print"></span>
             <div>打印</div>
@@ -151,7 +151,7 @@
                 <div class="left">
                     <table>
                         <tr>
-                            <td colspan="7" class="text-center red">时间</td>
+                            <td id="timeTd" colspan="7" class="text-center red">时间</td>
                         </tr>
                         <tr>
                             <td colspan="7" class="text-center red">O<sub class="red">2</sub> &nbsp;&nbsp;L/min</td>
@@ -266,7 +266,7 @@
                 <div class="right">
                     <table border="1" bordercolor="red">
                         <tr>
-                            <td class="text-center red">麻醉总结</td>
+                            <td id="summaryTd" class="text-center red">麻醉总结</td>
                         </tr>
                         <tr>
                             <td ng-click="vm.summary()">

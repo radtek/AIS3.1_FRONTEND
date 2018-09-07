@@ -234,10 +234,15 @@
                 </div>
                 <p ng-if="_anesthetist && dispatch.anesthetistId == undefined && regOpt.isLocalAnaes != 1" class="help-block text-right">麻醉医生不能为空</p>
             </div>
-            <div flex="20" class="input-wrap">
+            <div flex="20" class="input-wrap" ng-if="beCode == 'sybx'">
                 <div layout layout-align="start center" class="input-group">
-                    <label ng-if="beCode!='sybx'" class="tit">副麻医生</label>
-                    <label ng-if="beCode=='sybx'" class="tit">灌注医生</label>
+                    <label class="tit">灌注医生</label>
+                    <oi-select flex name="perfusionDoctor" oi-options="item.userName as item.name for item in getAnesList($query, dispatch.anesthetistId)" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="dispatch.perfusionDoctorIdList" multiple></oi-select>
+                </div>
+            </div>
+            <div flex="20" class="input-wrap" ng-if="beCode != 'sybx'">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">副麻医生</label>
                     <oi-select flex name="circuAnesthetist" oi-options="item.userName as item.name for item in getAnesList($query, dispatch.anesthetistId) | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="dispatch.circuAnesthetistId"></oi-select>
                 </div>
             </div>

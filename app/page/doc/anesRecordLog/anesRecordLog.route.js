@@ -113,7 +113,7 @@ function route($stateProvider) {
             template: require('./anesRecordLogPrint_syzxyy1.html'),
             controller: require('./anesRecordLogPrint.controller')
         }))
-        .state('anesRecordPrint_llzyyy', angular.merge({}, opt_syzxyy, {//临澧 打印
+        .state('anesRecordPrint_llzyyy', angular.merge({}, opt_syzxyy, { //临澧 打印
             parent: undefined,
             url: '/anesRecordPrint_syzxyy/:regOptId',
             template: require('./anesRecordLogPrint_syzxyy1.html'),
@@ -256,7 +256,9 @@ function anesRecordLogPrint(auth) {
             controllerAs: 'vm',
             restrict: 'E',
             replact: true,
-            scope: {}
+            scope: {
+                routeUrl:"="
+            }
         }
     }
 }

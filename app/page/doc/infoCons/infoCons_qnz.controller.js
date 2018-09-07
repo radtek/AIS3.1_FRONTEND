@@ -75,8 +75,10 @@ function InfoConsCtrl($rootScope, $scope, IHttp, toastr, auth, $timeout, select,
         params.accede.processState = processState;
         if(params.accede.anaesMethodList.length == 0)
             params.accede.anaesMethodList = [];
-        if(params.accede.anaesAssistMeasureList.length == 0)
-            params.accede.anaesAssistMeasureList = [];
+        if (params.accede.anaesAssistMeasureList) {
+            if(params.accede.anaesAssistMeasureList.length == 0)
+                params.accede.anaesAssistMeasureList = [];
+        }
         IHttp.post('document/updateAccede', params).then(function(rs) {
             if (rs.data.resultCode != 1) return;
             toastr.success(rs.data.resultMessage);

@@ -1,7 +1,8 @@
 <div id="print-region">
     <div class="page-print" id="preVisitLog_yxrm" ng-class="{true: 'end-state'}[vm.preVisit.processState==='END' && !saveActive || setting.readonly]">
         <header layout="column" layout-align="center center">
-            <h3>{{docInfo.beName}}<br/>麻醉术前访视与评估记录单</h3>
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+             <h4>麻醉术前访视与评估记录单</h4>
         </header>
         <div class="borline">
             <div class="form-group" layout layout-wrap="wrap" layout-align="end end">

@@ -169,7 +169,7 @@ function OverMediLogCtrl($rootScope, $scope, IHttp,$timeout, $uibModal, toastr, 
     });
 
     $scope.$on('save', () => {
-        save('NO_END');
+        save($scope.insuredPatAgree.processState);
     });
 
     $scope.$on('print', () => {

@@ -101,14 +101,14 @@ function PreVisitLogCtrl($rootScope, $scope, IHttp, $window, anesRecordServe, $t
                 if ($scope.preVisitItem.processState == 'END') {
                     $scope.$emit('doc-print');
                 } else {
-                    confirm.show('打印的文书将归档，且不可编辑。').then(function(data) {
+                    // confirm.show('打印的文书将归档，且不可编辑。').then(function(data) {
                         submit(type, state);
-                    });
+                    // });
                 }
             } else {
-                confirm.show('提交的文书将归档，并且不可编辑。').then(function(data) {
+                // confirm.show('提交的文书将归档，并且不可编辑。').then(function(data) {
                     submit(type);
-                });
+                // });
             }
         } else {
             submit(type);
@@ -120,7 +120,7 @@ function PreVisitLogCtrl($rootScope, $scope, IHttp, $window, anesRecordServe, $t
     });
 
     $scope.$on('save', () => {
-        save('NO_END');
+        save($scope.processState);
     });
 
     $scope.$on('print', () => {

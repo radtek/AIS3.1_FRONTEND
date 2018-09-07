@@ -2,8 +2,8 @@ module.exports = angular.module('anesthesiaSummary', [])
     .config(route)
     .directive('anesthesiaSummary', anesthesiaSummary)
     .directive('anesthesiaSummarySyzxyy', anesthesiaSummarySyzxyy)
-    .directive('anesthesiaSummaryYxrm',anesthesiaSummaryYxrm)
-    .directive('anesthesiaSummaryLlzyyy',anesthesiaSummaryLlzyyy)
+    .directive('anesthesiaSummaryYxrm', anesthesiaSummaryYxrm)
+    .directive('anesthesiaSummaryLlzyyy', anesthesiaSummaryLlzyyy)
     .name;
 
 route.$inject = ['$stateProvider'];
@@ -61,7 +61,9 @@ var dev = {
     controllerAs: 'vm',
     restrict: 'E',
     replact: true,
-    scope: {}
+    scope: {
+        routeUrl: "="
+    }
 }
 
 function anesthesiaSummary() {
@@ -79,6 +81,7 @@ function anesthesiaSummaryYxrm() {
         template: require('./anesthesiaSummary_yxrm.html')
     })
 }
+
 function anesthesiaSummaryLlzyyy() {
     return angular.merge({}, dev, {
         template: require('./anesthesiaSummary_llzyyy.html')

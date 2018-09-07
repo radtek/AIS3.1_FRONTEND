@@ -265,7 +265,7 @@
                         <tr ng-repeat="left in [0,1,2,3,4]" class="numInput">
                             <td ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
                                 <span ng-if="startOper.leftShowList[left] && vm.monDataList[i * 3].showIE && startOper.leftShowList[left].eventName == 'I:E'">1:</span>
-                                <input type="number" ng-if="startOper.leftShowList[left] && vm.monDataList[i * 3].monitorDataList[left + 1]" ng-model="vm.monDataList[i * 3].monitorDataList[left + 1].value" ng-value="vm.monDataList[i * 3].monitorDataList[left + 1].value" ng-blur="vm.saveMon(vm.monDataList[i * 3].monitorDataList[left + 1])" ng-class="{true: 'mon-left-ie'}[vm.monDataList[i * 3].showIE && startOper.leftShowList[left].eventName == 'I:E']">
+                                <input type="number" ng-if="startOper.leftShowList[left] && vm.monDataList[i * 3].monitorDataList[left + 1]" ng-model="vm.monDataList[i * 3].monitorDataList[left + 1].value" ng-value="vm.monDataList[i * 3].monitorDataList[left + 1].value" ng-blur="vm.saveMon(vm.monDataList[i * 3].monitorDataList[left + 1])" ng-class="{true: 'mon-left-ie'}[startOper.leftShowList[left] && vm.monDataList[i * 3].showIE && startOper.leftShowList[left].eventName == 'I:E']">
                             </td>
                         </tr>
                         <tr>

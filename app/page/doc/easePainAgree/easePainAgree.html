@@ -1,7 +1,8 @@
 <div id="print-region">
     <div class="page-print" id="easePainAgree" ng-class="{true: 'end-state'}[docAnalgesicInformedConsent.processState==='END' && !saveActive || setting.readonly]">
         <header layout="column" layout-align="center center">
-            <h3>{{docInfo.beName}}<br/>术后（术前）镇痛知情同意书</h3>
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <div class="title-div"> <h4>术后（术前）镇痛知情同意书</h4></div>
         </header>
 
 <table width="100%" border="1">
@@ -11,7 +12,10 @@
     <td style="width:8%">性别</td>
     <td style="width:10%">{{vm.regOptItem.sex}}</td>
     <td style="width:8%">年龄</td>
-    <td style="width:10%">{{vm.regOptItem.age}}<span ng-if="vm.regOptItem.age" >岁</span>{{vm.regOptItem.ageMon}}<span ng-if="vm.regOptItem.ageMon">月</span>{{vm.regOptItem.ageDay}} <span ng-if="vm.regOptItem.ageDay">天</span></td>
+    <td style="width:10%">
+        <span ng-if="vm.regOptItem.age" >{{vm.regOptItem.age}}岁</span>
+        <span ng-if="vm.regOptItem.ageMon">{{vm.regOptItem.ageMon}}月</span>
+        <span ng-if="vm.regOptItem.ageDay">{{vm.regOptItem.ageDay}}天</span></td>
     <td style="width:8%">床号</td>
     <td style="width:10%">{{vm.regOptItem.bed}}</td>
     <td style="width:8%">住院号</td>

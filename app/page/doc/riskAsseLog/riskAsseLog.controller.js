@@ -9,6 +9,7 @@ function RiskAsseLogCtrl($rootScope, $scope, IHttp, select, toastr, confirm, $wi
     $scope.docInfo = auth.loginUser();
     $scope.docUrl = auth.loginUser().titlePath;
     let beCode = $scope.docInfo.beCode;
+    $scope.saveActive = auth.getDocAuth();
 
     select.getAnaesthetists().then((rs) => {
         if (rs.data.resultCode != 1)
@@ -152,57 +153,47 @@ function RiskAsseLogCtrl($rootScope, $scope, IHttp, select, toastr, confirm, $wi
             }
         });
     }
-
     function save(processState, type) {
         $scope.verify = processState == 'END';
-
-        if (processState === 'END' && beCode === 'nhfe' && (!vm.optRiskEva.incisionCleanliness || !vm.optRiskEva.doctorName || !vm.optRiskEva.asa || !vm.optRiskEva.anesthesName || !vm.optRiskEva.durationSurgery || !vm.optRiskEva.tourNurseName)) {
-            toastr.warning('请输入必填项信息');
-            return;
-        }
-        if (processState === 'END' && beCode !== 'sybx' && (!vm.optRiskEva.incisionCleanliness || !vm.optRiskEva.doctorName || !vm.optRiskEva.asa || !vm.optRiskEva.anesthesName || !vm.optRiskEva.durationSurgery)) {
-            toastr.warning('请输入必填项信息');
-            return;
-        }
-        if (processState === 'END' && beCode === 'sybx' && (!vm.optRiskEva.doctorName || !vm.optRiskEva.anesthesName || !vm.optRiskEva.tourNurseName)) {
-            toastr.warning('请输入必填项信息');
-            return;
-        }
-        if (vm.optRiskEva.processState === 'END' && processState === 'END') {
-            $scope.$emit('doc-print');
-            return;
-        }
-        let content = '';
-        if (processState === 'END' && type !== 'print') {
-            content = '提交的文书将归档，并且不可编辑，是否继续提交？';
-            confirm.show(content).then(function(data) {
-                submit(processState, type);
-            });
-        } else if (processState === 'END' && type === 'print') {
-            if (vm.optRiskEva.processState === 'END') {
-                $scope.$emit('doc-print');
-            } else {
-                content = '打印的文书将归档，且不可编辑，是否继续打印？';
-                confirm.show(content).then(function(data) {
-                    submit(processState, type);
-                });
+        if (processState == 'END') {
+            if (processState === 'END' && beCode === 'sybx' && (!vm.optRiskEva.doctorName || !vm.optRiskEva.anesthesName || !vm.optRiskEva.tourNurseName)) {
+                toastr.warning('请输入必填项信息');
+                return;
             }
-        } else {
-            submit();
-        }
+            if (type && vm.optRiskEva.processState == 'END')
+                $scope.$emit('doc-print');
+            else if (type)
+                confirm.show('打印的文书将归档，且不可编辑。是否继续打印？').then(function(data) { submit(processState); });
+            else if (vm.optRiskEva.processState)
+                submit(processState, type);
+            else
+                confirm.show('提交的文书将归档，并且不可编辑。是否继续提交？').then(function(data) { submit(processState); });
+        } else
+            submit(processState, type)
     }
 
     initPage();
 
-    $scope.$on('save', () => {
-        save('NO_END');
+
+
+    $scope.$watch('processState', function(n) {
+        if (n == undefined)
+            return;
+        $scope.$emit('processState', n);
+    }, true);
+    $scope.$on('save', function() {
+        if ($scope.saveActive && $scope.processState == 'END')
+            save('END');
+        else
+            save('NO_END');
+
     });
 
-    $scope.$on('print', () => {
+    $scope.$on('submit', function() {
+        save('END');
+    });
+
+    $scope.$on('print', function() {
         save('END', 'print');
     });
-
-    $scope.$on('submit', () => {
-        save('END');
-    })
 }

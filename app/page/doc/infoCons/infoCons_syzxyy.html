@@ -88,9 +88,9 @@
                 <checkbox ng-model="selectedList_[14]" ng-true-value="'1'" ng-false-value="'0'"></checkbox>
                 15、术后根据患者病情需要可能要送重症监护室治疗。
             </p>
-            <p class="indent" style="width: 500px;">
-                <checkbox ng-model="selectedList_[15]" ng-true-value="'1'" ng-false-value="'0'"></checkbox>
-                16、其他：
+            <p class="indent" style="width: 790px;">
+                <checkbox ng-model="selectedList_[15]" ng-true-value="'1'" ng-false-value="'0'" ng-change="accedeItem.otherCase = selectedList_[15] == '1' ? accedeItem.otherCase : ''"></checkbox>
+                16、其他：<input type="text" style="width: 85%;" name="" class="noborder3" ng-model="accedeItem.otherCase">
             </p>
         </div>
         <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">

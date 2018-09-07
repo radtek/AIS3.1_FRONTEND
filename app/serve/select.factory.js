@@ -1,8 +1,8 @@
 module.exports = select;
 
-select.$inject = ['IHttp', '$q', '$timeout'];
+select.$inject = ['IHttp', '$q', '$timeout','auth','menu'];
 
-function select(IHttp, $q, $timeout) {
+function select(IHttp, $q, $timeout,auth,menu) {
     return {
         // 获取手术室列表
         operroom: function() {
@@ -338,6 +338,11 @@ function select(IHttp, $q, $timeout) {
         // 获取手术基本信息
         getRegOptInfo: function(regOptId) {
             return IHttp.post("operation/searchApplication", { regOptId: regOptId });
+        },
+        getRouteConfigByRouteUrl:function(url){
+            var menuArr = auth.userPermission();
+            var opt = menu.opt(url, menuArr);
+            return opt;
         }
     }
 }

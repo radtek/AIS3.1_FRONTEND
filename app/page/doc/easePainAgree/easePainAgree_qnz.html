@@ -1,0 +1,608 @@
+<div id="print-region">
+    <div class="page-print" id="easePainAgreeQnz" ng-class="{true: 'end-state'}[docAnalgesicInformedConsent.processState==='END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3>{{docInfo.beName}}麻醉科术后镇痛记录</h3>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>开始日期：<a flex></a></span>&nbsp;
+            <span layout>麻醉编号：<a flex></a></span>&nbsp;
+            <span layout>机号：<a flex></a></span>
+        </div>
+        <table class="tables">
+            <tr>
+                <td colspan="8">
+                    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                        <span layout>姓名：{{vm.regOptItem.name}}</span>&nbsp;
+                        <span layout>性别：{{vm.regOptItem.sex}}</span>&nbsp;
+                        <span layout>年龄：{{vm.regOptItem.age}}</span>&nbsp;
+                        <span layout>体重：{{vm.regOptItem.weight}}kg</span>&nbsp;
+                        <span layout>住院号：{{vm.regOptItem.hid}}</span>&nbsp;
+                        <span layout>床号：{{vm.regOptItem.bed}}</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                        <span layout>术后诊断：{{vm.regOptItem.optLatterDiag}}</span>&nbsp;
+                        <span layout>ASA：{{vm.regOptItem.asaLevelName}}</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                        <span layout>手术名称：{{vm.regOptItem.optRealOper}}</span>&nbsp;
+                        <span layout>麻醉方式：{{vm.regOptItem.anaesMethod}}</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                        <span layout>麻醉者：{{vm.regOptItem.anesthetistName}}</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <span>镇痛方式：</span>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">硬膜外持续镇痛</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">硬膜外自控镇痛</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">静脉持续镇痛</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">静脉自控镇痛</checkbox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <span>硬膜外导管位置：</span>
+                    <input flex type="text" class="noborder3" ng-model="vm.record.extraCatheterLoca" ng-value="vm.record.extraCatheterLoca" maxlength="128" />
+                    <span>静脉导管位置：</span>
+                    <input flex type="text" class="noborder3" ng-model="vm.record.intravCatheterLoca" ng-value="vm.record.intravCatheterLoca" maxlength="128" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 8%;text-align: center;"><span>镇痛泵<br>机型</span></td>
+                <td style="width: 10%">
+                    <select style="width: 51px;" ng-model="vm.record.analgesicPumpsType">
+                        <option ng-repeat="item in vm.transPumpTypes" value="{{item.codeValue}}">{{item.codeName}}</option>
+                    </select>
+                </td>
+                <td style="width: 5%;text-align: center;"><span>配方</span></td>
+                <td style="width: 77%" colspan="5">
+                    <span>舒芬太尼：</span><input flex type="number" class="noborder4" ng-model="vm.record.sftn" ng-value="vm.record.sftn" />ug&nbsp;&nbsp;
+                    <span>芬太尼：</span><input flex type="number" class="noborder4" ng-model="vm.record.ftn" ng-value="vm.record.ftn" />mg&nbsp;&nbsp;
+                    <span>胃复安：</span><input flex type="number" class="noborder4" ng-model="vm.record.wfa" ng-value="vm.record.wfa" />mg&nbsp;&nbsp;
+                    <span>曲马多：</span><input flex type="number" class="noborder4" ng-model="vm.record.qmd" ng-value="vm.record.qmd" />mg&nbsp;&nbsp;
+                    <span>布比卡因：</span><input flex type="number" class="noborder4" ng-model="vm.record.bbky" ng-value="vm.record.bbky" />mg&nbsp;&nbsp;
+                    <span>罗派卡因：</span><input flex type="number" class="noborder4" ng-model="vm.record.lpky" ng-value="vm.record.lpky" />mg&nbsp;&nbsp;
+                    <span>纳布啡：</span><input flex type="number" class="noborder4" ng-model="vm.record.nbf" ng-value="vm.record.nbf" />mg&nbsp;&nbsp;
+                    <span>地塞米松：</span><input flex type="number" class="noborder4" ng-model="vm.record.dsms" ng-value="vm.record.dsms" />mg&nbsp;&nbsp;
+                    <span>加N.S至总容量：</span><input flex type="number" class="noborder4" ng-model="vm.record.zrl" ng-value="vm.record.zrl" />ml
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%" colspan="4">镇痛泵开机时间：<datetime-picker class='calendar sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="vm.record.pcaStart" format="Y-m-d H:i"></datetime-picker></td>
+                <td style="width: 50%" colspan="4">镇痛泵停止时间：<datetime-picker class='calendar sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="vm.record.pcaStop" format="Y-m-d H:i"></datetime-picker></td>
+            </tr>
+            <tr>
+                <td style="width: 25%" colspan="2">首次剂量= <input flex type="number" class="noborder4" ng-model="vm.record.firstDosage" ng-value="vm.record.firstDosage" />ml</td>
+                <td style="width: 25%" colspan="2">持续剂量= <input flex type="number" class="noborder4" ng-model="vm.record.durativeDosage" ng-value="vm.record.durativeDosage" />ml/l</td>
+                <td style="width: 25%" colspan="2">PCA剂量= <input flex type="number" class="noborder4" ng-model="vm.record.pcaDosage" ng-value="vm.record.pcaDosage" />ml/l</td>
+                <td style="width: 25%" colspan="2">锁定时间= <input flex type="number" class="noborder4" ng-model="vm.record.lockTime" ng-value="vm.record.lockTime" />min</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;"><span style="font-size: 15px;">术后随访</span></td>
+                <td style="width: 15%;text-align: center;">出室</td>
+                <td style="width: 12%;text-align: center;"><input flex type="number" class="noborder4" ng-model="vm.postflup[1].postTime" ng-value="vm.postflup[1].postTime" />小时</td>
+                <td style="text-align: center;">第一天</td>
+                <td style="text-align: center;">第二天</td>
+                <td colspan="2" style="text-align: center;">第三天</td>
+            </tr>
+            <tr>
+                <td colspan="2"><span>SPO<sub>2</sub> /心率 次/min</span></td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[0].spo2" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[0].cardiotach" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[1].spo2" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[1].cardiotach" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[2].spo2" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[2].cardiotach" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[3].spo2" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[3].cardiotach" class="noborder2" min="0" />
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[4].spo2" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[4].cardiotach" class="noborder2" min="0" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">呼吸次数 次/min</td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[0].breath" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[1].breath" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[2].breath" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[3].breath" class="noborder2" min="0" />
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[4].breath" class="noborder2" min="0" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">VAS评分</td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[0].vasScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[1].vasScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[2].vasScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[3].vasScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <select ng-model="vm.postflup[4].vasScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">镇静评分</td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[0].calmnessScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[1].calmnessScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[2].calmnessScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[3].calmnessScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <select ng-model="vm.postflup[4].calmnessScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">运动阻滞评级</td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[0].sportBlockScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[1].sportBlockScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[2].sportBlockScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[3].sportBlockScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <select ng-model="vm.postflup[4].sportBlockScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">恶心/呕吐评分</td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[0].nauseaScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[0].vomitScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[1].nauseaScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[1].vomitScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[2].nauseaScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[2].vomitScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[3].nauseaScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[3].vomitScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <select ng-model="vm.postflup[4].nauseaScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[4].vomitScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">尿潴留/保留导尿</td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[0].emictionRetentionScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[0].catheterScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[1].emictionRetentionScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[1].catheterScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[2].emictionRetentionScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[2].catheterScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    <select ng-model="vm.postflup[3].emictionRetentionScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[3].catheterScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <select ng-model="vm.postflup[4].emictionRetentionScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select> /
+                    <select ng-model="vm.postflup[4].catheterScore" class="noborder2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">其他不良反应</td>
+                <td style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[0].otherKickback" class="noborder4" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[1].otherKickback" class="noborder4" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[2].otherKickback" class="noborder4" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[3].otherKickback" class="noborder4" />
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[4].otherKickback" class="noborder4" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">总按压/有效按压(次)</td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[0].totalPress" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[0].validPress" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[1].totalPress" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[1].validPress" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[2].totalPress" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[2].validPress" class="noborder2" min="0" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[3].totalPress" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[3].validPress" class="noborder2" min="0" />
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[4].totalPress" class="noborder2" min="0" />/
+                    <input type="number" ng-model="vm.postflup[4].validPress" class="noborder2" min="0" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">用量(ml)(持续+PCA)</td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[0].drugUsed" class="noborder2" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[1].drugUsed" class="noborder2" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[2].drugUsed" class="noborder2" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[3].drugUsed" class="noborder2" />
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <input type="number" ng-model="vm.postflup[4].drugUsed" class="noborder2" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+                <td style="text-align: center;">&nbsp;</td>
+                <td style="text-align: center;">&nbsp;</td>
+                <td style="text-align: center;">&nbsp;</td>
+                <td style="text-align: center;">&nbsp;</td>
+                <td colspan="2" style="text-align: center;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">随访签名</td>
+                <td style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[0].inquiryDoctor" class="noborder4" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[1].inquiryDoctor" class="noborder4" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[2].inquiryDoctor" class="noborder4" />
+                </td>
+                <td style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[3].inquiryDoctor" class="noborder4" />
+                </td>
+                <td colspan="2" style="text-align: center;">
+                    <input type="text" ng-model="vm.postflup[4].inquiryDoctor" class="noborder4" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <span>镇痛术毕导管：</span><checkbox ng-model="vm.postflup[0].analgesicCatheter" ng-true-value="1">留</checkbox>
+                    <checkbox ng-model="vm.postflup[0].analgesicCatheter" ng-true-value="2">拔</checkbox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>总体满意度：</span>
+                    <select ng-model="vm.postflup[0].totalSatisf" class="noborder4">
+                        <option value="1">很满意</option>
+                        <option value="2">满意</option>
+                        <option value="3">一般</option>
+                        <option value="4">不满意</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span>备注</span></td>
+                <td colspan="7">
+                    <textarea flex ng-model="vm.postflup[0].remark" ng-value="vm.postflup[0].remark" class="no-triangle" rows="4" cols="100" maxlength="200">{{vm.postflup[0].remark}}</textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <div layout>
+                <div flex>
+                    <h5 style="margin: 0;font-weight: bold;">VAS评分</h5>
+                    <div>0-翻身、咳嗽时不痛</div>
+                    <div>1-安静平卧不痛，翻身咳嗽时疼痛</div>
+                    <div>2-咳嗽时痛，深呼吸不痛</div>
+                    <div>3-安静平卧不痛，咳嗽深呼吸时痛</div>
+                    <div>4-安静平卧时断续疼痛</div>
+                    <div>5-安静平卧时持续疼痛</div>
+                    <div>6-安静平卧时疼痛较重</div>
+                    <div>7-疼痛较重，翻转不安，疲乏</div>
+                    <div>8-持续痛难忍，全身大汗</div>
+                    <div>9-剧烈无法忍受痛，有生不如死感</div>
+                </div>
+                <div flex>
+                    <h5 style="margin: 0;font-weight: bold;">Ramesay镇静评分</h5>
+                    <div>0-无镇静（病人觉醒）</div>
+                    <div>1-轻度镇静（偶尔嗜睡，易于唤醒）</div>
+                    <div>2-中度镇静（经常嗜睡，易于唤醒）</div>
+                    <div>3-重度镇静（嗜睡，易于唤醒）</div>
+                    <h5 style="margin: 0;font-weight: bold;">运动阻滞评级</h5>
+                    <div>0-可伸屈大腿</div>
+                    <div>1-可伸屈膝关节</div>
+                    <div>2-可伸屈踝关节</div>
+                    <div>3-不能移动下肢</div>
+                </div>
+                <div flex>
+                    <h5 style="margin: 0;font-weight: bold;">恶心评分</h5>
+                    <div>0-无恶心</div>
+                    <div>1-休息时无恶心，运动时稍有恶心感</div>
+                    <div>2-休息时有间断的恶心感</div>
+                    <div>3-休息时有持续性恶心感，运动时有严重恶心感</div>
+                    <h5 style="margin: 0;font-weight: bold;">呕吐评分</h5>
+                    <div>0-无呕吐</div>
+                    <div>1-轻度呕吐(1-2次/天)</div>
+                    <div>2-中度呕吐(3-5次/天)</div>
+                    <div>3-重度呕吐(6次以上/天)</div>
+                </div>
+                <div flex>
+                    <h5 style="margin: 0;font-weight: bold;">尿潴留</h5>
+                    <div>0-无尿潴留</div>
+                    <div>1-排尿轻度困难，排尿时间稍延长</div>
+                    <div>2-排尿明显困难，尿成滴状</div>
+                    <div>3-尿液不能排出，需导管</div>
+                    <h5 style="margin: 0;font-weight: bold;">总体满意度</h5>
+                    <div>镇痛结束时，由病人及家属对镇痛效果，不良反应和性价比做综合评定</div>
+                    <div>1-很满意</div>
+                    <div>2-满意</div>
+                    <div>3-一般</div>
+                    <div>4-不满意</div>
+                </div>
+            </div>
+        </div>
+ </div>      
+</div>

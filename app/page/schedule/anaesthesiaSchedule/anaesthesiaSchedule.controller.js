@@ -132,7 +132,7 @@ function AnaesthesiaScheduleCtrl($rootScope, $scope, IHttp, $timeout, toastr, se
             editDropdownOptionsArray: [],
             width: 100
         }, {
-            field: beCode=='sybx'?'perfusionDoctorId':'circuAnesthetistId',
+            field: beCode=='sybx'?'perfusionDoctorIdList':'circuAnesthetistId',
             name:beCode=='sybx'?'巡台医生':'副麻医生' ,
             cellClass: 'anaesthetist-circuanesthetistId',
             cellTemplate: beCode=='sybx'?require('./pinYinFilter3.html'):require('./pinYinFilter2.html'),

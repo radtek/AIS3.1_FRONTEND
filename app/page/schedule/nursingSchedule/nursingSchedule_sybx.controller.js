@@ -62,8 +62,9 @@ function NursingScheduleCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeou
         enableGridMenu: true, // 配置按钮显示
         useExternalFiltering: false, // 禁止内部过滤，启用外部滤波器监听事件
         useExternalSorting: false,
-        useExternalPagination: false, // 分页
+        // useExternalPagination: false, // 分页
         paginationPageSizes: [ 15 ],
+        paginationState: 2,
         rowHeight: 40,
         paginationPageSize: params.pageSize,
         enableCellEditOnFocus: true,

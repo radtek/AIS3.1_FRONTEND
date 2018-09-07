@@ -9,6 +9,6 @@
 		   ng-change="grid.appScope.blurFn(row.entity,col,'isSameDoct');"
            ng-click="grid.appScope.focus(row.entity, col);" 
            oi-options="item.userName as item.name for item in col.colDef.editDropdownOptionsArray track by item.userName | limitTo: 100" 
-           ng-model="row.entity.perfusionDoctorId"  oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" multiple>
+           ng-model="row.entity.perfusionDoctorIdList"  oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" multiple>
 </oi-select>
 

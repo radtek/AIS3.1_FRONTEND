@@ -21,6 +21,7 @@ function DocModalCtrl($rootScope, $scope, $uibModalInstance, auth, $filter) {
         })[0];
         if (curItem) {
             $uibModalInstance.close(curItem);
+            sessionStorage.setItem("regOptId",regOptId)
             $rootScope.$state.go(curItem.url, { regOptId: regOptId, showPlacentaAgree: showPlacentaAgree, showRiskAsseLog: showRiskAsseLog });
         }
     };

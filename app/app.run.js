@@ -30,6 +30,7 @@ function run($rootScope, $state, $stateParams, auth, menu, i18nService, $locatio
         // 获取当前状态，绑定到根作用域上
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+        if(toParams.regOptId)$rootScope.$stateParams.regOptId=toParams.regOptId;//全局regOptId
         if(toState.name == 'operroom') {
             $rootScope.$broadcast('banSelectRoom', true)
         } else {

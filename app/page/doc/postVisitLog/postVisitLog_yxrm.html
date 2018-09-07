@@ -2,7 +2,7 @@
     <div class="page-print" id="postVisitLogyxrm" ng-class="{true: 'end-state'}[postFollowRecord.processState == 'END' && !saveActive || setting.readonly]">
         <header layout="column" layout-align="center center">
             <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
-            <div class="title-div">麻醉后访视记录</div>
+            <div class="title-div"> <h4>麻醉后访视记录单</h4></div>
         </header>
         <br/>
         <div class="form-group" layout layout-align="space-between">
@@ -32,12 +32,8 @@
             <span flex layout style="margin-left: 103px;">指脉搏氧饱和（SpO2）<input type="number" class="noborder5" ng-model="docPostFollowYxrm.beforeSpo2" ng-value="docPostFollowYxrm.beforeSpo2" maxlength="5"  required/>%</span>
         </div>
         <div class="form-group" layout>
-            <span flex layout>2、<span class="md-red no-print">*</span>神经系统：<span>意识
-                <checkbox ng-model="docPostFollowYxrm.beforeMentalState" ng-true-value="1" ng-false-value="" required>清醒</checkbox>
-                <checkbox ng-model="docPostFollowYxrm.beforeMentalState" ng-true-value="2" ng-false-value="" required>嗜睡</checkbox>
-                <checkbox ng-model="docPostFollowYxrm.beforeMentalState" ng-true-value="3" ng-false-value="" required>模糊</checkbox>
-                <checkbox ng-model="docPostFollowYxrm.beforeMentalState" ng-true-value="4" ng-false-value="" required>昏睡</checkbox>
-                <checkbox ng-model="docPostFollowYxrm.beforeMentalState" ng-true-value="5" ng-false-value="" required>昏迷</checkbox>
+            <span flex layout>2、<span class="md-red no-print">*</span>神经系统：<span>意识&nbsp;&nbsp;
+                <checkbox ng-repeat="i in awarenessList" ng-model="docPostFollowYxrm.beforeMentalState" ng-true-value="i.codeValue" ng-false-value="" required>{{i.codeName}}</checkbox>
             </span></span>
         </div>
         <div class="form-group" layout>
@@ -81,10 +77,8 @@
             <span flex layout style="margin-left: 103px;">指脉搏氧饱和（SpO2）<input type="number" class="noborder5" ng-model="docPostFollowYxrm.afterSpo2" ng-value="docPostFollowYxrm.afterSpo2" maxlength="5"  required/>%</span>
         </div>
         <div class="form-group" layout>
-            <div flex layout>2、<span class="md-red no-print">*</span>神经系统：意识
-                <select style="width: 110px;border:none;border-bottom:1px solid #333;" ng-model="docPostFollowYxrm.afterMentalState">
-                    <option ng-repeat="item in awarenessList" value="{{item.codeValue}}">{{item.codeName}}</option>
-                </select>
+            <div flex layout>2、<span class="md-red no-print">*</span>神经系统：意识&nbsp;&nbsp;
+                <checkbox ng-repeat="i in awarenessList" ng-model="docPostFollowYxrm.afterMentalState" ng-true-value="i.codeValue" ng-false-value="" required>{{i.codeName}}</checkbox>
             </div>
         </div>
         <div class="form-group" layout>

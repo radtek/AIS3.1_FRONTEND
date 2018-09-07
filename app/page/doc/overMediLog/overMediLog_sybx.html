@@ -39,7 +39,7 @@
                 </td>
             </tr>
         </table>
-        <div class="form-group" layout layout-align="space-between end" ng-class="{true: 'end-state'}[processState == 'END' || setting.readonly]">
+        <div class="form-group" layout layout-align="space-between end" ng-class="{true: 'end-state111'}[processState == 'END' || setting.readonly]">
             <div layout>患者/家属签字：
                 <a flex class="sign"></a>
             </div>&nbsp;
@@ -53,7 +53,7 @@
                 <a flex class="sign"></a>
             </div>
         </div>
-        <div layout layout-align="end center" ng-class="{true: 'end-state'}[processState == 'END' || setting.readonly]">
+        <div layout layout-align="end center" ng-class="{true: 'end-state111'}[processState == 'END' || setting.readonly]">
             日期：
             <datetime-picker class='calendar noborder3 sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="insuredPatAgree.signTime" timepicker="false" format="Y-m-d"></datetime-picker>
         </div>
