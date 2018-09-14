@@ -81,7 +81,7 @@ function DocCtrl($rootScope, $scope, select, $timeout, auth, anesRecordServe) {
         $scope.$broadcast('addInsOpr', type);
     }
 
-    $scope.appTemplat = function() {
+    $scope.appTemplat = function() {//应用模板
         $scope.$broadcast('appTemplat');
     }
 
@@ -97,7 +97,7 @@ function DocCtrl($rootScope, $scope, select, $timeout, auth, anesRecordServe) {
         $scope.$broadcast('delBatch');
     }
 
-    $scope.saveAs = function() {
+    $scope.saveAs = function() {//另存模板
         $scope.$broadcast('saveAs');
     }
 

@@ -84,6 +84,12 @@ function route($stateProvider) {
         template: require('./postVisitLog_sybx.html'),
         less: require('./postVisitLog.less'),
         controller: require('./postVisitLog_sybx.controller')
+    }).state('midPostVisitLog_sybx', {
+        parent: 'doc',
+        url: '/midPostVisitLog_sybx/:regOptId',
+        template: require('./postVisitLog_sybx.html'),
+        less: require('./postVisitLog.less'),
+        controller: require('./postVisitLog_sybx.controller')
     }).state('postVisitLog_xxcx_sybx', {     // 沈阳本溪 | 信息查询 》查看
         parent: 'doc',
         url: '/postVisitLog_xxcx_sybx/:regOptId',

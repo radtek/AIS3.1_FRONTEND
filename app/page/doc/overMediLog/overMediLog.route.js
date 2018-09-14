@@ -40,7 +40,7 @@ function route($stateProvider) {
         data: { readonly: true }
     })).state('overMediLog2_sybx', angular.merge({}, base,sybx, {  //
         url: '/overMediLog2_sybx/:regOptId',
-        data: { readonly: true }
+        data: { readonly: false }
     }))
 }
 

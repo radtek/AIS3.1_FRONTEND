@@ -11,6 +11,7 @@ function TabsCtrl($rootScope, $scope, IHttp, $timeout, $state, auth, resultRegOp
     let hasAnaesPacuRec = regOpt.pacuId == '' || !regOpt.pacuId ? false : true;
     let showPlacentaAgree = regOpt.sex == '男' ? false : true;
     let showRiskAsseLog = regOpt.isLocalAnaes == '1' ? false : true;
+    let showAnalgesicDoc = regOpt.analgesicMethod == '1' || regOpt.analgesicMethod == '2' || regOpt.analgesicMethod == '3' || regOpt.analgesicMethod == '4' ? true : false;
     $scope.$watch('$state.current.name', function(n, o) {
         if ($rootScope.tabsMenu.length > 0 && $rootScope.tabsMenu[0].name !== '基本信息' && $rootScope.tabsMenu[0].name !== '麻醉记录单'&& $rootScope.tabsMenu[0].name !== '麻醉记录单一'&& $rootScope.tabsMenu[0].name !== '麻醉记录单（一）') { //列表切换更新 ，文书不更新
             $scope.tabsMenu = $rootScope.tabsMenu;
@@ -22,6 +23,8 @@ function TabsCtrl($rootScope, $scope, IHttp, $timeout, $state, auth, resultRegOp
                 if(operSource && (tab.name == '检验报告' || tab.name == 'B超' || tab.name == '内窥镜' || tab.name == '麻醉前访视记录单' || tab.name == '麻醉知情同意书' || tab.name == '手术麻醉使用药品知情同意书' || tab.name == '手术麻醉使用自费及高价耗材知情同意书'  || tab.name == '麻醉总结' ||  tab.name == '麻醉后访视记录单' || tab.name == 'PACU观察记录单' || tab.name == '手术核算单'))
                     return;
                 else if(!operSource && tab.name == '麻醉前访视和谈话记录')
+                    return;
+                else if(!showAnalgesicDoc && tab.name == '麻醉科术后镇痛记录')
                     return;
             } else if (user.beCode == 'cshtyy') {
                 if(regOpt.emergency == 1 && tab.name == '手术患者访视单' && tab.url == 'surgicalVisitList')

@@ -30,7 +30,8 @@
                     <!-- 术前 -->
                     <div layout class="form-group">
                         <span flex='30' layout ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.enterTime && verify]'>入PACU时间：<datetime-picker timepicker="true" format="Y-m-d H:i" class="noborder3" ng-model="vm.rSheet.anaesPacuRec.enterTime" ng-change="vm.setreNodeinfo()"></datetime-picker></span>
-                        <span flex ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.enterTemp && verify]'>入室体温：<input type="number" class="noborder3" ng-value="vm.rSheet.anaesPacuRec.enterTemp" ng-model="vm.rSheet.anaesPacuRec.enterTemp" ng-blur="vm.setreNodeinfo()" style="width: 100px;"></input>℃</span>
+                        <span flex='25' ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.enterTemp && verify]'>入室体温：<input type="number" class="noborder3" ng-value="vm.rSheet.anaesPacuRec.enterTemp" ng-model="vm.rSheet.anaesPacuRec.enterTemp" ng-blur="vm.setreNodeinfo()" style="width: 100px;"></input>℃</span>
+                        <span flex layout ng-class='{true: "md-red"}[!vm.rSheet.anaesPacuRec.exitTime && verify]'>出PACU时间：<datetime-picker timepicker="true" format="Y-m-d H:i" class="noborder3" ng-model="vm.rSheet.anaesPacuRec.exitTime" ng-change="vm.setreNodeinfo()"></datetime-picker></span>
                     </div>
                     <div layout class="form-group">
                         <!-- <div>病室&nbsp;<span class="span-rehnode-info"> &nbsp;{{vm.rSheet.regOpt.regionName}} </span></div> -->

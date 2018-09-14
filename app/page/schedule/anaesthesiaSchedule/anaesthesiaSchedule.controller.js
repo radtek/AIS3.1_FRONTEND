@@ -164,6 +164,7 @@ function AnaesthesiaScheduleCtrl($rootScope, $scope, IHttp, $timeout, toastr, se
             } else {
                 return;
             }
+            if(beCode=='sybx'&&!row.operRoomId)return;
             angular.forEach($scope.gridOptions.data, function(v, k) {
                 if (v != row) {
                     var flag = false;

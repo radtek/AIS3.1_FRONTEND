@@ -135,11 +135,6 @@
                 <checkbox ng-model="vm.preVisit.anaesPunctureCondMap.b" ng-true-value="true" ng-false-value="false" ng-disabled="vm.preVisit.anaesPuncture != 1">畸形</checkbox>
                 <checkbox ng-model="vm.preVisit.anaesPunctureCondMap.c" ng-true-value="true" ng-false-value="false" ng-disabled="vm.preVisit.anaesPuncture != 1">外伤</checkbox>
             </div>
-            <div class="form-group" layout-wrap="wrap" layout-align="space-between end">
-                <span>麻醉适应症按计划安排手术：</span>
-                <checkbox ng-model="vm.preVisit.anesthIndica" ng-true-value="1">继续术前准备</checkbox>
-                <checkbox ng-model="vm.preVisit.anesthIndica" ng-true-value="2">改期安排手术</checkbox>
-            </div>
             <div layout class="form-group" layout-wrap="wrap" layout-align="space-between end">
                 <span layout flex>拟施麻醉方法：<a flex>{{vm.regOptItem.designedAnaesMethodName}}</a></span>
             </div>
@@ -165,13 +160,39 @@
                 <checkbox ng-model="vm.preVisit.leaveTo" ng-true-value="1">去病房</checkbox>
                 <checkbox ng-model="vm.preVisit.leaveTo" ng-true-value="2">去ICU</checkbox>
             </div>
-            <div layout class="form-group" layout-wrap="wrap" layout-align="space-between end">
-                <span>麻醉前讨论：</span>
-                <input flex type="text" class="noborder3" ng-model="vm.preVisit.otherProblem" ng-value="vm.preVisit.otherProblem" maxlength="128" />
+            <div layout class="form-group" layout-wrap="wrap">
+                <span>麻醉前讨论： 经与本科室医师讨论：</span>
+                <div class="padLeft92">
+                    <checkbox ng-model="vm.previsitAnaesplan.scheduled" ng-true-value="1">按计划安排手术</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.scheduled" ng-true-value="2">安排当日，但需延迟手术</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.scheduled" ng-true-value="3">继续术前准备，另期安排手术</checkbox><br>
+                    <span>麻醉准备：</span>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesPrep" ng-true-value="1">按麻醉计划所定麻醉方法常规准备</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesPrep" ng-true-value="2">需特殊准备：</checkbox>
+                    <input flex type="text" class="noborder3 res-input" ng-model="vm.previsitAnaesplan.anaesPrepSpecRes" ng-value="vm.previsitAnaesplan.anaesPrepSpecRes" maxlength="128" /><br>
+                    <span>风险防范措施：</span>
+                    <checkbox ng-model="vm.previsitAnaesplan.riskPreventMeasureMap.a" ng-true-value="true" ng-false-value="false">无创监测</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.riskPreventMeasureMap.b" ng-true-value="true" ng-false-value="false">抢救药品</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.riskPreventMeasureMap.c" ng-true-value="true" ng-false-value="false">有创压力监测</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.riskPreventMeasureMap.d" ng-true-value="true" ng-false-value="false">>=14G静脉通道</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.riskPreventMeasureMap.e" ng-true-value="true" ng-false-value="false">特殊插管设备，材料</checkbox>
+                </div>
             </div>
-            <div layout class="form-group" layout-wrap="wrap" layout-align="space-between end">
+            <div layout class="form-group" layout-wrap="wrap">
                 <span>麻醉计划：</span>
-                <input flex type="text" class="noborder3" ng-model="vm.preVisit.anaesDocord" ng-value="vm.preVisit.anaesDocord" maxlength="128" />
+                <div>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">全身麻醉</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="2">椎管内麻醉</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="3">区域麻醉</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="4">局部麻醉</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="5">麻醉监测</checkbox>
+                </div>
+            </div>
+            <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                <span style="padding-left: 72px;">变更麻醉方法：</span>
+                <checkbox ng-model="vm.previsitAnaesplan.anaesMethChg" ng-true-value="1" ng-click="vm.previsitAnaesplan.anaesMethChgRea = ''">无</checkbox>
+                <checkbox ng-model="vm.previsitAnaesplan.anaesMethChg" ng-true-value="2">有</checkbox>
+                <input flex type="text" class="noborder3" ng-model="vm.previsitAnaesplan.anaesMethChgRea" ng-value="vm.previsitAnaesplan.anaesMethChgRea" maxlength="128" ng-disabled="vm.previsitAnaesplan.anaesMethChg == 1 || vm.previsitAnaesplan.anaesMethChg == undefined" />
             </div>
             <div class="form-group" layout layout-align="end center" ng-class="{true: 'md-red'}[!vm.preVisit.anaestheitistId && verify]">
                 <span>麻醉医师：</span>

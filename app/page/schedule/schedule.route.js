@@ -24,7 +24,7 @@ function route($stateProvider) {
         controller: require('./nursingSchedule/nursingSchedule_sybx.controller.js'),
         data: { pageName: '护理安排' }
     })
-    .state('anaesthesiaSchedule', {
+    .state('anaesthesiaSchedule', {//麻醉安排
         parent: 'schedule',
         url: '/anaesthesiaSchedule',
         template: require('./scheduleView.html'),

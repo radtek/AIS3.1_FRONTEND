@@ -1,8 +1,8 @@
-easePainAgreeCtrl.$inject = ['$rootScope', '$scope', 'IHttp', '$timeout', '$state', '$q', 'toastr', 'confirm', 'auth', '$filter', 'select'];
+easePainAgreeCtrl.$inject = ['$rootScope', '$scope', 'IHttp', '$timeout', '$state', '$q', 'toastr', 'confirm', 'auth', '$filter', 'dateFilter', 'select'];
 
 module.exports = easePainAgreeCtrl;
 
-function easePainAgreeCtrl($rootScope, $scope, IHttp, $timeout, $state, $q, toastr, confirm, auth, $filter, select) {
+function easePainAgreeCtrl($rootScope, $scope, IHttp, $timeout, $state, $q, toastr, confirm, auth, $filter, dateFilter, select) {
     var vm = this,
         promise;
        
@@ -20,10 +20,17 @@ function easePainAgreeCtrl($rootScope, $scope, IHttp, $timeout, $state, $q, toas
 
     // 规定0为出室，1为小时，2为第一天，3为第二天，4为第三天
     vm.postflup = [{ type: 0 }, { type: 1 }, { type: 2 }, { type: 3 }, { type: 4 }];
+    vm.recipe = {};
     IHttp.post('document/getAnalgesicRecord', { 'regOptId': regOptId }).then(function(rs) {
         if (rs.data.resultCode != 1)
             return;
         vm.regOptItem = rs.data.regOpt;
+        vm.analgesicMed = rs.analgesicMed;
+        vm.analgesicMethod = rs.analgesicMethod;
+        if (rs.data.analgesicRecord.analgesicRecord.pcaStart && rs.data.analgesicRecord.analgesicRecord.pcaStart != '')
+            rs.data.analgesicRecord.analgesicRecord.pcaStart = dateFilter(new Date(rs.data.analgesicRecord.analgesicRecord.pcaStart), 'yyyy-MM-dd HH:mm');
+        if (rs.data.analgesicRecord.analgesicRecord.pcaStop && rs.data.analgesicRecord.analgesicRecord.pcaStop != '')
+            rs.data.analgesicRecord.analgesicRecord.pcaStop = dateFilter(new Date(rs.data.analgesicRecord.analgesicRecord.pcaStop), 'yyyy-MM-dd HH:mm');
         vm.record = rs.data.analgesicRecord.analgesicRecord;
         if (rs.data.analgesicRecord.analgesicPostFlup.constructor === Array) {
             for (var i = 0; i < vm.postflup.length; i++) {
@@ -68,6 +75,8 @@ function easePainAgreeCtrl($rootScope, $scope, IHttp, $timeout, $state, $q, toas
         param.analgesicRecord = angular.copy(vm.record);
         param.analgesicRecord.processState = processState;
         param.analgesicRecord.patId = regOptId;
+        param.analgesicRecord.pcaStart = new Date($filter('date')(new Date(param.analgesicRecord.pcaStart), 'yyyy-MM-dd HH:mm')).getTime();
+        param.analgesicRecord.pcaStop = new Date($filter('date')(new Date(param.analgesicRecord.pcaStop), 'yyyy-MM-dd HH:mm')).getTime();
         for (var key in vm.recipe) {
             param.analgesicRecipe.push({
                 medName: key,
@@ -77,28 +86,16 @@ function easePainAgreeCtrl($rootScope, $scope, IHttp, $timeout, $state, $q, toas
         }
 
         param.analgesicPostFlup = vm.postflup;
-        if (processState !== 'NO_END') {
-            param.analgesicRecord.processState = 'END';
-        }else {
-            param.analgesicRecord.processState = $scope.processState;
-        }
 
         IHttp.post("/document/saveAnalgesicRecord", param).then(function(rs) {
             if (rs.data.resultCode != 1) return;
             toastr.success(rs.data.resultMessage);
-            if (processState !== 'NO_END') {
-                if (!$rootScope.isLeader) {
-                    vm.record.processState = 'END';
-                } else {
-                    $scope.processState = 'END';
-                }
-            }
-            if (processState != 'NO_END') {
-                for (var i = 0; i < docNav.items.length; i++) {
-                    if (docNav.items[i].name === $rootScope.siteTitle) {
-                        docNav.items[i].iscomplete = true;
-                    }
-                }
+            vm.record.processState = processState;
+            $scope.processState = processState;
+            if (type == 'print') {
+                $scope.$emit('end-print');
+            } else {
+                $scope.$emit('processState', processState);
             }
         });
     }
@@ -106,9 +103,9 @@ function easePainAgreeCtrl($rootScope, $scope, IHttp, $timeout, $state, $q, toas
     function save(processState, type) {
         $scope.verify = processState == 'END';
         let content = '';
-        if (processState === 'END') {            
+        if (processState === 'END') {
             if (type === 'print') {
-                if ($scope.docAnalgesicInformedConsent.processState === 'END') {
+                if (vm.record.processState === 'END') {
                     $scope.$emit('doc-print');
                 } else {
                     content = '打印的文书将归档，且不可编辑。是否继续打印？';
@@ -118,9 +115,13 @@ function easePainAgreeCtrl($rootScope, $scope, IHttp, $timeout, $state, $q, toas
                 }
             } else {
                 content = '提交的文书将归档，并且不可编辑。是否继续提交？';
-                confirm.show(content).then(function(data) {
+                if (vm.record.processState === 'END') {
                     submit(processState);
-                });
+                }else {
+                    confirm.show(content).then(function(data) {
+                        submit(processState);
+                    });
+                }
             }
         } else {
             submit(processState);
@@ -128,7 +129,10 @@ function easePainAgreeCtrl($rootScope, $scope, IHttp, $timeout, $state, $q, toas
     }
 
     $scope.$on('save', () => {
-        save('NO_END');
+        if ($scope.saveActive && $scope.processState == 'END')
+            save('END');
+        else
+            save('NO_END');
     });
 
     $scope.$on('print', () => {

@@ -1,5 +1,5 @@
 <div id="print-region">
-    <div class="page-print" id="easePainAgreeQnz" ng-class="{true: 'end-state'}[docAnalgesicInformedConsent.processState==='END' && !saveActive || setting.readonly]">
+    <div class="page-print" id="easePainAgreeQnz" ng-class="{true: 'end-state'}[vm.record.processState==='END' && !saveActive || setting.readonly]">
         <header layout="column" layout-align="center center">
             <h3>{{docInfo.beName}}麻醉科术后镇痛记录</h3>
         </header>
@@ -11,7 +11,7 @@
         <table class="tables">
             <tr>
                 <td colspan="8">
-                    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                    <div layout layout-wrap="wrap" layout-align="space-between end">
                         <span layout>姓名：{{vm.regOptItem.name}}</span>&nbsp;
                         <span layout>性别：{{vm.regOptItem.sex}}</span>&nbsp;
                         <span layout>年龄：{{vm.regOptItem.age}}</span>&nbsp;
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td colspan="8">
-                    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                    <div layout layout-wrap="wrap" layout-align="space-between end">
                         <span layout>术后诊断：{{vm.regOptItem.optLatterDiag}}</span>&nbsp;
                         <span layout>ASA：{{vm.regOptItem.asaLevelName}}</span>
                     </div>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <td colspan="8">
-                    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                    <div layout layout-wrap="wrap" layout-align="space-between end">
                         <span layout>手术名称：{{vm.regOptItem.optRealOper}}</span>&nbsp;
                         <span layout>麻醉方式：{{vm.regOptItem.anaesMethod}}</span>
                     </div>
@@ -39,7 +39,7 @@
             </tr>
             <tr>
                 <td colspan="8">
-                    <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+                    <div layout layout-wrap="wrap" layout-align="space-between end">
                         <span layout>麻醉者：{{vm.regOptItem.anesthetistName}}</span>
                     </div>
                 </td>
@@ -47,10 +47,10 @@
             <tr>
                 <td colspan="8">
                     <span>镇痛方式：</span>
-                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">硬膜外持续镇痛</checkbox>
-                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">硬膜外自控镇痛</checkbox>
-                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">静脉持续镇痛</checkbox>
-                    <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="1">静脉自控镇痛</checkbox>
+                    <checkbox ng-model="vm.record.analgesicMethod" ng-true-value="1">硬膜外持续镇痛</checkbox>
+                    <checkbox ng-model="vm.record.analgesicMethod" ng-true-value="2">硬膜外自控镇痛</checkbox>
+                    <checkbox ng-model="vm.record.analgesicMethod" ng-true-value="3">静脉持续镇痛</checkbox>
+                    <checkbox ng-model="vm.record.analgesicMethod" ng-true-value="4">静脉自控镇痛</checkbox>
                 </td>
             </tr>
             <tr>
@@ -70,15 +70,15 @@
                 </td>
                 <td style="width: 5%;text-align: center;"><span>配方</span></td>
                 <td style="width: 77%" colspan="5">
-                    <span>舒芬太尼：</span><input flex type="number" class="noborder4" ng-model="vm.record.sftn" ng-value="vm.record.sftn" />ug&nbsp;&nbsp;
-                    <span>芬太尼：</span><input flex type="number" class="noborder4" ng-model="vm.record.ftn" ng-value="vm.record.ftn" />mg&nbsp;&nbsp;
-                    <span>胃复安：</span><input flex type="number" class="noborder4" ng-model="vm.record.wfa" ng-value="vm.record.wfa" />mg&nbsp;&nbsp;
-                    <span>曲马多：</span><input flex type="number" class="noborder4" ng-model="vm.record.qmd" ng-value="vm.record.qmd" />mg&nbsp;&nbsp;
-                    <span>布比卡因：</span><input flex type="number" class="noborder4" ng-model="vm.record.bbky" ng-value="vm.record.bbky" />mg&nbsp;&nbsp;
-                    <span>罗派卡因：</span><input flex type="number" class="noborder4" ng-model="vm.record.lpky" ng-value="vm.record.lpky" />mg&nbsp;&nbsp;
-                    <span>纳布啡：</span><input flex type="number" class="noborder4" ng-model="vm.record.nbf" ng-value="vm.record.nbf" />mg&nbsp;&nbsp;
-                    <span>地塞米松：</span><input flex type="number" class="noborder4" ng-model="vm.record.dsms" ng-value="vm.record.dsms" />mg&nbsp;&nbsp;
-                    <span>加N.S至总容量：</span><input flex type="number" class="noborder4" ng-model="vm.record.zrl" ng-value="vm.record.zrl" />ml
+                    <span>舒芬太尼：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.sftn" ng-value="vm.recipe.sftn" />ug&nbsp;&nbsp;
+                    <span>芬太尼：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.ftn" ng-value="vm.recipe.ftn" />mg&nbsp;&nbsp;
+                    <span>胃复安：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.wfa" ng-value="vm.recipe.wfa" />mg&nbsp;&nbsp;
+                    <span>曲马多：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.qmd" ng-value="vm.recipe.qmd" />mg&nbsp;&nbsp;
+                    <span>布比卡因：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.bbky" ng-value="vm.recipe.bbky" />mg&nbsp;&nbsp;
+                    <span>罗派卡因：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.lpky" ng-value="vm.recipe.lpky" />mg&nbsp;&nbsp;
+                    <span>纳布啡：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.nbf" ng-value="vm.recipe.nbf" />mg&nbsp;&nbsp;
+                    <span>地塞米松：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.dsms" ng-value="vm.recipe.dsms" />mg&nbsp;&nbsp;
+                    <span>加N.S至总容量：</span><input flex type="number" class="noborder4" ng-model="vm.recipe.zrl" ng-value="vm.recipe.zrl" />ml
                 </td>
             </tr>
             <tr>
@@ -86,7 +86,7 @@
                 <td style="width: 50%" colspan="4">镇痛泵停止时间：<datetime-picker class='calendar sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="vm.record.pcaStop" format="Y-m-d H:i"></datetime-picker></td>
             </tr>
             <tr>
-                <td style="width: 25%" colspan="2">首次剂量= <input flex type="number" class="noborder4" ng-model="vm.record.firstDosage" ng-value="vm.record.firstDosage" />ml</td>
+                <td style="width: 25%" colspan="2">首次剂量= <input flex type="number" class="noborder4 first-dosage" ng-model="vm.record.firstDosage" ng-value="vm.record.firstDosage" />ml</td>
                 <td style="width: 25%" colspan="2">持续剂量= <input flex type="number" class="noborder4" ng-model="vm.record.durativeDosage" ng-value="vm.record.durativeDosage" />ml/l</td>
                 <td style="width: 25%" colspan="2">PCA剂量= <input flex type="number" class="noborder4" ng-model="vm.record.pcaDosage" ng-value="vm.record.pcaDosage" />ml/l</td>
                 <td style="width: 25%" colspan="2">锁定时间= <input flex type="number" class="noborder4" ng-model="vm.record.lockTime" ng-value="vm.record.lockTime" />min</td>
@@ -217,42 +217,52 @@
                 <td colspan="2">镇静评分</td>
                 <td style="text-align: center;">
                     <select ng-model="vm.postflup[0].calmnessScore" class="noborder2">
-                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
                     </select>
                 </td>
                 <td style="text-align: center;">
                     <select ng-model="vm.postflup[1].calmnessScore" class="noborder2">
-                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
                     </select>
                 </td>
                 <td style="text-align: center;">
                     <select ng-model="vm.postflup[2].calmnessScore" class="noborder2">
-                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
                     </select>
                 </td>
                 <td style="text-align: center;">
                     <select ng-model="vm.postflup[3].calmnessScore" class="noborder2">
-                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
                     </select>
                 </td>
                 <td colspan="2" style="text-align: center;">
                     <select ng-model="vm.postflup[4].calmnessScore" class="noborder2">
-                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
                     </select>
                 </td>
             </tr>
@@ -567,10 +577,12 @@
                 </div>
                 <div flex>
                     <h5 style="margin: 0;font-weight: bold;">Ramesay镇静评分</h5>
-                    <div>0-无镇静（病人觉醒）</div>
-                    <div>1-轻度镇静（偶尔嗜睡，易于唤醒）</div>
-                    <div>2-中度镇静（经常嗜睡，易于唤醒）</div>
-                    <div>3-重度镇静（嗜睡，易于唤醒）</div>
+                    <div>1-不安静，烦躁</div>
+                    <div>2-安静，合作</div>
+                    <div>3-嗜睡，能听从指令</div>
+                    <div>4-睡眠状态，但可唤醒</div>
+                    <div>5-呼唤反应迟钝</div>
+                    <div>6-深睡状态，呼唤不醒</div>
                     <h5 style="margin: 0;font-weight: bold;">运动阻滞评级</h5>
                     <div>0-可伸屈大腿</div>
                     <div>1-可伸屈膝关节</div>
@@ -602,6 +614,14 @@
                     <div>3-一般</div>
                     <div>4-不满意</div>
                 </div>
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <span>麻醉医生签名：</span>
+            <oi-select class="noborder3 sign signature" name="anaesDocId" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="vm.record.anaesDocId"></oi-select>
+            <div class="eSignature">
+                <!-- <img ng-repeat="sig in eSignatureAnaestheitist" src="{{sig}}" ng-if="sig.indexOf('http')>=0" /> -->
+                <input type="text" class="noborder3" style="width: 150px;" />
             </div>
         </div>
  </div>      

@@ -75,6 +75,7 @@ function loadTemp($rootScope, $scope, IHttp, $uibModalInstance, $timeout, items,
         IHttp.post('basedata/queryAnaesDoctempList', {
             pageNo: $scope.params.pageNo,
             pageSize: $scope.params.pageSize,
+            docType:2,
             type: vm.lv ? Number(vm.lv) : '',
             createUser: auth.loginUser().userName,
             filters: [{

@@ -359,7 +359,7 @@ function RehealthRecordCtrl($rootScope, $scope, IHttp, $q, $filter, $uibModal, s
 
     $scope.outRoom = function(event) {
         $scope.verify = true;
-        if(!vm.rSheet.anaesPacuRec.enterTime || !vm.rSheet.anaesPacuRec.enterTemp || !vm.rSheet.anaesPacuRec.docSign || !vm.rSheet.anaesPacuRec.nurseSign || !vm.rSheet.anaesPacuRec.leaveTo) {
+        if(!vm.rSheet.anaesPacuRec.enterTime || !vm.rSheet.anaesPacuRec.exitTime || !vm.rSheet.anaesPacuRec.enterTemp || !vm.rSheet.anaesPacuRec.docSign || !vm.rSheet.anaesPacuRec.nurseSign || !vm.rSheet.anaesPacuRec.leaveTo) {
             toastr.warning('请输入必填项信息');
             return;
         } else if ((beCode == 'syzxyy' || beCode == 'cshtyy'||beCode=='llzyyy') && !vm.rSheet.anaesPacuRec.exitTime) {

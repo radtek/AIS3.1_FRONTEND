@@ -81,6 +81,13 @@
                     <input type="radio" ng-value="'0'" ng-model="editdictiontwo.comMedicine"><span style="margin-right: 16px;">否</span>
                 </div>
             </div>
+            <div flex="45" class="input-wrap" ng-if="beCode === 'qnzzyyy'">
+                <div layout layout-align="start center" class="input-group">
+                    <label class="tit">显示用药方式</label>
+                    <input type="radio" ng-value="1" ng-model="editdictiontwo.showMedWay"><span style="margin-right: 16px;">是</span>
+                    <input type="radio" ng-value="0" ng-model="editdictiontwo.showMedWay"><span style="margin-right: 16px;">否</span>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="btnActive && savedictionary()">保&nbsp;&nbsp;存</button>

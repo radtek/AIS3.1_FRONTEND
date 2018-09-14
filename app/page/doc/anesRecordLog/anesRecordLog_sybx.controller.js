@@ -622,7 +622,7 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
             controller: require('../../tpl/userModal/userModal.controller.js')
         }).result.then(function() {
             var date = new Date().getTime();
-            anesRecordServe_sybx.endOperation(regOptId, docId, '08', date, $scope.startOper.anaesRecord.leaveTo, 9).then(function(result) {
+            anesRecordServe_sybx.endOperation(regOptId, docId, '08', date, $scope.startOper.anaesRecord.leaveTo, 7, "").then(function(result) {
                 if (result.data.resultCode != '1') return;
                 // anaesOperTime(docId); // 查询麻醉时长与手术时长
                 $scope.operState = operState = 'END'; // 标记手术状态为END

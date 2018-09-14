@@ -1,10 +1,10 @@
-PostVisitLogCtrl.$inject = ['$rootScope', '$scope', 'IHttp', '$state', '$timeout', 'confirm', 'select', 'toastr', 'auth', '$filter'];
+PostVisitLogCtrl.$inject = ['$rootScope', '$scope', 'IHttp', '$state', '$timeout', 'confirm', 'anesRecordServe', 'select', 'toastr', 'auth', '$filter'];
 
 module.exports = PostVisitLogCtrl;
 
-function PostVisitLogCtrl($rootScope, $scope, IHttp, $state, $timeout, confirm, select, toastr, auth, $filter) {
+function PostVisitLogCtrl($rootScope, $scope, IHttp, $state, $timeout, confirm, anesRecordServe, select, toastr, auth, $filter) {
     var promise,
-        regOptId = $rootScope.$stateParams.regOptId,
+        regOptId = $rootScope.$stateParams.regOptId, timer_rt,
         rows = 3,
         rows1 = 3;
     $scope.docInfo = auth.loginUser();
@@ -21,6 +21,27 @@ function PostVisitLogCtrl($rootScope, $scope, IHttp, $state, $timeout, confirm, 
         rows1 = 1;
     }
 
+    var currRouteName = $rootScope.$state.current.name;
+    $scope.$on('$stateChangeStart', function() {
+        anesRecordServe.stopTimerRt();
+    });
+
+    //术中启动定时监测
+    if (currRouteName == 'midPostVisitLog_sybx') {
+        start_rt();
+
+        function rtData() {
+            anesRecordServe.rtData(regOptId, function(msg, list) {
+                start_rt();
+            });
+        }
+
+        function start_rt() {
+            if (timer_rt)
+                clearTimeout(timer_rt);
+            timer_rt = setTimeout(rtData, 1000);
+        }
+    }
     $scope.lv = [{ key: 0, val: 0 }, { key: 1, val: 1 }, { key: 2, val: 2 }, { key: 3, val: 3 }, { key: 4, val: 4 }, { key: 5, val: 5 }, { key: 6, val: 6 }, { key: 7, val: 7 }, { key: 8, val: 8 }, { key: 9, val: 9 }, { key: 10, val: 10 }];
 
     select.getAnaesthetists().then((rs) => {

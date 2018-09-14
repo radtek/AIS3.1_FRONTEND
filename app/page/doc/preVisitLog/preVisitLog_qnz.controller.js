@@ -36,6 +36,7 @@ function PreVisitLogCtrl($rootScope, $scope, IHttp, $timeout, $state, toastr, co
 
             vm.regOptItem = rs.data.regOptItem;
             vm.preVisit = rs.data.preVisitItem;
+            vm.previsitAnaesplan = rs.data.previsitAnaesplan;
             if(vm.preVisit.bonesPitch)
                 vm.preVisit.bonesPitch -= 0;
             vm.previsitPhyexam = rs.data.previsitPhyexam;
@@ -49,6 +50,7 @@ function PreVisitLogCtrl($rootScope, $scope, IHttp, $timeout, $state, toastr, co
         $rootScope.btnActive = false;
         let params = {
             preVisit: vm.preVisit,
+            previsitAnaesplan: vm.previsitAnaesplan,
             previsitPhyexam: vm.previsitPhyexam,
             previsitAccessexam: vm.accessexam
         };

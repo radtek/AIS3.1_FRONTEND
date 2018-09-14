@@ -272,10 +272,10 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
                 params.queryMethod = 1;
             }
         } else if (page == 'preOper') {
-            if (beCode == 'sybx' && (user.roleType === 'ANAES_DIRECTOR' || user.roleType === 'ANAES_DOCTOR'))
+            if (beCode == 'sybx' && (user.roleType === 'ANAES_DIRECTOR' || user.roleType === 'ANAES_DOCTOR')) {
                 params.state = '02,03';
-            if (beCode == 'sybx')
                 params.queryMethod = 2;
+            }
         }
         //查询归档数据;
         if ($scope.isArch) {

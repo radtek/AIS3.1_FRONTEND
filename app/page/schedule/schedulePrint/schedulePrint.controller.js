@@ -113,8 +113,8 @@ function SchedulePrintCtrl($rootScope, $scope, IHttp, uiGridConstants, $uibModal
             },
             minWidth: 100
         }, {
-            field: 'bed',
-            name: '床号',
+            field: $scope.docInfo.beCode === 'sybx'?'hid':'bed',
+            name: $scope.docInfo.beCode === 'sybx'?'住院号':'床号',
             width: 70
         }, {
             field: 'sex',

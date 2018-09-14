@@ -1,8 +1,8 @@
-OverMediLogCtrl.$inject = ['$rootScope', '$scope', 'IHttp','$timeout', '$uibModal', 'toastr', 'confirm', 'dateFilter', 'auth', 'select', '$filter'];
+OverMediLogCtrl.$inject = ['$rootScope', '$scope', 'IHttp', '$timeout', '$uibModal', 'toastr', 'confirm', 'dateFilter', 'auth', 'select', '$filter'];
 
 module.exports = OverMediLogCtrl;
 
-function OverMediLogCtrl($rootScope, $scope, IHttp,$timeout, $uibModal, toastr, confirm, dateFilter, auth, select, $filter) {
+function OverMediLogCtrl($rootScope, $scope, IHttp, $timeout, $uibModal, toastr, confirm, dateFilter, auth, select, $filter) {
     var regOptId = $rootScope.$stateParams.regOptId,
         insuredArray = [
             { type: 1, tit: '自费用药', len: 10 },
@@ -163,11 +163,56 @@ function OverMediLogCtrl($rootScope, $scope, IHttp,$timeout, $uibModal, toastr, 
                 $scope.$emit('processState', $scope.processState);
         });
     }
-
+    $scope.clear = function() {
+        confirm.show('是否清空所有特殊用药？').then(function() {
+            IHttp.post("document/batchDeleteInsuredItem", $scope.insuredPatAgree).then((res) => {
+                if (res.data.resultCode != 1)
+                    return;
+                initPage()
+            });
+        });
+    }
+    $scope.saveAs = function() {
+        // vm.saveAsTemp = function() { // 另存为模板，保存用药、输液、输血数据
+        // if ($scope.startOper.treatMedEvtList.length == 0 && $scope.startOper.transfusioninIoeventList.length == 0 && $scope.startOper.bloodinIoeventList.length == 0) {
+        //     toastr.warning('请先添加数据');
+        //     return;
+        // }
+        // for (var item of $scope.startOper.showList) {
+        //     item.$$hashKey = undefined;
+        // }
+        $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            template: require('./model/saveAsTemp.html'),
+            controller: require('./model/saveAsTemp.controller.js'),
+            resolve: { items: { insuredItems: $scope.insuredItems, insuredItemList: $scope.insuredItemList } }
+        });
+    };
+    $scope.appTemplat = function() {
+        // vm.loadTemp = function() { // 加载模板
+        $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            size: 'lg',
+            template: require('./model/loadTemp.html'),
+            controller: require('./model/loadTemp.controller.js'),
+            controllerAs: 'vm',
+            resolve: { items: { regOptId: regOptId, docId: $scope.docInfo.docId, insuredPatAgree: $scope.insuredPatAgree, insuredItemList: $scope.insuredItemList } }
+        }).result.then(function() {}, function() {
+            initPage();
+        });
+        // }
+    };
     select.getAnaesthetists().then((rs) => {
         $scope.anesthetistList = rs.data.userItem;
     });
-
+    $scope.$on('appTemplat', () => { //应用模板
+        $scope.appTemplat();
+    })
+    $scope.$on('saveAs', () => { //另存模板
+        $scope.saveAs();
+    })
     $scope.$on('save', () => {
         save($scope.insuredPatAgree.processState);
     });
@@ -182,5 +227,8 @@ function OverMediLogCtrl($rootScope, $scope, IHttp,$timeout, $uibModal, toastr, 
 
     $scope.$on('add', () => {
         $scope.add();
+    })
+    $scope.$on('clear', () => {
+        $scope.clear();
     })
 }

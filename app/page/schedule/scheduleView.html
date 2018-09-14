@@ -1,7 +1,6 @@
 <div flex id="schedule">
-    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pinning ui-grid-pagination  ui-grid-resize-columns  ng-if="gridOptions.paginationState" class="ui-grid-729"></div>
-    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pinning  ui-grid-resize-columns  ng-if="!gridOptions.paginationState" class="ui-grid-729"></div>
-    
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pinning ui-grid-pagination ui-grid-resize-columns ng-if="gridOptions.paginationState" class="ui-grid-729"></div>
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pinning ui-grid-resize-columns ng-if="!gridOptions.paginationState" class="ui-grid-729"></div>
     <div flex style="display: none;">
         <div id="list-scan">
             <div layout="column" layout-align="center center">
@@ -14,12 +13,13 @@
                 <h5>{{queryObj.operDate}}</h5>
             </div>
             <table class="table table-bordered">
-                <thead>  
+                <thead>
                     <td style="width: 45px;" ng-if="docInfo.beCode != 'sybx'">开始时间</td>
                     <td style="width: 90px;">手术室</td>
                     <td style="width: 40px;">台次</td>
                     <td style="min-width: 100px;">科室</td>
-                    <td style="width: 50px;">床号</td>
+                    <td style="width: 50px;" ng-if="docInfo.beCode !== 'sybx'" >床号</td>
+                    <td style="width: 60px;" ng-if="docInfo.beCode === 'sybx'">住院号</td>
                     <td style="width: 60px;">姓名</td>
                     <td style="width: 40px;">性别</td>
                     <td style="width: 45px;">年龄</td>
@@ -46,8 +46,11 @@
                         <td>
                             <div>{{item.deptName}}</div>
                         </td>
-                        <td>
+                        <td ng-if="docInfo.beCode !== 'sybx'">
                             <div>{{item.bed}}</div>
+                        </td>
+                        <td ng-if="docInfo.beCode === 'sybx'">
+                            <div>{{item.hid}}</div>
                         </td>
                         <td>
                             <div>{{item.regOptName}}</div>

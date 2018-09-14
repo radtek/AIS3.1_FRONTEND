@@ -22,7 +22,7 @@
                 <th class="text-center" style="width: 100px;">规格</th>
                 <th class="text-center" style="width: 50px;">单价</th>
                 <th class="text-center" style="width: 100px;">用药依据</th>
-                <th class="text-center" style="width: 70px;" ng-if="processState != 'END' && !setting.readonly">操作</th>
+                <th class="text-center hidden-print" style="width: 70px;" ng-if="!setting.readonly">操作</th>
             </tr>
             <tr ng-repeat="item in insuredItems">
                 <td class="text-center" ng-if="item.num == 0" rowspan="{{item.len}}">
@@ -33,7 +33,7 @@
                 <td>{{item.spec}}</td>
                 <td>{{item.price}}</td>
                 <td>{{item.reason}}</td>
-                <td ng-if="processState != 'END' && !setting.readonly">
+                <td ng-if="!setting.readonly" class="hidden-print">
                     <i class="glyphicon glyphicon-edit" style="cursor: pointer; margin-left: 10px; margin-right: 10px;" ng-click="add(item)" ng-if="!!item.id"></i>
                     <i class="glyphicon glyphicon-remove" style="cursor: pointer;" ng-click="del(item)" ng-if="!!item.id"></i>
                 </td>
@@ -46,8 +46,8 @@
             <div layout>医生签字：
                 <oi-select class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetist" oi-options="item.userName as item.name for item in anesthetistList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="insuredPatAgree.docSign"></oi-select>
                 <div class="eSignature">
-    <img ng-repeat="item in eSignatureAnesthetist" src="{{item.path}}" ng-if="item.hasPath" />
-</div>
+                    <img ng-repeat="item in eSignatureAnesthetist" src="{{item.path}}" ng-if="item.hasPath" />
+                </div>
             </div>&nbsp;
             <div layout>科主任签字：
                 <a flex class="sign"></a>
