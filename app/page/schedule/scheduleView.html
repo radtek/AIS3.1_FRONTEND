@@ -28,6 +28,7 @@
                     <td style="min-width: 100px;">手术医生</td>
                     <td style="min-width: 62px;">麻醉方法</td>
                     <td style="min-width: 62px;">麻醉医生</td>
+                    <td style="width: 62px;" ng-if="docInfo.beCode === 'sybx'">巡台医生</td>
                     <td style="min-width: 62px;">洗手护士</td>
                     <td style="min-width: 62px;">巡回护士</td>
                     <td style="width: 110px;">备注</td>
@@ -75,6 +76,9 @@
                         </td>
                         <td>
                             <div>{{item.anesthetistName}}</div>
+                        </td>
+                        <td ng-if="docInfo.beCode === 'sybx'">
+                            <div>{{item.perfusionDoctorName}}</div>
                         </td>
                         <td>
                             <div>{{item.instrnurseName1}}</div>

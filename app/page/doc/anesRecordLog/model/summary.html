@@ -250,6 +250,9 @@
                         <checkbox ng-model="anaesSummaryAppendixCanal.dualChamber" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">双腔</checkbox>
                         <checkbox ng-model="anaesSummaryAppendixCanal.threeChamber" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">三腔</checkbox>
                     </div>
+                    <div class="group-margin">
+                        <checkbox ng-model="anaesSummaryAppendixCanal.bloodWarming" ng-true-value="1" ng-disabled="!anaesSummaryAppendixCanal.deepVeinCathete">输血输液加温</checkbox>
+                    </div>
                 </div>
                 <div layout>
                     <checkbox ng-model="anaesSummaryAppendixCanal.sgCatheter" ng-true-value="1" ng-click="anaesSummaryAppendixCanal.other2=''">其它</checkbox>

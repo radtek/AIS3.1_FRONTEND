@@ -37,6 +37,7 @@ function AnaesthesiaScheduleCtrl($rootScope, $scope, IHttp, $timeout, toastr, se
         $scope.optBodyList = rs.data.resultList;
     })
 
+    $scope.$emit('setSearchType', 1);
     select.getAnaesthetists().then((rs) => {
         if (rs.data.resultCode != 1)
             return;

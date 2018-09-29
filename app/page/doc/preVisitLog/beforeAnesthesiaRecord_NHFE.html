@@ -1,0 +1,371 @@
+<div class="page-print beforeline beforeAnesthesiaRecord_NHFE beforemagin" ng-class="{true: 'end-state'}[vm.preVisit.processState==='END' || vm.readonly]">
+    <header layout="column" layout-align="center center">
+        <h3>{{docInfo.beName}}麻醉术前访视与评估记录单</h3>
+    </header>
+    <div style="border:solid 1px;margin-top: 10px;padding: 0 10px">
+        <div class="md-body-1 maginbdfore maginbdfore" layout="row" layout-align="space-between end" style="margin-top: 10px;">
+            住院号<span layout style="width: 75px;"><a flex style="padding: 0 4px;">{{::vm.regOptItem.hid}}</a></span> 科室
+            <span layout flex><a flex style="padding: 0 4px;">{{::vm.regOptItem.deptName}}</a></span> 床号
+            <span layout style="width: 75px;"><a flex style="padding: 0 4px;">{{::vm.regOptItem.bed}}</a></span> 姓名
+            <span layout style="width: 60px;"><a flex style="padding: 0 4px;">{{::vm.regOptItem.name}}</a></span> 性别
+            <span layout style="width: 30px;"><a flex style="padding: 0 4px;">{{::vm.regOptItem.sex}}</a></span> 年龄
+            <span layout style="width: 45px;"><a flex style="padding: 0 4px;">{{::vm.regOptItem.age}}</a></span> 体重
+            <span layout style="width: 33px;"><a flex style="padding: 0 4px;">{{::vm.regOptItem.weight}}</a></span>kg 身高
+            <span layout style="width: 33px;"><a flex style="padding: 0 4px;">{{::vm.regOptItem.height}}</a></span>cm
+        </div>
+        <div class="md-body-1 maginbdfore maginbdfore" layout="row" layout-align="space-between end">
+            <span>术前诊断：</span>
+            <span class="bottom-line" flex>{{::vm.regOptItem.diagnosisName}}</span>
+        </div>
+        <div class="md-body-1 maginbdfore maginbdfore" layout="row" layout-wrap="wrap" layout-align="space-between start">
+            <span>拟行手术：</span>
+            <span flex class="bottom-line">{{::vm.regOptItem.designedOptName}}</span>
+        </div>
+        <div class="md-body-1 maginbdfore maginbdfore" layout="row" layout-align="space-between end">
+            简要病史：
+            <input flex type="text" class="noborder3" ng-model="vm.preVisit.briefHis" maxlength="50" ng-disabled="vm.preVisit.processState==='END'" />
+        </div>
+        <div class="md-body-1 maginbdfore boline">
+            <span>并存病史：</span>
+            <checkbox ng-model="vm.comorbidity_[0]" ng-true-value="'1'" ng-false-value="0">高血压</checkbox>
+            <checkbox ng-model="vm.comorbidity_[1]" ng-true-value="'2'" ng-false-value="0">冠心病</checkbox>
+            <checkbox ng-model="vm.comorbidity_[2]" ng-true-value="'3'" ng-false-value="0">糖尿病</checkbox>
+            <checkbox ng-model="vm.comorbidity_[3]" ng-true-value="'4'" ng-false-value="0">脑栓塞</checkbox>
+            <checkbox ng-model="vm.comorbidity_[4]" ng-true-value="'5'" ng-false-value="0">脑出血</checkbox>
+            <checkbox ng-model="vm.comorbidity_[5]" ng-true-value="'6'" ng-false-value="0">哮喘</checkbox>
+            <checkbox ng-model="vm.comorbidity_[6]" ng-true-value="'7'" ng-false-value="0">慢性阻塞性肺病</checkbox>
+            <checkbox ng-model="vm.comorbidity_[7]" ng-true-value="'8'" ng-false-value="0">重症肌无力</checkbox>
+            <checkbox ng-model="vm.comorbidity_[8]" ng-true-value="'9'" ng-false-value="0">癫痫</checkbox>
+            <checkbox ng-model="vm.comorbidity_[9]" ng-true-value="'10'" ng-false-value="0">抑郁症</checkbox>
+            <checkbox ng-model="vm.comorbidity_[10]" ng-true-value="'11'" ng-false-value="0">吸烟</checkbox>
+            <checkbox ng-model="vm.comorbidity_[11]" ng-true-value="'12'" ng-false-value="0">嗜酒</checkbox>
+            <checkbox ng-model="vm.preVisit.allergic" ng-click="vm.setallergic()" ng-true-value="'1'" ng-false-value="'0'">药物过敏</checkbox>
+            <input ng-disabled="vm.preVisit.allergic!=='1'" type="text" class="noborder3" maxlength="9" style="width: 73px;" ng-model="vm.preVisit.allergicCond" ng-disabled="!vm.preVisit.allergic"></input>
+            <checkbox ng-model="vm.preVisit.drugAddiction" ng-click="vm.setdrugAddiction()" ng-true-value="'1'">药物成瘾</checkbox>
+            <input type="text" class="noborder3" maxlength="8" style="width: 63px;" ng-model="vm.preVisit.drugAddictionCond" ng-disabled="!vm.preVisit.drugAddiction"></input>
+            其他：
+            <input type="text" class="noborder3" maxlength="17" style="width:240px;" ng-model="vm.preVisit.other1"></input>
+        </div>
+        <div class="md-body-1 maginbdfore boline">
+            <span>特殊用药史：</span>
+            <checkbox ng-model="vm.medHis_[0]" ng-true-value="'1'" ng-false-value="0">激素</checkbox>
+            <checkbox ng-model="vm.medHis_[1]" ng-true-value="'2'" ng-false-value="0">抗凝药</checkbox>
+            <checkbox ng-model="vm.medHis_[2]" ng-true-value="'3'" ng-false-value="0">降压药</checkbox>
+            <span>&nbsp;药物：</span>
+            <input type="text" class="noborder3" style="width: 441px;" ng-model="vm.preVisit.other2" maxlength="31" />
+        </div>
+        <div layout class="bard-md-body-parent-smm">
+            <div class="md-body-1 maginbdfore boline">
+                <checkbox ng-model="vm.preVisit.anaes" ng-click="vm.setdanaes()" ng-true-value="'1'" ng-false-value="'0'">既往麻醉史</checkbox>
+                <input ng-disabled="vm.preVisit.anaes!=='1'" type="text" class="noborder3" style="width:246px;" ng-model="vm.preVisit.anaesCond" ng-disabled="!vm.preVisit.anaes" maxlength="31" />
+                <span style="padding-left: 10px;"></span>
+                <checkbox ng-model="vm.preVisit.operHis" ng-true-value="1" ng-false-value="0" ng-click="vm.setoperHis()">既往手术史</checkbox>
+                <input type="text" class="noborder3" style="width: 320px;" ng-model="vm.preVisit.operHisCond" ng-disabled="!vm.preVisit.operHis" maxlength="34"></input>
+            </div>
+        </div>
+        <h4 class="md-body-1 maginbdfore boline" style="text-align:center; font-size:18px;margin-bottom: 8px;margin-top: 10px;">
+            一般情况与体格检查
+        </h4>
+        <div class="md-body-1 maginbdfore boline">
+            T：
+            <input type="number" class="noborder3" min="0" style="width:60px;" ng-model="vm.previsitPhyexam.temp" /> ℃；&nbsp;P
+            <input type="number" class="noborder3" min="0" style="width:60px;" ng-model="vm.previsitPhyexam.pr" />次/分；&nbsp; R
+            <input type="number" class="noborder3" min="0" style="width:60px;" ng-model="vm.previsitPhyexam.heartrate" /> 次/分； &nbsp;BP
+            <input type="number" class="noborder3" min="0" style="width:45px;" ng-model="vm.previsitPhyexam._bloodPre" /> /
+            <input type="number" class="noborder3" min="0" style="width:45px;" ng-model="vm.previsitPhyexam.bloodPre_" />mmHg
+            <span>　神志：</span>
+            <checkbox ng-model="vm.previsitPhyexam.consciou" ng-true-value="1" ng-false-value="0">清醒</checkbox>
+            <checkbox ng-model="vm.previsitPhyexam.consciou" ng-true-value="2" ng-false-value="0">模糊</checkbox>
+            <checkbox ng-model="vm.previsitPhyexam.consciou" ng-true-value="3" ng-false-value="0">昏迷</checkbox>
+        </div>
+        <div class="md-body-1 maginbdfore boline">
+            <span>呼吸困难：</span>
+            <checkbox ng-model="vm.previsitPhyexam.dyspnea" ng-true-value="1" ng-false-value="0">有</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.dyspnea" ng-true-value="2" ng-false-value="0">无</checkbox>
+            <span style="padding-left:22px;">紫绀：</span>
+            <checkbox ng-model="vm.previsitPhyexam.cyanosis" ng-true-value="1" ng-false-value="0">有</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.cyanosis" ng-true-value="2" ng-false-value="0">无</checkbox>
+            <span style="padding-left: 22px;">困难气道：</span>
+            <checkbox ng-model="vm.previsitPhyexam.diffAirway" ng-true-value="1" ng-false-value="0">有</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.diffAirway" ng-true-value="2" ng-false-value="0">无</checkbox>
+            <span style="padding-left: 22px;">开口度：</span>
+            <checkbox ng-model="vm.previsitPhyexam.aperture" ng-true-value="1" ng-false-value="0">正常</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.aperture" ng-true-value="2" ng-false-value="0">异常</checkbox>
+        </div>
+        <div class="md-body-1 maginbdfore boline">
+            <span>牙齿松动：</span>
+            <checkbox ng-model="vm.previsitPhyexam.toothMobility" ng-true-value="1" ng-false-value="0">有</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.toothMobility" ng-true-value="2" ng-false-value="0">无</checkbox>
+            <span style="padding-left: 56px;">头颈活动度：</span>
+            <checkbox ng-model="vm.previsitPhyexam.headActivity" ng-true-value="1" ng-false-value="0">正常</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.headActivity" ng-true-value="2" ng-false-value="0">异常</checkbox>
+            <div style="font-size: 14px;outline: none;height: 33px;width:350px" class="required-inline" ng-class="{true: 'red-border'}[!vm.previsitPhyexam.mallampati && showBorder]">
+                <span style="padding-left: 99px;">Mallampati：</span>
+                <checkbox ng-model="vm.previsitPhyexam.mallampati" ng-true-value="1" ng-false-value="0">Ⅰ</checkbox>
+                <checkbox ng-model="vm.previsitPhyexam.mallampati" ng-true-value="2" ng-false-value="0">Ⅱ</checkbox>
+                <checkbox ng-model="vm.previsitPhyexam.mallampati" ng-true-value="3" ng-false-value="0">Ⅲ</checkbox>
+                <checkbox ng-model="vm.previsitPhyexam.mallampati" ng-true-value="4" ng-false-value="0">Ⅳ</checkbox>
+            </div>
+        </div>
+        <div class="md-body-1 maginbdfore boline">
+            <span>心脏检查：</span>
+            <checkbox ng-model="vm.previsitPhyexam.cardiacWorkup" ng-true-value="1" ng-false-value="0" ng-click="vm.cardiacWorkup()">正常</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.cardiacWorkup" ng-true-value="2" ng-false-value="0" ng-click="vm.cardiacWorkup()">异常</checkbox>
+            <input type="text" class="noborder3" style="width:580px;" ng-model="vm.previsitPhyexam.cardiacWorkupRes" maxlength="63" ng-disabled="vm.previsitPhyexam.cardiacWorkup != 2" />
+        </div>
+        <div class="md-body-1 maginbdfore boline">
+            <span>肺部检查：</span>
+            <checkbox ng-model="vm.previsitPhyexam.pulmExam" ng-true-value="1" ng-false-value="0" ng-click="vm.pulmExam()">正常</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.pulmExam" ng-true-value="2" ng-false-value="0" ng-click="vm.pulmExam()">异常</checkbox>
+            <input type="text" class="noborder3" style="width:580px;" ng-model="vm.previsitPhyexam.pulmExamRes" ng-disabled="vm.previsitPhyexam.pulmExam != 2" maxlength="63" />
+        </div>
+        <div class="md-body-1 maginbdfore boline">
+            <span style="margin-top: -4px;">脊椎畸形：</span>
+            <checkbox ng-model="vm.previsitPhyexam.hemivertebra" ng-true-value="1" ng-false-value="0">有</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.hemivertebra" ng-true-value="2" ng-false-value="0">无</checkbox>
+            <span style="margin-top: -4px;padding-left: 17px;">椎间隙:</span>
+            <checkbox ng-model="vm.previsitPhyexam.intervSpace" ng-true-value="1" ng-false-value="0">是</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.intervSpace" ng-true-value="2" ng-false-value="0">否</checkbox><span style="margin-top: -4px;">清楚</span>
+            <span style="padding-left: 78px">穿刺点局部：</span>
+            <checkbox ng-model="vm.previsitPhyexam.puncPoint" ng-true-value="1" ng-false-value="0">感染</checkbox>
+            <checkbox ng-model="vm.previsitPhyexam.puncPoint" ng-true-value="2" ng-false-value="0">畸形</checkbox>
+            <checkbox ng-model="vm.previsitPhyexam.puncPoint" ng-true-value="3" ng-false-value="0">外伤</checkbox>
+        </div>
+        <div class="md-body-1 maginbdfore boline" flex>
+            <span>双下肢运动/感觉：</span>
+            <checkbox ng-model="vm.previsitPhyexam.bleFeel" ng-true-value="1" ng-false-value="0" ng-click="vm.bleFeel()">正常</checkbox>/
+            <checkbox ng-model="vm.previsitPhyexam.bleFeel" ng-true-value="2" ng-false-value="0" ng-click="vm.bleFeel()">异常</checkbox>
+            <input type="text" class="noborder3" style="width:153px;" ng-model="vm.previsitPhyexam.bleFeelRes" maxlength="18" ng-disabled="vm.previsitPhyexam.bleFeel != 2" />
+            <span style="padding-left: 20px">　其他：</span>
+            <input type="text" class="noborder3" style="width:289px;" ng-model="vm.previsitPhyexam.other" maxlength="35" />
+        </div>
+        <h4 class="md-body-1 maginbdfore boline" style="text-align:center; font-size:18px;margin-bottom: 8px;margin-top: 10px;">
+            与麻醉相关的辅助检查结果
+        </h4>
+        <div class="bard-md-body-parent-smm">
+            <div layout class="bard-md-body-parent-smm">
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>血常规：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.routBloodTest" ng-true-value="1" ng-false-value="0" ng-click="vm.routBloodTest()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.routBloodTest" ng-true-value="2" ng-false-value="0" ng-click="vm.routBloodTest()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 198px;" ng-model="vm.previsitAccessexam.routBloodTestRes" ng-disabled="vm.previsitAccessexam.routBloodTest != 2" maxlength="25" />
+                </div>
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>尿常规：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.routUrineTest" ng-true-value="1" ng-false-value="0" ng-click="vm.routUrineTest()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.routUrineTest" ng-true-value="2" ng-false-value="0" ng-click="vm.routUrineTest()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 197px;" ng-model="vm.previsitAccessexam.routUrineTestRes" ng-disabled="vm.previsitAccessexam.routUrineTest != 2" maxlength="25" />
+                </div>
+            </div>
+            <div layout class="bard-md-body-parent-smm">
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>肺脏：胸片：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.rabat" ng-true-value="1" ng-false-value="0" ng-click="vm.rabat()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.rabat" ng-true-value="2" ng-false-value="0" ng-click="vm.rabat()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 170px;" ng-model="vm.previsitAccessexam.rabatRes" ng-disabled="vm.previsitAccessexam.rabat != 2" maxlength="22" />
+                </div>
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>肺功能：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.lungFunc" ng-true-value="1" ng-false-value="0" ng-click="vm.lungFunc()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.lungFunc" ng-true-value="2" ng-false-value="0" ng-click="vm.lungFunc()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 197px;" ng-model="vm.previsitAccessexam.lungFuncRes" ng-disabled="vm.previsitAccessexam.lungFunc != 2" maxlength="25" />
+                </div>
+            </div>
+            <div layout class="bard-md-body-parent-smm">
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>心脏：ECG：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.ecg" ng-true-value="1" ng-false-value="0" ng-click="vm.ecg()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.ecg" ng-true-value="2" ng-false-value="0" ng-click="vm.ecg()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 171px;" ng-model="vm.previsitAccessexam.ecgRes" ng-disabled="vm.previsitAccessexam.ecg != 2" maxlength="20" />
+                </div>
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>超声心动图：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.ucg" ng-true-value="1" ng-false-value="0" ng-click="vm.ucg()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.ucg" ng-true-value="2" ng-false-value="0" ng-click="vm.ucg()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 170px;" ng-model="vm.previsitAccessexam.ucgRes" ng-disabled="vm.previsitAccessexam.ucg != 2" maxlength="21" />
+                </div>
+            </div>
+            <div layout class="bard-md-body-parent-smm">
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>肝功能：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.liverFunc" ng-true-value="1" ng-false-value="0" ng-click="vm.liverFunc()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.liverFunc" ng-true-value="2" ng-false-value="0" ng-click="vm.liverFunc()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 198px;" ng-model="vm.previsitAccessexam.liverFuncRes" ng-disabled="vm.previsitAccessexam.liverFunc != 2" maxlength="25" />
+                </div>
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>肾功能：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.renalFunc" ng-true-value="1" ng-false-value="0" ng-click="vm.renalFunc()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.renalFunc" ng-true-value="2" ng-false-value="0" ng-click="vm.renalFunc()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 198px;" ng-model="vm.previsitAccessexam.renalFuncRes" ng-disabled="vm.previsitAccessexam.renalFunc != 2" maxlength="25" />
+                </div>
+            </div>
+            <div layout class="bard-md-body-parent-smm">
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>凝血功能：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.coagulFunc" ng-true-value="1" ng-false-value="0" ng-click="vm.coagulFunc()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.coagulFunc" ng-true-value="2" ng-false-value="0" ng-click="vm.coagulFunc()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 184px;" ng-model="vm.previsitAccessexam.coagulFuncRes" ng-disabled="vm.previsitAccessexam.coagulFunc != 2" maxlength="22" />
+                </div>
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>电解质：</span>
+                    <checkbox ng-model="vm.previsitAccessexam.electrolytic" ng-true-value="1" ng-false-value="0" ng-click="vm.electrolytic()">正常</checkbox>/
+                    <checkbox ng-model="vm.previsitAccessexam.electrolytic" ng-true-value="2" ng-false-value="0" ng-click="vm.electrolytic()">异常</checkbox>
+                    <input type="text" class="noborder3" style="width: 198px;" ng-model="vm.previsitAccessexam.electrolyticRes" ng-disabled="vm.previsitAccessexam.electrolytic != 2" maxlength="25" />
+                </div>
+            </div>
+            <div class="bard-md-body-parent-smm">
+                <div class="md-body-1 maginbdfore boline" flex>
+                    <span>其他：</span>
+                    <input type="text" class="noborder3" style="width: 726px;" ng-model="vm.previsitAccessexam.other" maxlength="93" />
+                </div>
+            </div>
+        </div>
+        <h4 class="md-body-1 maginbdfore boline" style="text-align:center; font-size:18px;margin-bottom: 8px;margin-top: 10px;">
+            麻醉术前讨论与麻醉计划
+        </h4>
+        <div layout class="bard-md-body-parent-smm">
+            <div class="md-body-1 maginbdfore boline required-inline" ng-class="{true: 'red-border'}[!vm.previsitAnaesplan.asa   && showBorder]">
+                <div style="float:left;outline: none;font-size:14px;">
+                    <span style="float:left;">综合评估：ASA：</span>
+                    <checkbox ng-model="vm.previsitAnaesplan.asa" ng-true-value="'1'" ng-false-value="0">Ⅰ</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.asa" ng-true-value="'2'" ng-false-value="0">/Ⅱ</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.asa" ng-true-value="'3'" ng-false-value="0">/Ⅲ</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.asa" ng-true-value="'4'" ng-false-value="0">/Ⅳ</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.asa" ng-true-value="'5'" ng-false-value="0">/Ⅴ</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.asaE" ng-true-value="'6'" ng-false-value="0">/E级</checkbox>
+                </div>
+            </div>
+        </div>
+        <div layout class="bard-md-body-parent-smm">
+            <div class="md-body-1 maginbdfore boline" flex>
+                <span>术前讨论：经本专业组医师讨论</span>
+                <checkbox ng-model="vm.previsitAnaesplan.anesthIndica" ng-true-value="1" ng-false-value="0">有</checkbox>/
+                <checkbox ng-model="vm.previsitAnaesplan.anesthIndica" ng-true-value="2" ng-false-value="0">无</checkbox>麻醉适应症；
+                <span>是否按期进行手术&nbsp;</span>
+                <checkbox ng-model="vm.previsitAnaesplan.scheduled" ng-true-value="1" ng-false-value="0">按期</checkbox>/
+                <checkbox ng-model="vm.previsitAnaesplan.scheduled" ng-true-value="2" ng-false-value="0">延期</checkbox>
+            </div>
+        </div>
+        <div layout class="bard-md-body-parent-smm" style="margin-top: 3px;margin-bottom: 3px;height: 20px;font-size:14px;">
+            <div style="float:left;outline: none;">
+                <span style="float:left;">拟行麻醉方式：</span>
+                <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="'1'" ng-false-value="0">全身麻醉</checkbox>
+            </div>
+            
+            <div >(
+                <checkbox ng-model="vm.genAnesPos_[0]" ng-true-value="'1'" ng-false-value="0" style="margin-right:0 !important;">气管插管</checkbox>
+                <checkbox ng-model="vm.genAnesPos_[1]" ng-true-value="'2'" ng-false-value="0" style="margin-right:0 !important;">喉罩</checkbox>
+                <checkbox ng-model="vm.genAnesPos_[2]" ng-true-value="'3'" ng-false-value="0" style="margin-right:0 !important;">其他</checkbox>)；
+            </div>
+           
+            <div style="float:left;display: inline-block;">
+                <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="'2'" ng-false-value="0">硬膜外</checkbox>/
+                <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="'3'" ng-false-value="0">腰硬联合</checkbox>/
+                <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="'4'" ng-false-value="0">腰麻</checkbox>/
+            </div>
+            <div style="float:left;margin-top:0px;font-size:14px;">
+                (穿刺点
+                <input type="text" class="noborder3" style="width:45px;" ng-model="vm.preVisit.puncPoint" maxlength="5" /> ）；
+            </div>
+        </div>
+        <div layout class="bard-md-body-parent-smm" style="height:27px;padding-left: 96px">
+            <div class="md-body-1 maginbdfore boline">
+                <checkbox ng-model="vm.previsitAnaesplan.anaesType" ng-true-value="'5'" ng-false-value="0">神经阻滞</checkbox>；
+                <span>其他：</span>
+                <input type="text" class="noborder3" style="width:528px;" ng-model="vm.previsitAnaesplan.other6" maxlength="68" />
+            </div>
+        </div>
+        <div layout class="bard-md-body-parent-smm" style="height:27px">
+            <div class="md-body-1 maginbdfore boline " flex>
+                <div class="required-inline" ng-class="{true: 'red-border'}[!vm.previsitAnaesplan.leaveTo && showBorder]">
+                    术后去向：
+                    <checkbox ng-model="vm.previsitAnaesplan.leaveTo" ng-true-value="'1'" ng-false-value="0">病房</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.leaveTo" ng-true-value="'2'" ng-false-value="0">PACU</checkbox>
+                    <checkbox ng-model="vm.previsitAnaesplan.leaveTo" ng-true-value="'3'" ng-false-value="0">ICU</checkbox>
+                </div>
+            </div>
+        </div>
+        <div layout>
+            <div class="md-body-1 maginbdfore boline" flex>
+                <span>麻醉准备：</span>
+                <checkbox ng-model="vm.previsitAnaesplan.anaesPrep" style="margin-right:0;margin-top: 5px;" ng-true-value="1" ng-false-value="0">按麻醉计划所定麻醉方法常规准备</checkbox>
+            </div>
+            <div class="md-body-1 maginbdfore boline" flex>
+                <checkbox ng-model="vm.previsitAnaesplan.anaesPrepSpec" ng-click="vm.anaesPrepSpec()" ng-true-value="1" ng-false-value="0">需特殊准备</checkbox>
+                <input type="text" class="noborder3" style="width:198px;" ng-model="vm.previsitAnaesplan.anaesPrepSpecRes" maxlength="25" ng-disabled="!vm.previsitAnaesplan.anaesPrepSpec" />
+            </div>
+        </div>
+        <div layout class="bard-md-body-parent-smm">
+            <div class="md-body-1 maginbdfore boline" flex>
+                <span>风险防范措施：</span>
+                <span>拟监测项目：</span>
+                <checkbox ng-model="vm.monitorItem_[0]" ng-true-value="'1'" ng-false-value="0">NIBP</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[1]" ng-true-value="'2'" ng-false-value="0">ABP</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[2]" ng-true-value="'3'" ng-false-value="0">ECG</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[3]" ng-true-value="'4'" ng-false-value="0">SpO2</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[4]" ng-true-value="'5'" ng-false-value="0">PetCO2</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[5]" ng-true-value="'6'" ng-false-value="0">CVP</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[6]" ng-true-value="'7'" ng-false-value="0">BIS</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[7]" ng-true-value="'8'" ng-false-value="0">TOF</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[8]" ng-true-value="'9'" ng-false-value="0">尿量</checkbox>
+            </div>
+        </div>
+        <div layout class="bard-md-body-parent-smm">
+            <div class="md-body-1 maginbdfore boline" flex>
+                <span style="padding-left: 100px;"></span>
+                <checkbox ng-model="vm.monitorItem_[9]" ng-true-value="'10'" ng-false-value="0">出血量</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[10]" ng-true-value="'11'" ng-false-value="0">体温</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[11]" ng-true-value="'12'" ng-false-value="0">血糖</checkbox>
+                <span></span>
+                <checkbox ng-model="vm.monitorItem_[12]" ng-true-value="'13'" ng-false-value="0">血气分析</checkbox>
+                <span>其他</span>
+                <input type="text" class="noborder3" style="width: 358px;" ng-model="vm.previsitAnaesplan.monitorOther" maxlength="45" />
+            </div>
+        </div>
+        <div layout class="bard-md-body-parent-smm">
+            <div class="md-body-1 maginbdfore boline" flex>
+                <span style="padding-left: 99px">设备与药品：</span>
+                <checkbox ng-model="vm.deviceMed_[0]" ng-true-value="'1'" ng-false-value="0">除颤仪</checkbox>
+                <checkbox ng-model="vm.deviceMed_[1]" ng-true-value="'2'" ng-false-value="0">肾上腺素</checkbox>
+                <checkbox ng-model="vm.deviceMed_[2]" ng-true-value="'3'" ng-false-value="0">阿托品</checkbox>
+                <checkbox ng-model="vm.deviceMed_[3]" ng-true-value="'4'" ng-false-value="0">多巴胺</checkbox>
+                <checkbox ng-model="vm.deviceMed_[4]" ng-true-value="'5'" ng-false-value="0">利多卡因</checkbox>
+                <span>其他</span>
+                <input type="text" class="noborder3" style="width:140px;" ng-model="vm.previsitAnaesplan.otherDevMed" maxlength="17" />
+            </div>
+        </div>
+        <div layout class="bard-md-body-parent-smm">
+            <div class="md-body-1 maginbdfore boline" flex>
+                <span>变更麻醉方法：</span>
+                <checkbox ng-model="vm.previsitAnaesplan.anaesMethChg" ng-true-value="1" ng-false-value="0">是</checkbox>/
+                <checkbox ng-model="vm.previsitAnaesplan.anaesMethChg" ng-true-value="2" ng-false-value="0">否</checkbox>
+                <span>变更麻醉方法原因：</span>
+                <input type="text" class="noborder3" style="width: 448px;" ng-disabled="vm.previsitAnaesplan.anaesMethChg != 1" ng-model="vm.previsitAnaesplan.anaesMethChgRea" maxlength="55" />
+            </div>
+        </div>
+        <div layout layout-align="space-between">
+            <div class="md-body-1 maginbdfore boline" layout="row">
+                <span>麻醉医师签名：</span>
+                <input type="text" class="noborder3 signature" style="width:70px;margin-top: 6px;" ng-model="vm.regOptItem.anesthetistName" readonly></input>
+                <div class="eSignature" style="min-width:200px;">
+                    <img ng-repeat="sig in eSignature" src="{{sig}}" />
+                </div>
+            </div>
+            <div style="margin-right: 10px;">
+                <span class="required-inline" ng-class="{true: 'red-border'}[!vm.preVisit.signDate && showBorder]">
+                日期：<input h-type="datetime-local" class="noborder3" ng-model="vm.preVisit.signDate"  style="width:115px"/>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

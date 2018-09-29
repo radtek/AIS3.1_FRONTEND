@@ -4,7 +4,7 @@ module.exports = LoginCtrl;
 
 function LoginCtrl($rootScope, $scope, auth, baseConfig) {
     $scope.userInfo = { username: '', password: '', logionBeid: '', module: module == 'oprm' ? 'oprm' : 'ctrlcent' };
-    $scope.beList = [{ id: "103", name: "沈阳本溪" },{ id: "104", name: "常德临澧" },{ id: "107", name: "永兴人民医院" },{ id: "109", name: "黔南洲人民医院" }, { id: "110", name: "黔南洲中医医院" }, { id: "111", name: "湖南航天医院" }];
+    $scope.beList = [{ id: "103", name: "沈阳本溪" },{ id: "104", name: "常德临澧" },{ id: "107", name: "永兴人民医院" },{ id: "109", name: "黔南洲人民医院" }, { id: "110", name: "黔南洲中医医院" }, { id: "111", name: "湖南航天医院" }, { id: "112", name: "耒阳市人民医院" }];
     $scope.fieldList = [{ fieldname: "控制中心", name: "ctrlcent" }, { fieldname: "复苏室", name: "pacu" }, { fieldname: "手术室", name: "oprm" }];
     if(!!notPacu){
         $scope.fieldList = [{ fieldname: "控制中心", name: "ctrlcent" }, { fieldname: "手术室", name: "oprm" }];
@@ -57,3 +57,4 @@ function LoginCtrl($rootScope, $scope, auth, baseConfig) {
             $scope.errPwd = '';
     }, true);
 }
+

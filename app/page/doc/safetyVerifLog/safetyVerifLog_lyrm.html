@@ -1,0 +1,517 @@
+<div id="print-region">
+    <div class="page-print safetyVerifLogQnz" id="safetyVerifLog-syzxyy" ng-class="{true:'end-state'}[processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center" class="noTop">
+            <h3 ng-if='docInfo.beName && (docInfo.beCode != "syzxyy" || docInfo.beCode == "cshtyy")'>{{docInfo.beName}}</h3>
+            <img ng-if='docInfo.beCode == "syzxyy"' src="app/img/syzxyy.png" style="height: 60px; margin-left: -50px;">
+            <h4>手术安全核查表</h4>
+        </header>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>科别：<a >{{baseData.deptName}}</a></span>&nbsp;
+            <span layout>床号：<a >{{baseData.bed}}</a></span>&nbsp;
+            <span layout>住院号：<a >{{baseData.hid}}</a></span>
+            <span layout>患者姓名：<a >{{baseData.name}}</a></span>&nbsp;
+            <span layout>性别：<a >{{baseData.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a >{{baseData.age}}</a></span>&nbsp;
+            <!-- <span layout>病室：<a >{{baseData.regionName}}</a></span>&nbsp; -->
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>手术方式：<a flex>{{baseData.designedOptName}}</a></span>
+            <span layout>手术日期：<a >{{baseData.operaDate | date: 'yyyy 年 MM 月 dd 日'}}</a></span>
+        </div>
+        <!--        <div flex class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>手术前诊断：<a flex>{{baseData.diagnosisName}}</a></span>
+        </div> -->
+        <!--         <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>拟实施手术：<a flex>{{baseData.designedOptName}}</a></span>
+        </div> -->
+        <!--         <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>拟实施麻醉：<a flex>{{baseData.designedAnaesMethodName}}</a></span>
+        </div> -->
+        <!--         <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>手术组医师：{{operatDoc}}</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>麻醉组医师：{{anaesDoc}}</span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>手术组护士：{{circunurse}}</span>
+        </div> -->
+        <div layout class="table-bordered" style="border-bottom: 1px solid #000;">
+            <div flex layout="column" layout-align="space-between" class="md-padding">
+                <ul class="anaes-info">
+                    <li class="tab-header"><strong>麻醉实施前</strong></li>
+                    <strong>麻醉医生陈述：</strong>
+                    <li layout layout-align="start center">患者姓名、性别、年龄正确：</li>
+                    <li layout layout-align="end center">
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.patientInfoConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.patientInfoConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">手术方式确认：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.desigedOperConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.desigedOperConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="start center">手术部位与标识正确：</li>
+                    <li layout layout-align="end center">
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.operSiteLogoConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.operSiteLogoConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        手术知情同意：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.operAccedeConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.operAccedeConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        麻醉知情同意：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.anaesAccedeConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.anaesAccedeConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        麻醉方式确认：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.anaesMethodConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.anaesMethodConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        麻醉风险提示：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.anaesRiskConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.anaesRiskConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        麻醉设备安全检查完成：
+                    </li>
+                    <li layout layout-align="end center">
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.anaesFqSafeCheckConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.anaesFqSafeCheckConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        皮肤是否完整：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.skinIntegratedConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.skinIntegratedConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        术野皮肤准备正确：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.skinSurgicalFieldConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.skinSurgicalFieldConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        静脉通道建立完成：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.venousAccessConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.venousAccessConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        患者是否有过敏史：
+                        <div>是
+                            <checkbox ng-model="anaesBeforeSafeCheck.allergicDetail" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="anaesBeforeSafeCheck.allergicDetail" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        抗菌药物皮试结果：
+                        <div>有
+                            <checkbox ng-model="anaesBeforeSafeCheck.antSkinTestResult" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="anaesBeforeSafeCheck.antSkinTestResult" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        术前血型：
+                        <div>有
+                            <checkbox ng-model="anaesBeforeSafeCheck.bloodType" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="anaesBeforeSafeCheck.bloodType" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        术前备血：
+                        <div>有
+                            <checkbox ng-model="anaesBeforeSafeCheck.preparationBlood" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="anaesBeforeSafeCheck.preparationBlood" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        <checkbox ng-model="anaesBeforeSafeCheck.prosthesis" ng-true-value="'1'" aria-label="假体">假体</checkbox>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        <checkbox ng-model="anaesBeforeSafeCheck.implantVivo" ng-true-value="'1'" aria-label="体内植入物">体内植入物</checkbox>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        <checkbox ng-model="anaesBeforeSafeCheck.imagingData" ng-true-value="'1'" aria-label="影像学资料">影像学资料</checkbox>
+                    </li>
+                    <li layout class="sign-li1" layout-align="start center">
+                        其他：
+                        <input flex type="text" maxlength="17" class="noborder3" ng-model="anaesBeforeSafeCheck.other" ng-value="anaesBeforeSafeCheck.other">
+                    </li>
+                </ul>
+                <ul>
+                    <li layout flex class="sign-li1" layout-align="start end">
+                        <span>麻醉医生签名：</span>
+                        <oi-select flex multiple name="anesthetistId" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasAnaesSig1]" oi-options="item.userName as item.name for item in anesthetistList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="anaesBeforeSafeCheck.anesthetistIdList"></oi-select>
+                        <div class="eSignature" style="height: 30px;">
+                            <img ng-repeat="item in eSignatureAnanesthetist1" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </li>
+                    <li layout flex class="sign-li1" layout-align="start end">
+                        <span>手术医生签名：</span>
+                        <oi-select flex multiple name="operatorId" class="noborder3 sign" oi-options="item.operatorId as item.name for item in operatorList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="anaesBeforeSafeCheck.operatorIdList"></oi-select>
+                    </li>
+                    <li layout flex class="sign-li1" layout-align="start end">
+                        <span>巡回护士签名：</span>
+                        <oi-select flex multiple name="circuNurseId" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasNurseSig1]" oi-options="item.userName as item.name for item in circunurseList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="anaesBeforeSafeCheck.circunurseIdList"></oi-select>
+                        <div class="eSignature" style="height: 30px;">
+                            <img ng-repeat="item in eSignatureCircuNurse1" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div flex layout="column" class="md-padding middle">
+                <ul class="anaes-info">
+                    <li class="tab-header"><strong>手术开始前</strong></li>
+                    <strong>手术医生陈述：</strong>
+                    <li layout layout-align="space-between center">患者姓名、性别、年龄正确：
+                        <div>
+                            <checkbox ng-model="operBeforeSafeCheck.patientInfoConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            <!--    否
+                            <checkbox ng-model="operBeforeSafeCheck.patientInfoConfirm" ng-true-value="'0'" aria-label="no"></checkbox> -->
+                        </div>
+                    </li>
+                    <!--                     <li layout layout-align="end center">
+                        
+                    </li> -->
+                    <li layout layout-align="space-between center">手术前诊断确认：
+                        <div>
+                            <checkbox ng-model="operBeforeSafeCheck.operBeDiagConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            <!--    否
+                            <checkbox ng-model="operBeforeSafeCheck.operBeDiagConfirm" ng-true-value="'0'" aria-label="no"></checkbox> -->
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        手术方式确认：
+                        <div>
+                            <checkbox ng-model="operBeforeSafeCheck.desigedOperConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            <!--      否
+                            <checkbox ng-model="operBeforeSafeCheck.desigedOperConfirm" ng-true-value="'0'" aria-label="no"></checkbox> -->
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        手术部位与标识确认：
+                        <div>
+                            <checkbox ng-model="exitOperSafeCheck.stomach" ng-true-value="'1'" aria-label="yes"></checkbox>
+                        </div>
+                    </li>
+                    <strong>手术、麻醉风险预警：</strong>
+                    <br>
+                    <strong>手术风险要点确认：</strong>
+                    <br>
+                    <li layout layout-align="space-between center">
+                        手术前准备完善确认：
+                        <checkbox ng-model="operBeforeSafeCheck.operBeReadyConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        手术重点和难点确认：
+                        <checkbox ng-model="operBeforeSafeCheck.operBeEmphasisConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        预计手术失血量：
+                    </li>
+                    <li layout layout-align="end center">
+                        <div>大于等于10毫升/KG
+                            <checkbox ng-model="operBeforeSafeCheck.anaesRiskConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="end center">
+                        <div>
+                            小于10毫升/KG
+                            <checkbox ng-model="operBeforeSafeCheck.anaesRiskConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        其他：
+                        <checkbox ng-model="operBeforeSafeCheck.operBeOther" ng-true-value="'1'" aria-label="yes"></checkbox>
+                    </li>
+                    <li layout layout-align="start center"><strong>麻醉医师陈述：</strong></li>
+                    <li layout layout-align="start center"><strong>麻醉要点确认：</strong></li>
+                    <li layout layout-align="space-between center">
+                        麻醉前准备完善确认：
+                        <checkbox ng-model="operBeforeSafeCheck.anaesBeReadyConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        麻醉重点和难点确认：
+                        <checkbox ng-model="operBeforeSafeCheck.anaesBeEmphasisConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        其他：
+                        <checkbox ng-model="operBeforeSafeCheck.anaesBeOther" ng-true-value="'1'" aria-label="其他"></checkbox>
+                    </li>
+                    <li layout layout-align="start center"><strong>巡回护士陈述：</strong></li>
+                    <li layout layout-align="start center"><strong>手术用物确认：</strong></li>
+                    <li layout layout-align="space-between center">
+                        手术所需物件准备确认：
+                        <checkbox ng-model="operBeforeSafeCheck.operThingConfirm" ng-true-value="'1'" aria-label="其他"></checkbox>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        物品灭菌合格确认：
+                        <checkbox ng-model="operBeforeSafeCheck.thingSterilizationConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                    </li>
+                    <!--                   <li layout layout-align="space-between center">
+                        仪器设备确认：
+                        <checkbox ng-model="operBeforeSafeCheck.equipment" ng-true-value="'1'" aria-label="yes"></checkbox>
+                    </li> -->
+                    <li layout layout-align="space-between center">
+                        手术用药准备确认：
+                        <checkbox ng-model="operBeforeSafeCheck.operMedConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        其他：
+                        <div>
+                            <checkbox ng-model="operBeforeSafeCheck.operMedOther" ng-true-value="'1'" aria-label="yes"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        相关影像资料带到确认：
+                        <div>
+                            <checkbox ng-model="operBeforeSafeCheck.imageDataConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <li layout class="sign-li1" layout-align="start center">
+                        其他：
+                        <input flex type="text" maxlength="17" class="noborder3" ng-model="operBeforeSafeCheck.other" ng-value="operBeforeSafeCheck.other">
+                    </li>
+                    <li layout flex class="sign-li1" layout-align="start end" class="sign-operator1">
+                        <span>手术医生签名：</span>
+                        <oi-select flex multiple name="operatorId" class="noborder3 sign" oi-options="item.operatorId as item.name for item in operatorList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="operBeforeSafeCheck.operatorIdList"></oi-select>
+                    </li>
+                    <li layout flex class="sign-li1" layout-align="start end">
+                        <span>麻醉医生签名：</span>
+                        <oi-select flex multiple name="anesthetistId" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasAnaesSig2]" oi-options="item.userName as item.name for item in anesthetistList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="operBeforeSafeCheck.anesthetistIdList"></oi-select>
+                        <div class="eSignature" style="height: 30px;">
+                            <img ng-repeat="item in eSignatureAnanesthetist2" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </li>
+                    <li layout flex class="sign-li1" layout-align="start end">
+                        <span>巡回护士签名：</span>
+                        <oi-select flex multiple name="circuNurseId" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasNurseSig2]" oi-options="item.userName as item.name for item in circunurseList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="operBeforeSafeCheck.circunurseIdList"></oi-select>
+                        <div class="eSignature" style="height: 30px;">
+                            <img ng-repeat="item in eSignatureCircuNurse2" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div flex layout="column" layout-align="space-between" class="md-padding">
+                <ul class="anaes-info">
+                    <li class="tab-header"><strong>患者离开手术室前</strong></li>
+                    <li layout layout-align="start center">患者姓名、性别、年龄正确：</li>
+                    <li layout layout-align="end center">
+                        <div>是
+                            <checkbox ng-model="exitOperSafeCheck.patientInfoConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="exitOperSafeCheck.patientInfoConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        实际手术方式确认：
+                        <div>是
+                            <checkbox ng-model="exitOperSafeCheck.realOperConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="exitOperSafeCheck.realOperConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="start center">手术用药、输血的核查：</li>
+                    <li layout layout-align="end center">
+                        <div>是
+                            <checkbox ng-model="exitOperSafeCheck.operMedBloodConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="exitOperSafeCheck.operMedBloodConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        手术用物清点正确：
+                        <div>是
+                            <checkbox ng-model="exitOperSafeCheck.operThingInventoryConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="exitOperSafeCheck.operThingInventoryConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        手术标本确认：
+                        <div>是
+                            <checkbox ng-model="exitOperSafeCheck.operSpecimenConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="exitOperSafeCheck.operSpecimenConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        皮肤是否有其他损伤：
+                        <div>是
+                            <checkbox ng-model="exitOperSafeCheck.skinDamageConfirm" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            否
+                            <checkbox ng-model="exitOperSafeCheck.skinDamageConfirm" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="start center"><strong>留置管路：</strong></li>
+                    <li layout layout-align="space-between center">
+                        中心静脉导管：
+                        <div>有
+                            <checkbox ng-model="exitOperSafeCheck.centralVenousCatheter" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="exitOperSafeCheck.centralVenousCatheter" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        外周静脉导管：
+                        <div>有
+                            <checkbox ng-model="exitOperSafeCheck.perVenousCatheterTube" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="exitOperSafeCheck.perVenousCatheterTube" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        动脉导管：
+                        <div>有
+                            <checkbox ng-model="exitOperSafeCheck.ductusArteriosus" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="exitOperSafeCheck.ductusArteriosus" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        气管插管：
+                        <div>有
+                            <checkbox ng-model="exitOperSafeCheck.fluidConduit" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="exitOperSafeCheck.fluidConduit" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="space-between center">
+                        伤口引流管：
+                        <div>有
+                            <checkbox ng-model="exitOperSafeCheck.wDrainageTube" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="exitOperSafeCheck.wDrainageTube" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+               <!--      <li layout layout-align="space-between center">
+                        胃管：
+                        <div>有
+                            <checkbox ng-model="exitOperSafeCheck.stomach" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="exitOperSafeCheck.stomach" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li> -->
+                    <li layout layout-align="space-between center">
+                        导尿管：
+                        <div>有
+                            <checkbox ng-model="exitOperSafeCheck.catheter" ng-true-value="'1'" aria-label="yes"></checkbox>
+                            无
+                            <checkbox ng-model="exitOperSafeCheck.catheter" ng-true-value="'0'" aria-label="no"></checkbox>
+                        </div>
+                    </li>
+                    <li layout layout-align="start center">其他：</li>
+                    <div>
+                        <li layout layout-align="start center"><span>患者去向：</span></li>
+                        <li layout layout-align="space-between center">
+                            <div>病房
+                                <checkbox ng-model="exitOperSafeCheck.whereabouts" ng-true-value="'0'" aria-label="病房"></checkbox>
+                            </div>
+                            <div>复苏室 
+                                <checkbox ng-model="exitOperSafeCheck.whereabouts" ng-true-value="'1'" aria-label="复苏室"></checkbox>
+                            </div>
+                        </li>
+                        <li layout layout-align="space-between center">
+                            <div>ICU病房 
+                                <checkbox ng-model="exitOperSafeCheck.whereabouts" ng-true-value="'2'" aria-label="ICU病房"></checkbox>
+                            </div>
+                            <div>离院
+                                <checkbox ng-model="exitOperSafeCheck.whereabouts" ng-true-value="'3'" aria-label="离院"></checkbox>
+                            </div>
+                        </li>
+                        <li layout layout-align="start center">
+                            <div>急诊观察室
+                                <checkbox ng-model="exitOperSafeCheck.whereabouts" ng-true-value="'4'" aria-label="急诊观察室"></checkbox>
+                            </div>
+                        </li>
+                        <li layout class="sign-li1" layout-align="start center">
+                        其他：
+                        <input flex type="text" maxlength="17" class="noborder3" ng-model="exitOperSafeCheck.other1" ng-value="exitOperSafeCheck.other1">
+                    </li>
+                    </div>
+                </ul>
+                <ul>
+                    
+                    <li layout flex class="sign-li1" layout-align="start end">
+                        <span>巡回护士签名：</span>
+                        <oi-select flex multiple name="circuNurseId" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasNurseSig3]" oi-options="item.userName as item.name for item in circunurseList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="exitOperSafeCheck.circunurseIdList"></oi-select>
+                        <div class="eSignature" style="height: 30px;">
+                            <img ng-repeat="item in eSignatureCircuNurse3" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </li>
+                    <li layout flex class="sign-li1" layout-align="start end">
+                        <span>麻醉医生签名：</span>
+                        <oi-select flex multiple name="anesthetistId" class="noborder3 sign" ng-class="{true: 'signature', false: 'unsignature'}[hasAnaesSig3]" oi-options="item.userName as item.name for item in anesthetistList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="exitOperSafeCheck.anesthetistIdList"></oi-select>
+                        <div class="eSignature" style="height: 30px;">
+                            <img ng-repeat="item in eSignatureAnanesthetist3" src="{{item.path}}" ng-if="item.hasPath" />
+                        </div>
+                    </li>
+                    <li layout flex class="sign-li1" layout-align="start end">
+                        <span>手术医生签名：</span>
+                        <oi-select flex multiple name="operatorId" class="noborder3 sign" oi-options="item.operatorId as item.name for item in operatorList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="exitOperSafeCheck.operatorIdList"></oi-select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      <!--   <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>已实施麻醉：<a flex>{{baseData.realDesignedAnaesMethodName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>已实施手术：<a flex>{{baseData.realDesignedOptName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>手术后诊断：<a flex>{{baseData.realDiagnosisName}}</a></span>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <span>巡回护士签名：</span>
+            <oi-select multiple class="noborder3 sign sign-li1" ng-class="{true: 'signature', false: 'unsignature'}[hasNurseSig]" name="circunurseId" oi-options="item.userName as item.name for item in circunurseList" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="safeCheck.circunurseIdList" style="min-width: 320px;"></oi-select>
+            <div class="eSignature" style="height: 30px;">
+                <img ng-repeat="item in eSignatureCircuNurse" src="{{item.path}}" ng-if="item.hasPath" />
+            </div>
+        </div>
+        <div class="form-group" layout layout-align="end center">
+            <div>日期：</div>
+            <datetime-picker class='noborder3 calendar sign' name="signTimes" id="datatime" dateID="signTimes-times" ng-model="safeCheck.signTime"></datetime-picker>
+        </div> -->
+    </div>
+</div>

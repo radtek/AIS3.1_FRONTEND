@@ -36,6 +36,13 @@ var VisitLog_sybx = {
     controller: require('./preVisitLog_sybx.controller'),
     controllerAs: 'vm'
 }
+var VisitLog_lyrm = {
+    parent: 'doc',
+    template: require('./beforeAnesthesiaRecord_NHFE.html'),
+    less: require('./beforeAnesthesiaRecord_NHFE.less'),
+    controller: require('./beforeAnesthesiaRecord_NHFE.controller'),
+    controllerAs: 'vm'
+}
 
 function route($stateProvider) { //麻醉前访视记录单
     $stateProvider.state('preVisitLog_qnz', angular.merge({}, opt_qnz, { // 黔南州 》术前
@@ -70,6 +77,8 @@ function route($stateProvider) { //麻醉前访视记录单
         data: { readonly: true }
     })).state('preVisitLog3_sybx', angular.merge({}, VisitLog_sybx, { // 沈阳本溪 | 术后
         url: '/preVisitLog3_sybx/:regOptId'
+    })).state('before_anesthesia_record', angular.merge({}, VisitLog_lyrm, { // 耒阳人民
+        url: '/before_anesthesia_record/:regOptId'
     }))
 }
 

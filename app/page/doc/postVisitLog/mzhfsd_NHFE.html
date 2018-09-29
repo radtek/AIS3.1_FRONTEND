@@ -1,0 +1,107 @@
+<div class="page-print mzhfsd_NHFE" ng-class="{true: 'end-state111'}[vm.anaesPotTop.processState === 'END' || readonly]">
+    <header layout="column" layout-align="center center">
+        <h3 class="top-90">南华大学附属第二医院</h3>
+        <h4>麻醉后访视记录单</h4>
+    </header>
+    <div layout layout-align="space-between end" class="mb1" style="white-space:nowrap;">
+        <span> 
+                    病人姓名：<a>{{vm.regbase.name}}</a>
+                 </span>
+        <span>
+                    性别：<a>{{vm.regbase.sex}}</a> 
+                </span>
+        <span>
+                    年龄：<a>{{vm.regbase.age}}</a>
+                </span>
+        <span>
+                    病区：<a>{{vm.regbase.regionName}}</a>
+                </span>
+        <span>
+                  <a>{{vm.regbase.deptName}}</a>
+                    科
+                </span>
+        <span>
+                    <a>{{vm.regbase.bed}}</a>
+                    床
+                </span>
+        <span>
+                    住院号：<a>{{vm.regbase.hid}}</a>
+                </span>
+    </div>
+    <div class="md-body-1" layout style="margin-top: 10px">
+        术前诊断：<a flex>{{vm.regbase.diagnosisName}}</a>
+    </div>
+    <div class="md-body-1" layout style="margin-top: 10px">
+        已行手术：<a flex>{{vm.searchRegOptByIdFormBean.designedOptName}}</a>
+    </div>
+    <div layout layout-align="space-between end" style="margin-bottom: 10px;margin-top: 24px">
+        实施麻醉：{{vm.searchRegOptByIdFormBean.designedAnaesMethodName}}
+    </div>
+    <div layout layout-align="space-between end" style="margin-bottom: 10px;margin-top: 24px">
+        术后随诊：
+    </div>
+    <p style="margin-top: 24px">
+        1、呼吸系统：
+        <checkbox ng-model="vm.anaesPotTop.throatAche" ng-false-value="0" ng-true-value="1">咽痛</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.soundHoarseness" ng-false-value="0" ng-true-value="1">声嘶</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.cough" ng-false-value="0" ng-true-value="1">咳嗽</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.respTractInfarct" ng-false-value="0" ng-true-value="1">呼吸道梗阻</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.respDepress" ng-false-value="0" ng-true-value="1">呼吸抑制</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.anoxia" ng-false-value="0" ng-true-value="1">缺氧</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.carboDioxidAccum" ng-false-value="0" ng-true-value="1">二氧化碳蓄积</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.pulmInfect" ng-false-value="0" ng-true-value="1">肺部感染</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.atelectasis" ng-false-value="0" ng-true-value="1">肺不张</checkbox>
+    </p>
+    <p style="padding-left:94px">
+        其他：
+        <input type="text" ng-model="vm.anaesPotTop.respSystemCond" maxlength="38" style="outline: none;width:307px"></input>
+    </p>
+    <p style="margin-top: 24px">
+        2、循环情况：
+        <checkbox ng-model="vm.anaesPotTop.circulSystem" ng-false-value="0" ng-true-value="1" ng-false-value="">正常</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.bloodCond" ng-true-value="0" ng-false-value="" ng-disabled="vm.anaesPotTop.circulSystem">低血压</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.bloodCond" ng-true-value="1" ng-false-value="" ng-disabled="vm.anaesPotTop.circulSystem">高血压</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.arrhythmia" ng-false-value="0" ng-true-value="1" ng-disabled="vm.anaesPotTop.circulSystem">心律失常</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.ischMyocard" ng-false-value="0" ng-true-value="1" ng-disabled="vm.anaesPotTop.circulSystem">心肌缺血</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.shock" ng-false-value="0" ng-true-value="1" ng-disabled="vm.anaesPotTop.circulSystem">休克</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.circulSystemCond" ng-false-value="0" ng-true-value="'1'" ng-disabled="vm.anaesPotTop.circulSystem">其他</checkbox>
+    </p>
+    <p style="margin-top: 24px">
+        3、神经系统：术中知晓（
+        <checkbox ng-model="vm.anaesPotTop.intraoperAware" ng-false-value="0" ng-true-value="1">有</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.intraoperAware" ng-false-value="0" ng-true-value="2">无</checkbox>） 神志（
+        <checkbox ng-model="vm.anaesPotTop.consciousness" ng-false-value="0" ng-true-value="1">正常</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.consciousness" ng-false-value="0" ng-true-value="2">不正常</checkbox>） 术后躁动（
+        <checkbox ng-model="vm.anaesPotTop.postoperAgit" ng-false-value="0" ng-true-value="1">有</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.postoperAgit" ng-true-value="2" ng-false-value="0">无</checkbox>） 认知功能障碍（
+        <checkbox ng-model="vm.anaesPotTop.disgnosia" ng-false-value="0" ng-true-value="1">有</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.disgnosia" ng-false-value="0" ng-true-value="2">无</checkbox>）
+    </p>
+    <p style="margin-top: 24px">
+        4、消化系统：恶心（
+        <checkbox ng-model="vm.anaesPotTop.naupathia" ng-false-value="0" ng-true-value="1">有</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.naupathia" ng-false-value="0" ng-true-value="2">无</checkbox>） 呕吐（
+        <checkbox ng-model="vm.anaesPotTop.disgorge" ng-false-value="0" ng-true-value="1">有</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.disgorge" ng-false-value="0" ng-true-value="2">无</checkbox>） 呃逆（
+        <checkbox ng-model="vm.anaesPotTop.hiccup" ng-false-value="0" ng-true-value="1">有</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.hiccup" ng-false-value="0" ng-true-value="2">无</checkbox>）
+    </p>
+    <p style="margin-top: 24px">
+        5、术后疼痛程度：
+        <checkbox ng-model="vm.anaesPotTop.painDeg" ng-true-value="1" ng-false-value="">轻度</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.painDeg" ng-true-value="2" ng-false-value="">中度</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.painDeg" ng-true-value="3" ng-false-value="">重度</checkbox>
+        <checkbox ng-model="vm.anaesPotTop.painDeg" ng-true-value="0" ng-false-value="">无</checkbox>
+    </p>
+    <div class="form-group" layout layout-align="end center">
+        <span class="tit">麻醉医师签名：</span>
+        <oi-select class="noborder3 sign " ng-class="{true: 'signature', false: 'unsignature'}[hasSig]" name="anesthetistId" oi-options="item.userName as item.name for item in anesthetistList | limitTo: 100" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="vm.anaesPotTop.anesthetistId"></oi-select>
+        <div class="eSignature">
+            <img ng-repeat="item in eSignatureAnaestheitist" src="{{item.path}}" ng-if="item.hasPath" />
+        </div>
+    </div>
+    <div class="form-group" layout layout-align="end center">
+        <span class="tit">日期：</span>
+        <datetime-picker name="signTime" dateID="signTime-times" maxdate="2100-01-01" ng-model="vm.anaesPotTop.signTime" ng-value="vm.anaesPotTop.signTime" timepicker="false" class="noborder3 calendar sign" format="Y-m-d" id="datatime" style="width: 120px!important;"></datetime-picker>
+    </div>
+</div>

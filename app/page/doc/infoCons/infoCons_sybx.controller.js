@@ -71,6 +71,7 @@ function InfoConsCtrl($rootScope, $scope, IHttp, toastr, select, auth, $timeout,
     init();
 
     $scope.save = function(type, state) {
+        debugger;
         $scope.verify = type == 'END';
         if ($scope.accedeItem.processState == undefined) {
             toastr.error('操作失败，无效的数据！')

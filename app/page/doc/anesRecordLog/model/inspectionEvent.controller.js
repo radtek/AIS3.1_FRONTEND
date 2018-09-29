@@ -1,8 +1,8 @@
-inspectionEvent.$inject = ['$scope', 'IHttp', '$uibModalInstance', 'items', '$filter', '$timeout'];
+inspectionEvent.$inject = ['$scope', 'IHttp', '$uibModalInstance', 'items', 'toastr', '$filter', '$timeout'];
 
 module.exports = inspectionEvent;
 
-function inspectionEvent($scope, IHttp, $uibModalInstance, items, $filter, $timeout) {
+function inspectionEvent($scope, IHttp, $uibModalInstance, items, toastr, $filter, $timeout) {
     var promise,
         occurTime_ = new Date();
     $scope.docId = items.docId;
@@ -54,6 +54,10 @@ function inspectionEvent($scope, IHttp, $uibModalInstance, items, $filter, $time
                 resultSummary: $scope.param.resultSummary
             },
             checkeventItemRelationList: $scope.list
+        }
+        if (!param.evtCheckEvent.cheEventName || !param.evtCheckEvent.occurTime) {
+            toastr.warning("名称或时间不能为空");
+            return;
         }
         if (promise) {
             $timeout.cancel(promise);

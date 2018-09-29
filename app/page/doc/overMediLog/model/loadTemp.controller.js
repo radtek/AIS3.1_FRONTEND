@@ -143,7 +143,11 @@ function loadTemp($rootScope, $scope, IHttp, $uibModalInstance, $timeout, items,
     $scope.apply = function(row) { //点击应用
         $scope.isApply = true;
         $scope.tabIndex = 0;
-        tempJson = JSON.stringify(JSON.parse(row.entity.tempJson).insuredItemList);
+        var insuredItemList = JSON.parse(row.entity.tempJson).insuredItemList;
+        for(var i=0; i<insuredItemList.length; i++) {
+            insuredItemList[i].time = new Date().getTime();
+        }
+        tempJson = JSON.stringify(insuredItemList);
     }
 
     $scope.tab = function(i) {

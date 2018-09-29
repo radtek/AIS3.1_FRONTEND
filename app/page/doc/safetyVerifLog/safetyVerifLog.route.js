@@ -45,6 +45,9 @@ function route($stateProvider) {
     })).state('kyglSafetyVerifLog_syzxyy', angular.merge({}, opt_syzxyy, {
         url: '/kyglSafetyVerifLog_syzxyy/:regOptId',
         data: { readonly: true }
+    })).state('postSafetyVerifLog_lyrm', angular.merge({}, opt_syzxyy, {//耒阳
+        template: require('./safetyVerifLog_lyrm.html'),
+        url: '/postSafetyVerifLog_lyrm/:regOptId',
     })).state('safetyVerifLog_kycx_sybx', {       // 科研查询 》 查看(沈阳本溪版本)``
         parent: 'doc',
         url: '/safetyVerifLog_kycx_sybx/:regOptId',

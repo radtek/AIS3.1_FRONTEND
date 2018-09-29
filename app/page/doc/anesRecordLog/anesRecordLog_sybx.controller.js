@@ -100,37 +100,6 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
             }
         }
     }
-
-    $scope.eConfig1 = anesRecordServe_sybx.eChart1.config(function(data) { // 双击快速添加用药
-        if (!isNaN(data.data.evObj.endTime) || data.data.evObj.type != 'zl' || vm.pageState == 1) return; // 只有单次用药才可以进行操作
-        var scope = $rootScope.$new();
-        scope.parm = { docId: docId, data: data };
-        $uibModal.open({
-            animation: true,
-            backdrop: 'static',
-            template: require('./model/fastAddEvent.html'),
-            controller: require('./model/fastAddEvent.controller.js'),
-            resolve: { items: { docId: docId, data: data } },
-            scope: scope
-        }).result.then(function(rs) {
-            searchEventList(rs); // 更新echart1
-        });
-    }, vm.pageState);
-
-    $scope.eOption1 = anesRecordServe_sybx.eChart1.option(eChartRow1, eChartCol, function(params) { // 格式化echart1提示信息
-        var obj = params.data.evObj;
-        var startTime = $filter('date')(params.name, 'yyyy-MM-dd HH:mm:ss');
-        return obj ? '<div><p>时间：' + startTime + '</p><p>名称：' + obj.name + '</p></div>' : '';
-    });
-    $scope.eOption1.grid = {
-        top: -21,
-        left: -23,
-        right: 0,
-        bottom: -20,
-        containLabel: true
-    }
-
-
     $scope.eConfig2 = anesRecordServe_sybx.eChart2.config(function(data) { // 单击瞄点，修改瞄点值
         if (vm.pageState == 1)
             return;
@@ -160,79 +129,7 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
             series = a.targetScope.option.series[b[0]],
             data = series.data[b[1]],
             iconUrl = '';
-
         if (dir == 'x') {
-            data = series.data[b[2]];
-            if (data.symbol == 'rect' && data.symbolSize > 5)
-                updFlow = true; //拖动的是流速、浓度的点
-            var xAxis = a.targetScope.option.xAxis[0].data;
-            var evId,
-                type = data.evObj.type,
-                subType = data.evObj.subType,
-                originalTime = xAxis[b[1]].value,
-                newTime = xAxis[b[2]].value,
-                otherTime;
-            var params = {
-                canve: 'zl',
-                key: 'treatMedEvtList',
-                param: {
-                    docId: docId,
-                    type: '1'
-                },
-                url: 'searchMedicaleventGroupByCodeList'
-            }
-            if (type == 'zl') {
-                evId = data.evObj.medicalEvent.medEventId;
-            } else if (type == 'sy') {
-                evId = data.evObj.evId;
-                params.key = 'transfusioninIoeventList';
-            } else if (type == 'sx') {
-                evId = data.evObj.evId;
-                params.key = 'bloodinIoeventList';
-            }
-            if (data.evObj.durable) {
-                if (Math.abs(xAxis[b[1]].value - data.evObj.startTime) < xAxis[b[1]].freq)
-                    otherTime = data.evObj.endTime;
-                else
-                    otherTime = data.evObj.startTime;
-            }
-            if (!updFlow) {
-                anesRecordServe_sybx.updateEventTime(docId, evId, type, subType, newTime, otherTime).then(function(rs) {
-                    if (type == 'zl') {
-                        refMedicalChart(params, type);
-                    } else if (type == 'sy' || type == 'sx') {
-                        var ioParams = {
-                            docId: docId,
-                            subType: subType,
-                            type: 'I'
-                        }
-                        refIoEventChart(ioParams, type, params.key);
-                    }
-                    showRemark(docId);
-                });
-            } else {
-                var childList = data.evObj.childList,
-                    medEventId,
-                    id;
-                if (newTime >= data.evObj.endTime || newTime <= data.evObj.startTime) {
-                    toastr.error("修改的时间必须在" + dateFilter(new Date(data.evObj.startTime), 'yyyy-MM-dd HH:mm:ss') + " 至 " + dateFilter(new Date(data.evObj.endTime), 'yyyy-MM-dd HH:mm:ss') + "之间");
-                    refMedicalChart(params, type);
-                    return;
-                }
-                for (child of childList) {
-                    if (child.startTime == originalTime) {
-                        id = child.id;
-                        medEventId = child.medEventId;
-                        flow = child.flow;
-                        flowUnit = child.flowUnit;
-                        thickness = child.thickness;
-                        thicknessUnit = child.thicknessUnit;
-                    }
-                }
-                anesRecordServe_sybx.saveMedicalEventDetail(id, docId, medEventId, flow, flowUnit, thickness, thicknessUnit, newTime).then(function(rs) {
-                    refMedicalChart(params, type);
-                });
-            }
         } else {
             if (series.name == 'mark')
                 return;
@@ -450,12 +347,13 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
         $scope.operState = operState = rs.data.regOpt.state;
         $scope.startOper = anesRecordServe_sybx.initData(rs.data);
         vm.startOper = angular.copy(anesRecordServe.initData(rs.data));
-        setOption('zl', $scope.startOper.treatMedEvtList); // 用药情况瞄点数据生成
-        setOption('sy', $scope.startOper.transfusioninIoeventList); // 输液情况瞄点数据生成
-        setOption('sx', $scope.startOper.bloodinIoeventList); // 输血情况瞄点数据生成
-        setOption('cl', $scope.startOper.outIoeventList); // 出量情况瞄点数据生成
         setTimeout(function() { $scope.$broadcast('refresh', {}); }, 50);
 
+        if ($scope.startOper.anaesMedEvtList && $scope.startOper.anaesMedEvtList.length > 0) {
+            $scope.startOper.anaesRecord.anaesBeforeMed = 1;
+        }else {
+            $scope.startOper.anaesRecord.anaesBeforeMed = 0;
+        }
         if ($scope.startOper.anaeseventList.length == 0) { // 判断有没有事件（入室事件），没有则需要调firstSpot接口
             if (vm.setting.readonly)
                 return;
@@ -675,40 +573,6 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
             searchEventList(rs); // 更新echart1
         });
     }
-
-    // vm.anesEvent = function() { // 麻醉事件
-    //     $uibModal.open({
-    //         animation: true,
-    //         backdrop: 'static',
-    //         template: require('./model/anesEvent.html'),
-    //         controller: require('./model/anesEvent.controller.js'),
-    //         resolve: {
-    //             items: {
-    //                 list: angular.copy($scope.startOper.anaeseventList), // 考虑到删除和添加事件时无法同步界面，手动回显数据
-    //                 docId: docId,
-    //                 regOptId: regOptId,
-    //                 state: operState,
-    //                 callback: function(inTime, anaEventId, model) {
-    //                     updateEnterRoomTime(inTime, anaEventId, 1, function(list) {
-    //                         model(list); // 把事件回调到模态框里面进行更新
-    //                     });
-    //                 }
-    //             }
-    //         }
-    //     }).result.then(function(data) {
-    //         $scope.startOper.anaeseventList = data.list; // 更新麻醉事件
-    //         if (data.outTime)
-    //             vm.view.pageCur = 0;
-    //         getobsData();
-    //         if (data.inTime || data.outTime) {
-    //             $timeout(function() {
-    //                 vm.operEditView(1);
-    //             }, 1000);
-    //         }
-    //         showRemark(docId); // 更新备注
-    //         initSign(); // 更新标记
-    //     });
-    // }
     vm.anesEvent = function() { // 麻醉事件
         IHttp.post('operation/searchApplication', { regOptId: regOptId }).then(function(rs) {
             if (rs.data.resultCode != '1')
@@ -1101,7 +965,7 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
         }
 
         showRemark(docId);
-        initEvConfig();
+        
         getPupilData();
         initSign();
         getNewMon();
@@ -1361,175 +1225,6 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
         });
     }
 
-    function setOption(type, array) { //    
-        var num = 0,
-            site = 0,
-            startTime, endTime;
-        for (var a = ev_list.length - 1; a >= 0; a--) { // 先清空需要设置的数据，有zl、sy、sx
-            if (ev_list[a].type == type) {
-                ev_list.splice(a, 1);
-            }
-        }
-        if (array && array.length) {
-            for (var a = 0; a < array.length; a++) { // 循环用药或者输血、输液数据
-                if (type == 'zl' && a < 11) { // 用药只需要10条，超过10条的数据不做显示，放到备注栏里面
-                    site = 58 - a * 3; // 算出每一条用药信息的位置，及所在echart1上的行数
-                    for (var b = 0; b < array[a].medicalEventList.length; b++) { // 同一种药肯能在不同的时间段用，所以需要循环处理
-                        num = Number(array[a].medicalEventList[b].dosage);
-                        startTime = new Date(array[a].medicalEventList[b].startTime).getTime();
-                        endTime = new Date(array[a].medicalEventList[b].endTime).getTime();
-                        ev_list.push({
-                            site: site, // 位置
-                            type: type, // 状态
-                            name: array[a].name, // 名称
-                            dosage: num, // 剂量
-                            dosageUnit: array[a].medicalEventList[b].dosageUnit, // 剂量单位
-                            thickness: array[a].medicalEventList[b].thickness, // 浓度
-                            thicknessUnit: array[a].medicalEventList[b].thicknessUnit, // 浓度单位
-                            flow: array[a].medicalEventList[b].flow, // 流速
-                            flowUnit: array[a].medicalEventList[b].flowUnit, // 流速单位
-                            durable: Number(array[a].medicalEventList[b].durable), // 持续                         
-                            startTime: startTime, // 开始时间
-                            endTime: endTime, //结束时间
-                            showOption: array[a].medicalEventList[b].showOption, // 1 显示流速；2 显示浓度
-                            medicalEvent: array[a].medicalEventList[b]
-                        })
-                    }
-                } else if ((type == 'sy' || type == 'sx') && a < 3) { // 输液 输血
-                    site = type == 'sy' ? (25 - a * 3) : (16 - a * 3);
-                    for (var b = 0; b < array[a].ioeventList.length; b++) {
-                        num = Number(array[a].ioeventList[b].dosageAmount);
-                        startTime = new Date(array[a].ioeventList[b].startTime).getTime();
-                        endTime = new Date(array[a].ioeventList[b].endTime).getTime();
-                        ev_list.push({
-                            subType: type == 'sy' ? 1 : 2,
-                            evId: array[a].ioeventList[b].inEventId,
-                            site: site, // 位置
-                            type: type, // 状态
-                            name: array[a].name, // 名称
-                            dosageAmount: num, // 入量
-                            dosageUnit: array[a].ioeventList[b].dosageUnit, // 单位
-                            durable: 1,
-                            startTime: startTime, // 开始时间
-                            endTime: endTime // 结束时间
-                        })
-                    }
-                } else if (type == 'cl' && a < 3) { // 出量
-                    site = 7 - a * 3;
-                    for (var b = 0; b < array[a].egressList.length; b++) {
-                        num = Number(array[a].egressList[b].value);
-                        startTime = new Date(array[a].egressList[b].startTime).getTime();
-                        endTime = new Date(array[a].egressList[b].endTime).getTime();
-                        ev_list.push({
-                            site: site, // 位置
-                            type: type, // 状态
-                            name: array[a].name, // 名称
-                            value: num, // 入量
-                            dosageUnit: array[a].egressList[b].dosageUnit, // 单位
-                            durable: 1,
-                            startTime: startTime, // 开始时间
-                            endTime: endTime // 结束时间
-                        })
-                    }
-                }
-            }
-        }
-    }
-
-    function initEvConfig() { // 绑定用药输液数据到表格上
-        var evIndex = 0,
-            evOpt = (function() {
-                var len = 0;
-                var size = 5; // 把echart1的X轴间隔细分成5份
-                var curTime, nextTime, timeSpan;
-                var res = { x: [], y: [] };
-                while (len < pageSize) {
-                    curTime = vm.tempTime[len].value; // vm.tempTime是缓存的偏移以后的echart2没有分10份的X轴数据，echart1也要用偏移的数据
-                    if (len == pageSize - 1) {
-                        res.x.push({ freq: timeSpan, value: curTime });
-                        res.y.push('');
-                    } else {
-                        nextTime = vm.tempTime[len + 1].value;
-                        timeSpan = (nextTime - curTime) / size;
-                        var num = 0;
-                        while (num < size) {
-                            res.x.push({ freq: timeSpan, value: curTime + num * timeSpan });
-                            res.y.push('');
-                            num++;
-                        }
-                    }
-                    len++;
-                }
-                return res;
-            })();
-        $scope.eConfig1.dataLoaded = false;
-        $scope.eOption1.xAxis[0].data = angular.copy(evOpt.x); // 初始化echart1的X轴数据
-        for (var a = 0; a < eChartRow1; a++) {
-            $scope.eOption1.series[a].data = angular.copy(evOpt.y); // 初始化echart1的Y轴数据
-        }
-        var len = 0,
-            count = evOpt.x.length,
-            curTime;
-        while (len < count) {
-            curTime = evOpt.x[len];
-            for (var a = 0; a < ev_list.length; a++) {
-                var evStartTime = ev_list[a].startTime,
-                    evEndTime = ev_list[a].endTime,
-                    sIndex = (ev_list[a].site - 1) / 3;
-                if (evStartTime >= curTime.value && evStartTime - curTime.value < curTime.freq) {
-                    var str = '';
-                    if (ev_list[a].type == 'zl' || ev_list[a].type == 'mz') {
-                        // if(ev_list[a].durable) {
-                        if (ev_list[a].showOption == 1)
-                            str = ev_list[a].flow;
-                        else if (ev_list[a].showOption == 2)
-                            str = ev_list[a].thickness;
-                        else
-                            str = ev_list[a].dosage + ev_list[a].dosageUnit;
-                        // }
-                    } else if (ev_list[a].type == 'sy' || ev_list[a].type == 'sx') {
-                        str = ev_list[a].dosageAmount;
-                    } else {
-                        str = ev_list[a].value;
-                    }
-                    $scope.eOption1.series[sIndex].data[len] = {
-                        value: ev_list[a].site,
-                        evObj: ev_list[a],
-                        symbol: 'triangle',
-                        symbolSize: 12,
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    formatter: str + '',
-                                    position: [len <= 10 ? 5 : -5, -12]
-                                }
-                            }
-                        }
-                    }
-                }
-                if (ev_list[a].durable == 1 && evStartTime < curTime.value && evEndTime >= curTime.value) {
-                    if (evEndTime - curTime.value < curTime.freq) {
-                        $scope.eOption1.series[sIndex].data[len] = {
-                            value: ev_list[a].site,
-                            evObj: ev_list[a],
-                            symbol: 'triangle',
-                            symbolSize: 12
-                        }
-
-                    } else {
-                        $scope.eOption1.series[sIndex].data[len] = {
-                            value: ev_list[a].site,
-                            symbol: 'triangle',
-                            symbolSize: 0
-                        }
-                    }
-                }
-            }
-            len++;
-        }
-    }
-
     function initSign() { // 标记点
         $timeout(function() {
             var eachWidth = $('.echart2').width() / (pageSize - 1); // 算出每一小格格物理距离
@@ -1629,7 +1324,7 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
     function saveTime(nowTime, anaEventId, code) { // 保存麻醉事件
         anesRecordServe_sybx.saveAnaesevent(anaEventId, docId, code, operState, nowTime).then(function(result) {
             if (result.data.resultCode != '1') return;
-            $scope.startOper.anaeseventList = result.data.resultList;
+            vm.startOper.anaeseventList=$scope.startOper.anaeseventList = result.data.resultList;
             initSign();
             showRemark(docId);
             if (code == 5) anaesOperTime(docId);
@@ -1651,8 +1346,8 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
             if (result.data.resultCode != '1') return;
             $scope.startOper[opt.key] = result.data.resultList;
             if (opt.canve) {
-                setOption(opt.canve, result.data.resultList);
-                initEvConfig();
+                // setOption(opt.canve, result.data.resultList);
+                
                 showRemark(docId);
             }
             mergeData();
@@ -2253,6 +1948,10 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
                         contentStr += '三腔　';
                     }
 
+                    if (summary[objKey].bloodWarming == 1) {
+                        contentStr += '输血输液加温　';
+                    }
+
                     if (contentStr != '深静脉穿刺置管：') {
                         group.content.push(contentStr);
                     }
@@ -2425,47 +2124,8 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
         else
             return '';
     }
-
-    function refMedicalChart(params, type) {
-        anesRecordServe_sybx.searchEventList(params).then(function(result) {
-            if (result.data.resultCode !== '1') return;
-            $scope.startOper[params.key] = result.data.resultList;
-            setOption(type, result.data.resultList);
-            initEvConfig();
-        });
-    }
-
-    function refIoEventChart(ioParams, type, key) {
-        anesRecordServe_sybx.searchIoeventGroupByDefIdList(ioParams).then(function(result) {
-            if (result.data.resultCode !== '1') return;
-            $scope.startOper[key] = result.data.resultList;
-            setOption(type, result.data.resultList);
-            initEvConfig();
-        });
-    }
     
     $scope.$on('$stateChangeStart', function() { // 监听路由跳转，关闭定时器
         anesRecordServe.stopTimerRt();
     });
-
-    anesRecordInter.asaLevel.then(function(result) { // asa下拉选项值
-        vm.asaLevel = result.data.resultList;
-    });
-    anesRecordInter.optBody.then(function(result) { // 手术体位下拉选项值
-        vm.optBody = result.data.resultList;
-    });
-    anesRecordInter.leaveTo.then(function(result) { // 出室去向下拉选项值
-        vm.leaveTo = result.data.resultList;
-    });
-    anesRecordInter.getSysCode('anaes_level').then(function(result) { // 麻醉分级
-        vm.anaesLevel = result.data.resultList;
-    });
-    select.getAnaesMethodList().then((rs) => {
-        vm.anaesMethodList = rs.data.resultList;
-    })
-    anesRecordInter.getSysCode('guard_ecg_type').then(function(result) { // 心电图监护类型
-        vm.guardEcgType = result.data.resultList;
-    });
-
-
 }

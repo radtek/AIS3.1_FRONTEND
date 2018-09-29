@@ -1,0 +1,110 @@
+<div id="print-region">
+    <div id="infoCons_nhfe" class="page-print" ng-class="{true:'end-state'}[vm.accedeItem.processState == 'END' && !saveActive || setting.readonly]">
+        <header layout="column" layout-align="center center">
+            <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+            <h4>麻醉同意书</h4>
+        </header>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span layout>姓名：<a flex>{{regOptItem.name}}</a></span>&nbsp;
+            <span layout>性别：<a flex>{{regOptItem.sex}}</a></span>&nbsp;
+            <span layout>年龄：<a flex>{{regOptItem.age}}</a></span>&nbsp;
+            <span layout>病区：<a flex>{{regOptItem.regionName}}</a></span>&nbsp;
+            <span layout><a flex>{{regOptItem.deptName}}</a>科</span>&nbsp;
+            <span layout><a flex>{{regOptItem.bed}}</a>床</span>&nbsp;
+            <span layout>住院号：<a flex>{{regOptItem.hid}}</a></span>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>术前诊断：<a flex>{{regOptItem.diagnosisName}}</a></span>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>拟施手术：<a flex>{{regOptItem.designedOptName}}</a></span>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span flex layout>拟施麻醉：<a flex>{{regOptItem.designedAnaesMethodName}}</a></span>
+        </div>
+        <div class="form-group1" style="line-height: 2;" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;
+            麻醉医生术前检查病人后，经慎重考虑，拟选择本麻醉方法以及麻醉有关的处理措施，现将实施本麻醉存在的危险性、可能发生的并发症和意外告知如下：
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;1、麻醉药、治疗用药以及输液、输血可能引起过敏反应、中毒反应以及其它药物相关的并发症。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;2、椎管内麻醉可能引起局部组织、神经损伤、脊髓损伤、硬膜外血肿导致截瘫，全脊髓麻醉危及生命。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;3、麻醉后头晕、头痛、腰背疼等。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;4、神经阻滞麻醉可引起局部组织和神经损伤，导致相应区域感觉运动异常，局部血肿，局部感染等。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;5、全身麻醉可引起呼吸抑制，呼吸道梗阻，术后肺部感染等。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;6、气管内插管可引起局部组织损伤，导致术后声音嘶哑，牙齿脱落，呼吸道损伤或/和感染等。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;7、麻醉期间可能发生恶心、呕吐，反流误吸引起窒息危及生命。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;8、侵入性的监测，如动脉穿刺、中心静脉穿刺可引起局部组织损伤、血肿、感染、栓塞、血气胸等。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;9、麻醉手术过程中，可因手术创伤、失血、以及麻醉手术措施引起休克、器官功能障碍等。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;10、原有合并存在的疾病恶化，如高血压脑病、脑中风、严重心律失常、心肌梗死、心跳骤停。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;11、难以预料的并发症：如急性高热，各种危象危及患者生命。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;12、术后苏醒延迟，术后认知功能障碍。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;13、按计划实施的麻醉可能失败，或因病情变化需改用其它麻醉方法。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;14、如要求术后镇痛，术后镇痛可能出现恶心、呕吐、呼吸抑制等相关的并发症。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;15、麻醉过程中可能用到自费药物。
+        </div>
+<!--         <div class="form-group1" layout layout-wrap="wrap">
+            &nbsp;16、其他：<input type="text" class="noborder3" style="width: 85%" ng-model="vm.accedeItem.other" ng-value="vm.accedeItem.other" maxlength="100" />
+        </div> -->
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;以上各项并发症或意外均可能引起病人的器官功能障碍，严重时可致病人瘫痪、昏迷，甚至死亡。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            &nbsp;作为病人（或病人委托人）我们对以上各项均已了解清楚，同意接受麻醉手术，并愿意承担因此带来的各种风险。
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>具同意书人（病人或其委托人）</span>
+                <a flex></a>
+            <span>（签名），与病人的关系</span>
+                <a flex></a>
+        </div>
+        <div class="form-group1" flex layout>
+            <span>谈话麻醉医生</span>
+            <a flex="20"></a>
+            <span>（签名）</span>
+        </div>
+        <div class="form-group1" layout layout-wrap="wrap" layout-align="space-between end">
+            <span>签同意书地点</span>
+            <a flex="40"></a>
+            <span>时间</span>
+            <a flex></a>
+            <span>年</span>
+            <a flex></a>
+            <span>月</span>
+            <a flex></a>
+            <span>日</span>
+            <a flex></a>
+            <span>时</span>
+            <a flex></a>
+            <span>分</span>
+        </div>
+    </div>
+</div>

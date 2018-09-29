@@ -127,8 +127,12 @@
                         </div>
                         <div layout class="lineH">
                             <div flex="50" layout class="anaesthetic">
-                                <span class="red">麻醉前用药</span>
-                                <a flex ng-click="vm.modelAnaesthetic('2')">
+                                <span class="red">麻醉前用药&nbsp;&nbsp;</span>
+                                <div layout layout-align="start center">
+                                    <input type="radio" ng-model="startOper.anaesRecord.anaesBeforeMed" ng-value="1" ng-change="vm.changeRadio()"><span class="red">是</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" ng-model="startOper.anaesRecord.anaesBeforeMed" ng-value="0" ng-change="vm.changeRadio()"><span class="red">否</span>
+                                </div>
+                                <a flex ng-if="startOper.anaesRecord.anaesBeforeMed == 1" ng-click="vm.modelAnaesthetic('2')">
                                     <span ng-repeat="item in startOper.anaesMedEvtList" class="blockDis">{{item.name}}</span>
                                 </a>
                             </div>
@@ -159,25 +163,25 @@
                         <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
                             <td rowspan="11" class="text-center red" ng-if="i == 0">用药情况</td>
                             <td colspan="6" ng-click="vm.modelAnaesthetic('1')" class="pullLR">
-                                <div>{{startOper.treatMedEvtList[i].durable == '1' && startOper.treatMedEvtList[i].thickness > 0 ? startOper.treatMedEvtList[i].thickness : ''}}{{startOper.treatMedEvtList[i].durable == '1' && startOper.treatMedEvtList[i].thickness > 0 ? startOper.treatMedEvtList[i].thicknessUnit : ''}}{{startOper.treatMedEvtList[i].name}} &nbsp; {{startOper.treatMedEvtList[i].medicalEventList[0].flowUnit}}</div>
+                                <div>{{vm.startOper.treatMedEvtList[i].name}} &nbsp; {{vm.startOper.treatMedEvtList[i].medicalEventList[0].flowUnit}}</div>
                             </td>
                         </tr>
                         <tr ng-repeat="i in [0, 1, 2]">
                             <td rowspan="3" class="text-center syqk red" ng-if="i == 0">输液情况</td>
                             <td colspan="6" ng-click="vm.modelInput('1')" class="pullLR">
-                                <div class="pull-left">{{startOper.transfusioninIoeventList[i].name}} &nbsp; {{startOper.transfusioninIoeventList[i].ioeventList[0].dosageUnit}}</div>
+                                <div class="pull-left">{{vm.startOper.inIoeventList[i].name}} &nbsp; {{vm.startOper.inIoeventList[i].ioeventList[0].dosageUnit}}</div>
                             </td>
                         </tr>
                         <tr ng-repeat="i in [0, 1, 2]">
                             <td rowspan="3" class="text-center syqk red" ng-if="i == 0">输血情况</td>
                             <td colspan="6" ng-click="vm.modelInput('2')" class="pullLR">
-                                <div class="pull-left">{{startOper.bloodinIoeventList[i] && startOper.bloodinIoeventList[i].ioeventList[0].blood != '' ? startOper.bloodinIoeventList[i].name + '(血型:' + startOper.bloodinIoeventList[i].ioeventList[0].blood + ')' : startOper.bloodinIoeventList[i].name}} &nbsp; {{startOper.bloodinIoeventList[i].ioeventList[0].dosageUnit}}</div>
+                                <div class="pull-left">{{vm.startOper.bloodList[i] && vm.startOper.bloodList[i].ioeventList[0].blood != '' ? vm.startOper.bloodList[i].name + '(血型:' + vm.startOper.bloodList[i].ioeventList[0].blood + ')' : vm.startOper.bloodList[i].name}} &nbsp; {{vm.startOper.bloodList[i].ioeventList[0].dosageUnit}}</div>
                             </td>
                         </tr>
                         <tr ng-repeat="i in [0, 1, 2]">
                             <td rowspan="3" class="text-center red" ng-if="i == 0">出量</td>
                             <td colspan="6" ng-click="vm.outIoevent()" class="pullLR">
-                                <div class="pull-left">{{startOper.outIoeventList[i].name}} &nbsp; {{startOper.outIoeventList[i].egressList[0].dosageUnit}}</div>
+                                <div class="pull-left">{{vm.startOper.outIoeventList[i].name}} &nbsp; {{vm.startOper.outIoeventList[i].egressList[0].dosageUnit}}</div>
                             </td>
                         </tr>
                         <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6]">

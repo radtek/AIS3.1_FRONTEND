@@ -17,6 +17,7 @@ function NursingScheduleCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeou
 
     var promise;
 
+    $scope.$emit('setSearchType', 1);
     select.dept().then((rs) => {
         if (rs.data.resultCode != 1)
             return;

@@ -1,5 +1,5 @@
  <div class="print-progress">
-    <progressbar></progressbar>  
+    <progressbar></progressbar>   
 </div> 
 <div>
     <div id="anesRecord_sybx" class="page-print" layout="column" ng-repeat="page in PAGES"  repeat-finish="vm.pageFinish()"  >
@@ -13,8 +13,8 @@
                     <span flex><span class="red">住院号：</span>{{startOper.regOpt.hid}}</span>
                     <span flex class="red text-right">第{{page.pageCur}}页/共{{vm.view.pageCount}}页</span>
                 </div>
-            </header>
-            <article>
+            </header
+>            <article>
                 <div class="head">
                     <div layout class="lineH">
                         <div layout flex><span class="red">姓名</span><a flex>{{startOper.regOpt.name}}</a></div>
@@ -72,7 +72,11 @@
                             <div layout class="lineH">
                                 <div flex="50" layout>
                                     <span class="red">麻醉前用药</span>
-                                    <a flex><span ng-repeat="item in startOper.anaesMedEvtList"> {{item.name}} </span></a>
+                                    <a flex ng-if="startOper.anaesMedEvtList.length > 0"><span ng-repeat="item in startOper.anaesMedEvtList"> {{item.name}} </span></a>
+                                    <div layout layout-align="start center" ng-if="startOper.anaesMedEvtList.length == 0">
+                                        <input type="radio" ng-model="startOper.anaesRecord.anaesBeforeMed" ng-value="1" ng-change="vm.changeRadio()"><span class="red">是</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" ng-model="startOper.anaesRecord.anaesBeforeMed" ng-value="0" ng-change="vm.changeRadio()"><span class="red">否</span>
+                                    </div>
                                 </div>
                                 <div flex="50" layout>
                                     <span class="red">手术体位</span>
@@ -102,7 +106,7 @@
                             <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
                                 <td rowspan="11" class="text-center red" ng-if="i == 0">用药</td>
                                 <td colspan="6" class="pullLR">
-                                    <div>{{startOper.treatMedEvtList[i].durable == '1' && startOper.treatMedEvtList[i].thickness > 0 ? startOper.treatMedEvtList[i].thickness : ''}}{{startOper.treatMedEvtList[i].durable == '1' && startOper.treatMedEvtList[i].thickness > 0 ? startOper.treatMedEvtList[i].thicknessUnit : ''}}{{startOper.treatMedEvtList[i].name}} &nbsp; {{startOper.treatMedEvtList[i].medicalEventList[0].flowUnit}}</div>
+                                    <div style="width: 140px; height: 14px; overflow: hidden;">{{startOper.treatMedEvtList[i].dosage}}{{startOper.treatMedEvtList[i].dosageUnit}} &nbsp;{{startOper.treatMedEvtList[i].name}} &nbsp; {{startOper.treatMedEvtList[i].medicalEventList[0].flowUnit}}</div>
                                 </td>
                             </tr>
                             <tr ng-repeat="i in [0, 1, 2]">
@@ -168,8 +172,8 @@
                         <table border="1" bordercolor="red">
                             <tr>
                                 <td colspan="16">
-                                    <div layout>
-                                        <span flex ng-repeat="i in page.xTits | limitTo: 8">{{i}}</span>
+                                    <div layout >
+                                         <span flex ng-repeat="i in page.xTits | limitTo: 8">{{i}}</span>
                                     </div>
                                 </td>
                             </tr>

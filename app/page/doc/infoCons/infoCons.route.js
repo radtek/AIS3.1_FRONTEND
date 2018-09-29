@@ -39,6 +39,12 @@ var opt_llzyyy = {
     controller: require('./infoCons_llzyyy.controller'),
     controllerAs: 'vm'
 }
+var opt_lyrm = {
+    parent: 'doc',
+    template: require('./postInfoCons.html'),
+    controller: require('./postInfoCons.controller'),
+    controllerAs: 'vm'
+}
 
 function route($stateProvider) { //麻醉知情同意书
     $stateProvider.state('preInfoCons_qnz', angular.merge({}, opt_qnz, { // 黔南州 》术前
@@ -85,6 +91,11 @@ function route($stateProvider) { //麻醉知情同意书
         controller: require('./infoCons_sybx.controller')
     })).state('InfoCons_llzyyy', angular.merge({}, opt_llzyyy, { //临澧
         url: '/InfoCons_llzyyy/:regOptId'
+    })).state('postInfoCons_lyrm', angular.merge({}, opt_lyrm, { //耒阳   术后镇痛知情同意书及访视记录
+        url: '/postInfoCons_lyrm/:regOptId'
+    })).state('infoCons_lyrm', angular.merge({}, opt_yxrmyy, {//耒阳 麻醉同意书
+        template: require('./infoCons_lyrm.html'),
+        url: '/infoCons_lyrm/:regOptId'
     }))
 }
 

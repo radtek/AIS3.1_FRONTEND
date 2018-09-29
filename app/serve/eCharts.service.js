@@ -825,6 +825,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr, b
             result.inIoeventList = result.infusionList;
         if (result.egress)
             result.egressList = result.egress;
+        
         _this.option("mz", result.anaesMedevent, ev_list, vm);
         _this.option("zl", result.treatMedEvtList, ev_list, vm);
         _this.option("sy", result.inIoeventList, ev_list, vm);
@@ -832,9 +833,9 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr, b
         _this.option("cl", result.egressList, ev_list, vm);
         vm.startOper.anaesMedEvtList = result.anaesMedevent;
         vm.startOper.treatMedEvtList = result.treatMedEvtList;
-        vm.startOper.inIoeventList = result.inIoeventList;
-        vm.startOper.bloodList = result.bloodList;
-        vm.startOper.outIoeventList = result.egressList;
+        vm.startOper.inIoeventList = result.inIoeventList;//更新输液
+        vm.startOper.bloodList = result.bloodList;//更新输血
+        vm.startOper.outIoeventList = result.egressList;//更新出量
         _this.initEvConfig(ev_list, vm, false);
     }
 

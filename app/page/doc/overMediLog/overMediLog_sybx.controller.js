@@ -5,9 +5,9 @@ module.exports = OverMediLogCtrl;
 function OverMediLogCtrl($rootScope, $scope, IHttp, $timeout, $uibModal, toastr, confirm, dateFilter, auth, select, $filter) {
     var regOptId = $rootScope.$stateParams.regOptId,
         insuredArray = [
-            { type: 1, tit: '自费用药', len: 10 },
-            { type: 2, tit: '限字号用药', len: 10 },
-            { type: 3, tit: '诊疗项目、体内置放材料', len: 10 },
+            { type: 1, tit: '自费用药', len: 7 },
+            { type: 2, tit: '限字号用药', len: 7 },
+            { type: 3, tit: '诊疗项目、体内置放材料', len: 6 },
             { type: 4, tit: '贵重药品、卫材', len: 10 }
         ];
 
@@ -133,21 +133,31 @@ function OverMediLogCtrl($rootScope, $scope, IHttp, $timeout, $uibModal, toastr,
             initPage();
         });
     }
-
     function save(type, state) {
         $scope.verify = type == 'END';
-        if (type == 'END') {
-            if (state == 'PRINT') {
-                if ($scope.insuredPatAgree.processState == 'END')
+        if ($scope.insuredPatAgree.processState == undefined) {
+            toastr.error('操作失败，无效的数据！')
+            return;
+        }
+        if (type == 'END') {//已提交未提交打印都走这里
+            if (state == 'print') {
+                if ($scope.insuredPatAgree.processState == 'END') {
                     $scope.$emit('doc-print');
-                else
-                    confirm.show('打印的文书将归档，且不可编辑，是否继续打印？').then(function(data) { fn_save(type, state) });
-            } else
-                confirm.show("提交的文书将归档，并且不可编辑。是否继续提交？").then(function(data) { fn_save(type, state) });
-        } else
-            fn_save(type, state);
+                    return;
+                } else {
+                    confirm.show('打印的文书将归档，且不可编辑，是否继续打印？').then(function(data) {
+                        fn_save(type, state);
+                    });
+                }
+            } else {//提交
+                confirm.show('提交的文书将归档，且不可编辑，是否继续提交？').then(function(data) {
+                    fn_save(type);
+                });
+            }
+        } else {
+            fn_save(type);//保存no_end
+        }
     }
-
     function fn_save(type, state) {
         var param = angular.copy($scope.insuredPatAgree);
         param.processState = type;
@@ -157,7 +167,7 @@ function OverMediLogCtrl($rootScope, $scope, IHttp, $timeout, $uibModal, toastr,
             toastr.success(res.data.resultMessage);
             $scope.insuredPatAgree.processState = type;
             $scope.processState = type;
-            if (state == 'PRINT')
+            if (state == 'print')
                 $scope.$emit('end-print');
             else
                 $scope.$emit('processState', $scope.processState);
@@ -214,11 +224,14 @@ function OverMediLogCtrl($rootScope, $scope, IHttp, $timeout, $uibModal, toastr,
         $scope.saveAs();
     })
     $scope.$on('save', () => {
-        save($scope.insuredPatAgree.processState);
+        if ($scope.insuredPatAgree.processState == 'END')
+            fn_save('END');
+        else
+            save('NO_END');
     });
 
     $scope.$on('print', () => {
-        save('END', 'PRINT');
+        save('END', 'print');
     });
 
     $scope.$on('submit', () => {

@@ -240,6 +240,7 @@ function summary($rootScope, $scope, IHttp, $uibModalInstance, $state, $timeout,
             $scope.anaesSummaryAppendixCanal.singleChamber = '';
             $scope.anaesSummaryAppendixCanal.dualChamber = '';
             $scope.anaesSummaryAppendixCanal.threeChamber = '';
+            $scope.anaesSummaryAppendixCanal.bloodWarming = '';
         }
     });
 

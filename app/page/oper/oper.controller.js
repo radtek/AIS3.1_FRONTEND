@@ -23,8 +23,8 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
     }
     $scope.isArch = false;
     $scope.queryObj = {
-        startTime: (beCode == 'syzxyy'|| beCode == 'base'||beCode == 'llzyyy'|| beCode == 'cshtyy') ? $filter('date')(new Date().getTime(), 'yyyy-MM-dd') : '',
-        endTime: (beCode == 'syzxyy'|| beCode == 'base'||beCode == 'llzyyy'|| beCode == 'cshtyy') ? $filter('date')(new Date().getTime(), 'yyyy-MM-dd') : '',
+        startTime: (beCode == 'syzxyy'||beCode == 'lyrm'|| beCode == 'base'||beCode == 'llzyyy'|| beCode == 'cshtyy') ? $filter('date')(new Date().getTime(), 'yyyy-MM-dd') : '',
+        endTime: (beCode == 'syzxyy'||beCode == 'lyrm'|| beCode == 'base'||beCode == 'llzyyy'|| beCode == 'cshtyy') ? $filter('date')(new Date().getTime(), 'yyyy-MM-dd') : '',
         state: '',
     }
     if (pageOption && pageOption.crumbs == '1') {
@@ -36,7 +36,7 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
     var sepa = '<span ng-if="row.entity.state != \'04\' && row.entity.state != \'05\' && row.entity.state != \'06\' && row.entity.state != \'08\'"  >&nbsp;|&nbsp;</span>'
     $scope.btnsMenu.forEach(function(item) {
         if (page == 'operQuery') {
-            if (beCode == 'syzxyy' || beCode == 'base'||beCode == 'llzyyy'|| beCode == 'cshtyy')
+            if (beCode == 'syzxyy' ||beCode == 'lyrm' || beCode == 'base'||beCode == 'llzyyy'|| beCode == 'cshtyy')
                 operBtn += '<a ng-click="grid.appScope.query(row.entity, \'' + item.url + '\')">' + item.name + '</a><span>&nbsp;|&nbsp;</span>';
             else
                 operBtn += '<a ng-click="grid.appScope.query(row.entity, \'' + item.url + '\')" ng-if="row.entity.state != \'04\' && row.entity.state != \'05\' && row.entity.state != \'06\' && row.entity.state != \'08\'">' + item.name + '</a>' + sepa;
@@ -49,7 +49,7 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
         params.state = '01, 02, 08';
     } else if (page == 'operQuery') {
         operBtn += '<a ng-click="grid.appScope.cancel(row.entity)" ng-if="row.entity.state != \'04\' && row.entity.state != \'05\' && row.entity.state != \'06\' && row.entity.state != \'08\'">取消</a>';
-        if (beCode == 'syzxyy'|| beCode == 'base'||beCode == 'llzyyy'||beCode == 'cshtyy') {
+        if (beCode == 'syzxyy'||beCode == 'lyrm'|| beCode == 'base'||beCode == 'llzyyy'||beCode == 'cshtyy') {
 
             operBtn += sepa + '<a ng-if="row.entity.state != \'08\'" ng-click="grid.appScope.print(row.entity)" >打印</a>';
             selectOptions = [{ value: '03', label: '术前' }, { value: '04', label: '术中' }, { value: '05', label: '复苏中' }, { value: '06', label: '术后' }, { value: '07', label: '中止' }, { value: '08', label: '取消' }];
@@ -58,7 +58,7 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
             selectOptions = [{ value: '01', label: '未审核' }, { value: '02', label: '未排班' }, { value: '03', label: '术前' }, { value: '04', label: '术中' }, { value: '05', label: '复苏中' }, { value: '06', label: '术后' }, { value: '07', label: '中止' }, { value: '08', label: '取消' }];
             params.state = '02,03,04,05,06,07,08';
         }
-        operBtn += '<a ng-click="grid.appScope.activOper(row.entity)" ng-if="row.entity.state == \'08\'">激活手术</a>';
+        operBtn += '<a ng-click="grid.appScope.activOper(row.entity)" ng-hide="grid.appScope.beCode== \'sybx\'" ng-if="row.entity.state == \'08\'">激活手术</a>';
         if (beCode == 'qnzrmyy')
             params.state = '01,02,03,04,05,06,07,08';
     } else {
@@ -193,6 +193,15 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
             },
             visible: page == 'oper' ? false : true
         }, {
+            field: 'instrnurseName1',
+            name: '洗手护士',
+            enableSorting: false,
+            width: 80,
+            cellTooltip: function(row, col) {
+                return row.entity.instrnurseName1;
+            },
+            visible: (page == 'operQuery' && $scope.beCode === 'sybx')
+        }, {
             field: 'diagnosisName',
             name: '术前诊断',
             cellTooltip: function(row, col) {
@@ -240,7 +249,7 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
             enableSorting: false,
             enableFiltering: false,
             cellTemplate: '<div class="ui-grid-cell-contents"><a ng-if="!(grid.appScope.beCode== \'qnzzyyy\'&&row.entity.operSource==1)" ng-click=grid.appScope.isComplete(row.entity) ng-bind="row.entity.documentState"></a><a ng-if="grid.appScope.beCode== \'qnzzyyy\'&&row.entity.operSource==1" >完成</a></div>',
-            visible: !(page == 'oper' || (page == 'operQuery' && beCode != 'syzxyy' && beCode != 'base'&& beCode != 'llzyyy'&& beCode != 'cshtyy'))
+            visible: !(page == 'oper' || (page == 'operQuery' && beCode != 'syzxyy' &&beCode != 'lyrm' && beCode != 'base'&& beCode != 'llzyyy'&& beCode != 'cshtyy'))
         }, {
             field: 'state',
             name: '状态',
@@ -266,9 +275,9 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
         if (page == 'oper') {
             params.loginName = '';
         } else if (page == 'operQuery') {
-            if(beCode == 'syzxyy' || beCode == 'base'||beCode == 'llzyyy'|| beCode == 'cshtyy')
+            if(beCode == 'syzxyy' ||beCode == 'lyrm' || beCode == 'base'||beCode == 'llzyyy'|| beCode == 'cshtyy')
                 url = 'operation/getRegOptByRoleTypeAndState'
-            if(beCode != 'syzxyy' && beCode != 'base'&& beCode != 'llzyyy'&&beCode != 'cshtyy') {
+            if(beCode != 'syzxyy' &&beCode != 'lyrm' && beCode != 'base'&& beCode != 'llzyyy'&&beCode != 'cshtyy') {
                 params.queryMethod = 1;
             }
         } else if (page == 'preOper') {
@@ -310,7 +319,7 @@ function OperListCtrl($rootScope, $scope, IHttp, uiGridConstants, $timeout, toas
     $scope.search();
 
     $scope.stateChange = function(o) {
-        if (beCode != 'syzxyy' && beCode != 'base'&& beCode != 'llzyyy'&& beCode != 'cshtyy')
+        if (beCode != 'syzxyy' &&beCode != 'lyrm' && beCode != 'base'&& beCode != 'llzyyy'&& beCode != 'cshtyy')
             return;
         if (o.state)
             params.state = o.state;

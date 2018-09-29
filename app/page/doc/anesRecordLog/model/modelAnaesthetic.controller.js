@@ -40,6 +40,7 @@ function modelAnaesthetic($scope, IHttp, $uibModalInstance, $timeout, items, $q,
         IHttp.post('operation/serarchMedicaleventList', { docId: items.docId, type: items.type, docType: 1 }).then(function(rs) {
             if (rs.data.resultCode !== '1') return;
             $scope.dcl = rs.data.resultList;
+            $scope.param.showOption = '3';
             for(var entity of $scope.dcl) {
                 if (entity.startTime)
                     entity.startTime_ = dateFilter(new Date(entity.startTime), 'yyyy-MM-dd HH:mm');

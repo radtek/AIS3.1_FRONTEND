@@ -236,7 +236,7 @@
             </div>
             <div flex="20" class="input-wrap" ng-if="beCode == 'sybx'">
                 <div layout layout-align="start center" class="input-group">
-                    <label class="tit">灌注医生</label>
+                    <label class="tit">巡台医生</label>
                     <oi-select flex name="perfusionDoctor" oi-options="item.userName as item.name for item in getAnesList($query, dispatch.anesthetistId)" oi-select-options="{listFilter: 'oiSelectAscSort:[\'pinYin\']', cleanModel: true}" ng-model="dispatch.perfusionDoctorIdList" multiple></oi-select>
                 </div>
             </div>

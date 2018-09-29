@@ -50,6 +50,9 @@ function route($stateProvider) { //麻醉总结
     })).state('postAnesthesiaSummary_llzyyy', angular.merge({}, opt_qnz, { // 临澧 》术后
         template: require('./anesthesiaSummary_llzyyy.html'),
         url: '/postAnesthesiaSummary_llzyyy/:regOptId'
+    })).state('anesthesiaSummary_lyrm', angular.merge({}, opt_qnz, { // 耒阳麻醉记录单二
+        template: require('./anesthesiaSummary_lyrm.html'),
+        url: '/anesthesiaSummary_lyrm/:regOptId'
     }))
 
 }

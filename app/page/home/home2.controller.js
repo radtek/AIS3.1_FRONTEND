@@ -18,7 +18,6 @@ function HomeCtrl($rootScope, $scope, IHttp, uiGridConstants, auth, toastr, $uib
     };
     $scope.beid = user.beid;
     $scope.currentPage = 1;
-
     $scope.prev = false;
     $scope.prev1 = false;
     $scope.prev2 = false;

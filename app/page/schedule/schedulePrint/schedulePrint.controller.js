@@ -22,6 +22,8 @@ function SchedulePrintCtrl($rootScope, $scope, IHttp, uiGridConstants, $uibModal
             return;
         $scope.dept = rs.data.resultList;
     });
+    $scope.$emit('setSearchType', 2);
+
     //手术室列表
     select.operroom().then((rs) => {
             if (rs.data.resultCode != 1)
@@ -92,6 +94,8 @@ function SchedulePrintCtrl($rootScope, $scope, IHttp, uiGridConstants, $uibModal
                 col.editDropdownOptionsArray = rs.data.userItem;
             if (col.field == 'circuAnesthetistId')
                 col.editDropdownOptionsArray = rs.data.userItem;
+            if (col.field == 'perfusionDoctorIdList')
+                col.editDropdownOptionsArray = rs.data.userItem;
         }
     })
     $scope.gridOptions = uiGridServe.option({
@@ -150,6 +154,11 @@ function SchedulePrintCtrl($rootScope, $scope, IHttp, uiGridConstants, $uibModal
             field: 'anesthetistName',
             name: '麻醉医生',
             width: 100
+        }, {
+            field: 'perfusionDoctorName',
+            name: '巡台医生',
+            width: 100,
+            visible: $scope.docInfo.beCode === 'sybx' ? true : false
         }, {
             field: 'circunurseName1',
             name: '巡回护士',
@@ -515,6 +524,20 @@ function SchedulePrintCtrl($rootScope, $scope, IHttp, uiGridConstants, $uibModal
                         width: 105
                     };
                 }
+                if (item.field == 'perfusionDoctorName' && $scope.docInfo.beCode === 'sybx') {
+                    $scope.gridOptions.columnDefs[key] = {
+                        field: 'perfusionDoctorIdList',
+                        name: '巡台医生',
+                        cellClass: 'anaesthetist-circuanesthetistId',
+                        cellTemplate: require('../anaesthesiaSchedule/pinYinFilter3.html'),
+                        cellTooltip: function(row, col) {
+                            return row.entity.perfusionDoctorIdList;
+                        },
+                        editDropdownOptionsArray: [],
+                        enableCellEdit: true,
+                        width: 300
+                    };
+                }
             })
 
         }
@@ -533,7 +556,6 @@ function SchedulePrintCtrl($rootScope, $scope, IHttp, uiGridConstants, $uibModal
     })
 
     $scope.$on('export', () => {
-        console.log($scope.gridExporterOptions);
         $scope.gridExporterApi.exporter.csvExport('all','all');//导出所有的行和列
     })
     $scope.$on('save', (event) => {
@@ -541,6 +563,26 @@ function SchedulePrintCtrl($rootScope, $scope, IHttp, uiGridConstants, $uibModal
         if ($scope.isNurse) {
             for (var a=0; a<$scope.gridOptions.data.length; a++) {
                 var item = $scope.gridOptions.data[a - 0];
+                if (beCode === 'sybx') {
+                    if (item.circunurseId1 || item.operRoomId || item.pcs) {
+                        if (!item.circunurseId1) {
+                            toastr.warning('请为患者安排巡回护士');
+                            return;
+                        }
+                        if (!item.operRoomId) {
+                            toastr.warning('请为患者安排手术间');
+                            return;
+                        }
+                        if (!item.operaDate) {
+                            toastr.warning('请为患者安排手术日期');
+                            return;
+                        }
+                        if (!item.pcs) {
+                            toastr.warning('请为患者安排台次');
+                            return;
+                        }
+                    }
+                }
                 if (item.isLocalAnaes == '1')
                     item.isHold = '0';
                 if (item.circunurseId1 && !(item.state == '04' || item.state == '05' || item.state == '06' || item.state == '07'))

@@ -97,6 +97,13 @@ function route($stateProvider) {
         less: require('./postVisitLog.less'),
         controller: require('./postVisitLog_sybx.controller'),
         data: { readonly: true }
+    }).state('postVisitLog_lyrm', {     // 耒阳
+        parent: 'doc',
+        url: '/postVisitLog_lyrm/:regOptId',
+        template: require('./mzhfsd_NHFE.html'),
+        less: require('./mzhfsd_NHFE.less'),
+        controller: require('./mzhfsd_NHFE.controller'),
+        controllerAs: 'vm'
     })
 }
 

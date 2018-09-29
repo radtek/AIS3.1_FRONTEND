@@ -18,10 +18,6 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
         eChartRow2 = 31, // eChart2 的 行数
         eChartCol = 8,
         summary; // 麻醉总结
-    // vm.view = {
-    //     pageCur: 1,
-    //     pageCount: 1
-    // };
     vm.view = { // 同步界面的数据
         pageCur: 1, // 当前页数
         pageCount: 1, // 总页数
@@ -84,6 +80,11 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
         } else if ($scope.startOper.anaesRecord.asaLevel == '5') {
             $scope.asaLevelName = 'Ⅴ';
         }
+        if ($scope.startOper.anaesMedEvtList && $scope.startOper.anaesMedEvtList.length > 0) {
+            $scope.startOper.anaesRecord.anaesBeforeMed = 1;
+        }else {
+            $scope.startOper.anaesRecord.anaesBeforeMed = 0;
+        }
         setOption('mz', $scope.startOper.treatMedEvtList);
         setOption('sy', $scope.startOper.transfusioninIoeventList);
         setOption('sx', $scope.startOper.bloodinIoeventList);
@@ -117,10 +118,10 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
         $scope.xTits = [];
         for (var a = 0; a < xLen; a++) {
             temp = rs.xAxis[0].data[a];
-            if ((rs.changeFreqTime != '' && temp.value <= rs.changeFreqTime) || rs.changeFreqTime == '') {
-                temp.value = temp.value - rs.offset * 1000;
-                temp.offset = true;
-            }
+            // if ((rs.changeFreqTime != '' && temp.value <= rs.changeFreqTime) || rs.changeFreqTime == '') {
+            //     temp.value = temp.value - rs.offset * 1000;
+            //     temp.offset = true;
+            // }
             vm.tempTime.push(temp);
             res.push($filter('date')(temp.value, 'yyyy-MM-dd HH:mm:ss'));
             if (rs.xAxis[0].data[a + 1]) {
@@ -133,7 +134,7 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
                 $scope.xTits.push($filter('date')(temp.value, 'HH:mm'));
         }
         var tempValue = (vm.tempTime[xLen - 1].offset ? (vm.tempTime[xLen - 1].value + rs.offset * 1000) : vm.tempTime[xLen - 1].value) + vm.tempTime[xLen - 1].freq * 1000;
-        if (rs.changeFreqTime == '') tempValue = tempValue - rs.offset * 1000;
+        // if (rs.changeFreqTime == '') tempValue = tempValue - rs.offset * 1000;//补空点不再需要偏移
         var first = true;
         while (xLen < pageSize) {
             var timeEach = first ? parseInt((tempValue - vm.tempTime[xLen - 1].value) / 10) : rs.freq * 100;
@@ -147,6 +148,13 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
             tempValue = tempValue + rs.freq * 1000;
             xLen++;
             first = false;
+        }
+        if (vm.view.pageCur == 1 || (vm.view.pageCount == 1 && vm.view.pageCur == 0)) { //第一页第一个点特殊处理
+            var old = angular.copy(vm.timeArr49[vm.view.pageCur][0]);
+            var x = vm.startOper.anaeseventList[0].occurTime / 1000;
+            vm.timeArr49[vm.view.pageCur][0] = [x, '', old[0] - x + old[2], { formatTime: $filter('date')(x * 1000, 'HH:mm') }];
+            $scope.xTits.shift();
+            $scope.xTits.unshift($filter('date')(x * 1000, 'HH:mm'));
         }
         return res;
     }
@@ -503,6 +511,8 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
         anesRecordServe_sybx.getNewMon(regOptId, inTime, pageSize, vm.view.pageCur).then(function(result) {
             $scope.monDataList = result.data.monDataList;
             PAGES.push({
+                // view: angular.copy(vm.view),
+                // timeArr49: angular.copy(vm.timeArr49),
                 eOption1: angular.copy($scope.eOption1),
                 medEOpt1: angular.copy(vm.medEOpt1),
                 eOption2: angular.copy($scope.eOption2),
@@ -1112,6 +1122,10 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
 
                     if (summary[objKey].threeChamber == 1) {
                         contentStr += '三腔　';
+                    }
+
+                    if (summary[objKey].bloodWarming == 1) {
+                        contentStr += '输血输液加温　';
                     }
 
                     if (contentStr != '深静脉穿刺置管：') {

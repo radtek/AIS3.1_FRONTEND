@@ -1,0 +1,201 @@
+<div class="page-print postInfoCons" ng-class="{true:'end-state',false:''}[vm.analgesicInformedConsent.processState111==='END' || readonly]" id="sur-nur-list">
+    <header layout="column" layout-align="center center">
+        <h3 ng-if="docInfo.beName">{{docInfo.beName}}</h3>
+        <h4>术后镇痛知情同意书及访视记录</h4>
+    </header>
+    <div layout class="tab-warp">
+        <div flex="10" class="tit-h" layout layout-align="center center">
+            姓名：
+        </div>
+        <div flex="15" class="tit-h" layout layout-align="center center">
+            {{vm.regOpt.name}}
+        </div>
+        <div flex="10" class="tit-h" layout layout-align="center center">
+            性别：
+        </div>
+        <div flex="5" class="tit-h" layout layout-align="center center">
+            {{vm.regOpt.sex}}
+        </div>
+        <div flex="10" class="tit-h" layout layout-align="center center">
+            年龄：
+        </div>
+        <div flex="10" class="tit-h" layout layout-align="center center">
+           {{vm.regOpt.age}}
+        </div>
+        <div flex="10" class="tit-h" layout layout-align="center center">
+            病区：
+        </div>
+        <div flex="15" class="tit-h" layout layout-align="center center">
+            {{vm.regOpt.regionName}}
+        </div>
+        <div flex="10" class="tit-h" layout layout-align="center center">
+            床号：
+        </div>
+        <div flex="10" class="tit-h" layout layout-align="center center">
+            {{vm.regOpt.bed}}
+        </div>
+        <div flex="10" class="tit-h" layout layout-align="center center">
+            住院号：
+        </div>
+        <div flex="10" class="tit-h" style="border-right: 1px solid rgba(255,255,255,0)" layout layout-align="center center">
+            {{vm.regOpt.hid}}
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex="25" class="tit-h" layout layout-align="center center">
+            术前诊断：
+        </div>
+        <div flex="35" class="tit-h" layout layout-align="center center">
+            {{vm.regOpt.diagnosisName}}
+        </div>
+        <div flex="25" class="tit-h" layout layout-align="center center">
+            手术名称：
+        </div>
+        <div flex="40" class="tit-h" style="border-right: 1px solid rgba(255,255,255,0)" layout layout-align="center center">
+            {{vm.regOpt.designedOptName}}
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top " ng-class="{true: 'red-border'}[(vm.analgesicInformedConsent.pcia!='1'&&vm.analgesicInformedConsent.pcea!='1') && showBorder]">
+        <div flex="25" class="tit-h" layout layout-align="center center">
+            术后镇痛方式：
+        </div>
+        <div flex="25" class="tit-h" layout layout-align="center center">
+            患者静脉自控镇痛PCIA
+        </div>
+        <div flex="10" class="tit-h" layout layout-align="center center">
+            <input type="checkbox" name="pcia" ng-model="vm.analgesicInformedConsent.pcia" ng-true-value="'1'" ng-false-value='0' >
+        </div>
+        <div flex="40" class="tit-h" layout layout-align="center center">
+            患者硬膜外自控镇痛PCEA
+        </div>
+        <div flex="25" class="tit-h" style="border-right: 1px solid rgba(255,255,255,0)" layout layout-align="center center">
+            <input type="checkbox" name="pcea" ng-model="vm.analgesicInformedConsent.pcea" ng-true-value="'1'" ng-false-value='0' >
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex class="tit-h" layout layout-align="center center" style="padding: 12px;border-right: 1px solid rgba(255,255,255,0)">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp术后镇痛治疗能使患者减轻部分疼痛，提高围术期生活质量，有利于病人咳嗽，排痰，促进伤口愈合，有利于患者各生理系统的早日康复，减少住院天数。
+            <br> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp接受术后镇痛的患者有可能发生以下并发症：
+            <br> 1.恶心呕吐 2.低血压 3.尿潴留 4.皮肤瘙痒 5.运动障碍（a不能足背屈 b不能移动 c不能抬腿）6.感觉异常(a小腿 b大腿 c臀部) 7.呼吸抑制 8.镇痛不全 9.过度镇静
+            <br> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp镇痛泵属非医保项目
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top" style="border-bottom: 0">
+        <div flex class="tit-h" layout layout-align="center center" style="padding: 12px;border-right: 1px solid rgba(255,255,255,0)">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp医师陈述：我已告知患者将要施行的镇痛方式，术后镇痛过程中有可能发生的并发症和风险，并解答了关于术后镇痛的相关问题
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top" style="border-bottom: 0" layout-align="center center">
+        <label class="formAligncenter" style="font-size:14px;" flex>麻醉医师签名：</label>
+        <md-autocomplete style="margin-top:0; height:20px; width: 100px; display: inline-block;margin-right: 12px" md-selected-item="OBJ" md-search-text="searchtext" md-selected-item-change="vm.queryChangeItem(OBJ)"  md-items=" item in getAnaesdoctorList(searchtext)" md-item-text="item.name" placeholder="输入登录号进行搜索" md-autoselect="true" required ng-class="{true: 'red-border'}[!vm.analgesicInformedConsent.signId && showBorder]" class="signature" md-no-cache="true">
+
+            <md-item-template>
+                <span md-highlight-text="searchtext">{{item.name}}</span>
+            </md-item-template>
+        </md-autocomplete>
+        <div style="width:200px;" class="eSignature">
+            <img style="bottom: -20px;" ng-repeat="sig in eSignature" src="{{sig}}" />
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top" layout-align="space-between" style="padding-bottom: 12px">
+        <div class="md-body-1 maginbdfore boline" layout="row">
+        </div>
+        <div style="margin-right: 10px;">
+            <span class="required-inline" ng-class="{true: 'red-border'}[!vm.analgesicInformedConsent.signTime && showBorder]">
+                日期：<input h-type="datetime-local" class="noborder3" ng-model="vm.analgesicInformedConsent.signTime"  style="width:190px"/>
+                </span>
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top" style="border-bottom: 0">
+        <div flex class="tit-h" layout layout-align="start center" style="padding: 12px;border-right: 1px solid rgba(255,255,255,0)">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp以上情况已告知患者/家属，对以上情况表示理解，同意术后镇痛。
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top" layout-align="space-between" style="padding-bottom: 12px;border-bottom: 0">
+        <div flex="35" style="padding-left: 30px">
+            患者签名：
+        </div>
+        <div flex="35" style="padding-left: 30px">
+            委托人签名：
+        </div>
+        <div flex="35" style="padding-left: 30px">
+            与患者关系：
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top" layout-align="space-between" style="padding-bottom: 12px">
+        <div class="md-body-1 maginbdfore boline" layout="row">
+        </div>
+        <div style="margin-right: 10px;">
+            <span class="required-inline" >
+                日期：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp年&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp月&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp日
+                </span>
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex class="tit-h" layout="column" style="padding: 12px;border-right: 1px solid rgba(255,255,255,0);height: 110px">
+            镇痛方案：
+            <textarea ng-model="vm.analgesicInformedConsent.analgesicPlan" maxlength="120" style="resize: none;">
+                
+            </textarea>
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex="30" class="tit-h" layout layout-align="center center">
+        </div>
+        <div flex="30" class="tit-h" layout layout-align="center center">
+            效果（VAS:0-10）
+        </div>
+        <div flex="30" class="tit-h" layout layout-align="center center">
+            并发症
+        </div>
+        <div flex="30" class="tit-h" style="border-right: 1px solid rgba(255,255,255,0)" layout layout-align="center center">
+            访视者签名
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex="30" class="tit-h" layout layout-align="center center">
+            术后&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp h
+        </div>
+        <div flex="30" class="tit-h" layout layout-align="center center">
+        </div>
+        <div flex="30" class="tit-h" layout layout-align="center center">
+        </div>
+        <div flex="30" class="tit-h" style="border-right: 1px solid rgba(255,255,255,0)" layout layout-align="center center">
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex="30" class="tit-h" layout layout-align="center center">
+            术后&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp h
+        </div>
+        <div flex="30" class="tit-h" layout layout-align="center center">
+        </div>
+        <div flex="30" class="tit-h" layout layout-align="center center">
+        </div>
+        <div flex="30" class="tit-h" style="border-right: 1px solid rgba(255,255,255,0)" layout layout-align="center center">
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex="30" class="tit-h" layout layout-align="center center">
+            术后&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp h
+        </div>
+        <div flex="30" class="tit-h" layout layout-align="center center">
+        </div>
+        <div flex="30" class="tit-h" layout layout-align="center center">
+        </div>
+        <div flex="30" class="tit-h" style="border-right: 1px solid rgba(255,255,255,0)" layout layout-align="center center">
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex class="tit-h" layout style="padding: 12px;border-right: 1px solid rgba(255,255,255,0)">
+            镇痛开始时间：
+        </div>
+    </div>
+    <div layout class="tab-warp no-border-top">
+        <div flex class="tit-h" layout style="padding: 12px;border-right: 1px solid rgba(255,255,255,0)">
+            拔泵时间：
+        </div>
+        <div flex class="tit-h" layout style="padding: 12px;border-right: 1px solid rgba(255,255,255,0)">
+            签名：
+        </div>
+    </div>
+</div>

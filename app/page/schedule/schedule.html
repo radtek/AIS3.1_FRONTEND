@@ -1,18 +1,24 @@
 <form id="schedule" role="form" layout class="navbar-btn btn-xs text-right c-el-10">
     <div flex layout>
         <div layout layout-align="start center" class="input-group">
-            <label class="control-label tit">手术日期：</label>
-            <button class="btn btn-primary up" ng-click="updateDay('sub');">上一天</button>
-            <datetime-picker   dateID="date-start-time" maxdate="2100-01-01" ng-model="queryObj.operDate" timepicker="false" format="Y-m-d" class="form-control" required></datetime-picker>
-            <button class="btn btn-primary down" ng-click="updateDay('add');">下一天</button>
+            <label class="control-label tit" style="min-width: 105px;"><input type="radio" name="searchType" ng-value='1' ng-if="searchType == 2 && beCode === 'sybx'" ng-model="queryObj.searchType"/>手术日期：</label>
+            <button class="btn btn-primary up" ng-click="updateDay('sub');queryObj.searchType = 1">上一天</button>
+            <datetime-picker dateID="date-start-time" maxdate="2100-01-01" ng-model="queryObj.operDate" ng-click='queryObj.searchType = 1' timepicker="false" format="Y-m-d" class="form-control" style="margin-left: 10px;width: 100px;" required></datetime-picker>
+            <button class="btn btn-primary down" ng-click="updateDay('add');queryObj.searchType = 1">下一天</button>
         </div>
         <div layout layout-align="start center" class="input-group">
-            <label class="control-label tit">姓名：</label>
-            <input  class="form-control" type="text" ng-model="queryObj.name"></input>
+            <label class="control-label tit" style="min-width: 80px;">姓名：</label>
+            <input class="form-control" type="text" ng-model="queryObj.name" style="margin-left: 0px; width: 85px;"></input>
         </div>
         <div layout layout-align="start center" class="input-group">
-            <label class="control-label tit">住院号：</label>
-            <input  class="form-control" type="text" ng-model="queryObj.hid"></input>
+            <label class="control-label tit" style="min-width: 80px;">住院号：</label>
+            <input class="form-control" type="text" ng-model="queryObj.hid" style="margin-left: 0px; width: 85px;"></input>
+        </div>
+        <div layout layout-align="start center" class="input-group" ng-if="searchType == 2 && beCode === 'sybx'">            
+            <label class="control-label tit" style="min-width: 80px;padding-left: 10px;"><input type="radio" name="searchType" ng-value='2' ng-model="queryObj.searchType"/>按日期范围：</label>
+            <datetime-picker flex dateID="date-start-time" ng-model="queryObj.startTime" maxdate="2100-01-01" timepicker="false" format="Y-m-d" class="form-control" ng-click='queryObj.searchType = 2' style="margin-left: 0px;width: 100px;" required></datetime-picker>
+            <span style="margin-left: 5px; margin-right: 5px;">到</span>
+            <datetime-picker flex dateID="date-end-time" ng-model="queryObj.endTime" maxdate="2100-01-01" timepicker="false" format="Y-m-d" class="form-control" ng-click='queryObj.searchType = 2' style="margin-left: 0px;width: 100px;" required></datetime-picker>
         </div>
     </div>
     <button class="btn btn-primary" ng-click="query();">查&nbsp;&nbsp;询</button>
