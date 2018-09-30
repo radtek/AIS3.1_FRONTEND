@@ -68,7 +68,13 @@ function AddOverMedicareCtrl($scope, IHttp, $timeout, $filter, auth, $q, $uibMod
     function getDataList_(query) {
         var deferred = $q.defer(),
             url = '',
-            param = { pinyin: query, pageNo: 1, pageSize: 200 };
+            param = {
+                filters:[
+                    {field: 'pinYin', value: query}
+                ],
+                pageNo: 1,
+                pageSize: 200
+            };
         if (type == "1" || type == "2")
             url = 'basedata/getMedicineList';
         else if (type == "3")
