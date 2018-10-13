@@ -12,6 +12,7 @@ function TabsCtrl($rootScope, $scope, IHttp, $timeout, $state, auth, resultRegOp
     let showPlacentaAgree = regOpt.sex == '男' ? false : true;
     let showRiskAsseLog = regOpt.isLocalAnaes == '1' ? false : true;
     let showAnalgesicDoc = regOpt.analgesicMethod == '1' || regOpt.analgesicMethod == '2' || regOpt.analgesicMethod == '3' || regOpt.analgesicMethod == '4' ? true : false;
+    $scope.common_tabs_style={'font-size':'15px'};
     $scope.$watch('$state.current.name', function(n, o) {
         if ($rootScope.tabsMenu.length > 0 && $rootScope.tabsMenu[0].name !== '基本信息' && $rootScope.tabsMenu[0].name !== '麻醉记录单'&& $rootScope.tabsMenu[0].name !== '麻醉记录单一'&& $rootScope.tabsMenu[0].name !== '麻醉记录单（一）') { //列表切换更新 ，文书不更新
             $scope.tabsMenu = $rootScope.tabsMenu;

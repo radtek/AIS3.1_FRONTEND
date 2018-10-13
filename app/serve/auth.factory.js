@@ -34,7 +34,26 @@ function auth(IHttp, baseConfig) {
         },
         // 当前登录的用户信息
         loginUser: function() {
-            return JSON.parse(sessionStorage.getItem('user'));
+            let result= JSON.parse(sessionStorage.getItem('user'));
+            if(false){
+                return angular.merge({},result,{
+                    showImgTitle:true,//文书显示图片而非标题 邵阳
+                    // hideRegion:true,  //黔南州中院 外部会诊 隐藏病区
+                    // syncMidMed:true,//黔南州中院  手术核算单 同步术中药品
+                    // syncMidMed:true,//黔南州中院  手术核算单 同步术中药品
+                    optLevelListStyle:true,//麻醉记录单 手术分类default['一级', '二级', '三级', '四级']else['1', '2', '3', '4'];
+                    outOperConfirm:true,//麻醉记录单 出室确认
+                    eventCurrentTime2hours:true,//添加事件默认不能超过当前事件 
+                    setSubType:true,//加载模板传subtype
+                    // anesthesiaSummaryInspect:true,//麻醉总结/麻醉记录单二    验证必填项
+                    optLevelRequire:false,//黔南州中医院基本信息才必填手术等级
+                    NurseEnterOperRoomUrl:'midNursRecordLog_syzxyy',//护士开始手术url
+                    enterPacuUrl:'pacuRecovery_base',//入PACU路由地址
+
+                })
+            }else{
+                return result;
+            }
         },
         // 用户权限
         userPermission: function() {
@@ -53,6 +72,7 @@ function auth(IHttp, baseConfig) {
             else
                 return '';
         },
+        // 判断文书提交后是否可以修改
         getDocAuth: function() {
             let bConfig = baseConfig.getOther(),
                 user = this.loginUser(),

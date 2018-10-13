@@ -8,6 +8,7 @@ function FrameCtrl($rootScope, $scope, auth, menu, $timeout, select) {
         vm = this;
     $scope.curPage = pageState.name;
     $scope.user = auth.loginUser();
+    $scope.common_frame_style={'font-size':"17px"};
     let beCode = $scope.user.beCode;
     $scope.preUrl = $scope.user.module == 'oprm' ? 'operroom' : 'pacuroom';
     $scope.menu = menu.group(menus, $rootScope.crumbs);
@@ -72,6 +73,9 @@ function FrameCtrl($rootScope, $scope, auth, menu, $timeout, select) {
     $scope.$on('banSelectRoom', function(ev, data) {
         vm.banSelectRoom = data;
     })
+    // $scope.$on('changeStyle', function(ev, data) {
+    //     $scope.common_frame_style=data.common_frame_style;
+    // })
 
     $scope.eq = function(a, b) {
         return angular.equals(a, b);

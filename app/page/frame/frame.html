@@ -1,5 +1,5 @@
-<div flex layout id="frame">
-    <aside layout='column' class="menu-wrap not-print" ng-show="user.module == 'ctrlcent'">
+<div flex layout id="frame" >
+    <aside ng-style="common_frame_style" layout='column' class="menu-wrap not-print" ng-show="user.module == 'ctrlcent'">
         <div layout layout-align='center center' class="col menu-header">
             <span class="menu-header-login"></span>
         </div>
@@ -34,7 +34,7 @@
         </div>
     </aside>
     <div flex layout="column" class="main">
-        <header layout layout-align="space-between" class="col view-header not-print" ng-if="user.module == 'ctrlcent'">
+        <header ng-style="common_frame_style" layout layout-align="space-between" class="col view-header not-print" ng-if="user.module == 'ctrlcent'">
             <nav class="nav-crumbs">
                 <span class="icon"><i class="glyphicon glyphicon-home"></i></span>
                 <span class="item" ng-repeat="item in crumbs">
@@ -49,7 +49,7 @@
                 <a class="glyphicon glyphicon-log-out" title="退出" ng-click="logout()"></a>
             </nav>
         </header>
-        <header layout layout-align="space-between" class="col view-header bgColor not-print" ng-if="user.module == 'oprm' || user.module == 'pacu' || user.module == 'screen'">
+        <header ng-style="common_frame_style" layout layout-align="space-between" class="col view-header bgColor not-print" ng-if="user.module == 'oprm' || user.module == 'pacu' || user.module == 'screen'">
             <nav layout layout-align='start center' class="nav-crumbs">
                 <div class="login-icon" style="margin-right: 15px;"></div>
                 <div layout="column" class="login-user">

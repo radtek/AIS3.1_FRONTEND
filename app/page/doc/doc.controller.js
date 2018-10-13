@@ -10,7 +10,7 @@ function DocCtrl($rootScope, $scope, select, $timeout, auth, anesRecordServe) {
     $scope.isDelBat = false;
     $scope.page = $rootScope.$state.current.name;
     $scope.docRequired = "";
-
+    $scope.common_doc_style={'font-size':"15px"};
     $scope.saveActive = auth.getDocAuth();
     $scope.$on('readonly', function(event, data) {
         if (data && data.readonly == true) {

@@ -17,8 +17,8 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
         operState, // 手术状态
         timer_rt, // 实时监控定时器
         pageSize = 49, // 一页显示条数
-        eChartRow1 = 20, // eChart1 的 行数
-        eChartRow2 = 31, // eChart2 的 行数
+        eChartRow1 = 22, // eChart1 的 行数
+        eChartRow2 = 29, // eChart2 的 行数
         summary, // 麻醉总结
         oldValue;
         
@@ -40,7 +40,6 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
     $scope.disabledOutBtn = false;
     $scope.lineH = 28;
 
-    console.log(pageName);
     if (document.body.clientWidth < 1250) {
         $scope.lineH = 22;
         $('.echarts').width(543);
@@ -116,7 +115,7 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
         })
     }, vm.pageState);
 
-    $scope.eOption2 = anesRecordServe_sybx.eChart2.option(0, [{ min: -10, max: 300, interval: 10 }, { min: 11, max: 42, interval: 2 }], {
+    $scope.eOption2 = anesRecordServe_sybx.eChart2.option(0, [{ min: -10, max: 280, interval: 10 }, { min: 13, max: 42, interval: 1 }], {
         top: -1,
         left: -1,
         right: 0,
@@ -1216,7 +1215,7 @@ function AnesRecordLogCtrl($rootScope, $scope, IHttp, baseConfig, anesRecordInte
                     }
                 }
             }
-        }, docId, 3, 3, 11, 3, 0, 9, startTime, endTime, lastPage);
+        }, docId, 3, 5, 11, 3, 0, 9, startTime, endTime, lastPage);
     }
 
     function getPupilData() { // 瞳孔数据

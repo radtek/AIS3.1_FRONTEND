@@ -1,8 +1,8 @@
 <div class="navbar-btn text-right c-el-10">
-    <div layout layout-align='start center' class="col-md-6" ng-if="permission.indexOf('Q_LIST') >= 0">
-        <label style="margin-right: 15px;">
+    <div layout layout-align='start center' class="col-md-6" ng-if="permission.indexOf('Q_LIST') >= 0" >
+        <span style="margin-right: 15px;">
             日期范围
-        </label>
+        </span>
         <div style="width: 120px;">
             <datetime-picker flex dateID="date-start-time" ng-model="queryObj.startTime" maxdate="2100-01-01" timepicker="false" format="Y-m-d" class="form-control" ng-change='stateChange(queryObj)' required></datetime-picker>
         </div>

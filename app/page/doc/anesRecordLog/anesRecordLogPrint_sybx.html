@@ -1,6 +1,6 @@
- <div class="print-progress">
-    <progressbar></progressbar>   
-</div> 
+<div class="print-progress">
+    <progressbar></progressbar>
+</div>
 <div>
     <div id="anesRecord_sybx" class="page-print" layout="column" ng-repeat="page in PAGES"  repeat-finish="vm.pageFinish()"  >
         <main class="body">
@@ -13,8 +13,8 @@
                     <span flex><span class="red">住院号：</span>{{startOper.regOpt.hid}}</span>
                     <span flex class="red text-right">第{{page.pageCur}}页/共{{vm.view.pageCount}}页</span>
                 </div>
-            </header
->            <article>
+            </header>
+            <article>
                 <div class="head">
                     <div layout class="lineH">
                         <div layout flex><span class="red">姓名</span><a flex>{{startOper.regOpt.name}}</a></div>
@@ -109,8 +109,8 @@
                                     <div style="width: 140px; height: 14px; overflow: hidden;">{{startOper.treatMedEvtList[i].dosage}}{{startOper.treatMedEvtList[i].dosageUnit}} &nbsp;{{startOper.treatMedEvtList[i].name}} &nbsp; {{startOper.treatMedEvtList[i].medicalEventList[0].flowUnit}}</div>
                                 </td>
                             </tr>
-                            <tr ng-repeat="i in [0, 1, 2]">
-                                <td rowspan="3" class="text-center red" ng-if="i == 0">输液</td>
+                            <tr ng-repeat="i in [0, 1, 2, 3, 4]">
+                                <td rowspan="5" class="text-center red" ng-if="i == 0">输液</td>
                                 <td colspan="6" class="pullLR">
                                     <div class="pull-left">{{startOper.transfusioninIoeventList[i].name}} {{startOper.transfusioninIoeventList[i].ioeventList[0].dosageUnit}}</div>
                                 </td>
@@ -128,7 +128,7 @@
                                 </td>
                             </tr>
                             <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6]">
-                                <td rowspan="9" class="text-center red" ng-if="i == 0">术中监测</td>
+                                <td rowspan="9" class="text-center red monitorTd" ng-if="i == 0">术中监测</td>
                                 <td colspan="6">
                                     <div>{{startOper.leftShowList[i].eventName}}</div>
                                 </td>
@@ -157,10 +157,10 @@
                                     <div layout layout-align="space-between center" class="clickSpan"><span class="red">出室</span><a><span ng-repeat="i in startOper.anaeseventList | filter: { code: 9 }: eq" ng-init="vm.event.cs = i">{{i.occurTime | date: 'HH:mm'}}</span></a></div>
                                 </td>
                                 <td class="text-center">
-                                    <div layout="column" layout-align="end center" ng-repeat="i in ['℃',40,'',38,'',36,'',34,'',32,'',30,'',28,'',26,'',24,'',22,'',20,'',18,'',16,'',14,'',12] track by $index"><span class="red">{{i}}</span></div>
+                                    <div layout="column" layout-align="end center" ng-repeat="i in ['℃',40,'',38,'',36,'',34,'',32,'',30,'',28,'',26,'',24,'',22,'',20,'',18,'',16,'',14] track by $index"><span class="red">{{i}}</span></div>
                                 </td>
                                 <td>
-                                    <div layout='column' layout-align="end center" ng-repeat="i in ['脉搏/血压 mmHg','','',260,'',240,'',220,'',200,'',180,'',160,'',140,'',120,'',100,'',80,'',60,'',40,'',20,'',0] track by $index"><span class="red">{{i}}</span></div>
+                                    <div layout='column' layout-align="end center" ng-repeat="i in ['脉搏/血压 mmHg','','',240,'',220,'',200,'',180,'',160,'',140,'',120,'',100,'',80,'',60,'',40,'',20,'',0] track by $index"><span class="red">{{i}}</span></div>
                                 </td>
                             </tr>
                             <tr>

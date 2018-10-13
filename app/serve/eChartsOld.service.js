@@ -6,7 +6,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr) {
 
     let _this = this,
         user = auth.loginUser();
-
+    // 初始化配置项
     _this.config = function(isDrag, dir, fn) {
         return {
             dataLoaded: true,
@@ -17,6 +17,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr) {
             }]
         }
     } 
+    // 用药的配置项
     _this.medOpt = function(col, row) {
         return {
             grid: {
@@ -101,7 +102,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr) {
             })()
         }
     }
-
+    // 采集监测指标配置项
     _this.monOpt = function(col, yArr) {
         return {
             grid: {
@@ -185,7 +186,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr) {
             series: []
         }
     }
-
+    // 标记（入室、麻醉开始、麻醉结束，等其它事件）的配置项
     _this.markOpt = function(col, row) {
         return {
             grid: {
@@ -417,7 +418,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr) {
         });
         return res;
     }
-
+    // 处理用药事件的数据
     _this.option = function(type, array, ev_list) {
         var num = 0,
             site = 0,
@@ -496,8 +497,8 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr) {
         }
         return ev_list;
     }
-
-    _this.initEvConfig = function(medChartRow, ev_list, vm, print) { // 绑定用药输液数据到表格上
+    // 将处理后的数据渲染到页面
+    _this.initEvConfig = function(medChartRow, ev_list, vm, print) {
         var evIndex = 0,
             medECfg = vm.medECfg,
             medEOpt = vm.medEOpt,
@@ -678,7 +679,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr) {
         });
     }
 
-    _this.initSign = function(markEOpt, startOper, pageSize, print) {
+    _this.initSign = function(markEOpt, startOper, pageSize, print) {   // 标记项
         $timeout(function() {
             var seriesList = markEOpt.series[markEOpt.series.length - 1].data, // 得到最后一条标记的数据
                 index = 1;

@@ -6,8 +6,8 @@ const generateAssetPlugin = require('generate-asset-webpack-plugin');
 
 const createServerConfig = function(compilation) {
     let cfgJson = {
-        ipPort: 'localhost:8080/ais3.1/',
-        screenPort: 'localhost:8080/ais3.1/'
+        ipPort: 'localhost:8087/ais3.1/',
+        screenPort: 'localhost:8087/ais3.1/'
     };
     return JSON.stringify(cfgJson);
 }

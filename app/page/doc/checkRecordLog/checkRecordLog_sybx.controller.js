@@ -82,7 +82,7 @@ function CheckRecordLogCtrl($rootScope, $scope, IHttp, select, toastr, confirm, 
         }, true)
     }, 1000);
     vm.modelAnaesthetic = function(code) {
-        if (vm.regOpt.isLocalAnaes == '0') return;
+        // if (vm.regOpt.isLocalAnaes == '0') return;
         $uibModal.open({
             animation: true,
             backdrop: 'static',
@@ -122,12 +122,20 @@ function CheckRecordLogCtrl($rootScope, $scope, IHttp, select, toastr, confirm, 
 
     function addEmpty() {
         var emptyLength = vm.pageSize - vm.itemLength;
-        vm.instrubillItem = vm.instrubillItem.concat(new Array(emptyLength));
+        if (emptyLength >= 0) vm.instrubillItem = vm.instrubillItem.concat(new Array(emptyLength));
+        let length = vm.instrubillItem.length >= vm.pageSize ? vm.instrubillItem.length : vm.pageSize; //获得要渲染的真实数据长度
+        //长度是3的倍数 不操作 余1 加2 余2加1 好补空格
+        if (length % 3 == 1) {
+            length = length + 2;
+        } else if (length % 3 == 2) {
+            length = length + 1
+        }
         vm.item = [];
-        for (var i = 0; i < vm.pageSize + 14; i++) {
+        for (var i = 0; i < length; i++) {
             if (i % 3 === 0)
                 vm.item.push({ l: vm.instrubillItem[i], m: vm.instrubillItem[i + 1], r: vm.instrubillItem[i + 2] });
         }
+
     }
 
     $scope.$watch('vm.optNurseItem.operationNameList', function(event, data) {

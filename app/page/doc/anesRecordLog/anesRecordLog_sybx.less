@@ -27,7 +27,7 @@
         margin: 0;
     }
     .btn-primary {
-        font-size: 12px!important;
+        font-size: 14px!important;
     }
     .red,
     *.red {
@@ -167,6 +167,11 @@
                             height: @lineH;
                         }
                     }
+                    table tr:nth-last-child(3) {
+                        td {
+                            height: 1 * @lineH + 1;
+                        }
+                    }
                     .mon {
                         td:first-child {
                             border-right: 0;
@@ -209,12 +214,12 @@
                         }
                         td.echart1 {
                             >div {
-                                height: 20 * @lineH + 1;
+                                height: 22 * @lineH + 1;
                                 width: 100%;
                             }
                         }
                         td.echart2 {
-                            height: 31 * @lineH + 1;
+                            height: 29 * @lineH + 1;
                             width: 100%;
                             position: relative;
                             .title {
@@ -243,7 +248,7 @@
                             .dataView {
                                 width: 100%;
                                 background-color: #fff;
-                                height: 30 * @lineH;
+                                height: 28 * @lineH;
                                 position: absolute;
                                 top: @lineH;
                                 overflow: auto;
@@ -497,7 +502,7 @@
                         }
                     }
                     td.echart2 {
-                        height: 31 * 22 + 1px!important;
+                        height: 29 * 22 + 1px!important;
                         .dataView {
                             height: 30 * 22 - 20px!important;
                             div {
@@ -568,7 +573,11 @@
             .head {
                 padding: 1px;
                 .bSpecial {
+                    height: 54px;
                     margin-left: 5px;
+                    textarea {
+                        margin-top: -2px;
+                    }
                 }
             }
             .body {
@@ -583,9 +592,17 @@
                 }
                 .left {
                     width: 155px;
+                    .monitorTd {
+                        height: 36 * @lineH + 1;
+                    }
                     table tr:nth-last-child(2) {
                         td div {
                             height: @lineH;
+                        }
+                    }
+                    table tr:nth-last-child(3) {
+                        td {
+                            height: 1 * @lineH + 1;
                         }
                     }
                     .mon {
@@ -632,11 +649,11 @@
                     table {
                         td.echart1 {
                             >div {
-                                height: 20 * @lineH;
+                                height: 22 * @lineH;
                             }
                         }
                         td.echart2 {
-                            height: 30 * @lineH;
+                            height: 29 * @lineH;
                         }
                         tr.numInput td input,
                         tr.numInput td select {
@@ -660,7 +677,7 @@
                         height: 7 * @lineH!important;
                     }
                     table tr:nth-child(6) td {
-                        height: 3 * @lineH;
+                        height: 4 * @lineH - 2 ;
                     }
                     span {
                         word-break: break-all;
@@ -750,7 +767,7 @@
                         }
                     }
                     td.echart2 {
-                        height: 31 * 14px!important;
+                        height: 29 * 14px!important;
                         .dataView {
                             height: 30 * 14 - 20px!important;
                             div {

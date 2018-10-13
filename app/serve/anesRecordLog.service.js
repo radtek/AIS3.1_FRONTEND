@@ -8,20 +8,20 @@ function anesRecordServe($rootScope, auth, $filter, anesRecordInter, eCharts, co
         o = {
             regOptId: undefined,
             docId: undefined,
-            inTime: undefined,
-            index: 0,
+            inTime: undefined,  // 入室时间
+            index: 0,   // 记录描点的索引
             ev_list: [],
             freq: 0,
             PAGES: [],
             timer_rt: undefined,
             toas: undefined // 控制只显示一个toast
         }
-
+    // 初始化数据
     _this.initData = function(data) {
-        data.regOpt.emergency = data.regOpt.emergency + '';
+        data.regOpt.emergency = data.regOpt.emergency + ''; // 类型转换
         data.regOpt.frontOperForbidTake = data.regOpt.frontOperForbidTake + '';
-        data.anaeseventList = _this.dateFormat(data.anaeseventList)
-        try {
+        data.anaeseventList = _this.dateFormat(data.anaeseventList);    // 日期格式化
+        try {   // 强验证，数据类型
             if (data.anaesRecord.patAnalgesia)
                 data.anaesRecord.patAnalgesia_ = JSON.parse(data.anaesRecord.patAnalgesia);
             else
@@ -36,6 +36,7 @@ function anesRecordServe($rootScope, auth, $filter, anesRecordInter, eCharts, co
         }
         return data;
     }
+    // 初始化PACU的数据
     _this.initDataPacu = function(data) {
         data.regOpt.emergency = data.regOpt.emergency + '';
         data.regOpt.frontOperForbidTake = data.regOpt.frontOperForbidTake + '';
@@ -444,7 +445,7 @@ function anesRecordServe($rootScope, auth, $filter, anesRecordInter, eCharts, co
             $rootScope.timer_point = setTimeout(onLoad, time);
         }
     }
-
+    // 术中启动定时监测
     _this.startTimerRt = function(regOptId) {
 
         start_rt();
@@ -492,13 +493,14 @@ function anesRecordServe($rootScope, auth, $filter, anesRecordInter, eCharts, co
     _this.stopTimerPt = function() {
         clearTimeout($rootScope.timer_point);
     }
-
+    // 加点
     _this.addPoint = function(vm, b) {
         anesRecordInter.updobsdat(b, o.regOptId).then((rs) => {
             if (rs.data.resultCode != 1) return;
             _this.getobsData(vm, o.regOptId, o.docId, o.ev_list);
         })
     }
+    // echart——修改用药
     _this.upEOption1 = function(vm, dataIndex, transdata, entitydata, obj, config, regOptId, docId, ev_list, pageSize) {
         var evId;
         var data = transdata[dataIndex];
@@ -671,7 +673,7 @@ function anesRecordServe($rootScope, auth, $filter, anesRecordInter, eCharts, co
 
         });
     }
-
+    // 验证麻醉记录单必填项
     _this.checkInput = function(event, startOper, docType) {
         if (event && !event.mzks) {
             return '麻醉开始时间不能为空';
@@ -823,7 +825,7 @@ function anesRecordServe($rootScope, auth, $filter, anesRecordInter, eCharts, co
             }
         });
     }
-
+    // 手术入室至出室的时间
     function anaesOperTimePrint(vm, docId) {
         anesRecordInter.anaesOperTime(docId).then(function(result) {
             if (result.data.resultCode !== '1') return;
@@ -832,7 +834,7 @@ function anesRecordServe($rootScope, auth, $filter, anesRecordInter, eCharts, co
             totleIoEventPrint(vm, docId);
         });
     }
-
+    // 出入量总量
     function totleIoEventPrint(vm, docId) {
         anesRecordInter.totleIoEvent(docId).then(function(result) {
             if (result.data.resultCode !== '1') return;

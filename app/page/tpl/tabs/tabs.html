@@ -1,6 +1,6 @@
 <div flex layout="column" id="tabs">
-    <div class="not-print" ng-class="{true: 'tab-div'}[tabsMenu.length > 1]">
-    	<a ng-repeat="item in tabsMenu" ng-if="tabsMenu.length > 1" class="btn btn-default tab-a" ng-class="{true: 'btn-primary', false: 'btn-default'}[item.activeTab]" ui-sref="{{item.url}}" ng-click="checkTab(item)"><span ng-if="item.state" class="glyphicon glyphicon-ok tab-span" style="color: rgb(0, 186, 0);"></span> {{item.name}}</a>
+    <div class="not-print"   ng-class="{true: 'tab-div'}[tabsMenu.length > 1]">
+    	<a ng-style="common_tabs_style" ng-repeat="item in tabsMenu" ng-if="tabsMenu.length > 1" class="btn btn-default tab-a" ng-class="{true: 'btn-primary', false: 'btn-default'}[item.activeTab]" ui-sref="{{item.url}}" ng-click="checkTab(item)"><span ng-if="item.state" class="glyphicon glyphicon-ok tab-span" style="color: rgb(0, 186, 0);"></span> {{item.name}}</a>
     </div>
     <section flex layout="column" ui-view class="view-container"></section> 
 </div>

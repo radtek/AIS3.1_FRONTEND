@@ -17,7 +17,8 @@ var opt_qnz = {
 }
 
 function route($stateProvider) { //麻醉总结
-    $stateProvider.state('postAnesthesiaSummary_qnz', angular.merge({}, opt_qnz, { // 黔南州 》术后
+    $stateProvider
+    .state('postAnesthesiaSummary_qnz', angular.merge({}, opt_qnz, { // 黔南州 》术后
         url: '/postAnesthesiaSummary_qnz/:regOptId'
     })).state('midAnesthesiaSummary_qnz', angular.merge({}, opt_qnz, { // 黔南州 》术中巡视
         url: '/midAnesthesiaSummary_qnz/:regOptId',
@@ -50,7 +51,8 @@ function route($stateProvider) { //麻醉总结
     })).state('postAnesthesiaSummary_llzyyy', angular.merge({}, opt_qnz, { // 临澧 》术后
         template: require('./anesthesiaSummary_llzyyy.html'),
         url: '/postAnesthesiaSummary_llzyyy/:regOptId'
-    })).state('anesthesiaSummary_lyrm', angular.merge({}, opt_qnz, { // 耒阳麻醉记录单二
+    }))
+    .state('anesthesiaSummary_lyrm', angular.merge({}, opt_qnz, { // 耒阳麻醉记录单二
         template: require('./anesthesiaSummary_lyrm.html'),
         url: '/anesthesiaSummary_lyrm/:regOptId'
     }))

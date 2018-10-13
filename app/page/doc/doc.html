@@ -1,59 +1,59 @@
 <div flex layout="column">
 	<!-- button菜单 -->
-	<div class="navbar-btn btn-xs text-right c-el-10 not-print" ng-hide="btnHide">
-        <button class="btn btn-primary" ng-click="btnActive && add()"
+	<div  class="navbar-btn btn-xs text-right c-el-10 not-print" ng-hide="btnHide">
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="btnActive && add()"
         ng-if="permission.indexOf('ADD') >= 0 && processState != 'END'">增加</button>
 
-        <button id="saveBtn" class="btn btn-primary" ng-click="btnActive && save()"
+        <button ng-style="common_doc_style" id="saveBtn" class="btn btn-primary" ng-click="btnActive && save()"
         ng-if="permission.indexOf('UPD') >= 0 && (processState != 'END' || saveActive) || page == 'nursEmergency' || page == 'anaeEmergency'">保存</button>
 
-        <button class="btn btn-primary" ng-click="back()"
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="back()"
         ng-if="permission.indexOf('BACK') >= 0 || page == 'nursEmergency' || page == 'anaeEmergency'">返回</button>
 
-        <button class="btn btn-primary" ng-click="btnActive && submit()"
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="btnActive && submit()"
         ng-if="permission.indexOf('SUBM') >= 0 && processState != 'END'">提交</button>
 
-        <button id="printBtn" class="btn btn-primary" ng-click="print()" tk-print-region="print-region"
+        <button ng-style="common_doc_style" id="printBtn" class="btn btn-primary" ng-click="print()" tk-print-region="print-region"
         ng-if="permission.indexOf('PRINT') >= 0">打印</button>
 
-        <button id="printBtn" class="btn btn-primary" ng-click="printCard()" tk-print-region="print-region"
+        <button ng-style="common_doc_style" id="printBtn" class="btn btn-primary" ng-click="printCard()" tk-print-region="print-region"
         ng-if="permission.indexOf('PRINTCARD') >= 0">打印指示卡</button>
 
-        <button class="btn btn-primary" ng-click="btnActive && onAKeyPrint()" ng-if="permission.indexOf('KEYPRINT') >= 0">一键打印</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="btnActive && onAKeyPrint()" ng-if="permission.indexOf('KEYPRINT') >= 0">一键打印</button>
 
-        <button id="syncHisBtn" class="btn btn-primary" ng-click="syncHis()" tk-print-region="print-region"
+        <button ng-style="common_doc_style" id="syncHisBtn" class="btn btn-primary" ng-click="syncHis()" tk-print-region="print-region"
         ng-if="permission.indexOf('H_SYNC') >= 0 && (processState != 'END' || saveActive)">his同步</button>
 
-        <button class="btn btn-primary" ng-click="addInst('instrument')"
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="addInst('instrument')"
         ng-if="permission.indexOf('INST') >= 0 && (processState != 'END' || saveActive)">添加器械</button>
 
-        <button class="btn btn-primary" ng-click="addInst('instruments')"
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="addInst('instruments')"
         ng-if="permission.indexOf('INSTS') >= 0 && (processState != 'END' || saveActive)">添加器械包</button>
 
-        <button class="btn btn-primary" ng-click="addInsf('instrumentf')"
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="addInsf('instrumentf')"
         ng-if="permission.indexOf('INSF') >= 0 && (processState != 'END' || saveActive)">添加敷料</button>
 
-        <button class="btn btn-primary" ng-click="addInsOpr('instrumentopr')"
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="addInsOpr('instrumentopr')"
         ng-if="permission.indexOf('INSOPR') >= 0 && (processState != 'END' || saveActive)">添加手术包</button>
 
-        <button class="btn btn-primary" ng-disabled="!isDelBat"
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-disabled="!isDelBat"
         ng-if="permission.indexOf('DELBAT') >= 0" ng-click="delBatch()">批量删除</button>
 
-        <button class="btn btn-primary" ng-click="appTemplat()" ng-if="permission.indexOf('INSYYMB') >= 0">应用模板</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="appTemplat()" ng-if="permission.indexOf('INSYYMB') >= 0">应用模板</button>
 
-        <button class="btn btn-primary" ng-click="saveAs()" ng-if="permission.indexOf('INSLCMB') >= 0">另存模板</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="saveAs()" ng-if="permission.indexOf('INSLCMB') >= 0">另存模板</button>
 
-        <button class="btn btn-primary" ng-click="searchMed()" ng-if="permission.indexOf('INSQYJL') >= 0">取药记录</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="searchMed()" ng-if="permission.indexOf('INSQYJL') >= 0">取药记录</button>
 
-        <button class="btn btn-primary" ng-click="hisFin()" ng-if="permission.indexOf('HISFYJS') >= 0">HIS系统费用结算</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="hisFin()" ng-if="permission.indexOf('HISFYJS') >= 0">HIS系统费用结算</button>
 
-        <button class="btn btn-primary" ng-click="saveAs()" ng-if="permission.indexOf('SAVETMP') >= 0 && processState != 'END'">保存模板</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="saveAs()" ng-if="permission.indexOf('SAVETMP') >= 0 && processState != 'END'">保存模板</button>
 
-        <button class="btn btn-primary" ng-click="appTemplat()" ng-if="permission.indexOf('APPTMP') >= 0 && processState != 'END'">调用模板</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="appTemplat()" ng-if="permission.indexOf('APPTMP') >= 0 && processState != 'END'">调用模板</button>
 
-        <button class="btn btn-primary" ng-click="set()" ng-if="permission.indexOf('SET') >= 0 && processState != 'END'">设置必填项</button>
-        <button class="btn btn-primary" ng-click="clear()" ng-if="permission.indexOf('CLEAR') >= 0" >清空</button>
-        <button class="btn btn-primary" ng-click="btnActive && refresh()"
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="set()" ng-if="permission.indexOf('SET') >= 0 && processState != 'END'">设置必填项</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="clear()" ng-if="permission.indexOf('CLEAR') >= 0" >清空</button>
+        <button ng-style="common_doc_style" class="btn btn-primary" ng-click="btnActive && refresh()"
         ng-if="permission.indexOf('REF') >= 0 && (processState != 'END' || saveActive)">数据同步</button>
     </div>
     <!-- 视图 -->

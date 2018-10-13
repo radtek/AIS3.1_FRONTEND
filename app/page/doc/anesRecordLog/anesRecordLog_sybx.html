@@ -166,8 +166,8 @@
                                 <div>{{vm.startOper.treatMedEvtList[i].name}} &nbsp; {{vm.startOper.treatMedEvtList[i].medicalEventList[0].flowUnit}}</div>
                             </td>
                         </tr>
-                        <tr ng-repeat="i in [0, 1, 2]">
-                            <td rowspan="3" class="text-center syqk red" ng-if="i == 0">输液情况</td>
+                        <tr ng-repeat="i in [0, 1, 2, 3, 4]">
+                            <td rowspan="5" class="text-center syqk red" ng-if="i == 0">输液情况</td>
                             <td colspan="6" ng-click="vm.modelInput('1')" class="pullLR">
                                 <div class="pull-left">{{vm.startOper.inIoeventList[i].name}} &nbsp; {{vm.startOper.inIoeventList[i].ioeventList[0].dosageUnit}}</div>
                             </td>
@@ -211,10 +211,10 @@
                                 <div layout layout-align="space-between center" class="clickSpan"><span class="red">出室</span><a><span ng-repeat="i in startOper.anaeseventList | filter: { code: 9 }: eq" ng-init="vm.event.cs = 9">{{i.occurTime | date: 'HH:mm'}}</span></a></div>
                             </td>
                             <td class="text-center">
-                                <div layout="column" layout-align="end center" ng-repeat="i in ['℃',40,'',38,'',36,'',34,'',32,'',30,'',28,'',26,'',24,'',22,'',20,'',18,'',16,'',14,'',12] track by $index"><span class="red">{{i}}</span></div>
+                                <div layout="column" layout-align="end center" ng-repeat="i in ['℃',40,'',38,'',36,'',34,'',32,'',30,'',28,'',26,'',24,'',22,'',20,'',18,'',16,'',14] track by $index"><span class="red">{{i}}</span></div>
                             </td>
                             <td>
-                                <div layout='column' layout-align="end center" ng-repeat="i in ['脉搏/血压','mmHg','',260,'',240,'',220,'',200,'',180,'',160,'',140,'',120,'',100,'',80,'',60,'',40,'',20,'',0] track by $index"><span class="red">{{i}}</span></div>
+                                <div layout='column' layout-align="end center" ng-repeat="i in ['脉搏/血压','mmHg','',240,'',220,'',200,'',180,'',160,'',140,'',120,'',100,'',80,'',60,'',40,'',20,'',0] track by $index"><span class="red">{{i}}</span></div>
                             </td>
                         </tr>
                         <tr>

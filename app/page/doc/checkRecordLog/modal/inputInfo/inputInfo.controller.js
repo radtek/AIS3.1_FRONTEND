@@ -1,8 +1,8 @@
-inputInfo.$inject = ['$scope', 'IHttp', '$uibModalInstance', 'items', '$filter', '$timeout'];
+inputInfo.$inject = ['$scope', 'IHttp', '$uibModalInstance', 'items', '$filter', '$timeout', 'dateFilter'];
 
 module.exports = inputInfo;
 
-function inputInfo($scope, IHttp, $uibModalInstance, items, $filter, $timeout) {
+function inputInfo($scope, IHttp, $uibModalInstance, items, $filter, $timeout, dateFilter) {
     var promise, returnParam = {
         url: 'searchIoeventGroupByDefIdList',
         param: { docId: items.docId, type: "I", subType: items.type },
@@ -45,6 +45,12 @@ function inputInfo($scope, IHttp, $uibModalInstance, items, $filter, $timeout) {
         IHttp.post("operation/searchIoeventList", { docId: items.docId, type: 'I', subType: items.type }).then(function(result) {
             if (result.data.resultCode !== '1') return;
             $scope.list = result.data.resultList;
+            for (var entity of $scope.list) {
+                if (entity.startTime)
+                    entity.startTime_ = dateFilter(new Date(entity.startTime), 'yyyy-MM-dd HH:mm');
+                if (entity.endTime)
+                    entity.endTime_ = dateFilter(new Date(entity.endTime), 'yyyy-MM-dd HH:mm');
+            }
         });
     }
 

@@ -1,3 +1,6 @@
+/*
+ * 麻醉记录单接口集
+ */
 module.exports = anesRecordInter;
 
 anesRecordInter.$inject = ['IHttp', '$filter'];

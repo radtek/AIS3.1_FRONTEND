@@ -1,3 +1,6 @@
+/*
+ * 下拉选择项在渲染时，结构重构
+ */
 module.exports = dropdownMedRowFilter;
 
 dropdownMedRowFilter.$inject = ['$sce'];

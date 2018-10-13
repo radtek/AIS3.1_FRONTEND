@@ -4,12 +4,12 @@ eCharts.$inject = ['$rootScope', 'auth', '$filter', '$timeout', 'anesRecordInter
 
 function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr, baseConfig) {
     let _this = this,
-        getMed = baseConfig.getMed(),
-        getI = baseConfig.getI(),
-        getOther = baseConfig.getOther(),
+         getMed = baseConfig.getMed(),//系统管理 基本配置  用药
+        getI = baseConfig.getI(),//系统管理 基本配置  入量
+        getOther = baseConfig.getOther(),//系统管理 基本配置  其他
         user = auth.loginUser();
-    _this.config = function(isDrag, dir, eventList, obj) {
-        let rowConfig = { //各类行数
+  _this.config = function(isDrag, dir, eventList, obj) {
+        let rowConfig = { //各类配置项行数初始化
             'mzConfig': getMed.mzyRows ? getMed.mzyRows : 0,
             'zlConfig': getMed.zlyRows ? getMed.zlyRows : 0,
             'ztConfig': 0,
@@ -30,7 +30,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr, b
             }
             return result;
         }
-        return angular.merge({}, rowConfig, { //各类到最下边的总行数
+        return angular.merge({}, rowConfig, { //返回各类别到最下边的总行数
             'sum': rowConfig.clConfig + rowConfig.sxConfig + rowConfig.syConfig + rowConfig.ztConfig + rowConfig.zlConfig + rowConfig.mzConfig,
             'mzTotal': rowConfig.clConfig + rowConfig.sxConfig + rowConfig.syConfig + rowConfig.ztConfig + rowConfig.zlConfig + rowConfig.mzConfig,
             'zlTotal': rowConfig.clConfig + rowConfig.sxConfig + rowConfig.syConfig + rowConfig.ztConfig + rowConfig.zlConfig,
@@ -48,7 +48,7 @@ function eCharts($rootScope, auth, $filter, $timeout, anesRecordInter, toastr, b
             drag: isDrag != 1,
             dir: dir,
             event: [eventList]
-        }, obj ? obj : {});
+        }, obj);
     }
     _this.config1 = function(isDrag, dir, eventList, obj) {
         return angular.merge({}, {

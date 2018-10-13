@@ -30,7 +30,14 @@ function LoginCtrl($rootScope, $scope, auth, baseConfig) {
         auth.login(userInfo).then(function(user) {
             auth.curModule(userInfo.module);
             if (user.data.resultCode == 1) {
-                baseConfig.init();
+                baseConfig.init().then(function(rs){
+                    let result= JSON.parse(sessionStorage.getItem('user'));
+                    let config = JSON.parse(JSON.parse(rs.data.resultList[5].configureValue).baseBusConfig);
+                    let merge= angular.merge(result,config);
+                     //其他配置  用户信息和基本配置的其他配置合并  对user重新赋值
+                    sessionStorage.setItem('user',JSON.stringify(merge))
+                    // $rootScope.$broadcast('changeStyle', merge);
+                })
                 if (userInfo.module == 'ctrlcent') {
                     if (user.data.user.beid == '101')
                         $rootScope.$state.go('hospital');

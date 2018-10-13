@@ -19,8 +19,8 @@
                     <td ng-click="edit(row)">{{row.name}}</td>
                     <td ng-click="edit(row)">{{row.dosageAmount}}</td>
                     <td ng-click="edit(row)">{{row.spec}}</td>
-                    <td ng-click="edit(row)" ng-init="row.startTime_ = row.startTime.substring(0, row.startTime.length - 5)">{{row.startTime_}}</td>
-                    <td ng-click="edit(row)" ng-init="row.endTime_ = row.endTime.substring(0, row.endTime.length - 5)">{{row.endTime_}}</td>
+                    <td ng-click="edit(row)">{{row.startTime_}}</td>
+                    <td ng-click="edit(row)">{{row.endTime_}}</td>
                     <td class="text-center"><span class="glyphicon glyphicon-trash" ng-click="delete(row.inEventId); _ioSelected = false; _dosageAmount = false;"></span></td>
                 </tr>
             </tbody>

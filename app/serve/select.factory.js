@@ -1,3 +1,6 @@
+/*
+ * 接口集
+ */
 module.exports = select;
 
 select.$inject = ['IHttp', '$q', '$timeout','auth','menu'];

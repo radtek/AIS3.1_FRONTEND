@@ -14,8 +14,8 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
         pageSize = 49,
         ev_list = [],
         PAGES = [],
-        eChartRow1 = 20, // eChart1 的 行数
-        eChartRow2 = 31, // eChart2 的 行数
+        eChartRow1 = 22, // eChart1 的 行数
+        eChartRow2 = 29, // eChart2 的 行数
         eChartCol = 8,
         summary; // 麻醉总结
     vm.view = { // 同步界面的数据
@@ -42,7 +42,7 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
     $scope.eConfig1 = anesRecordServe_sybx.eChart1.config();
     $scope.eOption1 = anesRecordServe_sybx.eChart1.option(eChartRow1, eChartCol);
     $scope.eConfig2 = anesRecordServe_sybx.eChart2.config();
-    $scope.eOption2 = anesRecordServe_sybx.eChart2.option(0, [{ min: -10, max: 300, interval: 10 },{ min: 11, max: 42, interval: 1 }], {
+    $scope.eOption2 = anesRecordServe_sybx.eChart2.option(0, [{ min: -10, max: 280, interval: 10 },{ min: 13, max: 42, interval: 1 }], {
         top: -1,
         left: -1,
         right: 0,
@@ -285,7 +285,7 @@ function anesRecordLogPrint($rootScope, $scope, IHttp, anesRecordServe_sybx,anes
         anesRecordServe_sybx.searchAllEventList(function(list) {
             $scope.backList = list;
             getNewMon();
-        }, docId, 3, 3, 11, 3, 0, 9, startTime, endTime, lastPage);
+        }, docId, 3, 5, 11, 3, 0, 9, startTime, endTime, lastPage);
     }
 
     function getPupilData() { // anaesOperTime(docId);
