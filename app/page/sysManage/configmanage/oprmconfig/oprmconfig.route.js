@@ -12,7 +12,7 @@ function route($stateProvider) {
         url: '/oprmconfig',
         template: require('./oprmconfig.html'),
         less: require('./oprmconfig.less'),
-        controller: require('./oprmConfig.controller')
+        controller: require('./oprmconfig.controller')
     }).state('baseconfig', {
         parent: 'tabs',
         url: '/baseconfig',
