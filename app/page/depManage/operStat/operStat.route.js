@@ -11,12 +11,12 @@ function route($stateProvider) {
         less: require('./operStat.less'),
         controller: require('./operStat.controller')
     })
-    .state('statOutpatient', {
-        parent: 'operStat',
-        url: '/statOutpatient',
-        template: require('./operStatView.html'),
-        controller: require('./statOutpatient/statOutpatient.controller')
-    })
+    // .state('statOutpatient', {
+    //     parent: 'operStat',
+    //     url: '/statOutpatient',
+    //     template: require('./operStatView.html'),
+    //     controller: require('./statOutpatient/statOutpatient.controller')
+    // })
     .state('statHospitalPatient', {
         parent: 'operStat',
         url: '/statHospitalPatient',
